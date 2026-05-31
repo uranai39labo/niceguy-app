@@ -214,6 +214,67 @@
     from { opacity:0; transform: translateX(-10%) scale(0.7); }
     to   { opacity:1; transform: translateX(-10%) scale(1); }
   }
+  /* 音声入力 */
+  .voice-area {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 12px; padding: 14px;
+    margin-bottom: 12px;
+  }
+  .voice-title {
+    font-size: 11px; letter-spacing: 3px; color: #c9a84c;
+    margin-bottom: 10px;
+  }
+  .voice-btn {
+    width: 60px; height: 60px; border-radius: 50%;
+    background: #c9a84c; border: none; cursor: pointer;
+    font-size: 24px; display: flex; align-items: center;
+    justify-content: center; margin: 0 auto 10px;
+    transition: all 0.2s; box-shadow: 0 0 0 0 rgba(201,168,76,0.4);
+  }
+  .voice-btn.recording {
+    background: #e74c3c;
+    animation: pulse 1s infinite;
+  }
+  .voice-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(231,76,60,0.5); }
+    70%  { box-shadow: 0 0 0 14px rgba(231,76,60,0); }
+    100% { box-shadow: 0 0 0 0 rgba(231,76,60,0); }
+  }
+  .voice-transcript {
+    background: rgba(255,255,255,0.07); border-radius: 8px;
+    padding: 10px 12px; font-size: 12px; color: #9a8e82;
+    min-height: 48px; line-height: 1.7; margin-bottom: 8px;
+    display: none;
+  }
+  .voice-result {
+    display: none; margin-top: 8px;
+  }
+  .voice-task-preview {
+    background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 8px; padding: 10px 12px; margin-bottom: 8px;
+  }
+  .voice-task-item {
+    font-size: 13px; color: #f5f0e8; padding: 4px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .voice-task-item:last-child { border-bottom: none; }
+  .voice-add-btn {
+    background: #c9a84c; color: #1a1410; border: none;
+    padding: 10px; border-radius: 8px; cursor: pointer;
+    font-family: inherit; font-size: 13px; font-weight: 600;
+    width: 100%; margin-top: 4px;
+  }
+  .voice-status {
+    text-align: center; font-size: 11px; color: #9a8e82;
+    margin-bottom: 4px;
+  }
+  .ai-thinking {
+    text-align: center; font-size: 12px; color: #c9a84c;
+    padding: 10px; display: none;
+  }
   .empty { text-align: center; color: #5a5050; font-size: 13px; padding: 30px; }
 </style>
 </head>
@@ -253,7 +314,17 @@
 
   <div id="taskList"></div>
 
-  <div class="add-area">
+  <div class="voice-area">
+  <div class="voice-title">📋 日記からタスクを自動登録</div>
+  <textarea id="pasteArea" placeholder="音声日記のテキストをここに貼り付けてください…" style="width:100%;min-height:80px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:10px;font-family:inherit;font-size:13px;color:#f5f0e8;resize:vertical;outline:none;"></textarea>
+  <button onclick="analyzeText()" style="width:100%;background:#c9a84c;color:#1a1410;border:none;padding:10px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;margin-top:8px;">📋 タスクに分解する</button>
+
+  <div class="voice-result" id="voiceResult">
+    <div class="voice-task-preview" id="voiceTaskPreview"></div>
+    <button class="voice-add-btn" onclick="addVoiceTasks()">✅ これを全部追加する</button>
+  </div>
+</div>
+<div class="add-area">
     <div class="add-row">
       <input type="text" class="add-input" id="newTask" placeholder="新しいタスクを入力…" onkeydown="if(event.key==='Enter')addTask()">
       <select class="priority-select" id="newPriority">
@@ -567,6 +638,14 @@ function render() {
       var chip = document.createElement("span");
       chip.className = "xp-chip " + sec.chipCls;
       chip.textContent = t.done ? "済" : sec.chip;
+      if (!t.done) {
+        chip.style.cursor = "pointer";
+        chip.title = "タップで優先度変更";
+        chip.onclick = (function(id) { return function(e) {
+          e.stopPropagation();
+          changePriority(id);
+        }; })(t.id);
+      }
       card.appendChild(chip);
 
       var del = document.createElement("button");
@@ -592,6 +671,87 @@ function render() {
   document.getElementById("stats").textContent = "完了 " + done + " / 全 " + total + " 件";
   updateLevelUI();
   updateCharaByState();
+}
+
+// ── 日記からタスク抽出 ──
+var voiceTasks = [];
+
+function analyzeText() {
+  var text = document.getElementById("pasteArea").value.trim();
+  if (!text) { alert("テキストを貼り付けてください"); return; }
+
+  // 1行ずつに分割
+  var lines = text.split(/\n/);
+  voiceTasks = [];
+
+  lines.forEach(function(line) {
+    // 行頭の記号・空白を取り除く
+    var cleaned = line
+      .replace(/^[\s　]*[□■●○◯・\.\-\*#\[\]✓✔︎]+[\s　]*/u, "")
+      .replace(/^[\s　]+/, "")
+      .trim();
+
+    // 空行・短すぎる行はスキップ
+    if (cleaned.length < 2) return;
+
+    // 優先度を自動判定
+    var priority = "mid";
+    if (/連絡|電話|メール|返信|確認|締め切り|急|至急/.test(cleaned)) priority = "high";
+    if (/構築|設定|作成|制作|まとめ|整理|研究|調査/.test(cleaned)) priority = "low";
+
+    voiceTasks.push({ text: cleaned, priority: priority });
+  });
+
+  if (voiceTasks.length === 0) {
+    alert("タスクが見つかりませんでした。箇条書きで貼り付けてください。");
+    return;
+  }
+  showVoicePreview(voiceTasks);
+}
+
+function changePriority(id) {
+  var priorities = ["high", "mid", "low"];
+  var labels = { high:"🔴 高", mid:"🟡 中", low:"🟢 低" };
+  state.tasks.forEach(function(t) {
+    if (t.id === id) {
+      var idx = priorities.indexOf(t.priority);
+      t.priority = priorities[(idx + 1) % 3];
+      showDoneFlash("優先度を " + labels[t.priority] + " に変更", "normal");
+    }
+  });
+  save();
+  render();
+}
+
+function showVoicePreview(tasks) {
+  var preview = document.getElementById("voiceTaskPreview");
+  var priorityLabel = { high: "🔴", mid: "🟡", low: "🟢" };
+  preview.innerHTML = "";
+  tasks.forEach(function(t) {
+    var div = document.createElement("div");
+    div.className = "voice-task-item";
+    div.textContent = (priorityLabel[t.priority] || "🟡") + " " + t.text;
+    preview.appendChild(div);
+  });
+  document.getElementById("voiceResult").style.display = "block";
+}
+
+function addVoiceTasks() {
+  var count = voiceTasks.length;
+  voiceTasks.forEach(function(t) {
+    state.tasks.push({
+      id: state.nextId++,
+      text: t.text,
+      priority: t.priority || "mid",
+      done: false
+    });
+  });
+  save();
+  render();
+  document.getElementById("voiceResult").style.display = "none";
+  document.getElementById("pasteArea").value = "";
+  voiceTasks = [];
+  showDoneFlash(count + "件のタスクを追加しました！", "normal");
 }
 
 // 読み込み中表示
