@@ -465,16 +465,20 @@ var state = { tasks:[], xp:0, totalDone:0, nextId:100 };
 var currentFilter = "active";
 
 function load(callback) {
-  // まずlocalStorageから読み込む
+  // localStorageから即座に表示
   try {
     var s = localStorage.getItem(STORAGE_KEY);
     if (s) { state = JSON.parse(s); }
     else { state.tasks = DEFAULT_TASKS.slice(); }
   } catch(e) { state.tasks = DEFAULT_TASKS.slice(); }
-  // GASからも読み込んで上書き
+
+  // まず即座にレンダリング
+  if (callback) callback();
+
+  // バックグラウンドでGASと同期（表示を邪魔しない）
   gasLoad(function() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    if (callback) callback();
+    render(); // 差分があれば静かに更新
   });
 }
 
@@ -837,8 +841,7 @@ function addVoiceTasks() {
   showDoneFlash(count + "件のタスクを追加しました！", "normal");
 }
 
-// 読み込み中表示
-document.getElementById("taskList").innerHTML = '<div class="empty">データを読み込み中…</div>';
+// 即座に表示、バックグラウンドで同期
 load(function() {
   render();
 });
