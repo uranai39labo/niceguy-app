@@ -328,7 +328,7 @@
 </div>
 <div class="add-area">
     <div class="add-row">
-      <input type="text" class="add-input" id="newTask" placeholder="新しいタスクを入力…" onkeydown="if(event.key==='Enter')addTask()">
+      <input type="text" class="add-input" id="newTask" placeholder="新しいタスクを入力…" onkeydown="">
       <select class="priority-select" id="newPriority">
         <option value="high">🔴 高</option>
         <option value="mid" selected>🟡 中</option>
@@ -397,12 +397,17 @@ function gasLoad(callback) {
   fetch(GAS_URL + "?action=load")
     .then(function(r){ return r.json(); })
     .then(function(data) {
-      if (data.tasks) {
+      // GASにtasksデータが存在する場合のみ上書き（空の場合は現在のデータを保持）
+      if (data.tasks && data.tasks.length > 10) {
         try {
-          state.tasks = JSON.parse(data.tasks);
-          state.xp = parseInt(data.xp) || 0;
-          state.totalDone = parseInt(data.totalDone) || 0;
-          state.nextId = parseInt(data.nextId) || 100;
+          var gasTasks = JSON.parse(data.tasks);
+          // GASのデータの方が新しい場合のみ採用
+          if (gasTasks && gasTasks.length > 0) {
+            state.tasks = gasTasks;
+            state.xp = parseInt(data.xp) || state.xp;
+            state.totalDone = parseInt(data.totalDone) || state.totalDone;
+            state.nextId = parseInt(data.nextId) || state.nextId;
+          }
         } catch(e) {}
       }
       callback();
@@ -468,17 +473,22 @@ function load(callback) {
   // localStorageから即座に表示
   try {
     var s = localStorage.getItem(STORAGE_KEY);
-    if (s) { state = JSON.parse(s); }
-    else { state.tasks = DEFAULT_TASKS.slice(); }
+    if (s) {
+      state = JSON.parse(s);
+    } else {
+      // localStorageにない場合のみデフォルトを使う（GASにデータがあれば上書きされる）
+      state.tasks = DEFAULT_TASKS.slice();
+    }
   } catch(e) { state.tasks = DEFAULT_TASKS.slice(); }
 
   // まず即座にレンダリング
   if (callback) callback();
 
-  // バックグラウンドでGASと同期（表示を邪魔しない）
+  // バックグラウンドでGASと同期
   gasLoad(function() {
+    // GASにtasksデータがある場合のみlocalStorageを更新
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    render(); // 差分があれば静かに更新
+    render();
   });
 }
 
