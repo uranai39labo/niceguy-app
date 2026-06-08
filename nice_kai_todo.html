@@ -312,6 +312,7 @@
     <button class="filter-btn active"        onclick="setFilter('active')"  id="f-active">未完了</button>
     <button class="filter-btn"        onclick="setFilter('done')"    id="f-done">完了済み</button>
     <button class="filter-btn"        onclick="setFilter('journal')" id="f-journal">📔 やったこと</button>
+    <button class="filter-btn"        onclick="setFilter('weekly')"  id="f-weekly">📊 週次レポート</button>
   </div>
 
   <div id="taskList"></div>
@@ -600,6 +601,101 @@ function addTask() {
   save(); render();
 }
 
+function renderWeekly() {
+  var list = document.getElementById("taskList");
+  list.innerHTML = "";
+
+  // 今週の範囲を計算（月曜始まり）
+  var now = new Date();
+  var day = now.getDay();
+  var diffToMon = (day === 0) ? -6 : 1 - day;
+  var monday = new Date(now);
+  monday.setDate(now.getDate() + diffToMon);
+  monday.setHours(0,0,0,0);
+  var sunday = new Date(monday);
+  sunday.setDate(monday.getDate() + 6);
+  sunday.setHours(23,59,59,999);
+
+  var fmtDate = function(d) {
+    return (d.getMonth()+1) + "/" + d.getDate();
+  };
+
+  // 今週完了したタスク
+  var weekDone = state.tasks.filter(function(t) {
+    if (!t.done || !t.doneAt) return false;
+    var d = new Date(t.doneAt);
+    return d >= monday && d <= sunday;
+  });
+
+  // 未完了タスク
+  var active = state.tasks.filter(function(t){ return !t.done; });
+
+  // XP計算
+  var weekXP = 0;
+  weekDone.forEach(function(t){ weekXP += (t.priority==="high"?15:t.priority==="mid"?8:3); });
+
+  // レベル情報
+  var lvInfo = getLevelInfo(state.xp);
+
+  // レポート表示
+  var wrap = document.createElement("div");
+  wrap.style.cssText = "padding:4px 0;";
+
+  // ヘッダー
+  var header = document.createElement("div");
+  header.style.cssText = "background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:10px;padding:14px 16px;margin-bottom:12px;";
+  header.innerHTML =
+    '<div style="font-size:11px;letter-spacing:3px;color:#c9a84c;margin-bottom:6px;">📊 週次振り返り</div>' +
+    '<div style="font-size:16px;font-weight:600;color:#f5f0e8;">' + fmtDate(monday) + ' 〜 ' + fmtDate(sunday) + '</div>' +
+    '<div style="font-size:12px;color:#9a8e82;margin-top:4px;">現在 Lv.' + lvInfo.lv + '「' + lvInfo.title + '」</div>';
+  wrap.appendChild(header);
+
+  // やったこと
+  var doneSection = document.createElement("div");
+  doneSection.style.cssText = "background:rgba(74,158,110,0.1);border:1px solid rgba(74,158,110,0.3);border-radius:10px;padding:14px 16px;margin-bottom:12px;";
+  var doneHTML = '<div style="font-size:12px;color:#4a9e6e;letter-spacing:2px;margin-bottom:10px;">✅ 今週やったこと（' + weekDone.length + '件・+' + weekXP + 'XP）</div>';
+  if (weekDone.length > 0) {
+    weekDone.forEach(function(t) {
+      var emoji = t.priority==="high"?"🔴":t.priority==="mid"?"🟡":"🟢";
+      doneHTML += '<div style="font-size:13px;color:#f5f0e8;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.05);">' + emoji + ' ' + t.text + '</div>';
+    });
+  } else {
+    doneHTML += '<div style="font-size:13px;color:#9a8e82;">今週はまだ完了したタスクがありません</div>';
+  }
+  doneSection.innerHTML = doneHTML;
+  wrap.appendChild(doneSection);
+
+  // どこに向かっているか
+  var dirSection = document.createElement("div");
+  dirSection.style.cssText = "background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:14px 16px;margin-bottom:12px;";
+  var highActive = active.filter(function(t){ return t.priority==="high"; });
+  var dirHTML = '<div style="font-size:12px;color:#c9a84c;letter-spacing:2px;margin-bottom:10px;">🧭 どこに向かっているか</div>';
+  dirHTML += '<div style="font-size:12px;color:#9a8e82;margin-bottom:8px;">未完了タスク ' + active.length + '件　うち高優先度 ' + highActive.length + '件</div>';
+  if (highActive.length > 0) {
+    highActive.slice(0,5).forEach(function(t) {
+      dirHTML += '<div style="font-size:13px;color:#f5f0e8;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.05);">🔴 ' + t.text + '</div>';
+    });
+  }
+  dirSection.innerHTML = dirHTML;
+  wrap.appendChild(dirSection);
+
+  // 来週やること
+  var nextSection = document.createElement("div");
+  nextSection.style.cssText = "background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:14px 16px;";
+  var midActive = active.filter(function(t){ return t.priority==="mid"; });
+  var nextHTML = '<div style="font-size:12px;color:#9a8e82;letter-spacing:2px;margin-bottom:10px;">💡 来週の候補</div>';
+  var nextItems = highActive.slice(0,3).concat(midActive.slice(0,3));
+  nextItems.slice(0,5).forEach(function(t) {
+    var emoji = t.priority==="high"?"🔴":"🟡";
+    nextHTML += '<div style="font-size:13px;color:#f5f0e8;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.05);">' + emoji + ' ' + t.text + '</div>';
+  });
+  nextSection.innerHTML = nextHTML;
+  wrap.appendChild(nextSection);
+
+  list.appendChild(wrap);
+  document.getElementById("stats").textContent = "今週完了：" + weekDone.length + "件　+" + weekXP + "XP";
+}
+
 function renderJournal() {
   var list = document.getElementById("taskList");
   list.innerHTML = "";
@@ -676,7 +772,7 @@ function renderJournal() {
 
 function setFilter(f) {
   currentFilter = f;
-  ["all","active","done","journal"].forEach(function(x){
+  ["all","active","done","journal","weekly"].forEach(function(x){
     document.getElementById("f-"+x).className = "filter-btn" + (x===f?" active":"");
   });
   render();
@@ -689,6 +785,11 @@ function render() {
   // やったこと日誌
   if (currentFilter === "journal") {
     renderJournal();
+    return;
+  }
+  // 週次レポート
+  if (currentFilter === "weekly") {
+    renderWeekly();
     return;
   }
 
