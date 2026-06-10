@@ -18,21 +18,13 @@ body{
   justify-content:center;
   padding:48px 0;
 }
-.wrap{width:100%;max-width:390px;padding:0 28px;}
-
-@media (min-width: 768px) {
-  body { padding: 60px 0; }
-  .wrap { max-width: 480px; }
-  .catch-main { font-size: 32px; }
-  .hl { font-size: 42px; }
-  .df input { font-size: 26px; padding: 16px 12px; }
-  .btn-primary { font-size: 18px; padding: 20px; }
-  .r-icon { font-size: 88px; }
-  .r-animal-name { font-size: 30px; }
-  .r-line { font-size: 22px; }
-  .kan-title-main { font-size: 42px; }
+.wrap{
+  width:100%;
+  max-width:480px;
+  padding:0 28px;
 }
 
+/* ── ボタン ── */
 .btn-primary{
   width:100%;padding:18px;
   background:#1A1A1A;border:none;
@@ -45,37 +37,61 @@ body{
 }
 .btn-primary:hover{background:#333;}
 .btn-ghost{
-  background:none;border:none;color:#AAA;font-size:12px;
+  background:none;border:none;color:#AAA;font-size:14px;
   cursor:pointer;letter-spacing:1px;
   font-family:'Noto Sans JP',sans-serif;
   text-decoration:underline;display:block;
   margin:16px auto 0;text-align:center;
 }
 
-/* TOP */
+/* ── TOP ── */
 #sTop{text-align:center;}
 .badge{
   display:inline-block;
-  font-size:10px;letter-spacing:3px;color:#B8860B;
+  font-size:13px;letter-spacing:4px;color:#B8860B;
   border:1px solid #B8860B;
-  padding:4px 14px;border-radius:2px;margin-bottom:28px;
+  padding:6px 20px;border-radius:2px;margin-bottom:24px;
 }
+/* 黄金の羅針盤：大きく */
+.brand-title{
+  font-family:'Shippori Mincho',serif;
+  font-size:clamp(36px,9vw,56px);
+  font-weight:800;
+  color:#B8860B;
+  line-height:1.3;
+  margin-bottom:20px;
+  text-shadow: 0 2px 12px rgba(184,134,11,0.15);
+}
+/* 今、辛いと自分を知らないは元のサイズ */
 .catch-main{
   font-family:'Shippori Mincho',serif;
-  font-size:clamp(22px,6vw,30px);
-  font-weight:800;line-height:1.7;
+  font-size:clamp(18px,4.5vw,22px);
+  font-weight:700;line-height:1.8;
   color:#1A1A1A;margin-bottom:6px;
 }
-.hl{color:#B8860B;display:block;font-size:clamp(26px,7vw,36px);}
-.catch-sub{font-size:13px;color:#888;margin-bottom:44px;line-height:1.8;}
+.hl{
+  color:#B8860B;
+  display:block;
+  font-size:clamp(18px,4.5vw,22px);
+}
+/* 生年月日だけで：大きく */
+.catch-sub{
+  font-size:clamp(16px,4vw,20px);
+  color:#555;
+  margin-bottom:44px;
+  line-height:1.8;
+  font-weight:700;
+  font-family:'Shippori Mincho',serif;
+}
 
-/* INPUT */
+/* ── INPUT ── */
 #sInput{display:none;}
-.q-label{font-size:11px;letter-spacing:2px;color:#B8860B;margin-bottom:14px;font-weight:700;}
-.date-row{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px;margin-bottom:24px;}
+.q-label{font-size:13px;letter-spacing:2px;color:#B8860B;margin-bottom:14px;font-weight:700;}
+.date-row{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px;margin-bottom:24px;max-width:480px;}
 .df{display:flex;flex-direction:column;gap:6px;}
-.df span{font-size:11px;color:#999;letter-spacing:1px;}
+.df span{font-size:13px;color:#999;letter-spacing:1px;}
 .df input{
+  width:100%;
   background:#F5F5F0;border:1px solid #DDD;
   border-radius:4px;padding:14px 10px;
   color:#1A1A1A;font-size:22px;
@@ -87,9 +103,9 @@ body{
 .df input::-webkit-inner-spin-button{-webkit-appearance:none;}
 .df input:focus{border-color:#B8860B;}
 .df input::placeholder{color:#CCC;font-size:14px;}
-.err{font-size:12px;color:#C0392B;margin-bottom:14px;display:none;}
+.err{font-size:14px;color:#C0392B;margin-bottom:14px;display:none;}
 
-/* RESULT 共通 */
+/* ── RESULT 共通 ── */
 #sResultA,#sResultB{display:none;text-align:center;}
 .r-icon{font-size:72px;line-height:1;margin-bottom:12px;animation:pop .4s ease;}
 @keyframes pop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
@@ -102,23 +118,23 @@ body{
   padding:24px 20px;margin-bottom:22px;text-align:left;
 }
 .r-box-label{
-  font-size:10px;letter-spacing:3px;color:#B8860B;
-  font-weight:700;margin-bottom:10px;
+  font-size:13px;letter-spacing:2px;color:#B8860B;
+  font-weight:700;margin-bottom:12px;
 }
 .r-line{
   font-family:'Shippori Mincho',serif;
   font-size:clamp(17px,4.5vw,21px);
   font-weight:700;line-height:1.7;color:#1A1A1A;
 }
-.r-bridge{font-size:14px;color:#666;line-height:2;margin-bottom:24px;}
+.r-bridge{font-size:16px;color:#555;line-height:2;margin-bottom:24px;}
 .r-bridge strong{color:#1A1A1A;font-weight:700;}
 
-/* 十干結果専用 */
+/* ── 十干専用 ── */
 .kan-attr-badge{
   display:inline-block;
-  font-size:11px;letter-spacing:2px;
+  font-size:13px;letter-spacing:2px;
   color:#FFF;background:#B8860B;
-  padding:5px 18px;border-radius:20px;
+  padding:6px 20px;border-radius:20px;
   margin-bottom:20px;font-weight:700;
 }
 .kan-title-main{
@@ -128,8 +144,13 @@ body{
   line-height:1.4;margin-bottom:6px;
 }
 .kan-title-sub{
-  font-size:13px;color:#888;
-  margin-bottom:24px;line-height:1.7;
+  font-size:16px;color:#666;
+  margin-bottom:24px;line-height:1.8;
+}
+
+/* ── PC対応 ── */
+@media(min-width:768px){
+  .brand-title{ font-size: clamp(48px,6vw,64px); }
 }
 </style>
 </head>
@@ -138,7 +159,7 @@ body{
 
 <!-- TOP -->
 <div id="sTop">
-  <div class="badge">黄金の羅針盤</div>
+  <div class="brand-title">黄金の羅針盤</div>
   <div class="catch-main">
     あなたが今、辛いのは
     <span class="hl">自分を知らないから</span>
@@ -148,20 +169,20 @@ body{
 </div>
 
 <!-- INPUT -->
-<div id="sInput">
+<div id="sInput" style="max-width:480px;margin:0 auto;">
   <div class="q-label">生年月日を入力</div>
   <div class="date-row">
     <div class="df">
       <span>年（西暦）</span>
-      <input type="number" id="iy" placeholder="1985" min="1920" max="2010">
+      <input type="text" inputmode="numeric" id="iy" placeholder="1985">
     </div>
     <div class="df">
       <span>月</span>
-      <input type="number" id="im" placeholder="5" min="1" max="12">
+      <input type="text" inputmode="numeric" id="im" placeholder="5">
     </div>
     <div class="df">
       <span>日</span>
-      <input type="number" id="id" placeholder="15" min="1" max="31">
+      <input type="text" inputmode="numeric" id="id" placeholder="15">
     </div>
   </div>
   <div class="err" id="err">生年月日を正しく入力してください</div>
@@ -204,24 +225,8 @@ body{
 
 </div>
 <script>
-// ══════════════════════════
-// 動物データ
-// ══════════════════════════
-const CHAR_TO_ANIMAL = {
-  1:0,7:0,42:0,48:0,
-  2:1,8:1,41:1,47:1,
-  3:2,9:2,15:2,33:2,34:2,40:2,46:2,
-  4:3,10:3,16:3,39:3,45:3,60:3,
-  5:4,44:4,50:4,53:4,56:4,59:4,
-  6:5,43:5,49:5,54:5,55:5,
-  11:6,17:6,32:6,38:6,
-  12:7,18:7,31:7,37:7,
-  13:8,19:8,24:8,25:8,30:8,36:8,
-  14:9,20:9,23:9,26:9,29:9,35:9,
-  21:10,22:10,27:10,28:10,
-  51:11,52:11,57:11,58:11,
-};
-const ANIMALS = [
+const CHAR_TO_ANIMAL={1:0,7:0,42:0,48:0,2:1,8:1,41:1,47:1,3:2,9:2,15:2,33:2,34:2,40:2,46:2,4:3,10:3,16:3,39:3,45:3,60:3,5:4,44:4,50:4,53:4,56:4,59:4,6:5,43:5,49:5,54:5,55:5,11:6,17:6,32:6,38:6,12:7,18:7,31:7,37:7,13:8,19:8,24:8,25:8,30:8,36:8,14:9,20:9,23:9,26:9,29:9,35:9,21:10,22:10,27:10,28:10,51:11,52:11,57:11,58:11};
+const ANIMALS=[
   {icon:'🐆',name:'チーター',   hm:'速すぎて、誰もついてこれない'},
   {icon:'🦝',name:'たぬき',     hm:'空気を読みすぎて、自分を見失う'},
   {icon:'🐒',name:'猿',         hm:'考えすぎて、動けなくなる'},
@@ -235,144 +240,66 @@ const ANIMALS = [
   {icon:'🦄',name:'ペガサス',   hm:'夢ばかり大きく、地に足がつかない'},
   {icon:'🦁',name:'ライオン',   hm:'強すぎて、人が近づけない'},
 ];
-
-// ══════════════════════════
-// 十干データ（二つ名メイン）
-// ══════════════════════════
-const JIKKAN = [
-  {
-    icon:'🌳',
-    attrBadge:'BUILD ／ 木',
-    titleMain:'リーダー',
-    titleSub:'誰も見たことない道を、ひとりで切り拓く人',
-    shadow:'あなたが孤独なのは、先を行きすぎているから'
-  },
-  {
-    icon:'🌿',
-    attrBadge:'BUILD ／ 木',
-    titleMain:'プロデューサー',
-    titleSub:'しなやかに曲がりながら、絶対に折れない人',
-    shadow:'あなたが疲れるのは、誰かのために使いすぎているから'
-  },
-  {
-    icon:'☀️',
-    attrBadge:'SHINE ／ 火',
-    titleMain:'インフルエンサー',
-    titleSub:'全方位に光を放ち、大衆を動かす人',
-    shadow:'あなたが空回りするのは、伝える場所が違うから'
-  },
-  {
-    icon:'🕯️',
-    attrBadge:'SHINE ／ 火',
-    titleMain:'クリエイター',
-    titleSub:'暗闇の一点を鋭く照らす、唯一無二の人',
-    shadow:'あなたが認められないのは、まだ世界があなたを知らないから'
-  },
-  {
-    icon:'⛰️',
-    attrBadge:'CORE ／ 土',
-    titleMain:'マネージャー',
-    titleSub:'圧倒的な器で、人と現場を動かす人',
-    shadow:'あなたが重いのは、背負いすぎているから'
-  },
-  {
-    icon:'🌾',
-    attrBadge:'CORE ／ 土',
-    titleMain:'サポーター',
-    titleSub:'万物を平等に育てる、大地のような人',
-    shadow:'あなたが報われないのは、見えないところで与えすぎているから'
-  },
-  {
-    icon:'⚔️',
-    attrBadge:'ACT ／ 金',
-    titleMain:'プレイヤー',
-    titleSub:'最前線でリスクを取り、現状を突破する人',
-    shadow:'あなたが空回りするのは、動く方向が定まっていないから'
-  },
-  {
-    icon:'💎',
-    attrBadge:'ACT ／ 金',
-    titleMain:'スペシャリスト',
-    titleSub:'細部を磨き上げ、プレミアムなポジションを確立する人',
-    shadow:'あなたが埋もれるのは、磨く場所をまだ見つけていないから'
-  },
-  {
-    icon:'🌊',
-    attrBadge:'VISION ／ 水',
-    titleMain:'パイオニア',
-    titleSub:'時代の先を読み、誰も見ぬ地平を拓く人',
-    shadow:'あなたが孤立するのは、見えているものが周りと違うから'
-  },
-  {
-    icon:'🌧️',
-    attrBadge:'VISION ／ 水',
-    titleMain:'ナビゲーター',
-    titleSub:'膨大な知を美しく循環させ、人を導く人',
-    shadow:'あなたが迷うのは、自分が地図を持っていることに気づいていないから'
-  },
+const JIKKAN=[
+  {icon:'🌳',attrBadge:'A-BUILD ／ 木',titleMain:'リーダー',titleSub:'誰も見たことない道を、ひとりで切り拓く人',shadow:'あなたが孤独なのは、先を行きすぎているから'},
+  {icon:'🌿',attrBadge:'A-BUILD ／ 木',titleMain:'プロデューサー',titleSub:'しなやかに曲がりながら、絶対に折れない人',shadow:'あなたが疲れるのは、誰かのために使いすぎているから'},
+  {icon:'☀️',attrBadge:'B-SHINE ／ 火',titleMain:'インフルエンサー',titleSub:'全方位に光を放ち、大衆を動かす人',shadow:'あなたが空回りするのは、伝える場所が違うから'},
+  {icon:'🕯️',attrBadge:'B-SHINE ／ 火',titleMain:'クリエイター',titleSub:'暗闇の一点を鋭く照らす、唯一無二の人',shadow:'あなたが認められないのは、まだ世界があなたを知らないから'},
+  {icon:'⛰️',attrBadge:'C-CORE ／ 土',titleMain:'マネージャー',titleSub:'圧倒的な器で、人と現場を動かす人',shadow:'あなたが重いのは、背負いすぎているから'},
+  {icon:'🌾',attrBadge:'C-CORE ／ 土',titleMain:'サポーター',titleSub:'万物を平等に育てる、大地のような人',shadow:'あなたが報われないのは、見えないところで与えすぎているから'},
+  {icon:'⚔️',attrBadge:'D-ACT ／ 金',titleMain:'プレイヤー',titleSub:'最前線でリスクを取り、現状を突破する人',shadow:'あなたが空回りするのは、動く方向が定まっていないから'},
+  {icon:'💎',attrBadge:'D-ACT ／ 金',titleMain:'スペシャリスト',titleSub:'細部を磨き上げ、プレミアムなポジションを確立する人',shadow:'あなたが埋もれるのは、磨く場所をまだ見つけていないから'},
+  {icon:'🌊',attrBadge:'E-VISION ／ 水',titleMain:'パイオニア',titleSub:'時代の先を読み、誰も見ぬ地平を拓く人',shadow:'あなたが孤立するのは、見えているものが周りと違うから'},
+  {icon:'🌧️',attrBadge:'E-VISION ／ 水',titleMain:'ナビゲーター',titleSub:'膨大な知を美しく循環させ、人を導く人',shadow:'あなたが迷うのは、自分が地図を持っていることに気づいていないから'},
 ];
 
-// ══════════════════════════
-// 計算
-// ══════════════════════════
+// 全角数字→半角変換
+function toHankaku(str) {
+  return str.replace(/[０-９]/g, function(s) {
+    return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+  }).replace(/[^0-9]/g, '');
+}
+
 function getAnimalChar(y,m,d){
-  const base = new Date(1985,0,1);
-  const t    = new Date(y,m-1,d);
-  const diff = Math.floor((t-base)/86400000);
+  const base=new Date(1985,0,1);
+  const t=new Date(y,m-1,d);
+  const diff=Math.floor((t-base)/86400000);
   return ((diff+36)%60+60)%60+1;
 }
-
-// 日干：基準 1900-01-01 = 甲(0) 検証済み
-// 1980-06-01 = 乙(1) ✅
-// 2026-06-01 = 丙(2) ✅
 function getJikkanIdx(y,m,d){
-  const base   = new Date(1900,0,1);
-  const target = new Date(y,m-1,d);
-  const diff   = Math.round((target-base)/86400000);
+  const base=new Date(1900,0,1);
+  const target=new Date(y,m-1,d);
+  const diff=Math.round((target-base)/86400000);
   return ((diff%10)+10)%10;
 }
-
-// ══════════════════════════
-// 画面制御
-// ══════════════════════════
 function go(id){
   ['sTop','sInput','sResultA','sResultB'].forEach(s=>{
-    document.getElementById(s).style.display = s===id?'block':'none';
+    document.getElementById(s).style.display=s===id?'block':'none';
   });
   window.scrollTo(0,0);
 }
-
 function diagnose(){
-  const y = parseInt(document.getElementById('iy').value);
-  const m = parseInt(document.getElementById('im').value);
-  const d = parseInt(document.getElementById('id').value);
-  const err = document.getElementById('err');
-
-  if(!y||!m||!d||y<1920||y>2010||m<1||m>12||d<1||d>31){
-    err.style.display='block'; return;
-  }
+  const y=parseInt(toHankaku(document.getElementById('iy').value));
+  const m=parseInt(toHankaku(document.getElementById('im').value));
+  const d=parseInt(toHankaku(document.getElementById('id').value));
+  const err=document.getElementById('err');
+  if(!y||!m||!d||y<1920||y>2010||m<1||m>12||d<1||d>31){err.style.display='block';return;}
   err.style.display='none';
-
-  // 動物
-  const charNo = getAnimalChar(y,m,d);
-  const ai = CHAR_TO_ANIMAL[charNo] ?? (charNo%12);
-  const a  = ANIMALS[ai];
-  document.getElementById('aIcon').textContent = a.icon;
-  document.getElementById('aName').textContent = a.name;
-  document.getElementById('aHm').textContent   = a.hm;
-
-  // 十干（日干）
-  const ki = getJikkanIdx(y,m,d);
-  const k  = JIKKAN[ki];
-  document.getElementById('bAttrBadge').textContent  = k.attrBadge;
-  document.getElementById('bIcon').textContent       = k.icon;
-  document.getElementById('bTitleMain').textContent  = k.titleMain;
-  document.getElementById('bTitleSub').textContent   = k.titleSub;
-  document.getElementById('bShadow').textContent     = k.shadow;
-
+  const charNo=getAnimalChar(y,m,d);
+  const ai=CHAR_TO_ANIMAL[charNo]??(charNo%12);
+  const a=ANIMALS[ai];
+  document.getElementById('aIcon').textContent=a.icon;
+  document.getElementById('aName').textContent=a.name;
+  document.getElementById('aHm').textContent=a.hm;
+  const ki=getJikkanIdx(y,m,d);
+  const k=JIKKAN[ki];
+  document.getElementById('bAttrBadge').textContent=k.attrBadge;
+  document.getElementById('bIcon').textContent=k.icon;
+  document.getElementById('bTitleMain').textContent=k.titleMain;
+  document.getElementById('bTitleSub').textContent=k.titleSub;
+  document.getElementById('bShadow').textContent=k.shadow;
   go('sResultA');
 }
-
 go('sTop');
 </script>
 </body>
