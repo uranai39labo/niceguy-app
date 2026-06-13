@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ナイス貝 占い講座 学習ロードマップ</title>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1410;
+  --paper: #f7f2e8;
+  --paper2: #ede5d0;
+  --gold: #c49a2a;
+  --gold-d: #8b6519;
+  --gold-l: rgba(196,154,42,0.12);
+  --red: #a83828;
+  --indigo: #2a3a55;
+  --teal: #1a6b52;
+  --muted: rgba(26,20,16,0.52);
+  --line: rgba(26,20,16,0.11);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.85;
+  padding-bottom: 100px;
+}
+
+/* ─── HERO ─── */
+.hero {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 56px 24px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(196,154,42,0.15), transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(42,58,85,0.3), transparent 50%);
+}
+.hero-inner { position: relative; z-index: 1; }
+.hero-label {
+  font-size: 10px;
+  letter-spacing: 0.7em;
+  color: var(--gold);
+  margin-bottom: 18px;
+  font-family: 'Shippori Mincho B1', serif;
+}
+.hero h1 {
+  font-family: 'Shippori Mincho B1', serif;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.55;
+  margin-bottom: 14px;
+}
+.hero h1 em { color: var(--gold); font-style: normal; }
+.hero-sub {
+  font-size: 12px;
+  color: rgba(247,242,232,0.6);
+  letter-spacing: 0.15em;
+  margin-bottom: 28px;
+}
+.hero-promise {
+  display: inline-block;
+  border: 1px solid rgba(196,154,42,0.4);
+  padding: 14px 28px;
+  font-size: 13px;
+  line-height: 1.9;
+  color: rgba(247,242,232,0.85);
+  max-width: 480px;
+  text-align: left;
+}
+.hero-promise strong { color: var(--gold); }
+
+/* ─── STEP NAV ─── */
+.step-nav {
+  display: flex;
+  overflow-x: auto;
+  gap: 0;
+  border-bottom: 2px solid var(--line);
+  background: var(--paper2);
+  padding: 0 16px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.step-nav::-webkit-scrollbar { display: none; }
+.nav-item {
+  flex-shrink: 0;
+  padding: 14px 18px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.2s, border-color 0.2s;
+  user-select: none;
+}
+.nav-item.active { color: var(--ink); border-bottom-color: var(--gold); }
+.nav-item:hover { color: var(--ink); }
+
+/* ─── CONTAINER ─── */
+.container { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+
+/* ─── STEP PANEL ─── */
+.step-panel { display: none; padding: 40px 0 0; }
+.step-panel.active { display: block; }
+
+/* ─── STEP HEADER ─── */
+.step-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--ink);
+  position: relative;
+}
+.step-head::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -1px;
+  width: 56px; height: 3px;
+  background: var(--gold);
+}
+.step-badge {
+  flex-shrink: 0;
+  background: var(--ink);
+  color: var(--gold);
+  font-family: 'Shippori Mincho B1', serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  padding: 6px 12px;
+  margin-top: 4px;
+}
+.step-titles { flex: 1; }
+.step-label {
+  font-size: 10px;
+  letter-spacing: 0.5em;
+  color: var(--gold-d);
+  margin-bottom: 6px;
+  font-family: 'Shippori Mincho B1', serif;
+}
+.step-title {
+  font-family: 'Shippori Mincho B1', serif;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  line-height: 1.4;
+}
+
+/* ─── GOAL BOX ─── */
+.goal-box {
+  background: rgba(26,20,16,0.94);
+  color: var(--paper);
+  padding: 22px 24px;
+  margin-bottom: 24px;
+  font-size: 13px;
+  line-height: 2;
+}
+.goal-box .g-label {
+  font-size: 9px;
+  letter-spacing: 0.5em;
+  color: var(--gold);
+  margin-bottom: 8px;
+  font-family: 'Shippori Mincho B1', serif;
+}
+.goal-box strong { color: var(--gold); }
+
+/* ─── CHECKLIST ─── */
+.checklist {
+  background: rgba(255,255,255,0.6);
+  border: 1px solid var(--line);
+  padding: 20px 22px;
+  margin-bottom: 20px;
+}
+.cl-title {
+  font-family: 'Shippori Mincho B1', serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--indigo);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--line);
+  letter-spacing: 0.05em;
+}
+.cl-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 7px 0;
+  font-size: 13px;
+  line-height: 1.75;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  user-select: none;
+}
+.cl-item:last-child { border-bottom: none; }
+.cl-box {
+  flex-shrink: 0;
+  width: 18px; height: 18px;
+  border: 1.5px solid rgba(26,20,16,0.3);
+  border-radius: 3px;
+  margin-top: 2px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  color: var(--teal);
+  transition: background 0.15s, border-color 0.15s;
+}
+.cl-item.checked .cl-box {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: white;
+}
+.cl-item.checked .cl-text { color: var(--muted); text-decoration: line-through; }
+.cl-text { flex: 1; }
+.cl-sub {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 1px;
+}
+.cl-item.key .cl-box { border-color: var(--gold-d); }
+.cl-item.key .cl-text { font-weight: 700; }
+
+/* ─── INFO BLOCKS ─── */
+.info-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+@media (max-width: 540px) { .info-row { grid-template-columns: 1fr; } }
+.info-card {
+  background: white;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--gold-d);
+  padding: 16px;
+}
+.info-card.blue { border-top-color: var(--indigo); }
+.info-card.teal { border-top-color: var(--teal); }
+.info-card.red { border-top-color: var(--red); }
+.info-card-label {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--gold-d);
+  font-family: 'Shippori Mincho B1', serif;
+  margin-bottom: 6px;
+}
+.info-card.blue .info-card-label { color: var(--indigo); }
+.info-card.teal .info-card-label { color: var(--teal); }
+.info-card.red .info-card-label { color: var(--red); }
+.info-card-title {
+  font-family: 'Shippori Mincho B1', serif;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.info-card-body { font-size: 12px; color: var(--muted); line-height: 1.85; }
+
+/* ─── ACCENT ─── */
+.accent {
+  border-left: 4px solid var(--gold);
+  padding: 14px 18px;
+  background: var(--gold-l);
+  font-size: 13px;
+  line-height: 2;
+  margin-bottom: 16px;
+}
+.accent.ind { border-left-color: var(--indigo); background: rgba(42,58,85,0.06); }
+.accent.teal { border-left-color: var(--teal); background: rgba(26,107,82,0.06); }
+.accent.red { border-left-color: var(--red); background: rgba(168,56,40,0.05); }
+.accent strong { color: var(--indigo); }
+.accent.teal strong { color: var(--teal); }
+.accent.red strong { color: var(--red); }
+
+/* ─── TYPE GRID ─── */
+.type-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.type-card {
+  background: white;
+  border: 1px solid var(--line);
+  padding: 12px 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.type-badge {
+  flex-shrink: 0;
+  font-family: 'Shippori Mincho B1', serif;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 2px;
+  letter-spacing: 0.05em;
+  margin-top: 2px;
+}
+.bg-build { background: rgba(90,104,64,0.15); color: #3a4428; }
+.bg-emo   { background: rgba(168,56,40,0.12); color: var(--red); }
+.bg-core  { background: rgba(139,101,25,0.15); color: var(--gold-d); }
+.bg-act   { background: rgba(42,58,85,0.12); color: var(--indigo); }
+.bg-des   { background: rgba(26,107,82,0.12); color: var(--teal); }
+.type-name { font-family: 'Shippori Mincho B1', serif; font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+.type-desc { font-size: 11px; color: var(--muted); line-height: 1.6; }
+
+/* ─── FLOW STEPS ─── */
+.flow { counter-reset: fl; list-style: none; position: relative; margin-bottom: 20px; }
+.flow::before {
+  content: "";
+  position: absolute;
+  left: 19px; top: 28px; bottom: 28px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--gold), var(--indigo));
+}
+.fl-item {
+  counter-increment: fl;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 12px 0;
+}
+.fl-num {
+  flex-shrink: 0;
+  width: 38px; height: 38px;
+  background: var(--paper);
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Shippori Mincho B1', serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gold-d);
+  z-index: 1;
+}
+.fl-body { flex: 1; padding-top: 7px; }
+.fl-title { font-size: 14px; font-weight: 700; margin-bottom: 3px; font-family: 'Shippori Mincho B1', serif; }
+.fl-desc { font-size: 12px; color: var(--muted); line-height: 1.85; }
+
+/* ─── COMPARE TABLE ─── */
+.ctable { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 20px; }
+.ctable th {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: 'Shippori Mincho B1', serif;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  padding: 9px 12px;
+  text-align: left;
+  font-weight: 700;
+}
+.ctable td { padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.75; }
+.ctable tr:nth-child(even) td { background: rgba(255,255,255,0.5); }
+.ctable td:first-child { font-weight: 700; font-family: 'Shippori Mincho B1', serif; color: var(--indigo); white-space: nowrap; }
+.merit { color: var(--teal); }
+.demerit { color: var(--red); }
+
+/* ─── KARTE ─── */
+.karte {
+  border: 2px solid var(--ink);
+  padding: 24px 20px;
+  margin-bottom: 20px;
+  position: relative;
+}
+.karte::before {
+  content: attr(data-label);
+  position: absolute; top: -12px; left: 16px;
+  background: var(--paper);
+  padding: 0 10px;
+  font-family: 'Shippori Mincho B1', serif;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--gold-d);
+}
+.karte-row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  border-bottom: 1px solid var(--line);
+}
+.karte-row:last-child { border-bottom: none; }
+.karte-label {
+  background: rgba(26,20,16,0.04);
+  padding: 9px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: 'Shippori Mincho B1', serif;
+  color: var(--indigo);
+  border-right: 1px solid var(--line);
+  display: flex; align-items: center;
+  line-height: 1.4;
+}
+.karte-val {
+  padding: 9px 14px;
+  font-size: 12px;
+  color: var(--muted);
+  min-height: 38px;
+  display: flex; align-items: center;
+}
+.karte-val.write { color: transparent; }
+.karte-val.write::after { content: "（記入欄）"; color: rgba(26,20,16,0.2); font-size: 11px; }
+.karte-val.h2 { min-height: 70px; align-items: flex-start; padding-top: 12px; }
+
+/* ─── COMPASS ─── */
+.compass { border: 2px solid var(--gold-d); padding: 24px 20px; margin-bottom: 20px; position: relative; }
+.compass::before { content: "コンパスシート（持ち帰り用）"; position: absolute; top: -12px; left: 16px; background: var(--paper); padding: 0 10px; font-family: 'Shippori Mincho B1', serif; font-size: 11px; letter-spacing: 0.25em; color: var(--gold-d); }
+.compass-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+.compass-cell { border: 1px solid var(--line); background: white; padding: 12px 14px; }
+.compass-cell-label { font-size: 9px; letter-spacing: 0.3em; color: var(--gold-d); font-family: 'Shippori Mincho B1', serif; margin-bottom: 4px; }
+.compass-cell-title { font-size: 13px; font-weight: 700; font-family: 'Shippori Mincho B1', serif; margin-bottom: 8px; }
+.wline { height: 26px; border-bottom: 1px solid rgba(26,20,16,0.12); margin-bottom: 2px; }
+
+/* ─── PROGRESS DOTS ─── */
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 16px 20px;
+  background: var(--paper2);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 28px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.progress::-webkit-scrollbar { display: none; }
+.prog-dot {
+  flex-shrink: 0;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(26,20,16,0.15);
+}
+.prog-dot.done { background: var(--teal); }
+.prog-dot.current { background: var(--gold); width: 10px; height: 10px; }
+.prog-line { flex-shrink: 0; height: 1px; width: 20px; background: var(--line); }
+.prog-label { font-size: 11px; color: var(--muted); white-space: nowrap; margin-left: 4px; }
+
+/* ─── NEXT BTN ─── */
+.next-bar {
+  text-align: center;
+  padding: 32px 0 8px;
+}
+.next-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--ink);
+  color: var(--gold);
+  padding: 14px 32px;
+  font-family: 'Shippori Mincho B1', serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  border: none;
+  border-radius: 0;
+  transition: background 0.15s;
+  user-select: none;
+}
+.next-btn:hover { background: #2a2420; }
+.prev-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  color: var(--muted);
+  padding: 10px 20px;
+  font-size: 12px;
+  cursor: pointer;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  margin-right: 12px;
+  transition: color 0.15s;
+}
+.prev-btn:hover { color: var(--ink); }
+
+/* ─── DIVIDER ─── */
+.divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  margin: 28px 0;
+}
+
+/* ─── SEAL ─── */
+.seal {
+  text-align: center;
+  padding: 40px 0 8px;
+  border-top: 1px solid var(--line);
+}
+.seal-mark {
+  display: inline-block;
+  background: var(--red);
+  color: white;
+  width: 54px; height: 54px;
+  line-height: 1.2;
+  padding-top: 12px;
+  font-family: 'Shippori Mincho B1', serif;
+  font-size: 15px;
+  font-weight: 800;
+  transform: rotate(-3deg);
+  border-radius: 3px;
+  box-shadow: 0 2px 10px rgba(168,56,40,0.25);
+  margin-bottom: 12px;
+}
+.seal-text { font-size: 11px; letter-spacing: 0.4em; color: var(--muted); font-family: 'Shippori Mincho B1', serif; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">N I C E K A I　占い講座　第3期</div>
+    <h1>占術 ×  AI で<br><em>自分の地図を持つ</em></h1>
+    <div class="hero-sub">受講生ロードマップ　全6ステップ</div>
+    <div class="hero-promise">
+      <strong>この講座が終わると：</strong><br>
+      自分の命式が読める → 他者を鑑定できる → AIと連携できる<br>
+      「占い＝戦術」として人生に使えるようになる
+    </div>
+  </div>
+</div>
+
+<!-- STEP NAV -->
+<div class="step-nav" id="stepNav">
+  <div class="nav-item active" onclick="showStep(0)">STEP 1　自分を知る</div>
+  <div class="nav-item" onclick="showStep(1)">STEP 2　仕組みを理解する</div>
+  <div class="nav-item" onclick="showStep(2)">STEP 3　鑑定を学ぶ</div>
+  <div class="nav-item" onclick="showStep(3)">STEP 4　AIと連携する</div>
+  <div class="nav-item" onclick="showStep(4)">STEP 5　実践・他者鑑定</div>
+  <div class="nav-item" onclick="showStep(5)">STEP 6　自分のスタイルへ</div>
+</div>
+
+<div class="container">
+
+<!-- ═══════════════ STEP 1 ═══════════════ -->
+<div class="step-panel active" id="step0">
+  <div class="progress">
+    <div class="prog-dot current"></div><div class="prog-line"></div>
+    <div class="prog-dot"></div><div class="prog-line"></div>
+    <div class="prog-dot"></div><div class="prog-line"></div>
+    <div class="prog-dot"></div><div class="prog-line"></div>
+    <div class="prog-dot"></div><div class="prog-line"></div>
+    <div class="prog-dot"></div>
+    <span class="prog-label">STEP 1 / 6</span>
+  </div>
+
+  <div class="step-head">
+    <div class="step-badge">STEP 1</div>
+    <div class="step-titles">
+      <div class="step-label">S E L F　D I S C O V E R Y</div>
+      <div class="step-title">自分を知る<br>— まず自分の命式を出す</div>
+    </div>
+  </div>
+
+  <div class="goal-box">
+    <div class="g-label">S T E P　G O A L</div>
+    自分の生年月日から「<strong>日干（十干）</strong>」を出し、自分がどのアーキタイプかを把握する。<br>
+    ここがすべての出発点。自分を知らずに他者は鑑定できない。
+  </div>
+
+  <div class="checklist">
+    <div class="cl-title">やること</div>
+    <div class="cl-item key" onclick="toggle(this)">
+      <div class="cl-box">✓</div>
+      <div class="cl-text">GAS占いサイト or AIナイス貝鑑定で自分の命式を出す
+        <span class="cl-sub">uranai39labo.github.io/niceguy-app/hardmode_v3.html</span>
+      </div>
+    </div>
+    <div class="cl-item key" onclick="toggle(this)">
+      <div class="cl-box">✓</div>
+      <div class="cl-text">日干（十干）を確認する
+        <span class="cl-sub">甲・乙・丙・丁・戊・己・庚・辛・壬・癸のどれか</span>
+      </div>
+    </div>
+    <div class="cl-item" onclick="toggle(this)">
+      <div class="cl-box">✓</div>
+      <div class="cl-text">自分のアーキタイプ名を覚える
+        <span class="cl-sub">例：丙 → I-EMO（表現型インフルエンサー）</span>
+      </div>
+    </div>
+    <div class="cl-item" onclick="toggle(this)">
+      <div class="cl-box">✓</div>
+      <div class="cl-text">動物占いのタイプも確認する
+        <span class="cl-sub">60動物のどれか。性格の「入り口」として使う</span>
+      </div>
+    </div>
+    <div class="cl-item" onclick="toggle(this)">
+      <div class="cl-box">✓</div>
+      <div class="cl-text">鑑定カルテ（自分用）に記入する
+        <span class="cl-sub">STEP 3のカルテシートを使って書き込んでおく</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="cl-title" style="margin-bottom:12px; font-family:'Shippori Mincho B1',serif; font-size:13px; font-weight:700; color:var(--indigo);">10のアーキタイプ一覧</div>
+  <div class="type-grid">
+    <div class="type-card"><span class="type-badge bg-build">A・BUILD</span><div><div class="type-name">甲　L-BUILD</div><div class="type-desc">ビジョン型リーダー<br>Leader（先頭に立つ経営者）</div></div></div>
+    <div class="type-card"><span class="type-badge bg-build">A・BUILD</span><div><div class="type-name">乙　P-BUILD</div><div class="type-desc">共感型プロデューサー<br>Producer（環境を整える黒幕）</div></div></div>
+    <div class="type-card"><span class="type-badge bg-emo">B・EMO</span><div><div class="type-name">丙　I-EMO</div><div class="type-desc">表現型インフルエンサー<br>Influencer（大衆を巻き込む発信者）</div></div></div>
+    <div class="type-card"><span class="type-badge bg-emo">B・EMO</span><div><div class="type-name">丁　C-EMO</div><div class="type-desc">職人型クリエイター<br>Creator（独自の美学を貫く職人）</div></div></div>
+    <div class="type-card"><span class="type-badge bg-core">C・CORE</span><div><div class="type-name">戊　M-CORE</div><div class="type-desc">統括型マネージャー<br>Manager（全体を統括する重鎮）</div></div></div>
+    <div class="type-card"><span class="type-badge bg-core">C・CORE</span><div><div class="type-name">己　D-CORE</div><div class="type-desc">深掘り型ディレクター<br>Director（細部を分析する参謀）</div></div></div>
+    <div class="type-card"><span class="type-badge bg-act">D・ACT</span><div><div class="type-name">庚　V-ACT</div><div class="type-desc">突破型ヴァンガード<br>Vanguard（最前線の突撃隊長）</div></div></div>
+    <div class="type-card"><span class="type-badge bg-act">D・ACT</span><div><div class="type-name">辛　S-ACT</div><div class="type-desc">専門型スペシャリスト<br>Specialist（独自の刃を持つ専門家）</div></div></div>
+    <div class="type-card"><span class="type-badge bg-des">E・DESIGN</span><div><div class="type-name">壬　E-DESIGN</div><div class="type-desc">開拓型パイオニア<br>Explorer（新市場の冒険者）</div></div></div>
+    <div class="type-card"><span class="type-badge bg-des">E・DESIGN</span><div><div class="type-name">癸　N-DESIGN</div><div class="type-desc">循環型ナビゲーター<br>Navigator（大衆を導く羅針盤）</div></div></div>
+  </div>
+
+  <div class="next-bar">
+    <button class="next-btn" onclick="showStep(1)">STEP 2 へ進む　→</button>
+  </div>
+</div>
+
+<!-- ═══════════════ STEP 2 ═══════════════ -->
+<div class="step-panel" id="step1">
+  <div class="progress">
+    <div class="prog-dot done"></div><div class="prog-line"></div>
+    <div class="prog-dot current"></div><div class="prog-line"></div>
+    <div class="prog-dot"></div><div class="prog-line"></div>
+    <div class="prog-dot"></div><div class="prog-line"></div>
+    <div class="prog-dot"></div><div class="prog-line"></div>
+    <div class="prog-dot"></div>
+    <span class="prog-label">STEP 2 / 6</span>
+  </div>
+
+  <div class="step-head">
+    <div class="step-badge">STEP 2</div>
+    <div class="step-titles">
+      <div class="step-label">U N D E R S T A N D I N G</div>
+      <div class="step-title">仕組みを理解する<br>— 干支学・13種占術の全体像</div>
+    </div>
+  </div>
+
+  <div class="goal-box">
+    <div class="g-label">S T E P　G O A L</div>
+    「<strong>干支 = 12ではなく60</strong>」という衝撃を理解する。<br>
+    13種の占術それぞれの役割を把握し、「いつ・どれを使うか」の判断軸を持つ。
+  </div>
+
+  <div class="checklist">
+    <div class="cl-title">やること</div>
+    <div class="cl-item key" onclick="toggle(this)">
+      <div class="cl-box">✓</div>
+      <div class="cl-text">「干支は12種類ではない」を人に説明できるようになる
+        <span class="cl-sub">陰陽 × 十干 × 十二支 = 六十干支 の構造を理解する</span>
+      </div>
+    </div>
+    <div class="cl-item key" onclick="toggle(this)">
+      <div class="cl-box">✓</div>
+      <div class="cl-text">5属性（ABCDE）の違いを言えるようになる
+        <span class="cl-sub">BUILD・EMO・CORE・ACT・DESIGNそれぞれのエネルギーの違い</span>
+      </div>
+    </div>
+    <div class="cl-item" onclick="toggle(this)">
+      <div class="cl-box">✓</div>
+      <div class="cl-text">13種の占術を「命・卜・相」に分類できる
+        <span class="cl-sub">命術（生年月日）・卜術（今この瞬間）・相術（環境・身体）</span>
+      </div>
+    </div>
+    <div class="cl-item" onclick="toggle(this)">
+      <div class="cl-box">✓</div>
+      <div class="cl-text">自分がメインで使う占術を1〜2種類決める</div>
+    </div>
+  </div>
+
+  <div class="accent teal">
+    <strong>核心の概念</strong><br>
+    占いは「当てるもの」ではなく「<strong>人生の戦術を立てるための技術（占術 = 戦術）</strong>」。<br>
+    地図を持って歩くのと、暗闇を歩くのでは、同じ荒れ道でも全然違う。
+  </div>
+
+  <table class="ctable">
+    <thead>
+      <tr><th>占術</th><th>分類</th><th>主な用途</th><th>メリット / 注意点</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>干支学</td><td>命術</td><td>性格・才能・長期運気</td><td><span class="merit">AIとの相性◎ / ビジネス応用が広い</span></td></tr>
+      <tr><td>動物占い</td><td>命術</td><td>関係性・アイスブレイク</td><td><span class="merit">誰でも知っている / </span><span class="demerit">深い鑑定には不向き</span></td></tr>
+      <tr><td>九星気学</td><td>命術</td><td>タイミング・方位</td><td><span class="merit">吉方位に強い / </span><span class="demerit">個別性が薄い</span></td></tr>
+      <tr><td>四柱推命</td><td>命術</td><td>深い命式・大運</td><td><span class="merit">解像度最高 / </span><span class="demerit">習得コスト高</span></td></tr>
+      <tr><td>タロット</td><td>卜術</td><td>今この瞬間の答え</td><td><span class="merit">即答できる / </span><span class="demerit">長期予測は苦手</span></td></tr>
+      <tr><td>数秘術</td><td>命術</td><td>SNS発信・初心者向け</td><td><span class="merit">シンプル / </span><span class="demerit">流派差が大きい</span></td></tr>
+      <tr><td>西洋占星術</td><td>命術</td><td>性格分析・海外発信</td><td><span class="merit">世界標準 / </span><span class="demerit">出生時間必要</span></td></tr>
+      <tr><td>インド占星術</td><td>命術</td><td>カルマ・Rahu/Ketu</td><td><span class="merit">精度が高い / </span><span class="demerit">難易度最高峰</span></td></tr>
+      <tr><td>手相</td><td>相術</td><td>対面イベント</td><td><span class="merit">信頼感◎ / </span><span class="demerit">オンライン不向き</span></td></tr>
+      <tr><td>姓名判断</td><td>命術</td><td>改名・命名</td><td>特定ニーズに特化</td></tr>
+      <tr><td>風水</td><td>相術</td><td>環境改善</td><td>空間・方位を見る</td></tr>
+      <tr><td>奇門遁甲</td><td>命術</td><td>吉方・時間戦略</td><td><span class="demerit">上級者向け</span></td></tr>
+      <tr><td>算命学</td><td>命術</td><td>守護神・忌神</td><td>四柱推命と近い体系</td></tr>
+    </tbody>
+  </table>
+
+  <div class="next-bar">
+    <button class="prev-btn" onclick="showStep(0)">← STEP 1</button>
+    <button class="next-btn" onclick="showStep(2)">STEP 3 へ進む　→</button>
+  </div>
+</div>
+
+<!-- ═══════════════ STEP 3 ═══════════════ -->
+<div class="step-panel" id="step2">
+  <div class="progress">
+    <div class="prog-dot done"></div><div class="prog-line"></div>
+    <div class="prog-dot done"></div><div class="prog-line"></div>
+    <div class="prog-dot current"></div><div class="prog-line"></div>
+    <div class="prog-dot"></div><div class="prog-line"></div>
+    <div class="prog-dot"></div><div class="prog-line"></div>
+    <div class="prog-dot"></div>
+    <span class="prog-label">STEP 3 / 6</span>
+  </div>
+
+  <div class="step-head">
+    <div class="step-badge">STEP 3</div>
+    <div class="step-titles">
+      <div class="step-label">K A R T E　&amp;　F L O W</div>
+      <div class="step-title">鑑定を学ぶ<br>— フロー・カルテ・コンパスシート</div>
+    </div>
+  </div>
+
+  <div class="goal-box">
+    <div class="g-label">S T E P　G O A L</div>
+    鑑定の<strong>7ステップフロー</strong>を頭に入れ、カルテとコンパスシートを実際に書けるようになる。<br>
+    「相手が何を求めているか」を聞き、「光・影・未来」を伝える型を習得する。
+  </div>
+
+  <div class="checklist">
+    <div class="cl-title">やること</div>
+    <div class="cl-item key" onclick="toggle(this)">
+      <div class="cl-box">✓</div>
+      <div class="cl-text">7ステップフローを声に出して3回言えるようにする</div>
+    </div>
+    <div class="cl-item key" onclick="toggle(this)">
+      <div class="cl-box">✓</div>
+      <div class="cl-text">家族・友人1人の鑑定カルテを書いてみる
+        <span class="cl-sub">相手の生年月日を借りて命式を出し、カルテに記入する練習</span>
+      </div>
+    </div>
+    <div class="cl-item" onclick="toggle(this)">
+      <div class="cl-box">✓</div>
+      <div class="cl-text">コンパスシートに自分の光・影・未来を書き込む</div>
+    </div>
+    <div class="cl-item" onclick="toggle(this)">
+      <div class="cl-box">✓</div>
+      <div class="cl-text">「光・影・未来」を自分のアーキタイプで3分以内に話せるようにする</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="cl-title" style="margin-bottom:14px; font-family:'Shippori Mincho B1',serif; font-size:13px; font-weight:700; color:var(--indigo);">鑑定7ステップフロー</div>
+  <ul class="flow">
+    <li class="fl-item"><div class="fl-num">1</div><div class="fl-body"><div class="fl-title">情報の収集</div><div class="fl-desc">生年月日・名前・相談内容を確認。「何に困っているか」ではなく「何を本当に求めているか」を聞く。</div></div></li>
+    <li class="fl-item"><div class="fl-num">2</div><div class="fl-body"><div class="fl-title">命式の算出</div><div class="fl-desc">GASサイト or AI鑑定で日干・月干・年干を自動算出。自分で計算しなくていい。</div></div></li>
+    <li class="fl-item"><div class="fl-num">3</div><div class="fl-body"><div class="fl-title">光（強み）の鑑定</div><div class="fl-desc">十干アーキタイプ・5属性から「この人の最大の才能」を読む。相手が「そうそう！」と言う部分を探す。</div></div></li>
+    <li class="fl-item"><div class="fl-num">4</div><div class="fl-body"><div class="fl-title">影（課題）の鑑定</div><div class="fl-desc">Rahu（今世の課題）・Ketu（快適ゾーン）で「今手放すべきもの」「向かうべき方向」を伝える。</div></div></li>
+    <li class="fl-item"><div class="fl-num">5</div><div class="fl-body"><div class="fl-title">未来（運気）の鑑定</div><div class="fl-desc">今年・来年の大運・年運を読む。吉凶ではなく「どう活かすか」の戦術として伝える。</div></div></li>
+    <li class="fl-item"><div class="fl-num">6</div><div class="fl-body"><div class="fl-title">AIとの連携（STEP 4で詳しく）</div><div class="fl-desc">干支学Gems・AIナイス貝鑑定で補完情報を出力。口頭＋AI出力の組み合わせで深度と速度を両立。</div></div></li>
+    <li class="fl-item"><div class="fl-num">7</div><div class="fl-body"><div class="fl-title">アクションへの橋渡し</div><div class="fl-desc">「今日からできること1つ」を具体的に伝える。コンパスシートに書き込んで相手に持ち帰ってもらう。</div></div></li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <!-- カルテ -->
+  <div class="karte" data-label="鑑定カルテ（記入用）">
+    <div class="karte-row"><div class="karte-label">お名前</div><div class="karte-val write h2"></div></div>
+    <div class="karte-row"><div class="karte-label">生年月日</div><div class="karte-val">　　年　　月　　日（　歳）</div></div>
+    <div class="karte-row"><div class="karte-label">日干 / アーキタイプ</div><div class="karte-val">　　干 ／　　　　　　　（型名）</div></div>
+    <div class="karte-row"><div class="karte-label">動物占い</div><div class="karte-val write"></div></div>
+    <div class="karte-row"><div class="karte-label">相談内容</div><div class="karte-val write h2"></div></div>
+    <div class="karte-row"><div class="karte-label">本当に求めていること</div><div class="karte-val write h2"></div></div>
+    <div class="karte-row"><div class="karte-label">使用した占術</div><div class="karte-val">□干支学　□九星　□タロット　□数秘　□手相</div></div>
+    <div class="karte-row"><div class="karte-label">メモ</div><div class="karte-val write h2"></div></div>
+    <div class="karte-row"><div class="karte-label">アクション（次の1つ）</div><div class="karte-val write h2"></div></div>
+  </div>
+
+  <!-- コンパス -->
+  <div class="compass">
+    <div class="compass-grid">
+      <div class="compass-cell"><div class="compass-cell-label">L I G H T</div><div class="compass-cell-title">私の光（強み・才能）</div><div class="wline"></div><div class="wline"></div><div class="wline"></div></div>
+      <div class="compass-cell"><div class="compass-cell-label">S H A D O W</div><div class="compass-cell-title">私の影（課題・手放すもの）</div><div class="wline"></div><div class="wline"></div><div class="wline"></div></div>
+      <div class="compass-cell"><div class="compass-cell-label">F U T U R E</div><div class="compass-cell-title">今年・来年の戦術</div><div class="wline"></div><div class="wline"></div><div class="wline"></div></div>
+      <div class="compass-cell"><div class="compass-cell-label">A C T I O N</div><div class="compass-cell-title">今日から始める1つのこと</div><div class="wline"></div><div class="wline"></div><div class="wline"></div></div>
+    </div>
+    <div style="border-top:1px solid var(--line); padding-top:12px; text-align:right; font-size:11px; color:var(--muted); font-family:'Shippori Mincho B1',serif; letter-spacing:0.2em;">NICE KAI　lin.ee/jrKIohi</div>
+  </div>
+
+  <div class="next-bar">
+    <button class="prev-btn" onclick="showStep(1)">← STEP 2</button>
+    <button class="next-btn" onclick="showStep(3)">STEP 4 へ進む　→</button>
+  </div>
+</div>
+
+<!-- ═══════════════ STEP 4 ═══════════════ -->
+<div class="step-panel" id="step3">
+  <div class="progress">
+    <div class="prog-dot done"></div><div class="prog-line"></div>
+    <div class="prog-dot done"></div><div class="prog-line"></div>
+    <div class="prog-dot done"></div><div class="prog-line"></div>
+    <div class="prog-dot current"></div><div class="prog-line"></div>
+    <div class="prog-dot"></div><div class="prog-line"></div>
+    <div class="prog-dot"></div>
+    <span class="prog-label">STEP 4 / 6</span>
+  </div>
+
+  <div class="step-head">
+    <div class="step-badge">STEP 4</div>
+    <div class="step-titles">
+      <div class="step-label">A I　I N T E G R A T I O N</div>
+      <div class="step-title">AIと連携する<br>— 干支学Gems・AIナイス貝鑑定</div>
+    </div>
+  </div>
+
+  <div class="goal-box">
+    <div class="g-label">S T E P　G O A L</div>
+    干支学Gems（Gemini）と AIナイス貝鑑定を実際に操作し、<br>
+    「<strong>口頭の鑑定 ＋ AI出力</strong>」を組み合わせた半自動鑑定ができるようになる。
+  </div>
+
+  <div class="checklist">
+    <div class="cl-title">やること</div>
+    <div class="cl-item key" onclick="toggle(this)">
+      <div class="cl-box">✓</div>
+      <div class="cl-text">干支学Gems（Gemini版）に自分の生年月日を入れて鑑定してみる
+        <span class="cl-sub">出力される「光・影・未来」を読んで、自分の言葉と照合する</span>
+      </div>
+    </div>
+    <div class="cl-item key" onclick="toggle(this)">
+      <div class="cl-box">✓</div>
+      <div class="cl-text">AIナイス貝鑑定（ChatGPT版 or Gemini版）を使ってみる</div>
+    </div>
+    <div class="cl-item" onclick="toggle(this)">
+      <div class="cl-box">✓</div>
+      <div class="cl-text">Gems4ステップの流れを体験する
+        <span class="cl-sub">①魂の初期化 → ②光・影・未来 → ③脳内シェア率 → ④魂の覚醒</span>
+      </div>
+    </div>
+    <div class="cl-item" onclick="toggle(this)">
+      <div class="cl-box">✓</div>
+      <div class="cl-text">AI出力を「そのまま読む」のではなく「自分の言葉で翻訳して伝える」練習をする</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="info-row">
+    <div class="info-card blue">
+      <div class="info-card-label">G E M I N I　G E M S</div>
+      <div class="info-card-title">干支学Gems<br>4ステップ鑑定フロー</div>
+      <div class="info-card-body">
+        ① 魂の初期化（画像）<br>
+        ② 光・影・未来の鑑定<br>
+        ③ 脳内シェア率の診断<br>
+        ④ 魂の覚醒（画像）+ LINE誘導<br>
+        <br>
+        → LINE → note¥500 → 電子書籍¥3,000 → 本命¥12,000 へのファネル
+      </div>
+    </div>
+    <div class="info-card teal">
+      <div class="info-card-label">A I　鑑 定　活 用 術</div>
+      <div class="info-card-title">AIを使う3つの場面</div>
+      <div class="info-card-body">
+        ① <strong>補完</strong>：口頭で伝えきれない詳細をAIに出力させる<br><br>
+        ② <strong>確認</strong>：自分の解釈が合っているか照合する<br><br>
+        ③ <strong>発信</strong>：SNS投稿・note記事の文章をAIで整える
+      </div>
+    </div>
+  </div>
+
+  <div class="accent ind">
+    <strong>大切な原則</strong><br>
+    AIは「もう一人のナイス貝」として補助する道具。<br>
+    AIが答えを出し、あなたはそれを<strong>「人の言葉」で届ける</strong>のが役割分担。<br>
+    AIに頼りすぎず、AIを使いこなす。
+  </div>
+
+  <div class="next-bar">
+    <button class="prev-btn" onclick="showStep(2)">← STEP 3</button>
+    <button class="next-btn" onclick="showStep(4)">STEP 5 へ進む　→</button>
+  </div>
+</div>
+
+<!-- ═══════════════ STEP 5 ═══════════════ -->
+<div class="step-panel" id="step4">
+  <div class="progress">
+    <div class="prog-dot done"></div><div class="prog-line"></div>
+    <div class="prog-dot done"></div><div class="prog-line"></div>
+    <div class="prog-dot done"></div><div class="prog-line"></div>
+    <div class="prog-dot done"></div><div class="prog-line"></div>
+    <div class="prog-dot current"></div><div class="prog-line"></div>
+    <div class="prog-dot"></div>
+    <span class="prog-label">STEP 5 / 6</span>
+  </div>
+
+  <div class="step-head">
+    <div class="step-badge">STEP 5</div>
+    <div class="step-titles">
+      <div class="step-label">P R A C T I C E</div>
+      <div class="step-title">実践・他者鑑定<br>— ペア練習から実際の鑑定へ</div>
+    </div>
+  </div>
+
+  <div class="goal-box">
+    <div class="g-label">S T E P　G O A L</div>
+    他の受講生・身近な人を対象に<strong>実際に鑑定する</strong>。<br>
+    カルテを使い、コンパスシートを渡し、「口頭＋AI」の鑑定を完結させる。
+  </div>
+
+  <div class="checklist">
+    <div class="cl-title">やること（順番通りに）</div>
+    <div class="cl-item key" onclick="toggle(this)">
+      <div class="cl-box">✓</div>
+      <div class="cl-text">他の受講生とペアを組み、相互鑑定を行う（講座内）
+        <span class="cl-sub">カルテに記入しながら7ステップを実践する</span>
+      </div>
+    </div>
+    <div class="cl-item key" onclick="toggle(this)">
+      <div class="cl-box">✓</div>
+      <div class="cl-text">家族・友人・知人1人を「練習相手」として鑑定する（講座外）
+        <span class="cl-sub">感想をもらってフィードバックとして記録する</span>
+      </div>
+    </div>
+    <div class="cl-item" onclick="toggle(this)">
+      <div class="cl-box">✓</div>
+      <div class="cl-text">鑑定後にコンパスシートを渡す習慣をつける</div>
+    </div>
+    <div class="cl-item" onclick="toggle(this)">
+      <div class="cl-box">✓</div>
+      <div class="cl-text">鑑定の「やりやすい占術 / やりにくい占術」を把握する</div>
+    </div>
+    <div class="cl-item" onclick="toggle(this)">
+      <div class="cl-box">✓</div>
+      <div class="cl-text">鑑定で詰まった場面をメモしてナイス貝に共有する
+        <span class="cl-sub">「ここで詰まった」が次の講座のテーマになる</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="info-row">
+    <div class="info-card">
+      <div class="info-card-label">よく詰まるポイント</div>
+      <div class="info-card-title">「影」の伝え方が難しい</div>
+      <div class="info-card-body">課題を伝えるとき、否定に聞こえてしまいがち。<br><br>ポイント：「これがあなたの今世のテーマ（Rahu）」というフレームで伝えると、相手が受け取りやすくなる。</div>
+    </div>
+    <div class="info-card red">
+      <div class="info-card-label">絶対にやらないこと</div>
+      <div class="info-card-title">断言・決めつけ・脅し</div>
+      <div class="info-card-body">「あなたは〇〇だ」と断言するのではなく、「こういう傾向がある」「こういう側面が強い」という伝え方を徹底する。<br><br>占いは戦術であり、呪いではない。</div>
+    </div>
+  </div>
+
+  <div class="next-bar">
+    <button class="prev-btn" onclick="showStep(3)">← STEP 4</button>
+    <button class="next-btn" onclick="showStep(5)">STEP 6 へ進む　→</button>
+  </div>
+</div>
+
+<!-- ═══════════════ STEP 6 ═══════════════ -->
+<div class="step-panel" id="step5">
+  <div class="progress">
+    <div class="prog-dot done"></div><div class="prog-line"></div>
+    <div class="prog-dot done"></div><div class="prog-line"></div>
+    <div class="prog-dot done"></div><div class="prog-line"></div>
+    <div class="prog-dot done"></div><div class="prog-line"></div>
+    <div class="prog-dot done"></div><div class="prog-line"></div>
+    <div class="prog-dot current"></div>
+    <span class="prog-label">STEP 6 / 6</span>
+  </div>
+
+  <div class="step-head">
+    <div class="step-badge">STEP 6</div>
+    <div class="step-titles">
+      <div class="step-label">Y O U R　S T Y L E</div>
+      <div class="step-title">自分のスタイルへ<br>— 発信・収益化・次のステップ</div>
+    </div>
+  </div>
+
+  <div class="goal-box">
+    <div class="g-label">S T E P　G O A L</div>
+    鑑定を「自分のビジネス」として動かし始める。<br>
+    発信・ファネル・価格設定の基本を知り、<strong>自分のサービスの形</strong>を決める。
+  </div>
+
+  <div class="checklist">
+    <div class="cl-title">やること</div>
+    <div class="cl-item key" onclick="toggle(this)">
+      <div class="cl-box">✓</div>
+      <div class="cl-text">「自分がどんな人に、どんな鑑定を届けたいか」を一文で言えるようにする
+        <span class="cl-sub">これが発信の軸になる</span>
+      </div>
+    </div>
+    <div class="cl-item key" onclick="toggle(this)">
+      <div class="cl-box">✓</div>
+      <div class="cl-text">SNSで干支・暦の投稿を1週間続けてみる
+        <span class="cl-sub">Facebook / Instagram / Threads のどれか1つから</span>
+      </div>
+    </div>
+    <div class="cl-item" onclick="toggle(this)">
+      <div class="cl-box">✓</div>
+      <div class="cl-text">無料鑑定枠を1〜3人に提供し、感想・口コミをもらう</div>
+    </div>
+    <div class="cl-item" onclick="toggle(this)">
+      <div class="cl-box">✓</div>
+      <div class="cl-text">自分のメニュー（サービス内容・価格帯）の草案を作る</div>
+    </div>
+    <div class="cl-item" onclick="toggle(this)">
+      <div class="cl-box">✓</div>
+      <div class="cl-text">LINE公式アカウント or 予約ページ（リザスト）を整える</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="accent teal">
+    <strong>「知らない人には会わない」設計</strong><br>
+    いきなり個別鑑定を売るのではなく、<br>
+    無料発信 → 無料PDF / LINE登録 → 有料note → 講座 → 個別鑑定<br>
+    という7層フィルターを通った「縁ある人」と深く向き合う構造を作る。
+  </div>
+
+  <div class="info-row">
+    <div class="info-card">
+      <div class="info-card-label">発 信 の 型</div>
+      <div class="info-card-title">干支・暦の日次投稿</div>
+      <div class="info-card-body">毎朝の干支投稿が最も拡散しやすい。<br>①今日の干支の意味 → ②3日の流れ → ③ランキング → ④CTA<br>の型で毎朝15分で作れる。</div>
+    </div>
+    <div class="info-card blue">
+      <div class="info-card-label">価 格 の 目 安</div>
+      <div class="info-card-title">最初のメニュー設計</div>
+      <div class="info-card-body">
+        無料鑑定（練習・口コミ収集）<br>
+        ↓<br>
+        有料note ¥500〜¥3,000<br>
+        ↓<br>
+        個別鑑定 ¥10,000〜<br>
+        <br>
+        ※ 最初は価格より「経験と感想」を集める期間
+      </div>
+    </div>
+  </div>
+
+  <div class="accent" style="margin-top: 28px;">
+    <strong>卒業後も繋がり続ける</strong><br>
+    LINE公式　lin.ee/jrKIohi　でフォローしてください。<br>
+    毎朝の干支投稿・暦情報・次の講座・個別鑑定の案内を配信しています。<br>
+    鑑定予約もLINEから受け付けています。
+  </div>
+
+  <div class="seal">
+    <div class="seal-mark">片<br>貝</div>
+    <div class="seal-text">N I C E K A I　／　占術は戦術である　／　令和八年</div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<script>
+function showStep(n) {
+  document.querySelectorAll('.step-panel').forEach(function(p, i) {
+    p.classList.toggle('active', i === n);
+  });
+  document.querySelectorAll('.nav-item').forEach(function(item, i) {
+    item.classList.toggle('active', i === n);
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggle(el) {
+  el.classList.toggle('checked');
+  var key = 'ck_' + el.closest('.step-panel').id + '_' + Array.from(el.parentNode.children).indexOf(el);
+  try { localStorage.setItem(key, el.classList.contains('checked') ? '1' : '0'); } catch(e) {}
+}
+
+(function restoreChecks() {
+  document.querySelectorAll('.cl-item').forEach(function(el) {
+    var key = 'ck_' + el.closest('.step-panel').id + '_' + Array.from(el.parentNode.children).indexOf(el);
+    try { if (localStorage.getItem(key) === '1') el.classList.add('checked'); } catch(e) {}
+  });
+})();
+</script>
+</body>
+</html>
