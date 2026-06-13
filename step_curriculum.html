@@ -24,7 +24,8 @@ body {
   font-family: 'Noto Sans JP', sans-serif;
   background: var(--paper);
   color: var(--ink);
-  line-height: 1.85;
+  line-height: 1.9;
+  font-size: 16px;
   padding-bottom: 100px;
 }
 
@@ -196,9 +197,9 @@ body {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  padding: 7px 0;
-  font-size: 13px;
-  line-height: 1.75;
+  padding: 9px 0;
+  font-size: 15px;
+  line-height: 1.8;
   border-bottom: 1px solid var(--line);
   cursor: pointer;
   user-select: none;
@@ -224,9 +225,9 @@ body {
 .cl-text { flex: 1; }
 .cl-sub {
   display: block;
-  font-size: 11px;
+  font-size: 13px;
   color: var(--muted);
-  margin-top: 1px;
+  margin-top: 2px;
 }
 .cl-item.key .cl-box { border-color: var(--gold-d); }
 .cl-item.key .cl-text { font-weight: 700; }
@@ -260,19 +261,19 @@ body {
 .info-card.red .info-card-label { color: var(--red); }
 .info-card-title {
   font-family: 'Shippori Mincho B1', serif;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   margin-bottom: 8px;
   line-height: 1.4;
 }
-.info-card-body { font-size: 12px; color: var(--muted); line-height: 1.85; }
+.info-card-body { font-size: 14px; color: var(--muted); line-height: 1.9; }
 
 /* ─── ACCENT ─── */
 .accent {
   border-left: 4px solid var(--gold);
-  padding: 14px 18px;
+  padding: 16px 20px;
   background: var(--gold-l);
-  font-size: 13px;
+  font-size: 15px;
   line-height: 2;
   margin-bottom: 16px;
 }
@@ -313,8 +314,8 @@ body {
 .bg-core  { background: rgba(139,101,25,0.15); color: var(--gold-d); }
 .bg-act   { background: rgba(42,58,85,0.12); color: var(--indigo); }
 .bg-des   { background: rgba(26,107,82,0.12); color: var(--teal); }
-.type-name { font-family: 'Shippori Mincho B1', serif; font-size: 13px; font-weight: 700; margin-bottom: 2px; }
-.type-desc { font-size: 11px; color: var(--muted); line-height: 1.6; }
+.type-name { font-family: 'Shippori Mincho B1', serif; font-size: 15px; font-weight: 700; margin-bottom: 3px; }
+.type-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
 
 /* ─── FLOW STEPS ─── */
 .flow { counter-reset: fl; list-style: none; position: relative; margin-bottom: 20px; }
@@ -346,8 +347,8 @@ body {
   z-index: 1;
 }
 .fl-body { flex: 1; padding-top: 7px; }
-.fl-title { font-size: 14px; font-weight: 700; margin-bottom: 3px; font-family: 'Shippori Mincho B1', serif; }
-.fl-desc { font-size: 12px; color: var(--muted); line-height: 1.85; }
+.fl-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; font-family: 'Shippori Mincho B1', serif; }
+.fl-desc { font-size: 14px; color: var(--muted); line-height: 1.9; }
 
 /* ─── COMPARE TABLE ─── */
 .ctable { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 20px; }
@@ -608,16 +609,16 @@ body {
 
   <div class="cl-title" style="margin-bottom:12px; font-family:'Shippori Mincho B1',serif; font-size:13px; font-weight:700; color:var(--indigo);">10のアーキタイプ一覧</div>
   <div class="type-grid">
-    <div class="type-card"><span class="type-badge bg-build">A・BUILD</span><div><div class="type-name">甲　L-BUILD</div><div class="type-desc">ビジョン型リーダー<br>Leader（先頭に立つ経営者）</div></div></div>
-    <div class="type-card"><span class="type-badge bg-build">A・BUILD</span><div><div class="type-name">乙　P-BUILD</div><div class="type-desc">共感型プロデューサー<br>Producer（環境を整える黒幕）</div></div></div>
-    <div class="type-card"><span class="type-badge bg-emo">B・EMO</span><div><div class="type-name">丙　I-EMO</div><div class="type-desc">表現型インフルエンサー<br>Influencer（大衆を巻き込む発信者）</div></div></div>
-    <div class="type-card"><span class="type-badge bg-emo">B・EMO</span><div><div class="type-name">丁　C-EMO</div><div class="type-desc">職人型クリエイター<br>Creator（独自の美学を貫く職人）</div></div></div>
-    <div class="type-card"><span class="type-badge bg-core">C・CORE</span><div><div class="type-name">戊　M-CORE</div><div class="type-desc">統括型マネージャー<br>Manager（全体を統括する重鎮）</div></div></div>
-    <div class="type-card"><span class="type-badge bg-core">C・CORE</span><div><div class="type-name">己　D-CORE</div><div class="type-desc">深掘り型ディレクター<br>Director（細部を分析する参謀）</div></div></div>
-    <div class="type-card"><span class="type-badge bg-act">D・ACT</span><div><div class="type-name">庚　V-ACT</div><div class="type-desc">突破型ヴァンガード<br>Vanguard（最前線の突撃隊長）</div></div></div>
-    <div class="type-card"><span class="type-badge bg-act">D・ACT</span><div><div class="type-name">辛　S-ACT</div><div class="type-desc">専門型スペシャリスト<br>Specialist（独自の刃を持つ専門家）</div></div></div>
-    <div class="type-card"><span class="type-badge bg-des">E・DESIGN</span><div><div class="type-name">壬　E-DESIGN</div><div class="type-desc">開拓型パイオニア<br>Explorer（新市場の冒険者）</div></div></div>
-    <div class="type-card"><span class="type-badge bg-des">E・DESIGN</span><div><div class="type-name">癸　N-DESIGN</div><div class="type-desc">循環型ナビゲーター<br>Navigator（大衆を導く羅針盤）</div></div></div>
+    <div class="type-card"><span class="type-badge bg-build">BUILD</span><div><div class="type-name">甲　L-BUILD</div><div class="type-desc">ビジョン型リーダー<br>Leader（先頭に立つ経営者）</div></div></div>
+    <div class="type-card"><span class="type-badge bg-build">BUILD</span><div><div class="type-name">乙　P-BUILD</div><div class="type-desc">共感型プロデューサー<br>Producer（環境を整える黒幕）</div></div></div>
+    <div class="type-card"><span class="type-badge bg-emo">EMO</span><div><div class="type-name">丙　I-EMO</div><div class="type-desc">表現型インフルエンサー<br>Influencer（大衆を巻き込む発信者）</div></div></div>
+    <div class="type-card"><span class="type-badge bg-emo">EMO</span><div><div class="type-name">丁　C-EMO</div><div class="type-desc">職人型クリエイター<br>Creator（独自の美学を貫く職人）</div></div></div>
+    <div class="type-card"><span class="type-badge bg-core">CORE</span><div><div class="type-name">戊　M-CORE</div><div class="type-desc">統括型マネージャー<br>Manager（全体を統括する重鎮）</div></div></div>
+    <div class="type-card"><span class="type-badge bg-core">CORE</span><div><div class="type-name">己　D-CORE</div><div class="type-desc">深掘り型ディレクター<br>Director（細部を分析する参謀）</div></div></div>
+    <div class="type-card"><span class="type-badge bg-act">ACT</span><div><div class="type-name">庚　V-ACT</div><div class="type-desc">突破型ヴァンガード<br>Vanguard（最前線の突撃隊長）</div></div></div>
+    <div class="type-card"><span class="type-badge bg-act">ACT</span><div><div class="type-name">辛　S-ACT</div><div class="type-desc">専門型スペシャリスト<br>Specialist（独自の刃を持つ専門家）</div></div></div>
+    <div class="type-card"><span class="type-badge bg-des">DESIGN</span><div><div class="type-name">壬　E-DESIGN</div><div class="type-desc">開拓型パイオニア<br>Explorer（新市場の冒険者）</div></div></div>
+    <div class="type-card"><span class="type-badge bg-des">DESIGN</span><div><div class="type-name">癸　N-DESIGN</div><div class="type-desc">循環型ナビゲーター<br>Navigator（大衆を導く羅針盤）</div></div></div>
   </div>
 
   <div class="next-bar">
