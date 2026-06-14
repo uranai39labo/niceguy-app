@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub アップローダー</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  background:#FAFAF7;
+  color:#1A1A1A;
+  font-family:'Noto Sans JP',sans-serif;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:40px 16px;
+}
+.wrap{width:100%;max-width:480px;}
+
+h1{
+  font-size:20px;font-weight:700;
+  margin-bottom:6px;color:#1A1A1A;
+}
+.desc{font-size:13px;color:#888;margin-bottom:32px;line-height:1.8;}
+
+.section{margin-bottom:24px;}
+.label{
+  font-size:11px;letter-spacing:2px;color:#B8860B;
+  font-weight:700;margin-bottom:8px;
+}
+input[type=text],input[type=password],select{
+  width:100%;
+  background:#F5F5F0;
+  border:1px solid #DDD;
+  border-radius:4px;
+  padding:12px 14px;
+  font-size:14px;
+  font-family:'Noto Sans JP',sans-serif;
+  color:#1A1A1A;
+  outline:none;
+  transition:border-color .2s;
+}
+input:focus,select:focus{border-color:#B8860B;}
+
+.file-drop{
+  border:2px dashed #DDD;
+  border-radius:4px;
+  padding:32px 20px;
+  text-align:center;
+  cursor:pointer;
+  transition:all .2s;
+  background:#F5F5F0;
+}
+.file-drop:hover{border-color:#B8860B;background:#FFF;}
+.file-drop.dragover{border-color:#B8860B;background:#FFFBF0;}
+.file-drop p{font-size:13px;color:#999;line-height:2;}
+.file-drop strong{color:#1A1A1A;font-size:15px;display:block;margin-bottom:4px;}
+input[type=file]{display:none;}
+
+.file-list{
+  margin-top:12px;
+  display:flex;flex-direction:column;gap:6px;
+}
+.file-item{
+  display:flex;align-items:center;justify-content:space-between;
+  background:#FFF;border:1px solid #E8E8E8;
+  border-radius:4px;padding:10px 14px;
+  font-size:13px;
+}
+.file-item .fname{color:#1A1A1A;font-weight:700;}
+.file-item .fsize{color:#999;font-size:11px;}
+.file-remove{
+  background:none;border:none;color:#CCC;
+  cursor:pointer;font-size:16px;padding:0 4px;
+}
+.file-remove:hover{color:#C0392B;}
+
+.btn{
+  width:100%;padding:16px;
+  background:#1A1A1A;border:none;
+  color:#FFF;font-size:16px;font-weight:700;
+  letter-spacing:2px;cursor:pointer;
+  border-radius:4px;transition:background .2s;
+  font-family:'Noto Sans JP',sans-serif;
+}
+.btn:hover{background:#333;}
+.btn:disabled{background:#CCC;cursor:not-allowed;}
+
+.log{
+  margin-top:20px;
+  background:#1A1A1A;
+  border-radius:4px;
+  padding:16px;
+  font-size:12px;
+  color:#AAA;
+  line-height:2;
+  max-height:200px;
+  overflow-y:auto;
+  display:none;
+  font-family:monospace;
+}
+.log .ok{color:#7DB070;}
+.log .err{color:#C0392B;}
+.log .info{color:#6090B0;}
+
+.token-row{
+  display:flex;gap:8px;align-items:center;
+}
+.token-row input{flex:1;}
+.btn-sm{
+  padding:12px 16px;
+  background:#1A1A1A;border:none;
+  color:#FFF;font-size:12px;font-weight:700;
+  cursor:pointer;border-radius:4px;
+  white-space:nowrap;
+  font-family:'Noto Sans JP',sans-serif;
+}
+.btn-sm:hover{background:#333;}
+.btn-sm.saved{background:#4A7A50;}
+
+.divider{
+  border:none;border-top:1px solid #E8E8E8;
+  margin:28px 0;
+}
+
+.status-badge{
+  display:inline-block;
+  font-size:10px;letter-spacing:1px;
+  padding:3px 10px;border-radius:10px;
+  margin-left:8px;
+}
+.status-badge.ok{background:#E8F5E8;color:#4A7A50;}
+.status-badge.ng{background:#FFE8E8;color:#C0392B;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>GitHub アップローダー</h1>
+  <p class="desc">
+    ファイルをドラッグ＆ドロップするだけで<br>
+    GitHubに自動アップロードします。<br>
+    トークンはこのブラウザにのみ保存されます。
+  </p>
+
+  <!-- トークン設定 -->
+  <div class="section">
+    <div class="label">GITHUB TOKEN</div>
+    <div class="token-row">
+      <input type="password" id="token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+      <button class="btn-sm" id="saveBtn" onclick="saveToken()">保存</button>
+    </div>
+  </div>
+
+  <!-- リポジトリ設定 -->
+  <div class="section">
+    <div class="label">OWNER / REPOSITORY</div>
+    <input type="text" id="owner" placeholder="uranai39labo" value="uranai39labo">
+  </div>
+  <div class="section">
+    <div class="label">REPOSITORY NAME</div>
+    <input type="text" id="repo" placeholder="niceguy-app" value="niceguy-app">
+  </div>
+  <div class="section">
+    <div class="label">アップロード先フォルダ（空白でルート）</div>
+    <input type="text" id="folder" placeholder="例：subfolder　空白でルート">
+  </div>
+
+  <hr class="divider">
+
+  <!-- ファイル選択 -->
+  <div class="section">
+    <div class="label">アップロードするファイル</div>
+    <div class="file-drop" id="dropZone" onclick="document.getElementById('fileInput').click()">
+      <strong>ここにファイルをドロップ</strong>
+      <p>またはクリックしてファイルを選択<br>複数ファイル対応</p>
+    </div>
+    <input type="file" id="fileInput" multiple>
+    <div class="file-list" id="fileList"></div>
+  </div>
+
+  <button class="btn" id="uploadBtn" onclick="uploadFiles()" disabled>
+    アップロードする
+  </button>
+
+  <div class="log" id="log"></div>
+
+</div>
+<script>
+let selectedFiles = [];
+
+// ── トークン保存・読込 ──
+window.onload = function() {
+  const saved = localStorage.getItem('gh_token');
+  if (saved) {
+    document.getElementById('token').value = saved;
+    document.getElementById('saveBtn').textContent = '保存済み';
+    document.getElementById('saveBtn').classList.add('saved');
+  }
+};
+
+function saveToken() {
+  const t = document.getElementById('token').value.trim();
+  if (!t) return;
+  localStorage.setItem('gh_token', t);
+  const btn = document.getElementById('saveBtn');
+  btn.textContent = '保存済み';
+  btn.classList.add('saved');
+}
+
+// ── ファイル選択 ──
+document.getElementById('fileInput').addEventListener('change', function(e) {
+  addFiles(Array.from(e.target.files));
+});
+
+const dropZone = document.getElementById('dropZone');
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropZone.classList.remove('dragover');
+  addFiles(Array.from(e.dataTransfer.files));
+});
+
+function addFiles(files) {
+  files.forEach(f => {
+    if (!selectedFiles.find(x => x.name === f.name)) {
+      selectedFiles.push(f);
+    }
+  });
+  renderFileList();
+}
+
+function removeFile(name) {
+  selectedFiles = selectedFiles.filter(f => f.name !== name);
+  renderFileList();
+}
+
+function renderFileList() {
+  const list = document.getElementById('fileList');
+  list.innerHTML = selectedFiles.map(f => `
+    <div class="file-item">
+      <span class="fname">${f.name}</span>
+      <span class="fsize">${(f.size/1024).toFixed(1)} KB</span>
+      <button class="file-remove" onclick="removeFile('${f.name}')">✕</button>
+    </div>
+  `).join('');
+  document.getElementById('uploadBtn').disabled = selectedFiles.length === 0;
+}
+
+// ── ログ ──
+function log(msg, type='info') {
+  const el = document.getElementById('log');
+  el.style.display = 'block';
+  el.innerHTML += `<div class="${type}">${msg}</div>`;
+  el.scrollTop = el.scrollHeight;
+}
+
+// ── アップロード ──
+async function uploadFiles() {
+  const token  = localStorage.getItem('gh_token') || document.getElementById('token').value.trim();
+  const owner  = document.getElementById('owner').value.trim();
+  const repo   = document.getElementById('repo').value.trim();
+  const folder = document.getElementById('folder').value.trim();
+
+  if (!token) { alert('GitHubトークンを入力してください'); return; }
+  if (!owner || !repo) { alert('OwnerとRepositoryを入力してください'); return; }
+  if (selectedFiles.length === 0) { alert('ファイルを選択してください'); return; }
+
+  const btn = document.getElementById('uploadBtn');
+  btn.disabled = true;
+  btn.textContent = 'アップロード中...';
+
+  document.getElementById('log').innerHTML = '';
+  log(`📁 ${owner}/${repo} へのアップロードを開始します`, 'info');
+
+  for (const file of selectedFiles) {
+    const path = folder ? `${folder}/${file.name}` : file.name;
+    log(`⬆️ ${file.name} をアップロード中...`, 'info');
+
+    try {
+      // ファイルをBase64に変換
+      const base64 = await toBase64(file);
+
+      // 既存ファイルのSHAを取得（更新の場合に必要）
+      let sha = null;
+      try {
+        const getRes = await fetch(
+          `https://api.github.com/repos/${owner}/${repo}/contents/${path}`,
+          { headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' } }
+        );
+        if (getRes.ok) {
+          const getData = await getRes.json();
+          sha = getData.sha;
+          log(`🔄 既存ファイルを更新します`, 'info');
+        }
+      } catch(e) {}
+
+      // アップロード
+      const body = {
+        message: `Update ${file.name}`,
+        content: base64,
+      };
+      if (sha) body.sha = sha;
+
+      const res = await fetch(
+        `https://api.github.com/repos/${owner}/${repo}/contents/${path}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Authorization': `token ${token}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(body)
+        }
+      );
+
+      if (res.ok) {
+        log(`✅ ${file.name} のアップロード完了！`, 'ok');
+      } else {
+        const err = await res.json();
+        log(`❌ ${file.name} エラー：${err.message}`, 'err');
+      }
+    } catch(e) {
+      log(`❌ ${file.name} エラー：${e.message}`, 'err');
+    }
+  }
+
+  log('', 'info');
+  log(`🎉 完了！GitHub Pagesに反映されるまで数分かかります。`, 'ok');
+  log(`🔗 https://${owner}.github.io/${repo}/`, 'ok');
+
+  btn.disabled = false;
+  btn.textContent = 'アップロードする';
+}
+
+function toBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64 = reader.result.split(',')[1];
+      resolve(base64);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+</script>
+</body>
+</html>
