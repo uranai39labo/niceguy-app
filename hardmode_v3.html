@@ -211,6 +211,10 @@ body{
   <div class="r-icon" id="bIcon"></div>
   <div class="kan-title-main" id="bTitleMain"></div>
   <div class="kan-title-sub" id="bTitleSub"></div>
+  <div class="copy-box">
+    <div class="copy-text" id="bCopyText"></div>
+    <button class="btn-copy" id="copyBtn" onclick="copyResult()">コピー</button>
+  </div>
   <div class="r-box">
     <div class="r-box-label">あなたが辛かった理由</div>
     <div class="r-line" id="bShadow"></div>
@@ -241,16 +245,16 @@ const ANIMALS=[
   {icon:'🦁',name:'ライオン',   hm:'強すぎて、人が近づけない'},
 ];
 const JIKKAN=[
-  {icon:'🌳',attrBadge:'BUILD ／ 木',titleMain:'リーダー',titleSub:'誰も見たことない道を、ひとりで切り拓く人',shadow:'あなたが孤独なのは、先を行きすぎているから'},
-  {icon:'🌿',attrBadge:'BUILD ／ 木',titleMain:'プロデューサー',titleSub:'しなやかに曲がりながら、絶対に折れない人',shadow:'あなたが疲れるのは、誰かのために使いすぎているから'},
-  {icon:'☀️',attrBadge:'EMO ／ 火',titleMain:'インフルエンサー',titleSub:'全方位に光を放ち、大衆を動かす人',shadow:'あなたが空回りするのは、伝える場所が違うから'},
-  {icon:'🕯️',attrBadge:'EMO ／ 火',titleMain:'クリエイター',titleSub:'暗闇の一点を鋭く照らす、唯一無二の人',shadow:'あなたが認められないのは、まだ世界があなたを知らないから'},
-  {icon:'⛰️',attrBadge:'CORE ／ 土',titleMain:'マネージャー',titleSub:'圧倒的な器で、人と現場を動かす人',shadow:'あなたが重いのは、背負いすぎているから'},
-  {icon:'🌾',attrBadge:'CORE ／ 土',titleMain:'サポーター',titleSub:'万物を平等に育てる、大地のような人',shadow:'あなたが報われないのは、見えないところで与えすぎているから'},
-  {icon:'⚔️',attrBadge:'ACT ／ 金',titleMain:'プレイヤー',titleSub:'最前線でリスクを取り、現状を突破する人',shadow:'あなたが空回りするのは、動く方向が定まっていないから'},
-  {icon:'💎',attrBadge:'ACT ／ 金',titleMain:'スペシャリスト',titleSub:'細部を磨き上げ、プレミアムなポジションを確立する人',shadow:'あなたが埋もれるのは、磨く場所をまだ見つけていないから'},
-  {icon:'🌊',attrBadge:'DESIGN ／ 水',titleMain:'パイオニア',titleSub:'時代の先を読み、誰も見ぬ地平を拓く人',shadow:'あなたが孤立するのは、見えているものが周りと違うから'},
-  {icon:'🌧️',attrBadge:'DESIGN ／ 水',titleMain:'ナビゲーター',titleSub:'膨大な知を美しく循環させ、人を導く人',shadow:'あなたが迷うのは、自分が地図を持っていることに気づいていないから'},
+  {icon:'🌳',attrBadge:'L-BUILD ／ 木',titleMain:'理想型リーダー',titleSub:'誰も見たことない道を、ひとりで切り拓く人',shadow:'あなたが孤独なのは、先を行きすぎているから'},
+  {icon:'🌿',attrBadge:'P-BUILD ／ 木',titleMain:'共感型プロデューサー',titleSub:'しなやかに曲がりながら、絶対に折れない人',shadow:'あなたが疲れるのは、誰かのために使いすぎているから'},
+  {icon:'☀️',attrBadge:'I-EMO ／ 火',titleMain:'表現型インフルエンサー',titleSub:'全方位に光を放ち、大衆を動かす人',shadow:'あなたが空回りするのは、伝える場所が違うから'},
+  {icon:'🕯️',attrBadge:'C-EMO ／ 火',titleMain:'職人型クリエイター',titleSub:'暗闇の一点を鋭く照らす、唯一無二の人',shadow:'あなたが認められないのは、まだ世界があなたを知らないから'},
+  {icon:'⛰️',attrBadge:'M-CORE ／ 土',titleMain:'統括型マネージャー',titleSub:'圧倒的な器で、人と現場を動かす人',shadow:'あなたが重いのは、背負いすぎているから'},
+  {icon:'🌾',attrBadge:'D-CORE ／ 土',titleMain:'調和型ディレクター',titleSub:'万物を平等に育てる、大地のような人',shadow:'あなたが報われないのは、見えないところで与えすぎているから'},
+  {icon:'⚔️',attrBadge:'V-ACT ／ 金',titleMain:'突破型ヴァンガード',titleSub:'最前線でリスクを取り、現状を突破する人',shadow:'あなたが空回りするのは、動く方向が定まっていないから'},
+  {icon:'💎',attrBadge:'S-ACT ／ 金',titleMain:'専門型スペシャリスト',titleSub:'細部を磨き上げ、プレミアムなポジションを確立する人',shadow:'あなたが埋もれるのは、磨く場所をまだ見つけていないから'},
+  {icon:'🌊',attrBadge:'E-DESIGN ／ 水',titleMain:'開拓型パイオニア',titleSub:'時代の先を読み、誰も見ぬ地平を拓く人',shadow:'あなたが孤立するのは、見えているものが周りと違うから'},
+  {icon:'🌧️',attrBadge:'N-DESIGN ／ 水',titleMain:'循環型ナビゲーター',titleSub:'膨大な知を美しく循環させ、人を導く人',shadow:'あなたが迷うのは、自分が地図を持っていることに気づいていないから'},
 ];
 
 // 全角数字→半角変換
@@ -272,6 +276,19 @@ function getJikkanIdx(y,m,d){
   const diff=Math.round((target-base)/86400000);
   return ((diff%10)+10)%10;
 }
+function copyResult(){
+  const text = document.getElementById('bCopyText').textContent + '\n#黄金の羅針盤';
+  navigator.clipboard.writeText(text).then(function(){
+    var btn = document.getElementById('copyBtn');
+    btn.textContent = 'コピー済み';
+    btn.classList.add('copied');
+    setTimeout(function(){
+      btn.textContent = 'コピー';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
 function go(id){
   ['sTop','sInput','sResultA','sResultB'].forEach(s=>{
     document.getElementById(s).style.display=s===id?'block':'none';
@@ -298,6 +315,7 @@ function diagnose(){
   document.getElementById('bTitleMain').textContent=k.titleMain;
   document.getElementById('bTitleSub').textContent=k.titleSub;
   document.getElementById('bShadow').textContent=k.shadow;
+  document.getElementById('bCopyText').textContent=k.titleMain+' | '+k.attrBadge.split(' ')[0];
   go('sResultA');
 }
 go('sTop');
