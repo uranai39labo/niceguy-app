@@ -160,6 +160,14 @@
   }
   .res-btn:hover{ background:var(--navy-mid); }
   .res-btn.empty{ background:transparent; color:var(--muted); border:1px dashed var(--line); }
+  .res-category{
+    font-size:11px; letter-spacing:.18em; font-weight:700; text-transform:uppercase;
+    color:var(--gold); padding:28px 0 8px; border-bottom:2px solid var(--gold);
+    margin-bottom:4px;
+  }
+  .res-category.first{ padding-top:0; }
+  .res-category.pick{ color:var(--navy-deep); background:var(--navy); color:var(--gold-light); padding:8px 14px; border-radius:6px; border:none; display:inline-block; margin-bottom:4px; margin-top:28px; }
+  .res-category.pick.first{ margin-top:0; }
 
   /* ---------- cta ---------- */
   .cta{
@@ -215,6 +223,18 @@
       <div><strong>Zoom ＋ 対面</strong>開催形式</div>
     </div>
   </header>
+
+  <!-- ================= NOTEBOOKLM BANNER ================= -->
+  <div style="background:var(--gold); padding:20px 6vw; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
+    <div>
+      <div style="font-size:11px; letter-spacing:.18em; font-weight:700; color:var(--navy-deep); text-transform:uppercase; margin-bottom:4px;">📚 学習ツール（重要）</div>
+      <div style="font-family:'Shippori Mincho',serif; font-size:17px; font-weight:700; color:var(--navy-deep);">第2期 NotebookLM ── まずここで学んでください</div>
+    </div>
+    <a href="https://notebooklm.google.com/notebook/5815ba18-0dfc-4af9-8e7d-43f16143fbdb" target="_blank" rel="noopener"
+       style="flex-shrink:0; background:var(--navy-deep); color:var(--gold-light); font-weight:700; padding:13px 28px; border-radius:10px; text-decoration:none; font-size:14px; white-space:nowrap;">
+      NotebookLMを開く →
+    </a>
+  </div>
 
   <!-- ================= VOYAGE MAP ================= -->
   <section class="voyage" id="voyage">
@@ -377,6 +397,44 @@
     </div>
     <div class="res-list">
 
+      <!-- ★ まず今おすすめの -->
+      <div class="res-category pick first">★ まず今おすすめの</div>
+
+      <div class="res-row">
+        <div>
+          <div class="res-name">①生きづらさ鑑定</div>
+          <div class="res-sub">本日の講座資料</div>
+        </div>
+        <a class="res-btn" href="https://uranai39labo.github.io/niceguy-app/hardmode_v3.html" target="_blank" rel="noopener">開く →</a>
+      </div>
+
+      <div class="res-row">
+        <div>
+          <div class="res-name">②AIナイス貝の黄金の羅針盤</div>
+          <div class="res-sub">本日の講座資料</div>
+        </div>
+        <a class="res-btn" href="https://gemini.google.com/gem/1FjVcGq-KpP23ZNBnEAHJcCX6vUyB3PnU" target="_blank" rel="noopener">開く →</a>
+      </div>
+
+      <div class="res-row">
+        <div>
+          <div class="res-name">③講座生用の学習リンク</div>
+          <div class="res-sub">本日の講座資料</div>
+        </div>
+        <a class="res-btn" href="https://uranai39labo.github.io/niceguy-app/step_curriculum.html" target="_blank" rel="noopener">開く →</a>
+      </div>
+
+      <div class="res-row">
+        <div>
+          <div class="res-name">④ナイス貝の黄金の羅針盤</div>
+          <div class="res-sub">note</div>
+        </div>
+        <a class="res-btn" href="https://note.com/nicekai" target="_blank" rel="noopener">開く →</a>
+      </div>
+
+      <!-- 学習スライド -->
+      <div class="res-category">学習スライド</div>
+
       <div class="res-row">
         <div>
           <div class="res-name">占い基本の見方</div>
@@ -425,6 +483,9 @@
         <a class="res-btn" href="https://docs.google.com/presentation/d/19ehGjPeU4HU714-WeqYj6gctxJiHQv1Hwf36lZw0XNY/present" target="_blank" rel="noopener">開く →</a>
       </div>
 
+      <!-- 鑑定ツール -->
+      <div class="res-category">鑑定ツール</div>
+
       <div class="res-row">
         <div>
           <div class="res-name">鑑定システム Ver1.6（基本）</div>
@@ -449,13 +510,8 @@
         <a class="res-btn" href="https://docs.google.com/spreadsheets/d/1dCrVlkfn5-9Z00nmLz3SzRhxJDWtsy9Oz99GLhX_xEI/edit?usp=sharing" target="_blank" rel="noopener">開く →</a>
       </div>
 
-      <div class="res-row">
-        <div>
-          <div class="res-name">占い市場データ（PowerPoint）</div>
-          <div class="res-sub">6/28 補講で使用</div>
-        </div>
-        <a class="res-btn empty" href="#">リンクを追加</a>
-      </div>
+      <!-- その他 -->
+      <div class="res-category">その他</div>
 
       <div class="res-row">
         <div>
@@ -471,6 +527,22 @@
           <div class="res-sub">Google Sites（資料・アーカイブ一覧）</div>
         </div>
         <a class="res-btn" href="https://sites.google.com/view/niceuranai02/home" target="_blank" rel="noopener">開く →</a>
+      </div>
+
+      <div class="res-row">
+        <div>
+          <div class="res-name">第2期 振り返りサイト</div>
+          <div class="res-sub">このアーカイブページのURL</div>
+        </div>
+        <a class="res-btn" href="https://uranai39labo.github.io/niceguy-app/nice-kai-2ki.html" target="_blank" rel="noopener">開く →</a>
+      </div>
+
+      <div class="res-row">
+        <div>
+          <div class="res-name">占い市場データ（PowerPoint）</div>
+          <div class="res-sub">6/28 補講で使用</div>
+        </div>
+        <a class="res-btn empty" href="#">リンクを追加</a>
       </div>
 
     </div>
@@ -491,6 +563,7 @@
       <a href="https://lin.ee/jrKIohi" target="_blank" rel="noopener">LINE</a>
       <a href="https://youtube.com/@uranai39labo" target="_blank" rel="noopener">YouTube</a>
       <a href="https://instagram.com/niceguykatakai" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://note.com/nicekai" target="_blank" rel="noopener">note</a>
     </div>
   </footer>
 
