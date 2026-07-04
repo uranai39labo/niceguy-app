@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>片貝文昌 取扱説明書 ── ナイス貝 / KF 東西統合鑑定</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FBF8F1;
+    --bg-soft:#F3EEDF;
+    --surface:#FFFFFF;
+    --surface-2:#F6F0E1;
+    --line:rgba(60,50,30,.14);
+    --ink:#2B2A22;
+    --muted:#57543F;
+    --muted-dim:#7C775E;
+    --gold:#A8752B;
+    --gold-bright:#8A5E19;
+    --teal:#0E7F72;
+    --teal-dim:#CFEAE5;
+    --plum:#7A4A96;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Zen Kaku Gothic New", sans-serif;
+    font-size:19px;
+    line-height:1.95;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{ font-family:"Shippori Mincho", serif; letter-spacing:.02em; }
+  a{ color:inherit; }
+  img{max-width:100%;}
+  :focus-visible{ outline:2px solid var(--teal); outline-offset:3px; }
+  ::selection{ background:var(--gold); color:#fff; }
+
+  /* ---------- nav ---------- */
+  .nav{
+    position:sticky; top:0; z-index:60;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 6vw;
+    background:rgba(251,248,241,.9);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-brand{ display:flex; align-items:center; gap:10px; font-size:16px; font-weight:700; }
+  .nav-brand .mark{
+    width:26px;height:26px;border-radius:50%;
+    background:conic-gradient(from 200deg, var(--gold), var(--teal), var(--plum), var(--gold));
+    flex-shrink:0;
+  }
+  .nav-links{ display:flex; gap:22px; font-size:14.5px; color:var(--muted); flex-wrap:wrap; }
+  .nav-links a{ text-decoration:none; white-space:nowrap; }
+  .nav-links a:hover{ color:var(--gold-bright); }
+  @media (max-width:920px){ .nav-links{ display:none; } }
+
+  section{ padding:100px 6vw; position:relative; }
+  .section-head{ max-width:720px; margin-bottom:56px; }
+  .eyebrow{
+    font-size:13.5px; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--teal); margin-bottom:18px; font-weight:700;
+  }
+  .section-head h2{ font-size:clamp(28px,3.8vw,42px); margin:0 0 18px; color:var(--gold-bright); }
+  .section-head p{ color:var(--muted); margin:0; font-size:17.5px; }
+  .max{ max-width:1120px; margin:0 auto; }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:120px 6vw 90px;
+    background:
+      radial-gradient(ellipse 700px 500px at 85% -10%, rgba(14,127,114,.10), transparent 60%),
+      radial-gradient(ellipse 600px 500px at 10% 110%, rgba(168,117,43,.10), transparent 60%),
+      var(--bg);
+    text-align:center;
+    border-bottom:1px solid var(--line);
+  }
+  .hero .eyebrow{ justify-content:center; display:flex; gap:8px; }
+  .hero h1{
+    font-size:clamp(40px,7vw,74px); line-height:1.4; margin:0 0 28px;
+    color:var(--ink);
+  }
+  .hero h1 .accent{ color:var(--gold-bright); }
+  .hero p.lead{
+    max-width:56ch; margin:0 auto; color:var(--muted); font-size:18.5px;
+  }
+  .hero-chips{
+    display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:44px;
+  }
+  .hero-chip{
+    font-size:15px; padding:10px 20px; border-radius:999px;
+    background:var(--surface); border:1px solid var(--line); color:var(--muted);
+    box-shadow:0 2px 8px rgba(60,50,30,.05);
+  }
+  .hero-chip strong{ color:var(--gold-bright); font-weight:700; }
+
+  /* ---------- convergence ---------- */
+  .convergence{ background:var(--bg-soft); }
+  .conv-lead{ max-width:780px; color:var(--muted); font-size:17.5px; margin-bottom:48px; }
+  .conv-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:22px; }
+  @media (max-width:800px){ .conv-grid{ grid-template-columns:1fr; } }
+  .conv-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:16px;
+    padding:28px 28px 26px; position:relative; overflow:hidden;
+    box-shadow:0 2px 10px rgba(60,50,30,.05);
+  }
+  .conv-card::before{
+    content:""; position:absolute; left:0; top:0; bottom:0; width:4px;
+    background:linear-gradient(var(--teal), var(--gold));
+  }
+  .conv-card h3{ font-size:19px; margin:0 0 12px; color:var(--gold-bright); }
+  .conv-card p{ margin:0; font-size:16.5px; color:var(--muted); }
+  .pullquote{
+    margin:56px auto 0; max-width:780px; text-align:center;
+    font-family:"Shippori Mincho", serif; font-size:clamp(23px,3.2vw,32px);
+    color:var(--ink); line-height:1.75; padding:40px 24px;
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  }
+  .pullquote span{ color:var(--gold-bright); }
+
+  /* ---------- OS spec ---------- */
+  .os-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:0; border:1px solid var(--line); border-radius:16px; overflow:hidden; box-shadow:0 2px 10px rgba(60,50,30,.05); }
+  @media (max-width:800px){ .os-grid{ grid-template-columns:1fr; } }
+  .os-col{ padding:32px 30px; }
+  .os-col.east{ background:var(--surface); border-right:1px solid var(--line); }
+  .os-col.west{ background:var(--surface-2); }
+  @media (max-width:800px){ .os-col.east{ border-right:none; border-bottom:1px solid var(--line); } }
+  .os-col .tag{ font-size:13.5px; letter-spacing:.14em; color:var(--teal); font-weight:700; margin-bottom:8px; display:block; }
+  .os-col h3{ margin:0 0 22px; font-size:21px; color:var(--gold-bright); }
+  .os-row{ padding:18px 0; border-top:1px solid var(--line); }
+  .os-row:first-of-type{ border-top:none; }
+  .os-row .label{ font-size:14px; color:var(--muted-dim); letter-spacing:.06em; margin-bottom:8px; font-weight:700; }
+  .os-row .val{ font-size:16.5px; color:var(--ink); }
+  .os-row.bug .val{ color:#9A4A3E; }
+
+  .relate-box{
+    margin-top:32px; background:var(--surface); border:1px solid var(--line); border-radius:16px;
+    padding:30px 32px; box-shadow:0 2px 10px rgba(60,50,30,.05);
+  }
+  .relate-box h4{ margin:0 0 18px; font-size:17px; color:var(--teal); letter-spacing:.04em; }
+  .relate-box ul{ margin:0; padding-left:0; list-style:none; display:grid; grid-template-columns:repeat(2,1fr); gap:12px 28px; }
+  @media (max-width:700px){ .relate-box ul{ grid-template-columns:1fr; } }
+  .relate-box li{ font-size:16.5px; color:var(--muted); padding-left:22px; position:relative; }
+  .relate-box li::before{ content:"◦"; position:absolute; left:0; color:var(--gold); }
+
+  /* ---------- story timeline ---------- */
+  .story{ background:var(--bg-soft); }
+  .story-intro{ max-width:780px; color:var(--muted); font-size:17px; margin-bottom:52px; font-style:normal; }
+  .story-intro strong{ color:var(--gold-bright); }
+  .timeline{ position:relative; max-width:900px; margin:0 auto; padding-left:34px; }
+  .timeline::before{
+    content:""; position:absolute; left:8px; top:6px; bottom:6px; width:2px;
+    background:linear-gradient(var(--teal), var(--gold), var(--plum));
+    opacity:.55;
+  }
+  .t-item{ position:relative; padding-bottom:46px; }
+  .t-item:last-child{ padding-bottom:0; }
+  .t-item::before{
+    content:""; position:absolute; left:-34px; top:4px; width:16px; height:16px; border-radius:50%;
+    background:var(--bg-soft); border:3px solid var(--gold);
+  }
+  .t-item.now::before{ border-color:var(--teal); box-shadow:0 0 0 5px rgba(14,127,114,.14); }
+  .t-item .age{ font-size:14px; color:var(--gold); letter-spacing:.1em; font-weight:700; margin-bottom:8px; }
+  .t-item h3{ font-size:21px; margin:0 0 12px; color:var(--ink); }
+  .t-item p{ margin:0; color:var(--muted); font-size:16.5px; }
+  .t-item .stars{ margin-top:12px; display:flex; gap:8px; flex-wrap:wrap; }
+  .t-item .star-chip{ font-size:14px; padding:6px 14px; border-radius:999px; background:var(--surface); border:1px solid var(--line); color:var(--teal); }
+
+  /* ---------- jyotish deck ---------- */
+  .deck-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  @media (max-width:980px){ .deck-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:640px){ .deck-grid{ grid-template-columns:1fr; } }
+  .deck-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:26px 24px;
+    transition:transform .25s ease, border-color .25s ease;
+    box-shadow:0 2px 10px rgba(60,50,30,.05);
+  }
+  .deck-card:hover{ transform:translateY(-3px); border-color:var(--gold); }
+  .deck-card .kicker{ font-size:13px; letter-spacing:.1em; color:var(--plum); font-weight:700; margin-bottom:12px; text-transform:uppercase; }
+  .deck-card h3{ font-size:19px; margin:0 0 12px; color:var(--gold-bright); }
+  .deck-card p{ font-size:16px; color:var(--muted); margin:0; }
+  .deck-quote{
+    grid-column:1/-1; text-align:center; padding:28px 20px; margin-top:6px;
+    font-family:"Shippori Mincho", serif; font-size:clamp(20px,2.6vw,26px); color:var(--gold-bright);
+  }
+
+  /* ---------- now / vitals ---------- */
+  .now-grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:start; }
+  @media (max-width:900px){ .now-grid{ grid-template-columns:1fr; } }
+  .vital-list{ display:flex; flex-direction:column; gap:20px; }
+  .vital{ background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:22px 24px; box-shadow:0 2px 10px rgba(60,50,30,.05); }
+  .vital .label{ font-size:14px; color:var(--teal); letter-spacing:.08em; font-weight:700; margin-bottom:10px; }
+  .vital p{ margin:0; font-size:16.5px; color:var(--muted); }
+  .future-table{ border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 2px 10px rgba(60,50,30,.05); }
+  .fr{ display:flex; gap:16px; padding:18px 22px; border-top:1px solid var(--line); }
+  .fr:first-child{ border-top:none; background:var(--surface-2); }
+  .fr .yr{ flex-shrink:0; width:160px; font-size:14.5px; color:var(--gold-bright); font-weight:700; }
+  .fr p{ margin:0; font-size:15.5px; color:var(--muted); }
+
+  /* ---------- action plan ---------- */
+  .plan-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  @media (max-width:900px){ .plan-grid{ grid-template-columns:1fr; } }
+  .plan-card{ background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:28px 26px; box-shadow:0 2px 10px rgba(60,50,30,.05); }
+  .plan-card h3{ font-size:17px; color:var(--teal); margin:0 0 20px; letter-spacing:.04em; }
+  .plan-card ul{ margin:0; padding-left:0; list-style:none; display:flex; flex-direction:column; gap:14px; }
+  .plan-card li{ font-size:16px; color:var(--muted); padding-left:24px; position:relative; }
+  .plan-card li::before{ content:"✓"; position:absolute; left:0; color:var(--gold-bright); font-weight:700; }
+
+  /* ---------- practice guide ---------- */
+  .practice{ background:var(--bg-soft); }
+  .practice-lead{ max-width:780px; color:var(--muted); font-size:17.5px; margin-bottom:48px; }
+  .practice-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:24px; margin-bottom:28px; }
+  @media (max-width:860px){ .practice-grid{ grid-template-columns:1fr; } }
+  .practice-card{ background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:32px 30px; box-shadow:0 2px 10px rgba(60,50,30,.05); }
+  .practice-card .when{ display:inline-block; font-size:13.5px; letter-spacing:.05em; font-weight:700; color:#fff; background:var(--teal); padding:6px 16px; border-radius:999px; margin-bottom:18px; }
+  .practice-card h3{ font-size:21px; margin:0 0 22px; color:var(--gold-bright); }
+  .practice-card ol{ margin:0; padding-left:0; list-style:none; display:flex; flex-direction:column; gap:18px; }
+  .practice-card li{ font-size:16px; color:var(--muted); padding-left:40px; position:relative; counter-increment:step; }
+  .practice-card ol{ counter-reset:step; }
+  .practice-card li::before{
+    content:counter(step); position:absolute; left:0; top:-2px; width:28px; height:28px; border-radius:50%;
+    background:var(--surface-2); border:1px solid var(--line); color:var(--gold-bright); font-weight:700; font-size:14px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .capture-box{ background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:32px 30px; box-shadow:0 2px 10px rgba(60,50,30,.05); }
+  .capture-box h3{ font-size:19px; margin:0 0 10px; color:var(--teal); }
+  .capture-box .hint{ font-size:15px; color:var(--muted-dim); margin:0 0 22px; }
+  .capture-form{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:24px; }
+  .capture-form input{ flex:1; min-width:240px; font-size:16px; padding:13px 18px; border-radius:10px; border:1px solid var(--line); background:var(--bg); color:var(--ink); font-family:inherit; }
+  .capture-form input:focus{ outline:2px solid var(--teal); }
+  .capture-form button{ font-size:15.5px; padding:13px 24px; border-radius:10px; border:none; background:var(--gold-bright); color:#fff; font-weight:700; cursor:pointer; }
+  .capture-form button:hover{ background:var(--gold); }
+  .capture-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  .capture-list li{ display:flex; align-items:center; justify-content:space-between; gap:12px; background:var(--surface-2); border:1px solid var(--line); border-radius:10px; padding:13px 18px; font-size:15.5px; }
+  .capture-list li .t{ font-size:12.5px; color:var(--muted-dim); margin-right:12px; }
+  .capture-list button.del{ background:none; border:none; color:var(--muted-dim); cursor:pointer; font-size:14.5px; flex-shrink:0; }
+  .capture-list button.del:hover{ color:#9A4A3E; }
+
+  /* ---------- letter to professionals ---------- */
+  .letter{ background:var(--bg-soft); }
+  .letter-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:22px; }
+  @media (max-width:800px){ .letter-grid{ grid-template-columns:1fr; } }
+  .letter-card{ background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:28px 28px; box-shadow:0 2px 10px rgba(60,50,30,.05); }
+  .letter-card .role{ display:inline-block; font-size:13px; letter-spacing:.08em; font-weight:700; color:#fff; background:var(--gold-bright); padding:6px 16px; border-radius:999px; margin-bottom:16px; }
+  .letter-card p{ margin:0; font-size:16.5px; color:var(--muted); }
+
+  /* ---------- quick guide ---------- */
+  .guide-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  @media (max-width:760px){ .guide-grid{ grid-template-columns:1fr; } }
+  .guide-col{ border-radius:16px; padding:28px 28px; border:1px solid var(--line); }
+  .guide-col.do{ background:linear-gradient(180deg, rgba(14,127,114,.08), transparent); }
+  .guide-col.dont{ background:linear-gradient(180deg, rgba(154,74,62,.07), transparent); }
+  .guide-col h3{ margin:0 0 18px; font-size:17px; letter-spacing:.04em; }
+  .guide-col.do h3{ color:var(--teal); }
+  .guide-col.dont h3{ color:#9A4A3E; }
+  .guide-col ul{ margin:0; padding-left:0; list-style:none; display:flex; flex-direction:column; gap:14px; }
+  .guide-col li{ font-size:16.5px; color:var(--muted); padding-left:22px; position:relative; }
+  .guide-col.do li::before{ content:"○"; position:absolute; left:0; color:var(--teal); }
+  .guide-col.dont li::before{ content:"△"; position:absolute; left:0; color:#9A4A3E; }
+
+  /* ---------- profile / links ---------- */
+  .profile{ text-align:center; }
+  .profile-card{
+    max-width:820px; margin:0 auto; background:var(--surface); border:1px solid var(--line);
+    border-radius:20px; padding:56px 6vw; box-shadow:0 2px 14px rgba(60,50,30,.06);
+  }
+  .profile-card h2{ font-size:clamp(26px,3.2vw,34px); color:var(--gold-bright); margin:0 0 20px; }
+  .profile-card p{ color:var(--muted); font-size:17px; max-width:56ch; margin:0 auto 36px; }
+  .link-row{ display:flex; flex-wrap:wrap; justify-content:center; gap:12px; }
+  .link-btn{
+    font-size:15.5px; padding:13px 26px; border-radius:10px; text-decoration:none;
+    background:var(--surface-2); border:1px solid var(--line); color:var(--ink);
+    transition:all .2s ease;
+  }
+  .link-btn:hover{ background:var(--gold-bright); color:#fff; border-color:var(--gold-bright); }
+  .link-btn.primary{ background:var(--gold-bright); color:#fff; border-color:var(--gold-bright); font-weight:700; }
+  .link-btn.primary:hover{ background:var(--gold); }
+
+  footer{
+    padding:48px 6vw; background:var(--bg); color:var(--muted-dim);
+    font-size:14.5px; text-align:center; border-top:1px solid var(--line);
+  }
+  footer p{ max-width:60ch; margin:0 auto 16px; }
+  footer .credit{ color:var(--muted); }
+
+  @media (prefers-reduced-motion: reduce){ .deck-card{ transition:none; } html{ scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-brand"><span class="mark"></span> 片貝文昌 取扱説明書</div>
+    <div class="nav-links">
+      <a href="#toza">東西の一致</a>
+      <a href="#os">魂のOS</a>
+      <a href="#story">命の物語</a>
+      <a href="#jyotish">影の実力者</a>
+      <a href="#now">現在地</a>
+      <a href="#action">処方箋</a>
+      <a href="#practice">実践ガイド</a>
+      <a href="#letter">紹介状</a>
+      <a href="#guide">3分ガイド</a>
+      <a href="#profile">プロフィール</a>
+    </div>
+  </nav>
+
+  <!-- ================= HERO ================= -->
+  <header class="hero">
+    <div class="eyebrow">SELF INSTRUCTION MANUAL ／ 東西統合鑑定</div>
+    <h1>片貝文昌という、<br><span class="accent">取扱説明書。</span></h1>
+    <p class="lead">ナイス貝、KF ―― ひとつの魂に、いくつもの名前と、いくつもの占術。生まれも方法もまったく異なる算命学とインド占星術が、それぞれ独立に鑑定した結果、驚くほど同じ結論にたどり着いた。これは、その記録である。</p>
+    <div class="hero-chips">
+      <div class="hero-chip">生年 <strong>1980年</strong></div>
+      <div class="hero-chip">ASC <strong>天秤座</strong></div>
+      <div class="hero-chip">日干 <strong>乙巳（きのと）</strong></div>
+      <div class="hero-chip">守護神 <strong>癸・壬（水）</strong></div>
+      <div class="hero-chip">天中殺 <strong>寅卯天中殺</strong></div>
+    </div>
+  </header>
+
+  <!-- ================= CONVERGENCE ================= -->
+  <section class="convergence" id="toza">
+    <div class="max">
+      <div class="section-head">
+        <div class="eyebrow">THE CONVERGENCE</div>
+        <h2>二つの占術が、同じ場所を指した</h2>
+        <p class="conv-lead">東洋の暦から命式を読む算命学と、生まれた瞬間の星の配置から魂を読むインド占星術。出自も計算方法もまったく異なる二つの体系が、それぞれ独立に鑑定を行い、驚くほど同じ結論に達している。偶然というには、一致点が多すぎる。</p>
+      </div>
+      <div class="conv-grid">
+        <div class="conv-card">
+          <h3>魂の水のエネルギー</h3>
+          <p>算命学の守護神は癸・壬（水）。インド占星術のナクシャトラ守護神は水の女神アパス。東洋と西洋が独立に「この魂には水が要る」と指摘している。産土神社、川、海、温泉――水との縁が、そのまま充電場になる。</p>
+        </div>
+        <div class="conv-card">
+          <h3>開花のタイミング</h3>
+          <p>算命学は41〜60歳の大運を「表現・発信・人気が連続爆発する時期」と見る。インド占星術はラーフ期後半（2027年〜）から木星期（2037年〜）を黄金期とする。両者は「2025〜2027年が最大の転換点」で完全に一致する。</p>
+        </div>
+        <div class="conv-card">
+          <h3>天職・使命</h3>
+          <p>感性の星・調舒星（ダブル）は、9室の水星×金星に対応する――美と哲学と伝達の力。行動の星・車騎星は、11室に集まった火星の二重強化に対応する。「感じ、伝え、動く」ことが東西共通の設計図。</p>
+        </div>
+        <div class="conv-card">
+          <h3>魂の設計テーマ</h3>
+          <p>「内側の太陽を輝かせ、感性と言葉で世界を照らす改革者」。占い・鑑定という仕事を選んだことは、偶然ではなく命式そのものが示す必然として、両占術が同じ言葉で語っている。</p>
+        </div>
+      </div>
+      <div class="pullquote">「内側の太陽を輝かせ、<span>感性と言葉で世界を照らす改革者。</span>」<br><span style="font-size:16px;color:var(--muted);font-family:'Zen Kaku Gothic New',sans-serif;">──算命学とインド占星術、東西二つの占術が一致してたどり着いた結論</span></div>
+    </div>
+  </section>
+
+  <!-- ================= OS SPEC ================= -->
+  <section id="os">
+    <div class="max">
+      <div class="section-head">
+        <div class="eyebrow">THE CORE SPEC</div>
+        <h2>基本スペック ── 魂のOS</h2>
+        <p>算命学とインド占星術、それぞれの読み解きを並べて見る。東西で言葉は違っても、指している中身はほとんど同じだ。</p>
+      </div>
+      <div class="os-grid">
+        <div class="os-col east">
+          <span class="tag">算命学</span>
+          <h3>乙巳（42番）× 天恍星 ── P-BUILD型</h3>
+          <div class="os-row">
+            <div class="label">OSタイプ</div>
+            <div class="val">P-BUILD型（共感型プロデューサー）／ チーター。乙（柔・共感・プロデュース）が核心。人の才能を引き出し、舞台を作る。</div>
+          </div>
+          <div class="os-row">
+            <div class="label">エネルギー源泉</div>
+            <div class="val">内側の太陽（蔵干・丙）が絶えず燃え続ける型。「誰も見ていない場所でも燃えている炎」が本質。人を通じて・表現を通じて動くほどエネルギーが増す設計。</div>
+          </div>
+          <div class="os-row">
+            <div class="label">本来の強み</div>
+            <div class="val">共感力×世界観の構築×人を巻き込む力が同時発動。金132の突破力が乙の柔軟性と組み合わさり「優しく確実に突破する」。41〜60歳に表現・発信・人気が連続爆発する大運設計。</div>
+          </div>
+          <div class="os-row bug">
+            <div class="label">陥りやすいエラー・バグ</div>
+            <div class="val">調舒星ダブルによる神経疲労・感情の波。完璧主義が自分を追い詰めやすい。水（11）が極端に低く、流す力・手放す力が不足しがち。一人で抱え込みすぎる傾向。</div>
+          </div>
+        </div>
+        <div class="os-col west">
+          <span class="tag">インド占星術</span>
+          <h3>ASC天秤座 × プールヴァ・アーシャダー</h3>
+          <div class="os-row">
+            <div class="label">OSタイプ</div>
+            <div class="val">天秤座アセンダント×金星支配のナクシャトラ ―― 「美・調和・哲学・不敗の戦士」。生まれながらの調整役で、争いを好まない平和主義者。</div>
+          </div>
+          <div class="os-row">
+            <div class="label">エネルギー源泉</div>
+            <div class="val">9室に水星（定座・最強）×金星が在住。「知識と美を言葉で伝える」ことが人生の根幹。思想や美学が、そのまま社会的成功に繋がる幸運な配置。</div>
+          </div>
+          <div class="os-row">
+            <div class="label">本来の強み</div>
+            <div class="val">11室に火星・木星・土星のトリプル在住は非常に稀。ヴァルゴッタマ火星で行動力が二重強化。D9・9室に太陽×木星＝「導き手・智慧を広める者」の深層設計。</div>
+          </div>
+          <div class="os-row bug">
+            <div class="label">陥りやすいエラー・バグ</div>
+            <div class="val">太陽が8室にあり、自己表現・自己肯定感が外に出にくい。金星が逆行し、価値観を外に出す抵抗感がある。土星11室で、願望実現に時間がかかりやすい。</div>
+          </div>
+        </div>
+      </div>
+      <div class="relate-box">
+        <h4>【関わる人へ】このタイプとの上手な関わり方</h4>
+        <ul>
+          <li>「あなたにしかできない」という言葉が、最も力を引き出す</li>
+          <li>完璧でなくても背中を押す声かけが有効（60%で出すことを承認する）</li>
+          <li>細かい指示より「大きな方向性＋任せる」スタイルが合う</li>
+          <li>感情の波を否定せず、まず受け止めてから話を進める</li>
+          <li>一人でやらせない。チームの一員であることを定期的に伝える</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= STORY TIMELINE ================= -->
+  <section class="story" id="story">
+    <div class="max">
+      <div class="section-head">
+        <div class="eyebrow">THE STORY</div>
+        <h2>命の物語 ── 誇りの剣と、感性の翼</h2>
+      </div>
+      <p class="story-intro">1980年、庚申の年に生まれた命式には、珍しい星の配置が並ぶ。頭と左手に<strong>牽牛星</strong>（誇り・信念）、胸の中央と右手に二つの<strong>調舒星</strong>（感性・孤高の美意識）、腹に<strong>車騎星</strong>（隠れた行動力）。「内省する芸術家」でありながら、いざというとき猛然と動く――「行動できる芸術家」という稀な資質が、この命の核にある。</p>
+
+      <div class="timeline">
+        <div class="t-item">
+          <div class="age">初年期 ／ 1〜20歳</div>
+          <h3>オオカミの子として</h3>
+          <p>初年を司る星は天報星（オオカミ）――「潜伏の星」。広大な森の中で自分の牙の使い方をまだ知らない幼獣のように、内側に溢れるエネルギーの行き場を探す時間。周囲との微かな違和感、「なぜ皆はそれで満足できるのか」という言葉にならない問いを抱えながら、独特の感性と知への好奇心が育まれた時期。</p>
+          <div class="stars"><span class="star-chip">天報星</span><span class="star-chip">玉堂星・天貴星</span><span class="star-chip">龍高星・天印星</span></div>
+        </div>
+        <div class="t-item">
+          <div class="age">青年期 ／ 21〜40歳</div>
+          <h3>チーターとして走り始める</h3>
+          <p>夢想と直感の星・天恍星（チーター）が姿を現す。石門星の時代は仲間との連帯が前面に出た二十代――しかし内では「本当にこれでいいのか」と自問し続けた。三十代、貫索星（独立・自己完結）の時代に「自分は自分」という信念を世界に示し、既存のものを切り落として新しい自分を彫り出した。</p>
+          <div class="stars"><span class="star-chip">石門星・天報星</span><span class="star-chip">貫索星・天馳星</span></div>
+        </div>
+        <div class="t-item now">
+          <div class="age">現在 ／ 41〜50歳</div>
+          <h3>感性の剣が最も鋭くなる時</h3>
+          <p>命式の芯にある調舒星と、大運の主星・調舒星が重なる「星の共鳴」。もっとも「自分らしく」生きられる時代の鐘が鳴っている。天庫星は、これまで積み上げてきた経験・知識・傷・喜び・出会いのすべてを倉庫から引き出し、世界に提示する時代を示す。丙戌は暗号異常干支――常識の枠を超えた創造が可能になる時期であり、占い・鑑定という仕事はこの命式が「やるべきこと」として示す道そのものだ。孤独感の増幅にだけは注意し、少数の信頼関係を丁寧に守りたい。</p>
+          <div class="stars"><span class="star-chip">調舒星・天庫星</span><span class="star-chip">暗号異常干支</span></div>
+        </div>
+        <div class="t-item">
+          <div class="age">未来 ／ 51〜70歳</div>
+          <h3>自由の夜明け</h3>
+          <p>五十代、鳳閣星（表現・芸術・享楽・自由）が牽牛星の厳格さや調舒星の孤高さを解き放ち、もっと自由に世界へ発信できる時代が来る。六十代、司禄星（蓄積・豊かさ）はこれまでの旅で得たすべてを次の世代へ手渡す役割を示す。暗号異常干支が41〜70歳まで三連続で続く命式は非常に珍しく、この三十年が「常識を超えた何かを生み出す」ための黄金期であることを、天が強く示唆している。</p>
+          <div class="stars"><span class="star-chip">鳳閣星・天極星</span><span class="star-chip">司禄星・天胡星</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= JYOTISH DECK ================= -->
+  <section id="jyotish">
+    <div class="max">
+      <div class="section-head">
+        <div class="eyebrow">THE JYOTISH DECK</div>
+        <h2>魂の設計図 ── 影の実力者への鍵</h2>
+        <p>インド占星術（ジョーティッシュ）が描き出す、もうひとつの精緻な人物像。7つの分割図すべてでアセンダントが「天秤座」――極めて稀な、ブレない魂の刻印。</p>
+      </div>
+      <div class="deck-grid">
+        <div class="deck-card">
+          <div class="kicker">Grand Design</div>
+          <h3>完璧な調和で貫かれた「天秤座」</h3>
+          <p>表向きの姿は生まれながらの調整役。バランス感覚に優れ、争いを好まない平和主義者であり、高い美意識を持つ。支配星の金星は9室に在住し、「知的な探求」と「美意識」が、そのまま社会的成功に繋がる幸運な配置。</p>
+        </div>
+        <div class="deck-card">
+          <div class="kicker">Power Core</div>
+          <h3>調和の仮面に隠れた「獅子座」のエンジン</h3>
+          <p>人生のエネルギーは「社会的な成功、集団での達成」に集中する。11室（獅子座）に火星・木星・土星が集結――情熱・発展・定着がすべて「獲得と友人、社会的評価」の部屋に集まる、非常に稀な配置。</p>
+        </div>
+        <div class="deck-card">
+          <div class="kicker">Shadow Ruler</div>
+          <h3>影の支配者 ── D10が明かす実務力</h3>
+          <p>表向きは温厚な調整役だが、キャリア図（D10）は実務能力が天才的であることを示す。実行力の火星が高揚し、組織構築で天才的な手腕を発揮。洞察力の月も高揚し、隠された価値を見つけ出す力が仕事に直結する。</p>
+        </div>
+        <div class="deck-card">
+          <div class="kicker">Warrior Soul</div>
+          <h3>喜びと危機に現れる「牡羊座」の本能</h3>
+          <p>普段は平和主義だが、個人的な喜びと危機対応を映すチャートでは本質が「牡羊座」に変わる。趣味では一番であることとスピード感を求め、トラブルには即座に戦い、問題を排除しようとする戦士の顔が現れる。</p>
+        </div>
+        <div class="deck-card">
+          <div class="kicker">Past-Life Karma</div>
+          <h3>過去世は「闘う統治者」だった</h3>
+          <p>魂の履歴書であるD60チャートは、過去世で富と権力を極めた統治者としてのカルマを示す。激しい権力闘争と成功の経験があったからこそ、今世は「調和の中で生きたい」という魂の叫びが、天秤座への強い希求として現れている。</p>
+        </div>
+        <div class="deck-card">
+          <div class="kicker">Branding Strategy</div>
+          <h3>本当の自分 vs 世間のイメージ</h3>
+          <p>本当の自分（ASC）は天秤座＝親身な調整役。世間のイメージ（AL）は水瓶座＝時代を先読むビジョナリー。「入り口はユニークに、中身は親身に」――このギャップこそが熱狂的なファンを生む戦略。</p>
+        </div>
+        <div class="deck-quote">「王の座を避け、秘密の部屋で輝け。」──表舞台の看板より、裏方での采配にこそ、王者のような輝きが宿る。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= NOW / VITALS ================= -->
+  <section class="letter" id="now">
+    <div class="max">
+      <div class="section-head">
+        <div class="eyebrow">VITAL CHECK ／ SOUL TIMETABLE</div>
+        <h2>今、ここにいる</h2>
+        <p>現在のエネルギー状態と、迷いの根本原因。そしてこの先、魂の年表がどう続いていくか。</p>
+      </div>
+      <div class="now-grid">
+        <div class="vital-list">
+          <div class="vital">
+            <div class="label">現在のエネルギー状態</div>
+            <p>大運41〜50歳（丙戌・調舒星×天庫星）の中盤。2026年は丙午年で、大運の丙と年の丙が重なる「内側の太陽の二重点灯」。西ではラーフ-土星期の最終盤（〜2027年11月）＝派手な結果より、仕組みと土台を固める仕込みの時期。エンジンはかかっているが、神経疲労と記憶の揮発性が課題。</p>
+          </div>
+          <div class="vital">
+            <div class="label">迷いや葛藤の根本原因</div>
+            <p>「やりたいことと、現実の仕組みの間のギャップ」。共感・アイデアの乙と、突破・行動の庚が内側で常に戦っている状態。水の低さから、流す・委ねる・手放すが苦手で、完璧に仕上げてから動こうとするため動き出しが遅れやすい。</p>
+          </div>
+          <div class="vital">
+            <div class="label">エネルギーが漏れているポイント</div>
+            <p>個別鑑定（対応）に時間とエネルギーを使いすぎている。本来の役割はプロデュース・発信・教育。「仕組み化」より「手動対応」を選んでしまう場面が多く、アイデアが消える前に記録する仕組みも不十分。</p>
+          </div>
+        </div>
+        <div class="future-table">
+          <div class="fr"><div class="yr">〜2027.11</div><p>ラーフ-土星期。仕組み・導線・教材の仕込み。今作るシステムが以後10年の資産になる。</p></div>
+          <div class="fr"><div class="yr">2027.11〜2030.6</div><p>ラーフ-水星期。9室・定座の水星が起動。教える・書く・広めるの黄金期。出版・講座拡大の本命。</p></div>
+          <div class="fr"><div class="yr">2031.7〜2034.7</div><p>ラーフ-金星期。ブランド完成と収穫の3年。</p></div>
+          <div class="fr"><div class="yr">2034.7〜2035.5</div><p>ラーフ-太陽期×寅卯天中殺。東西両方が「潜って整えよ」と告げる注意区間。拡大より内省。</p></div>
+          <div class="fr"><div class="yr">2037年〜</div><p>木星期。導師の16年。ラーフ期に立てた旗の下に人が集まり、教えが実る。</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ACTION PLAN ================= -->
+  <section id="action">
+    <div class="max">
+      <div class="section-head">
+        <div class="eyebrow">SELF-CARE PRESCRIPTION</div>
+        <h2>自走のための処方箋</h2>
+        <p>日常の中で自分をチューニングし、本来の輝きを取り戻すための具体的な行動リスト。</p>
+      </div>
+      <div class="plan-grid">
+        <div class="plan-card">
+          <h3>環境の整備</h3>
+          <ul>
+            <li>音声入力を常時オンにして、思考の揮発を防ぐ</li>
+            <li>産土・一ノ宮神社への月1回参拝で水のエネルギーを補給</li>
+            <li>良質な水・川・海・温泉を生活に組み込む</li>
+            <li>AIツールとの連携でアイデアを即・外部記憶化する</li>
+            <li>鑑定枠を限定し、残りをプロデュース・コンテンツ制作へ</li>
+          </ul>
+        </div>
+        <div class="plan-card">
+          <h3>習慣の改善</h3>
+          <ul>
+            <li>毎朝5分のAI日記を継続する（デトックス→グッド3つ→モット1つ）</li>
+            <li>全予定をカレンダーに一元管理し、3段階通知を徹底</li>
+            <li>「完璧でなくていい、60%で出す」を意識的に実践する</li>
+            <li>週1回、AIと対話しながら進捗を棚卸しする</li>
+            <li>土用の期間は新規プロジェクトを始めず、整える時間に使う</li>
+          </ul>
+        </div>
+        <div class="plan-card">
+          <h3>マインドセット</h3>
+          <ul>
+            <li>「内側の太陽は消えない」――迷いは曇りであり、光は常にある</li>
+            <li>一人でやろうとしない。仲間の輪を作ることで願いが叶う設計</li>
+            <li>ゼロから作るより、既にあるものを進化させる</li>
+            <li>動いていることが正解。止まることが最大のリスク</li>
+            <li>自分が主役ではなく、人を輝かせることが自分の輝きになる</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PRACTICE GUIDE ================= -->
+  <section class="practice" id="practice">
+    <div class="max">
+      <div class="section-head">
+        <div class="eyebrow">THE PRACTICE GUIDE</div>
+        <h2>迷ったその場で、これを開く</h2>
+        <p class="practice-lead">「読んで終わる」トリセツにはしない。突然の配信衝動も、スケジュールを書きたくない気持ちも、命式に書かれた通りの自然な反応――止める必要はない。ただ、詰まりやすい場面にだけ、小さな仕組みを置いておく。</p>
+      </div>
+
+      <div class="practice-grid">
+        <div class="practice-card">
+          <span class="when">配信を思いついた瞬間</span>
+          <h3>今すぐ配信したくなったら</h3>
+          <ol>
+            <li>声か文字で1行だけ残す。内容は決めなくていい。「21時から話す」で十分。</li>
+            <li>完璧な告知文を考えない。60%の一言で出す。整えるのは後でいい。</li>
+            <li>これは弱点ではなく、設計図通りの強み（車騎星の行動力・天恍星の直感）。動くことがそのまま正解。</li>
+            <li>終わったら、下の「ひとことログ」にタイトルだけ残す。振り返りは週1回でいい。</li>
+          </ol>
+        </div>
+        <div class="practice-card">
+          <span class="when">スケジュールに向き合う瞬間</span>
+          <h3>書き出すのが嫌になったら</h3>
+          <ol>
+            <li>全部を計画しようとしない。「今日」と「直近1週間」だけ考える。</li>
+            <li>自分で整えようとせず、声で話してAIに整理を任せる。</li>
+            <li>カレンダーの置き場所を1つに決め、3段階通知に記憶を預ける。</li>
+            <li>棚卸しは週1回だけ。それ以外は「思い出さなくていい」が正しい状態。</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="capture-box">
+        <h3>ひとことログ ── 声の代わりにここへ</h3>
+        <p class="hint">思いついた瞬間、考えずにここへ1行だけ残す。整理も計画もあとでいい。このブラウザにだけ保存されます。</p>
+        <form class="capture-form" id="captureForm">
+          <input type="text" id="captureInput" placeholder="例）21時から配信する／明日〇〇さんに連絡" maxlength="120" autocomplete="off">
+          <button type="submit">残す</button>
+        </form>
+        <ul class="capture-list" id="captureList"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= LETTER TO PROFESSIONALS ================= -->
+  <section class="letter" id="letter">
+    <div class="max">
+      <div class="section-head">
+        <div class="eyebrow">A LETTER TO COLLABORATORS</div>
+        <h2>関わる人への「紹介状」</h2>
+        <p>各分野の専門家・協力者が「どう関わればよいか」を把握するための共通資料。</p>
+      </div>
+      <div class="letter-grid">
+        <div class="letter-card">
+          <span class="role">医療・メンタル</span>
+          <p>ADHDの傾向と命式（天報星・調舒星・暗号異常干支）が一致。感受性が非常に高く、刺激に敏感で神経疲労を起こしやすい設計。「0か100か」の傾向があり、休息のタイミングを外部からサポートする声かけが有効。燃え尽きの初期兆候は「睡眠の乱れ→発信の停止」の順で現れる。第一処方は水。否定せずまず受け止める関わり方が信頼構築の鍵。</p>
+        </div>
+        <div class="letter-card">
+          <span class="role">コーチング・経営</span>
+          <p>アイデアは豊富だが、仕組み化と実行管理が課題。「右腕・実務担当者」との協力体制を作ることで本来の力が発揮される。11室に火星・木星・土星が集結し、協力者・チームとの関係構築が運命の鍵。細かい指示より大きな方向性を共有し、任せる形が合う。</p>
+        </div>
+        <div class="letter-card">
+          <span class="role">AI・テクノロジー</span>
+          <p>記憶の揮発性（ADHD傾向）をAIが補う設計が最適。Claude・Gemini・NotebookLMをAI秘書として活用し、音声入力でアイデアをリアルタイム外部記憶化することを推奨。世界観をAIがコンテンツ化する役割分担が、最も効率的に機能する。</p>
+        </div>
+        <div class="letter-card">
+          <span class="role">神社・スピリチュアル</span>
+          <p>守護神は癸・壬（水）。ナクシャトラの守護神も水の女神アパス――東西一致。水のエネルギーを意識的に補うことで命式全体が整う。産土神社・一ノ宮神社への定期参拝を推奨。亥・子の方角・時間帯にエネルギーが高まりやすい。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= QUICK GUIDE ================= -->
+  <section id="guide">
+    <div class="max">
+      <div class="section-head">
+        <div class="eyebrow">QUICK GUIDE</div>
+        <h2>はじめて会う人へ ── 3分でわかる関わり方</h2>
+      </div>
+      <div class="guide-grid">
+        <div class="guide-col do">
+          <h3>して嬉しいこと</h3>
+          <ul>
+            <li>「あなたにしかできない」と伝える</li>
+            <li>60%の完成度でも、まず出したことを認める</li>
+            <li>大きな方向性だけ渡して、あとは任せる</li>
+            <li>感情の波を否定せず、まず受け止める</li>
+            <li>「一人じゃない、チームの一員だ」と定期的に伝える</li>
+          </ul>
+        </div>
+        <div class="guide-col dont">
+          <h3>気をつけたいこと</h3>
+          <ul>
+            <li>細かい指示や管理で追い詰めない</li>
+            <li>完璧を求めすぎない（本人が一番求めてしまう性質）</li>
+            <li>一人で仕事を抱え込ませたままにしない</li>
+            <li>休息のサインを本人任せにせず、声をかける</li>
+            <li>看板・肩書きより、裏方での実務・工夫を評価する</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROFILE ================= -->
+  <section class="profile" id="profile">
+    <div class="max">
+      <div class="profile-card">
+        <div class="eyebrow" style="justify-content:center;display:flex;">PROFILE</div>
+        <h2>片貝文昌 ／ ナイス貝 ／ KF</h2>
+        <p>占いラボ39を主宰。算命学・インド占星術・数秘術・動物占いなどを組み合わせた「フラクタル鑑定」を提唱し、算命学講座を継続開催。誰もが自分自身の人生のサイクルを自分の手で読み解けるように――という理念のもと、占い師の育成と「黄金の羅針盤」の仕組み化に取り組んでいる。</p>
+        <div class="link-row">
+          <a class="link-btn primary" href="https://reservestock.jp/page/index/44078" target="_blank" rel="noopener">公式サイト →</a>
+          <a class="link-btn" href="https://note.com/nicekai" target="_blank" rel="noopener">note →</a>
+          <a class="link-btn" href="https://youtube.com/@uranai39labo" target="_blank" rel="noopener">YouTube →</a>
+          <a class="link-btn" href="https://instagram.com/niceguykatakai" target="_blank" rel="noopener">Instagram →</a>
+          <a class="link-btn" href="https://lin.ee/jrKIohi" target="_blank" rel="noopener">LINE →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>本ページは算命学・インド占星術による鑑定内容を、本人が自己理解を深め、また周囲の協力者と共有するためにまとめた「自分自身の取扱説明書」です。結果に縛られるためのものではなく、自分を最大限に活かす方法としてご活用ください。</p>
+    <p class="credit">ナイス貝（片貝文昌）｜占いラボ39</p>
+  </footer>
+
+  <script>
+  (function(){
+    var KEY = 'kf_torisetsu_capture_log';
+    var form = document.getElementById('captureForm');
+    var input = document.getElementById('captureInput');
+    var list = document.getElementById('captureList');
+    if(!form || !input || !list) return;
+
+    function load(){
+      try{ return JSON.parse(localStorage.getItem(KEY) || '[]'); }
+      catch(e){ return []; }
+    }
+    function save(items){
+      try{ localStorage.setItem(KEY, JSON.stringify(items)); }catch(e){}
+    }
+    function fmt(ts){
+      var d = new Date(ts);
+      var mm = d.getMonth()+1, dd = d.getDate();
+      var hh = String(d.getHours()).padStart(2,'0');
+      var mi = String(d.getMinutes()).padStart(2,'0');
+      return mm+'/'+dd+' '+hh+':'+mi;
+    }
+    function render(){
+      var items = load();
+      list.innerHTML = '';
+      if(items.length === 0){
+        var empty = document.createElement('li');
+        empty.style.background = 'transparent';
+        empty.style.border = 'none';
+        empty.style.color = 'var(--muted-dim)';
+        empty.style.fontSize = '14.5px';
+        empty.textContent = 'まだ何もありません。思いついたら、ここに1行だけ。';
+        list.appendChild(empty);
+        return;
+      }
+      items.slice().reverse().forEach(function(item){
+        var li = document.createElement('li');
+        var left = document.createElement('span');
+        var t = document.createElement('span');
+        t.className = 't';
+        t.textContent = fmt(item.ts);
+        left.appendChild(t);
+        left.appendChild(document.createTextNode(item.text));
+        var btn = document.createElement('button');
+        btn.className = 'del';
+        btn.type = 'button';
+        btn.textContent = '削除';
+        btn.addEventListener('click', function(){
+          save(load().filter(function(x){ return x.id !== item.id; }));
+          render();
+        });
+        li.appendChild(left);
+        li.appendChild(btn);
+        list.appendChild(li);
+      });
+    }
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var text = input.value.trim();
+      if(!text) return;
+      var items = load();
+      items.push({ id: Date.now()+'-'+Math.random().toString(36).slice(2), text:text, ts: Date.now() });
+      save(items);
+      input.value = '';
+      render();
+    });
+    render();
+  })();
+  </script>
+
+</body>
+</html>
