@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>あなたの本質を知る｜干支学</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8CB7A;
+  --gold-pale: #F5EDD0;
+  --ink: #1A1208;
+  --white: #FAFAF7;
+  --muted: #6A5A3A;
+  --border: rgba(201,168,76,0.25);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--white);
+  color: var(--ink);
+  font-family: 'Noto Sans JP', sans-serif;
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+.header {
+  background: var(--ink);
+  padding: 48px 24px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.15) 0%, transparent 60%);
+}
+.header-eyebrow {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  opacity: .8;
+  margin-bottom: 16px;
+  position: relative;
+}
+.header-title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(28px, 7vw, 44px);
+  font-weight: 800;
+  color: var(--gold-light);
+  line-height: 1.4;
+  margin-bottom: 8px;
+  position: relative;
+}
+.header-sub {
+  font-size: 14px;
+  color: rgba(250,250,247,0.5);
+  position: relative;
+  line-height: 1.8;
+}
+
+/* ── MAIN ── */
+.main {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+/* ── INPUT ── */
+.input-section { margin-bottom: 32px; }
+.label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.date-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.df { display: flex; flex-direction: column; gap: 5px; }
+.df span { font-size: 11px; color: #999; letter-spacing: 1px; }
+.df input {
+  width: 100%;
+  background: #F0EDE4;
+  border: 1px solid #DDD;
+  border-radius: 4px;
+  padding: 13px 10px;
+  color: var(--ink);
+  font-size: 22px;
+  font-family: 'Shippori Mincho', serif;
+  text-align: center;
+  outline: none;
+  transition: border-color .2s;
+}
+.df input:focus { border-color: var(--gold); }
+.df input::placeholder { color: #CCC; font-size: 14px; }
+.err { font-size: 12px; color: #C0392B; margin-bottom: 12px; display: none; }
+
+.btn-diagnose {
+  width: 100%;
+  padding: 16px;
+  background: var(--ink);
+  border: none;
+  color: var(--white);
+  font-family: 'Shippori Mincho', serif;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background .2s;
+}
+.btn-diagnose:hover { background: #333; }
+
+/* ── 十干表示 ── */
+.type-kanji {
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(28px, 7vw, 38px);
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.type-yomi-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+}
+.color-dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1px solid rgba(0,0,0,0.1);
+  flex-shrink: 0;
+}
+
+/* ── RESULT ── */
+.result {
+  display: none;
+  animation: fadeUp .5s ease;
+}
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(16px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+.result-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 32px 0;
+}
+
+/* 型名メイン */
+.type-card {
+  text-align: center;
+  margin-bottom: 24px;
+}
+.type-badge {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--white);
+  background: var(--ink);
+  padding: 5px 18px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+.type-icon { font-size: 64px; line-height: 1; margin-bottom: 10px; }
+.type-main {
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(30px, 8vw, 44px);
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.type-sub {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* コピーボックス */
+.copy-box {
+  background: var(--gold-pale);
+  border-radius: 6px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.copy-text {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.btn-copy {
+  flex-shrink: 0;
+  padding: 7px 14px;
+  background: var(--ink);
+  border: none;
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background .2s;
+  white-space: nowrap;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.btn-copy:hover { background: #333; }
+.btn-copy.copied { background: #4A7A50; }
+
+/* 光の特徴 */
+.light-box {
+  background: var(--gold-pale);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 4px 4px 0;
+  padding: 18px 20px;
+  margin-bottom: 14px;
+}
+.light-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.light-text {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.9;
+  color: #3A2A1A;
+}
+
+/* 辛かった理由（影） */
+.shadow-box {
+  background: #F0EDE4;
+  border-left: 3px solid #8A7A5A;
+  border-radius: 0 4px 4px 0;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+}
+.shadow-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #8A7A5A;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.shadow-text {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.9;
+  color: var(--ink);
+}
+
+/* ブリッジ */
+.bridge {
+  text-align: center;
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 2;
+  margin-bottom: 24px;
+}
+.bridge strong { color: var(--ink); font-weight: 700; }
+
+/* CTA */
+.btn-cta {
+  display: block;
+  width: 100%;
+  padding: 18px;
+  background: var(--ink);
+  color: var(--white);
+  font-family: 'Shippori Mincho', serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 4px;
+  transition: background .2s;
+  margin-bottom: 12px;
+}
+.btn-cta:hover { background: #333; }
+
+.btn-reset {
+  display: block;
+  background: none;
+  border: none;
+  color: #AAA;
+  font-size: 12px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  text-decoration: underline;
+  margin: 0 auto;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-eyebrow">黄金の羅針盤 · 干支学</div>
+  <div class="header-title">
+    縄文の知恵!?<br>人は自然の一部だった
+  </div>
+  <div class="header-sub">
+    大樹のように伸びる人。太陽のように照らす人。<br>
+    あなたには、あなたの「自然の伸び方」がある。
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- INPUT -->
+  <div class="input-section">
+    <div class="label">生年月日を入力</div>
+    <div class="date-row">
+      <div class="df">
+        <span>年（西暦）</span>
+        <input type="text" inputmode="numeric" id="iy" placeholder="1985">
+      </div>
+      <div class="df">
+        <span>月</span>
+        <input type="text" inputmode="numeric" id="im" placeholder="5">
+      </div>
+      <div class="df">
+        <span>日</span>
+        <input type="text" inputmode="numeric" id="id" placeholder="15">
+      </div>
+    </div>
+    <div class="err" id="err">生年月日を正しく入力してください</div>
+    <button class="btn-diagnose" onclick="diagnose()">本質を知る</button>
+  </div>
+
+  <!-- RESULT -->
+  <div class="result" id="result">
+    <hr class="result-divider">
+
+    <div class="type-card">
+      <div class="type-badge" id="rBadge"></div>
+      <div class="type-kanji" id="rKanji"></div>
+      <div class="type-yomi-row">
+        <span id="rYomi"></span>
+        <span class="color-dot" id="rColorDot"></span>
+        <span id="rColorName"></span>
+      </div>
+      <div class="type-icon" id="rIcon"></div>
+      <div class="type-main" id="rMain"></div>
+      <div class="type-sub" id="rSub"></div>
+    </div>
+
+    <div class="copy-box">
+      <div class="copy-text" id="rCopyText"></div>
+      <button class="btn-copy" id="copyBtn" onclick="copyResult()">コピー</button>
+    </div>
+
+    <div class="light-box">
+      <div class="light-label">あなたの才能</div>
+      <div class="light-text" id="rLight"></div>
+    </div>
+
+    <div class="shadow-box">
+      <div class="shadow-label">あなたの伸び方のクセ</div>
+      <div class="shadow-text" id="rShadow"></div>
+    </div>
+
+    <div class="bridge">
+      この力の<strong>使い方</strong>が、<br>
+      黄金の羅針盤にある。
+    </div>
+
+    <a class="btn-cta" href="https://note.com/nicekai/n/n265857ef361e" target="_blank">
+      羅針盤を受け取る
+    </a>
+    <button class="btn-reset" onclick="reset()">← もう一度</button>
+  </div>
+
+</div>
+
+<script>
+// ── 十干データ ──
+const JIKKAN = [
+  {
+    icon:'🌳', badge:'L-BUILD ／ 木',
+    kanji:'甲', yomi:'こう・きのえ', color:'#C9A84C', colorName:'黄',
+    main:'理想型リーダー',
+    sub:'誰も見たことない道を、ひとりで切り拓く人',
+    light:'ゼロから道をつくり出す人。誰も見ていない先を見て、場の向かう方向そのものを決める力がある。',
+    shadow:'「自分がやった方が早い」と全部を抱え込んで、気づけば深夜に一人。人に任せるのが、一番の苦手ではないですか。'
+  },
+  {
+    icon:'🌿', badge:'P-BUILD ／ 木',
+    kanji:'乙', yomi:'おつ・きのと', color:'#4A7A50', colorName:'緑',
+    main:'共感型プロデューサー',
+    sub:'しなやかに曲がりながら、絶対に折れない人',
+    light:'人の才能を見抜き、輝かせる人。あなたが間に入るだけで、なぜかバラバラだった全体が回り出す。',
+    shadow:'人の神輿を担ぐのは得意なのに、自分が主役の場所に立つことを、いつも後回しにしていませんか。'
+  },
+  {
+    icon:'☀️', badge:'I-EMO ／ 火',
+    kanji:'丙', yomi:'へい・ひのえ', color:'#B83030', colorName:'赤',
+    main:'表現型インフルエンサー',
+    sub:'全方位に光を放ち、大衆を動かす人',
+    light:'その場にいるだけで空気を変える人。あなたの言葉と熱量は、理屈ぬきで人を惹きつけ、自然と動かしていく。',
+    shadow:'いいねもフォロワーも増えるのに、一番売りたい肝心なところで、なぜか誰も動いてくれていないですか。'
+  },
+  {
+    icon:'🕯️', badge:'C-EMO ／ 火',
+    kanji:'丁', yomi:'てい・ひのと', color:'#D4732A', colorName:'橙',
+    main:'職人型クリエイター',
+    sub:'暗闇の一点を鋭く照らす、唯一無二の人',
+    light:'誰にも真似できない世界を持つ人。あなたの作るものには、器用さでは届かない「魂」が確かに宿っている。',
+    shadow:'「まだ完璧じゃない」と磨き続ける間に、出すべきタイミングが静かに過ぎ、チャンスを逃していませんか。'
+  },
+  {
+    icon:'⛰️', badge:'M-CORE ／ 土',
+    kanji:'戊', yomi:'ぼ・つちのえ', color:'#7A5A3A', colorName:'茶',
+    main:'統括型マネージャー',
+    sub:'圧倒的な器で、人と現場を動かす人',
+    light:'どっしりと場を束ねる人。あなたが中心にいるだけで、周りは安心して力を出せる土台が生まれる。',
+    shadow:'「今のままで十分回ってる」と変化を先送りしている間に、気づけば後ろから静かに抜かれていませんか。'
+  },
+  {
+    icon:'🌾', badge:'D-CORE ／ 土',
+    kanji:'己', yomi:'き・つちのと', color:'#2A2A2A', colorName:'黒',
+    main:'調和型ディレクター',
+    sub:'万物を平等に育てる、大地のような人',
+    light:'本質を見抜き、全体を整える人。あなたの深い観察と分析は、いつも物事の芯をまっすぐ食い当てる。',
+    shadow:'誰よりも完璧に調べ尽くすのに、「まだ準備が足りない」が口ぐせで、肝心の一歩が踏み出せていませんか。'
+  },
+  {
+    icon:'⚔️', badge:'V-ACT ／ 金',
+    kanji:'庚', yomi:'こう・かのえ', color:'#B8960A', colorName:'金',
+    main:'突破型ヴァンガード',
+    sub:'最前線でリスクを取り、現状を突破する人',
+    light:'誰より速く動き、結果をもぎ取る人。あなたの思い切った一歩が、停滞した場の空気を一瞬で変えていく。',
+    shadow:'勢いのまま突っ込んで、なぜコケたかもわからないまま、また次へ特攻。ふり返れば時間だけが溶けていませんか。'
+  },
+  {
+    icon:'💎', badge:'S-ACT ／ 金',
+    kanji:'辛', yomi:'しん・かのと', color:'#8A8A8A', colorName:'銀',
+    main:'専門型スペシャリスト',
+    sub:'細部を磨き上げ、プレミアムなポジションを確立する人',
+    light:'深く、精密に磨き上げる人。あなたの専門性と美意識は、本物だけがたどり着ける静かな輝きを放つ。',
+    shadow:'「わかる人だけわかればいい」と扉を閉じている間に、実力では劣る見せ方上手に、客をさらわれていませんか。'
+  },
+  {
+    icon:'🌊', badge:'E-DESIGN ／ 水',
+    kanji:'壬', yomi:'じん・みずのえ', color:'#2A5A8A', colorName:'青',
+    main:'開拓型パイオニア',
+    sub:'時代の先を読み、誰も見ぬ地平を拓く人',
+    light:'時代を先読みし、最初に飛び込む人。まだ誰もいない荒野こそ、あなたが一番いきいきと輝ける居場所になる。',
+    shadow:'新しいものに飛びついては3日で飽き、また別のことへ。気づけば周りを置いてきぼりにしていませんか。'
+  },
+  {
+    icon:'🌧️', badge:'N-DESIGN ／ 水',
+    kanji:'癸', yomi:'き・みずのと', color:'#6A3A8A', colorName:'紫',
+    main:'循環型ナビゲーター',
+    sub:'膨大な知を美しく循環させ、人を導く人',
+    light:'知を束ね、人に道を示す人。あなたが整理した言葉は、迷っている人にとっての確かな地図になる。',
+    shadow:'人の知識をまとめるのは得意なのに、自分自身がリスクを背負って動くことから、ずっと逃げ続けていませんか。'
+  },
+];
+
+// ── 全角→半角 ──
+function toHan(str) {
+  return str.replace(/[０-９]/g, s => String.fromCharCode(s.charCodeAt(0) - 0xFEE0))
+            .replace(/[^0-9]/g, '');
+}
+
+// ── 日干計算（基準：1900-01-01 = 甲） ──
+function getJikkanIdx(y, m, d) {
+  const base   = new Date(1900, 0, 1);
+  const target = new Date(y, m - 1, d);
+  const diff   = Math.round((target - base) / 86400000);
+  return ((diff % 10) + 10) % 10;
+}
+
+// ── 診断 ──
+function diagnose() {
+  const y = parseInt(toHan(document.getElementById('iy').value));
+  const m = parseInt(toHan(document.getElementById('im').value));
+  const d = parseInt(toHan(document.getElementById('id').value));
+  const err = document.getElementById('err');
+
+  if (!y||!m||!d||y<1920||y>2010||m<1||m>12||d<1||d>31) {
+    err.style.display = 'block'; return;
+  }
+  err.style.display = 'none';
+
+  const k = JIKKAN[getJikkanIdx(y, m, d)];
+
+  document.getElementById('rBadge').textContent    = k.badge;
+  document.getElementById('rKanji').textContent   = k.kanji;
+  document.getElementById('rYomi').textContent    = k.kanji + '（' + k.yomi + '）';
+  document.getElementById('rColorDot').style.background = k.color;
+  document.getElementById('rColorName').textContent = k.colorName;
+  document.getElementById('rKanji').style.color = k.color;
+  document.getElementById('rIcon').textContent     = k.icon;
+  document.getElementById('rMain').textContent     = k.main;
+  document.getElementById('rSub').textContent      = k.sub;
+  document.getElementById('rLight').textContent    = k.light;
+  document.getElementById('rShadow').textContent   = k.shadow;
+  document.getElementById('rCopyText').textContent = k.main + ' | ' + k.badge.split(' ')[0];
+
+  document.getElementById('result').style.display = 'block';
+  document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ── コピー ──
+function copyResult() {
+  const text = document.getElementById('rCopyText').textContent + '\n#黄金の羅針盤 #干支学';
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = 'コピー済み';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'コピー';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
+// ── リセット ──
+function reset() {
+  document.getElementById('result').style.display = 'none';
+  document.getElementById('iy').value = '';
+  document.getElementById('im').value = '';
+  document.getElementById('id').value = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Enterキー対応
+document.addEventListener('keydown', e => { if (e.key === 'Enter') diagnose(); });
+</script>
+</body>
+</html>
