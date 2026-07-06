@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>逆引き十干鑑定｜黄金の羅針盤</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8CB7A;
+  --gold-pale: #F5EDD0;
+  --ink: #1A1208;
+  --white: #FAFAF7;
+  --muted: #6A5A3A;
+  --border: rgba(201,168,76,0.25);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--white);
+  color: var(--ink);
+  font-family: 'Noto Sans JP', sans-serif;
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+.header {
+  background: var(--ink);
+  padding: 40px 24px 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.15) 0%, transparent 60%);
+}
+.header-eyebrow {
+  font-size: 10px; letter-spacing: 4px; color: var(--gold);
+  opacity: .8; margin-bottom: 14px; position: relative;
+}
+.header-title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(24px, 6vw, 34px);
+  font-weight: 800; color: var(--gold-light);
+  line-height: 1.5; position: relative;
+}
+
+/* ── MAIN ── */
+.main { max-width: 480px; margin: 0 auto; padding: 32px 24px 80px; }
+
+/* ── INTRO ── */
+#screenIntro { text-align: center; }
+.intro-text {
+  font-size: 14px; color: #3A2A1A; line-height: 2.1;
+  margin-bottom: 32px;
+}
+.intro-text strong { color: var(--ink); font-weight: 700; }
+.btn-start {
+  width: 100%; padding: 18px;
+  background: var(--ink); border: none; color: var(--white);
+  font-family: 'Shippori Mincho', serif;
+  font-size: 16px; font-weight: 700; letter-spacing: 3px;
+  cursor: pointer; border-radius: 4px; transition: background .2s;
+}
+.btn-start:hover { background: #333; }
+
+/* ── PROGRESS ── */
+.progress-wrap { margin-bottom: 28px; }
+.progress-label {
+  display: flex; justify-content: space-between;
+  font-size: 11px; color: var(--muted); margin-bottom: 8px; letter-spacing: 1px;
+}
+.progress-bar {
+  height: 6px; background: #EEE8D8; border-radius: 3px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  border-radius: 3px; transition: width .4s ease;
+}
+
+/* ── QUIZ ── */
+#screenQuiz { display: none; }
+.q-number {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 13px; color: var(--gold); letter-spacing: 2px;
+  margin-bottom: 12px; font-weight: 700;
+}
+.q-text {
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(18px, 4.5vw, 22px);
+  font-weight: 700; line-height: 1.7; color: var(--ink);
+  margin-bottom: 28px;
+}
+.options { display: flex; flex-direction: column; gap: 10px; }
+.option {
+  background: #F0EDE4;
+  border: 1px solid #E0D8C0;
+  border-radius: 6px;
+  padding: 16px 18px;
+  font-size: 14px;
+  line-height: 1.7;
+  cursor: pointer;
+  transition: all .15s;
+  text-align: left;
+}
+.option:hover { background: var(--gold-pale); border-color: var(--gold); }
+.option:active { transform: scale(0.98); }
+.option-label {
+  display: inline-block;
+  width: 22px; height: 22px;
+  background: var(--ink);
+  color: var(--white);
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 22px;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+/* ── RESULT (十干結果) ── */
+#screenResult { display: none; }
+.result-divider { border: none; border-top: 1px solid var(--border); margin: 0 0 28px; }
+
+.type-card { text-align: center; margin-bottom: 24px; }
+.type-badge {
+  display: inline-block; font-size: 12px; letter-spacing: 2px;
+  color: var(--white); background: var(--ink);
+  padding: 5px 18px; border-radius: 20px; margin-bottom: 14px; font-weight: 700;
+}
+.type-icon { font-size: 64px; line-height: 1; margin-bottom: 10px; }
+.type-kanji {
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(28px, 7vw, 38px);
+  font-weight: 800; line-height: 1; margin-bottom: 6px;
+}
+.type-yomi-row {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--muted); letter-spacing: 1px; margin-bottom: 14px;
+}
+.color-dot {
+  width: 13px; height: 13px; border-radius: 50%; display: inline-block;
+  border: 1px solid rgba(0,0,0,0.1); flex-shrink: 0;
+}
+.type-main {
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(30px, 8vw, 44px);
+  font-weight: 800; color: var(--ink); margin-bottom: 6px;
+}
+.type-sub { font-size: 15px; color: var(--muted); line-height: 1.7; }
+
+.copy-box {
+  background: var(--gold-pale); border-radius: 6px; padding: 14px 18px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  margin-bottom: 20px;
+}
+.copy-text { font-family: 'Shippori Mincho', serif; font-size: 15px; font-weight: 700; color: var(--ink); }
+.btn-copy {
+  flex-shrink: 0; padding: 7px 14px; background: var(--ink); border: none;
+  color: var(--white); font-size: 11px; font-weight: 700; letter-spacing: 1px;
+  cursor: pointer; border-radius: 4px; transition: background .2s; white-space: nowrap;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.btn-copy:hover { background: #333; }
+.btn-copy.copied { background: #4A7A50; }
+
+.light-box {
+  background: var(--gold-pale); border-left: 3px solid var(--gold);
+  border-radius: 0 4px 4px 0; padding: 18px 20px; margin-bottom: 14px;
+}
+.light-label { font-size: 10px; letter-spacing: 3px; color: var(--gold); font-weight: 700; margin-bottom: 8px; }
+.light-text { font-size: 14px; font-weight: 500; line-height: 1.9; color: #3A2A1A; }
+
+.shadow-box {
+  background: #F0EDE4; border-left: 3px solid #8A7A5A;
+  border-radius: 0 4px 4px 0; padding: 18px 20px; margin-bottom: 20px;
+}
+.shadow-label { font-size: 10px; letter-spacing: 3px; color: #8A7A5A; font-weight: 700; margin-bottom: 8px; }
+.shadow-text { font-size: 14px; font-weight: 500; line-height: 1.9; color: var(--ink); }
+
+.bridge { text-align: center; font-size: 15px; color: var(--muted); line-height: 2; margin-bottom: 24px; }
+.bridge strong { color: var(--ink); font-weight: 700; }
+
+.btn-cta {
+  display: block; width: 100%; padding: 18px;
+  background: var(--ink); color: var(--white);
+  font-family: 'Shippori Mincho', serif; font-size: 16px; font-weight: 700;
+  letter-spacing: 3px; text-decoration: none; text-align: center;
+  border-radius: 4px; transition: background .2s; margin-bottom: 12px;
+}
+.btn-cta:hover { background: #333; }
+.btn-reset {
+  display: block; background: none; border: none; color: #AAA;
+  font-size: 12px; cursor: pointer; letter-spacing: 1px;
+  text-decoration: underline; margin: 0 auto; font-family: 'Noto Sans JP', sans-serif;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-eyebrow">黄金の羅針盤 · 干支学</div>
+  <div class="header-title">逆引き十干鑑定</div>
+</div>
+
+<div class="main">
+
+  <!-- INTRO -->
+  <div id="screenIntro">
+    <p class="intro-text">
+      生年月日ではなく、<br>
+      <strong>あなたの感覚・行動パターン</strong>から<br>
+      本質の十干を導き出します。<br><br>
+      全15問、直感で答えてください。<br>
+      所要時間は約2分です。
+    </p>
+    <button class="btn-start" onclick="startQuiz()">診断を始める</button>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="screenQuiz">
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span id="progressText">Q1 / 15</span>
+        <span id="progressPercent">7%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width:7%"></div>
+      </div>
+    </div>
+    <div class="q-number" id="qNumber">QUESTION 01</div>
+    <div class="q-text" id="qText"></div>
+    <div class="options" id="qOptions"></div>
+  </div>
+
+  <!-- RESULT -->
+  <div id="screenResult">
+    <hr class="result-divider">
+    <div class="type-card">
+      <div class="type-badge" id="rBadge"></div>
+      <div class="type-kanji" id="rKanji"></div>
+      <div class="type-yomi-row">
+        <span id="rYomi"></span>
+        <span class="color-dot" id="rColorDot"></span>
+        <span id="rColorName"></span>
+      </div>
+      <div class="type-icon" id="rIcon"></div>
+      <div class="type-main" id="rMain"></div>
+      <div class="type-sub" id="rSub"></div>
+    </div>
+
+    <div class="copy-box">
+      <div class="copy-text" id="rCopyText"></div>
+      <button class="btn-copy" id="copyBtn" onclick="copyResult()">コピー</button>
+    </div>
+
+    <div class="light-box">
+      <div class="light-label">あなたの才能</div>
+      <div class="light-text" id="rLight"></div>
+    </div>
+
+    <div class="shadow-box">
+      <div class="shadow-label">あなたの伸び方のクセ</div>
+      <div class="shadow-text" id="rShadow"></div>
+    </div>
+
+    <div class="bridge">
+      この力の<strong>使い方</strong>が、<br>
+      黄金の羅針盤にある。
+    </div>
+
+    <a class="btn-cta" href="https://note.com/nicekai/n/n265857ef361e" target="_blank">
+      羅針盤を受け取る
+    </a>
+    <button class="btn-reset" onclick="resetQuiz()">← もう一度診断する</button>
+  </div>
+
+</div>
+
+<script>
+// ══════════════════════════
+// 質問データ（全15問）
+// ══════════════════════════
+const QUESTIONS = [
+  { q:'あなたが一番「自分らしい」と感じる行動スタイルは？', opts:[
+    '新しい計画を立てたり、アイデアを出して行動しているとき',
+    '人前で話したり、場を盛り上げて注目されているとき',
+    '人の話をじっくり聞き、みんなのまとめ役に徹しているとき',
+    '効率的なルールを作ったり、物事を整理整頓しているとき',
+    '1人で深く考えにふけったり、物事の本質を追究しているとき'
+  ]},
+  { q:'初めての場所に連れて行かれたとき、あなたの反応は？', opts:[
+    '「面白そう！」とすぐに新しい環境に飛び込んでいく',
+    '人見知りせず、その場にいる人たちとすぐに仲良くなる',
+    '周りの様子を伺いながら、みんなが居心地よく過ごせているか気にする',
+    'その場所のルールや仕組み、マナーなどが気になってチェックする',
+    '冷静に全体を観察し、まずは自分の安全なポジションを確保する'
+  ]},
+  { q:'ストレスが溜まったとき、あなたはどうなりやすい？', opts:[
+    'イライラして怒りっぽくなったり、じっとしていられなくなる',
+    '気持ちがソワソワして落ち着かなくなったり、過剰に喋ってしまう',
+    'ぐるぐると考えすぎて胃が痛くなったり、食べすぎてしまう',
+    '神経質になって白黒ハッキリつけたくなったり、悲観的になる',
+    '誰とも話したくなくなり、自分の世界に閉じこもってしまう'
+  ]},
+  { q:'あなたが仕事や勉強で最も大切にしている価値観は？', opts:[
+    '常に成長し、新しい挑戦を続けること',
+    '自分の情熱を表現し、周りをワクワクさせること',
+    'チームの調和を保ち、みんなに安心感を与えること',
+    '高いクオリティを保ち、正確に結果を出すこと',
+    '専門性を深め、誰も気づかない本質を見抜くこと'
+  ]},
+  { q:'友人から「あなたってどんな人？」と言われることが多い？', opts:[
+    '「行動力があって、まっすぐな人だね」',
+    '「明るくて、一緒にいると元気になる人だね」',
+    '「聞き上手で、包容力があって安心する人だね」',
+    '「真面目でブレない、芯がしっかりした人だね」',
+    '「クールで知性的、ちょっとミステリアスな人だね」'
+  ]},
+  { q:'体調を崩すとき、どこに不調が出やすいですか？', opts:[
+    '目が疲れる、頭痛がする、自律神経が乱れる',
+    '動悸がする、寝付きが悪い、顔がほてる',
+    '胃もたれ、お腹が張る、口内炎ができる',
+    '肌が荒れる、便秘・下痢、風邪を引きやすい（喉・鼻）',
+    '冷え性、むくみ、疲れが取れにくい（腰・耳）'
+  ]},
+  { q:'あなたの休日の過ごし方の理想は？', opts:[
+    'アウトドアやスポーツなど、アクティブに体を動かしたい',
+    'イベント、パーティー、ライブなど、賑やかな場所に行きたい',
+    'カフェでまったりしたり、家族や友人とアットホームに過ごしたい',
+    '買い物を楽しんだり、美術館や綺麗に整備された場所に行きたい',
+    '自宅にこもって、読書、映画、趣味に没頭したい'
+  ]},
+  { q:'人とのコミュニケーションで、あなたが一番避けたいことは？', opts:[
+    '自分の自由を制限されたり、頭ごなしに否定されること',
+    '自分の存在を無視されたり、場が冷め切ってしまうこと',
+    '誰かが仲間外れになったり、関係がギスギスすること',
+    '約束を破られたり、筋の通らない理不尽な対応をされること',
+    'プライベートな領域に土足で踏み込まれること'
+  ]},
+  { q:'あなたの「決断」の仕方はどのタイプ？', opts:[
+    '直感を信じて、とにかく「まずはやってみる！」と決める',
+    'その時の気分や、周りの盛り上がりの勢いで決める',
+    '周りの人の意見を聞き、みんなが納得する方法を選ぶ',
+    '過去のデータやメリット・デメリットを冷静に比較して決める',
+    '徹底的に調べ、じっくり時間をかけて納得がいくまで考える'
+  ]},
+  { q:'以下の「色」の中で、直感で今一番惹かれる色は？', opts:[
+    '青・緑',
+    '赤・ピンク',
+    '黄・茶・ベージュ',
+    '白・ゴールド・シルバー',
+    '黒・紺・ダークグレー'
+  ]},
+  // 陰陽5問
+  { q:'あなたが何かを始めるとき、どちらの感覚が近い？', yy:true, opts:[
+    '自分が先頭に立って引っ張りたい。自分の力で新しく開拓したい',
+    '誰かと協力しながら進めたい。既存のものをアレンジして柔軟に広げたい'
+  ]},
+  { q:'自分の意見や感情を伝えるときのスタイルは？', yy:true, opts:[
+    'ストレートでわかりやすい。裏表がなく、ハッキリと主張する',
+    '控えめでマイルド。相手の反応や場の空気を読みながら慎重に伝える'
+  ]},
+  { q:'予想外のトラブルが起きたとき、どう対処する？', yy:true, opts:[
+    '正面突破！自分の信念を曲げずに、堂々と立ち向かう',
+    '臨機応変に対応。状況に合わせて自分を変化させ、賢く受け流す'
+  ]},
+  { q:'他人から見たあなたの雰囲気はどちらに近いと言われる？', yy:true, opts:[
+    '存在感があり、堂々としている。良くも悪くも目立つタイプ',
+    '親しみやすく、安心感がある。控えめで調整役に回ることが多いタイプ'
+  ]},
+  { q:'あなたのパワーの源はどこから湧いてくる？', yy:true, opts:[
+    '外側への発散（行動する、発信する、目標を追いかける）',
+    '内側への蓄積（じっくり育てる、深く考える、身内を大切にする）'
+  ]},
+];
+
+// ══════════════════════════
+// 十干データ（生年月日版と共通）
+// ══════════════════════════
+const JIKKAN = [
+  { icon:'🌳', badge:'L-BUILD ／ 木', kanji:'甲', yomi:'こう・きのえ', color:'#C9A84C', colorName:'黄',
+    main:'理想型リーダー', sub:'誰も見たことない道を、ひとりで切り拓く人',
+    light:'ゼロから道をつくり出す人。誰も見ていない先を見て、場の向かう方向そのものを決める力がある。',
+    shadow:'「自分がやった方が早い」と全部を抱え込んで、気づけば深夜に一人。人に任せるのが、一番の苦手ではないですか。' },
+  { icon:'🌿', badge:'P-BUILD ／ 木', kanji:'乙', yomi:'おつ・きのと', color:'#4A7A50', colorName:'緑',
+    main:'共感型プロデューサー', sub:'しなやかに曲がりながら、絶対に折れない人',
+    light:'人の才能を見抜き、輝かせる人。あなたが間に入るだけで、なぜかバラバラだった全体が回り出す。',
+    shadow:'人の神輿を担ぐのは得意なのに、自分が主役の場所に立つことを、いつも後回しにしていませんか。' },
+  { icon:'☀️', badge:'I-EMO ／ 火', kanji:'丙', yomi:'へい・ひのえ', color:'#B83030', colorName:'赤',
+    main:'表現型インフルエンサー', sub:'全方位に光を放ち、大衆を動かす人',
+    light:'その場にいるだけで空気を変える人。あなたの言葉と熱量は、理屈ぬきで人を惹きつけ、自然と動かしていく。',
+    shadow:'いいねもフォロワーも増えるのに、一番売りたい肝心なところで、なぜか誰も動いてくれていないですか。' },
+  { icon:'🕯️', badge:'C-EMO ／ 火', kanji:'丁', yomi:'てい・ひのと', color:'#D4732A', colorName:'橙',
+    main:'職人型クリエイター', sub:'暗闇の一点を鋭く照らす、唯一無二の人',
+    light:'誰にも真似できない世界を持つ人。あなたの作るものには、器用さでは届かない「魂」が確かに宿っている。',
+    shadow:'「まだ完璧じゃない」と磨き続ける間に、出すべきタイミングが静かに過ぎ、チャンスを逃していませんか。' },
+  { icon:'⛰️', badge:'M-CORE ／ 土', kanji:'戊', yomi:'ぼ・つちのえ', color:'#7A5A3A', colorName:'茶',
+    main:'統括型マネージャー', sub:'圧倒的な器で、人と現場を動かす人',
+    light:'どっしりと場を束ねる人。あなたが中心にいるだけで、周りは安心して力を出せる土台が生まれる。',
+    shadow:'「今のままで十分回ってる」と変化を先送りしている間に、気づけば後ろから静かに抜かれていませんか。' },
+  { icon:'🌾', badge:'D-CORE ／ 土', kanji:'己', yomi:'き・つちのと', color:'#2A2A2A', colorName:'黒',
+    main:'調和型ディレクター', sub:'万物を平等に育てる、大地のような人',
+    light:'本質を見抜き、全体を整える人。あなたの深い観察と分析は、いつも物事の芯をまっすぐ食い当てる。',
+    shadow:'誰よりも完璧に調べ尽くすのに、「まだ準備が足りない」が口ぐせで、肝心の一歩が踏み出せていませんか。' },
+  { icon:'⚔️', badge:'V-ACT ／ 金', kanji:'庚', yomi:'こう・かのえ', color:'#B8960A', colorName:'金',
+    main:'突破型ヴァンガード', sub:'最前線でリスクを取り、現状を突破する人',
+    light:'誰より速く動き、結果をもぎ取る人。あなたの思い切った一歩が、停滞した場の空気を一瞬で変えていく。',
+    shadow:'勢いのまま突っ込んで、なぜコケたかもわからないまま、また次へ特攻。ふり返れば時間だけが溶けていませんか。' },
+  { icon:'💎', badge:'S-ACT ／ 金', kanji:'辛', yomi:'しん・かのと', color:'#8A8A8A', colorName:'銀',
+    main:'専門型スペシャリスト', sub:'細部を磨き上げ、プレミアムなポジションを確立する人',
+    light:'深く、精密に磨き上げる人。あなたの専門性と美意識は、本物だけがたどり着ける静かな輝きを放つ。',
+    shadow:'「わかる人だけわかればいい」と扉を閉じている間に、実力では劣る見せ方上手に、客をさらわれていませんか。' },
+  { icon:'🌊', badge:'E-DESIGN ／ 水', kanji:'壬', yomi:'じん・みずのえ', color:'#2A5A8A', colorName:'青',
+    main:'開拓型パイオニア', sub:'時代の先を読み、誰も見ぬ地平を拓く人',
+    light:'時代を先読みし、最初に飛び込む人。まだ誰もいない荒野こそ、あなたが一番いきいきと輝ける居場所になる。',
+    shadow:'新しいものに飛びついては3日で飽き、また別のことへ。気づけば周りを置いてきぼりにしていませんか。' },
+  { icon:'🌧️', badge:'N-DESIGN ／ 水', kanji:'癸', yomi:'き・みずのと', color:'#6A3A8A', colorName:'紫',
+    main:'循環型ナビゲーター', sub:'膨大な知を美しく循環させ、人を導く人',
+    light:'知を束ね、人に道を示す人。あなたが整理した言葉は、迷っている人にとっての確かな地図になる。',
+    shadow:'人の知識をまとめるのは得意なのに、自分自身がリスクを背負って動くことから、ずっと逃げ続けていませんか。' },
+];
+
+// 五行(0-4) × 陰陽(true=陽,false=陰) → JIKKANインデックス
+// 木:0,1 火:2,3 土:4,5 金:6,7 水:8,9  (陽が偶数,陰が奇数)
+function getJikkanFromAnswers(elementIdx, isYang) {
+  const base = elementIdx * 2;
+  return isYang ? base : base + 1;
+}
+
+// ══════════════════════════
+// クイズ制御
+// ══════════════════════════
+let currentQ = 0;
+let elementCount = [0,0,0,0,0]; // A,B,C,D,E
+let yangCount = 0;
+let yinCount = 0;
+
+function startQuiz() {
+  document.getElementById('screenIntro').style.display = 'none';
+  document.getElementById('screenQuiz').style.display = 'block';
+  currentQ = 0;
+  elementCount = [0,0,0,0,0];
+  yangCount = 0;
+  yinCount = 0;
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = QUESTIONS[currentQ];
+  const total = QUESTIONS.length;
+
+  document.getElementById('progressText').textContent = `Q${currentQ+1} / ${total}`;
+  document.getElementById('progressPercent').textContent = Math.round(((currentQ)/total)*100) + '%';
+  document.getElementById('progressFill').style.width = ((currentQ)/total*100) + '%';
+  document.getElementById('qNumber').textContent = `QUESTION ${String(currentQ+1).padStart(2,'0')}`;
+  document.getElementById('qText').textContent = q.q;
+
+  const optsEl = document.getElementById('qOptions');
+  optsEl.innerHTML = q.opts.map((opt, i) => `
+    <div class="option" onclick="selectOption(${i})">
+      <span class="option-label">${String.fromCharCode(65+i)}</span>${opt}
+    </div>
+  `).join('');
+
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function selectOption(idx) {
+  const q = QUESTIONS[currentQ];
+  if (q.yy) {
+    // 陰陽質問：0=陽, 1=陰
+    if (idx === 0) yangCount++; else yinCount++;
+  } else {
+    // 五行質問：0=A(木) 1=B(火) 2=C(土) 3=D(金) 4=E(水)
+    elementCount[idx]++;
+  }
+
+  currentQ++;
+  if (currentQ < QUESTIONS.length) {
+    renderQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  document.getElementById('screenQuiz').style.display = 'none';
+
+  // 五行判定：最多のインデックス
+  let maxCount = -1, elementIdx = 0;
+  elementCount.forEach((c, i) => {
+    if (c > maxCount) { maxCount = c; elementIdx = i; }
+  });
+
+  // 陰陽判定
+  const isYang = yangCount >= yinCount;
+
+  const jikkanIdx = getJikkanFromAnswers(elementIdx, isYang);
+  const k = JIKKAN[jikkanIdx];
+
+  document.getElementById('rBadge').textContent      = k.badge;
+  document.getElementById('rKanji').textContent       = k.kanji;
+  document.getElementById('rKanji').style.color       = k.color;
+  document.getElementById('rYomi').textContent        = k.kanji + '（' + k.yomi + '）';
+  document.getElementById('rColorDot').style.background = k.color;
+  document.getElementById('rColorName').textContent   = k.colorName;
+  document.getElementById('rIcon').textContent        = k.icon;
+  document.getElementById('rMain').textContent        = k.main;
+  document.getElementById('rSub').textContent         = k.sub;
+  document.getElementById('rLight').textContent       = k.light;
+  document.getElementById('rShadow').textContent      = k.shadow;
+  document.getElementById('rCopyText').textContent    = k.main + ' | ' + k.badge.split(' ')[0];
+
+  document.getElementById('screenResult').style.display = 'block';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function copyResult() {
+  const text = document.getElementById('rCopyText').textContent + '\n#黄金の羅針盤 #干支学 #逆引き十干鑑定';
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = 'コピー済み';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'コピー';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
+function resetQuiz() {
+  document.getElementById('screenResult').style.display = 'none';
+  document.getElementById('screenIntro').style.display = 'block';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+</script>
+</body>
+</html>
