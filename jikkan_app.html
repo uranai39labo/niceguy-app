@@ -503,7 +503,7 @@ function diagnose() {
   const d = parseInt(toHan(document.getElementById('id').value));
   const err = document.getElementById('err');
 
-  if (!y||!m||!d||y<1920||y>2010||m<1||m>12||d<1||d>31) {
+  if (!y||!m||!d||y<1900||y>2100||m<1||m>12||d<1||d>31) {
     err.style.display = 'block'; return;
   }
   err.style.display = 'none';

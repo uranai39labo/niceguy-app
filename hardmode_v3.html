@@ -300,7 +300,7 @@ function diagnose(){
   const m=parseInt(toHankaku(document.getElementById('im').value));
   const d=parseInt(toHankaku(document.getElementById('id').value));
   const err=document.getElementById('err');
-  if(!y||!m||!d||y<1920||y>2010||m<1||m>12||d<1||d>31){err.style.display='block';return;}
+  if(!y||!m||!d||y<1900||y>2100||m<1||m>12||d<1||d>31){err.style.display='block';return;}
   err.style.display='none';
   const charNo=getAnimalChar(y,m,d);
   const ai=CHAR_TO_ANIMAL[charNo]??(charNo%12);
