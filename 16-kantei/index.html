@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>16鑑定アプリ</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="question-panel" id="questionScreen" aria-labelledby="questions-title">
+        <div class="question-header">
+          <div>
+            <p class="eyebrow">16鑑定</p>
+            <h1 id="questions-title">質問</h1>
+          </div>
+          <div class="progress-pill"><span id="currentNumber">1</span> / 60</div>
+        </div>
+
+        <div class="progress-track" aria-hidden="true">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <article class="single-question-card">
+          <div class="question-number" id="questionNumber">1</div>
+          <p class="question-text" id="questionText"></p>
+          <div class="answer-grid" id="answerGrid"></div>
+        </article>
+
+        <div class="flow-actions">
+          <button class="ghost-button" id="prevButton" type="button">戻る</button>
+          <button class="ghost-button" id="clearButton" type="button">リセット</button>
+        </div>
+      </section>
+
+      <section class="result-panel is-hidden" id="resultScreen" aria-labelledby="result-title">
+        <div class="result-topline">
+          <div>
+            <p class="eyebrow">鑑定結果</p>
+            <h1 id="result-title">性格特性</h1>
+          </div>
+          <button class="ghost-button" id="restartButton" type="button">もう一度</button>
+        </div>
+
+        <div class="type-summary">
+          <div class="type-mark" id="typeMark">INFP-T</div>
+          <div>
+            <div class="type-label">あなたの性格タイプ</div>
+            <div class="type-name" id="typeName">INFP-T</div>
+            <div class="type-japanese" id="typeJapaneseName">仲介者</div>
+            <div class="type-group" id="typeGroup">外交官</div>
+            <div class="type-copy" id="typeCopy">内向型 / 直感型 / 感情型 / 探索型 / 激動型</div>
+          </div>
+          <div class="type-illustration" id="typeIllustration" aria-hidden="true"></div>
+        </div>
+
+        <p class="type-description" id="typeDescription"></p>
+
+        <div class="result-actions">
+          <button class="primary-button" id="showImageButton" type="button">シェア用画像を表示</button>
+          <span class="copy-status" id="copyStatus" aria-live="polite"></span>
+        </div>
+
+        <div class="share-preview is-hidden" id="sharePreview">
+          <p>画像を長押しして保存できます</p>
+          <img id="shareImage" alt="鑑定結果のシェア画像">
+        </div>
+
+        <div class="trait-list" id="traitList"></div>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
