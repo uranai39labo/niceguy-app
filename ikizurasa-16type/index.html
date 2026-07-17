@@ -1,0 +1,1822 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生きづらさ16タイプ鑑定</title>
+  <style>
+:root {
+  --bg: #f5f2ec;
+  --bg-soft: #ffffff;
+  --panel: #ffffff;
+  --panel-strong: #fffaf0;
+  --line: rgba(23, 26, 31, 0.14);
+  --text: #171a1f;
+  --muted: #5f6673;
+  --navy: #15243a;
+  --water: #5aa7d8;
+  --wood: #79b86d;
+  --metal: #d8d0bd;
+  --fire: #e46f57;
+  --gold: #9a6a16;
+  --danger: #d96565;
+  --radius: 8px;
+  --shadow: 0 22px 60px rgba(38, 32, 22, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+  background:
+    radial-gradient(circle at 18% 8%, rgba(90, 167, 216, 0.18), transparent 28rem),
+    radial-gradient(circle at 88% 12%, rgba(228, 111, 87, 0.12), transparent 24rem),
+    linear-gradient(145deg, #faf8f3 0%, #f2efe8 52%, #e9edf1 100%);
+}
+
+button {
+  font: inherit;
+}
+
+.app-shell {
+  width: min(920px, calc(100% - 32px));
+  min-height: 100vh;
+  margin: 0 auto;
+  display: grid;
+  place-items: center;
+  padding: 32px 0;
+}
+
+.screen {
+  display: none;
+  width: 100%;
+  padding: clamp(24px, 5vw, 48px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+.screen-active {
+  display: block;
+}
+
+#start-screen {
+  text-align: center;
+}
+
+.brand-mark {
+  width: 152px;
+  height: 152px;
+  margin: 0 auto 28px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.element-dot {
+  border-radius: 999px;
+  opacity: 0.92;
+  box-shadow: inset 0 0 22px rgba(255, 255, 255, 0.18);
+}
+
+.water { background: var(--water); }
+.wood { background: var(--wood); }
+.metal { background: var(--metal); }
+.fire { background: var(--fire); }
+
+.eyebrow,
+.panel-label,
+.question-category {
+  margin: 0 0 10px;
+  color: var(--gold);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+p {
+  overflow-wrap: anywhere;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.5rem, 8vw, 5.25rem);
+  line-height: 1.12;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+h1 span {
+  display: block;
+}
+
+h2 {
+  margin: 0;
+  font-size: clamp(1.9rem, 5vw, 3.2rem);
+  line-height: 1.12;
+  letter-spacing: 0;
+}
+
+h3 {
+  margin: 0;
+  font-size: clamp(1.25rem, 3vw, 1.8rem);
+  line-height: 1.45;
+  letter-spacing: 0;
+}
+
+.lead {
+  max-width: 620px;
+  margin: 22px auto 32px;
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.9;
+}
+
+.primary-button,
+.ghost-button,
+.answer-button {
+  min-height: 48px;
+  border: 0;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.primary-button {
+  width: min(360px, 100%);
+  padding: 15px 22px;
+  color: #08101a;
+  background: linear-gradient(135deg, var(--gold), #f1d99c);
+  font-weight: 800;
+}
+
+.ghost-button {
+  padding: 12px 16px;
+  color: var(--text);
+  border: 1px solid var(--line);
+  background: #ffffff;
+}
+
+.answer-button {
+  width: 100%;
+  padding: 16px;
+  color: var(--text);
+  border: 1px solid var(--line);
+  background: #ffffff;
+  text-align: left;
+  font-weight: 700;
+}
+
+.primary-button:hover,
+.ghost-button:hover,
+.answer-button:hover {
+  transform: translateY(-1px);
+}
+
+.answer-button:hover,
+.answer-button.selected {
+  border-color: rgba(217, 183, 104, 0.76);
+  background: #fff6dd;
+}
+
+.question-header,
+.question-actions,
+.limit-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.progress-label {
+  min-width: 64px;
+  margin: 0;
+  color: var(--muted);
+  font-weight: 800;
+  text-align: right;
+}
+
+.progress-track,
+.limit-track {
+  width: 100%;
+  height: 10px;
+  margin: 26px 0;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(23, 26, 31, 0.1);
+}
+
+.progress-bar,
+.limit-bar {
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--water), var(--wood), var(--metal), var(--fire));
+  transition: width 260ms ease;
+}
+
+.question-panel,
+.result-panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+
+.question-panel {
+  padding: clamp(22px, 4vw, 36px);
+}
+
+.answer-options {
+  display: grid;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.question-actions {
+  margin-top: 20px;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.result-panel {
+  padding: clamp(20px, 3vw, 28px);
+}
+
+.result-panel p {
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.main-result {
+  background: var(--panel-strong);
+}
+
+.personality-code {
+  margin: 4px 0 10px;
+  color: var(--text);
+  font-size: clamp(4rem, 13vw, 8.5rem);
+  line-height: 0.95;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+#original-type-name {
+  color: var(--gold);
+  font-size: clamp(1.45rem, 3.5vw, 2.35rem);
+}
+
+.element-note {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.type-description {
+  display: grid;
+  gap: 7px;
+  margin-top: 14px;
+}
+
+.type-description p {
+  margin: 0;
+}
+
+.type-section {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.type-section-title {
+  display: inline;
+  margin-right: 4px;
+  color: var(--gold);
+  font-size: 0.92rem;
+  font-weight: 900;
+}
+
+
+.shadow-summary {
+  display: flex;
+  flex-direction: column;
+}
+
+.axis-panel {
+  margin-top: 16px;
+}
+
+.type-table-panel {
+  margin-top: 16px;
+}
+
+.type-matrix-wrap {
+  overflow-x: auto;
+}
+
+.matrix-frame {
+  min-width: 760px;
+  display: grid;
+  grid-template-columns: 64px 1fr 64px;
+  grid-template-rows: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.matrix-axis {
+  color: var(--gold);
+  font-weight: 900;
+  text-align: center;
+}
+
+.matrix-axis small {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.matrix-axis-top {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.matrix-axis-bottom {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+.matrix-axis-left {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.matrix-axis-right {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.type-matrix {
+  position: relative;
+  grid-column: 2;
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--line);
+}
+
+.matrix-group-label {
+  position: absolute;
+  z-index: 4;
+  padding: 5px 10px;
+  border: 1px solid rgba(23, 26, 31, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+  color: var(--text);
+  font-size: 0.78rem;
+  font-weight: 900;
+  line-height: 1;
+  box-shadow: 0 4px 14px rgba(38, 32, 22, 0.08);
+  pointer-events: none;
+}
+
+.matrix-group-label.nt {
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.matrix-group-label.nf {
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.matrix-group-label.sj {
+  top: 50%;
+  left: 8px;
+  transform: translateY(-50%);
+}
+
+.matrix-group-label.sp {
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+}
+
+.matrix-quadrant {
+  position: relative;
+  z-index: 0;
+  min-height: 250px;
+  padding: 14px;
+  background: #fffdf8;
+}
+
+.matrix-quadrant.water-zone { --zone-base: #eaf6ff; --zone-n: #cfeaff; background: var(--zone-base); }
+.matrix-quadrant.wood-zone { --zone-base: #edf8e8; --zone-n: #d7efce; background: var(--zone-base); }
+.matrix-quadrant.metal-zone { --zone-base: #fff7d9; --zone-n: #f8e8a9; background: var(--zone-base); }
+.matrix-quadrant.fire-zone { --zone-base: #ffe8e5; --zone-n: #ffd0ca; background: var(--zone-base); }
+
+.matrix-quadrant::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--zone-n);
+  pointer-events: none;
+}
+
+.matrix-quadrant.n-upper-right::before {
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+
+.matrix-quadrant.n-upper-left::before {
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.matrix-quadrant.n-lower-right::before {
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+.matrix-quadrant.n-lower-left::before {
+  clip-path: polygon(0 0, 0 100%, 100% 100%);
+}
+
+.matrix-label {
+  position: relative;
+  z-index: 2;
+  grid-area: center;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  min-height: 54px;
+  padding: 4px;
+  color: var(--text);
+  font-weight: 900;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.matrix-label span {
+  white-space: nowrap;
+}
+
+.matrix-label small {
+  display: block;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.matrix-types {
+  position: relative;
+  min-height: 210px;
+  display: grid;
+  grid-template-areas:
+    ". top ."
+    "left center right"
+    ". bottom .";
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 8px;
+}
+
+.type-cell {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  min-height: 58px;
+  padding: 8px;
+  border: 1px solid rgba(23, 26, 31, 0.12);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.84);
+  text-align: center;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.type-cell:hover,
+.type-cell:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(154, 106, 22, 0.36);
+  box-shadow: 0 10px 24px rgba(38, 32, 22, 0.14);
+  outline: none;
+}
+
+.type-cell.top { grid-area: top; }
+.type-cell.left { grid-area: left; }
+.type-cell.right { grid-area: right; }
+.type-cell.bottom { grid-area: bottom; }
+
+.type-cell.current-type {
+  border-color: var(--gold);
+  background: #fff4c7;
+  box-shadow: 0 0 0 3px rgba(154, 106, 22, 0.18), 0 8px 24px rgba(154, 106, 22, 0.2);
+}
+
+.type-code-small {
+  color: var(--text);
+  font-size: 1.18rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.type-name-small {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.compat-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: none;
+  place-items: center;
+  padding: 20px;
+  background: rgba(23, 26, 31, 0.36);
+}
+
+.compat-modal.active {
+  display: grid;
+}
+
+.compat-card {
+  width: min(560px, 100%);
+  max-height: min(760px, calc(100vh - 40px));
+  overflow-y: auto;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 16% 0%, rgba(90, 167, 216, 0.16), transparent 14rem),
+    radial-gradient(circle at 100% 18%, rgba(228, 111, 87, 0.14), transparent 13rem),
+    #fffdf8;
+  box-shadow: 0 26px 80px rgba(23, 26, 31, 0.28);
+}
+
+.compat-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.compat-title {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  line-height: 1.1;
+}
+
+.compat-subtitle {
+  margin: 8px 0 0;
+  color: var(--gold);
+  font-weight: 900;
+}
+
+.compat-close {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 1.35rem;
+  font-weight: 900;
+}
+
+.compat-body {
+  display: grid;
+  gap: 12px;
+}
+
+.compat-chip {
+  display: inline-flex;
+  width: fit-content;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: #fff4c7;
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+.compat-section {
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.compat-section strong {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--gold);
+}
+
+.compat-section p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.limit-ring {
+  flex: 0 0 auto;
+  width: 88px;
+  height: 88px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: conic-gradient(var(--danger) 0deg, rgba(23, 26, 31, 0.1) 0deg);
+}
+
+.limit-ring span {
+  width: 66px;
+  height: 66px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--bg-soft);
+  color: var(--text);
+  font-weight: 900;
+}
+
+.advice-text {
+  margin-bottom: 0;
+}
+
+.score-list {
+  display: grid;
+  gap: 8px;
+}
+
+.score-row {
+  display: grid;
+  grid-template-columns: 54px 1fr 150px;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.score-axis {
+  color: var(--text);
+  font-weight: 900;
+}
+
+.score-judgement {
+  color: var(--gold);
+  text-align: right;
+  font-size: 0.88rem;
+  white-space: nowrap;
+}
+
+.score-track {
+  position: relative;
+  display: flex;
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(23, 26, 31, 0.08);
+}
+
+.score-fill-left,
+.score-fill-right {
+  display: block;
+  height: 100%;
+}
+
+.score-fill-left {
+  background: linear-gradient(90deg, var(--water), var(--gold));
+}
+
+.score-fill-right {
+  background: linear-gradient(90deg, #e8dfcd, var(--fire));
+}
+
+.score-midline {
+  position: absolute;
+  inset: 0 auto 0 50%;
+  width: 2px;
+  background: rgba(23, 26, 31, 0.22);
+}
+
+.result-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 22px;
+}
+
+.result-actions .primary-button,
+.result-actions .ghost-button {
+  width: min(280px, 100%);
+}
+
+.share-status {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.share-preview {
+  display: none;
+  max-width: 420px;
+  margin: 18px auto 0;
+  text-align: center;
+}
+
+.share-preview.active {
+  display: block;
+}
+
+.share-preview img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  -webkit-touch-callout: default;
+  user-select: auto;
+}
+
+.download-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin-top: 12px;
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  background: #fff6dd;
+  color: var(--text);
+  font-weight: 900;
+  text-decoration: none;
+}
+
+@media (max-width: 720px) {
+  .app-shell {
+    width: min(100% - 20px, 920px);
+    padding: 10px 0;
+  }
+
+  .screen {
+    padding: 22px;
+  }
+
+  .brand-mark {
+    width: 124px;
+    height: 124px;
+  }
+
+  .question-header,
+  .question-actions,
+  .limit-header {
+    align-items: stretch;
+  }
+
+  .question-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .result-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .result-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .type-matrix {
+    min-width: 0;
+  }
+
+  .matrix-frame {
+    min-width: 700px;
+    grid-template-columns: 52px 1fr 52px;
+  }
+
+  .matrix-quadrant {
+    min-height: 226px;
+    padding: 10px;
+  }
+
+  .score-row {
+    grid-template-columns: 42px 1fr 136px;
+    gap: 8px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <main class="app-shell">
+    <section id="start-screen" class="screen screen-active">
+      <div class="brand-mark" aria-hidden="true">
+        <span class="element-dot water"></span>
+        <span class="element-dot wood"></span>
+        <span class="element-dot metal"></span>
+        <span class="element-dot fire"></span>
+      </div>
+      <p class="eyebrow">Inner Pattern Diagnosis</p>
+      <h1>
+        <span>生きづらさ</span>
+        <span>16タイプ鑑定</span>
+      </h1>
+      <p class="lead">
+        日々の反応パターンから、あなたの4文字タイプと、限界時に出やすい心の反応を読み解きます。
+      </p>
+      <button id="start-button" class="primary-button" type="button">鑑定をはじめる</button>
+    </section>
+
+    <section id="question-screen" class="screen" aria-live="polite">
+      <header class="question-header">
+        <div>
+          <p class="eyebrow">Question</p>
+          <h2 id="question-count">Q1 / 20</h2>
+        </div>
+        <p id="answered-count" class="progress-label">0%</p>
+      </header>
+
+      <div class="progress-track" aria-hidden="true">
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+
+      <article class="question-panel">
+        <h3 id="question-text">質問文が入ります</h3>
+        <div id="answer-options" class="answer-options"></div>
+      </article>
+
+      <footer class="question-actions">
+        <button id="back-button" class="ghost-button" type="button">戻る</button>
+        <button id="reset-button" class="ghost-button" type="button">最初から</button>
+      </footer>
+    </section>
+
+    <section id="result-screen" class="screen">
+      <p class="eyebrow">Result</p>
+      <h2>鑑定結果</h2>
+
+      <div class="result-grid">
+        <article class="result-panel main-result">
+          <p class="panel-label">あなたの4文字タイプ</p>
+          <div id="personality-code" class="personality-code">INFP</div>
+          <h3 id="original-type-name">静かな理想探求家</h3>
+          <p id="main-type-description"></p>
+          <p id="element-note" class="element-note"></p>
+        </article>
+
+        <article class="result-panel shadow-summary">
+          <div class="limit-header">
+            <div>
+              <p class="panel-label">シャドウ</p>
+              <h3 id="shadow-type-title">限界時の反応</h3>
+            </div>
+            <div class="limit-ring" aria-hidden="true">
+              <span id="limit-ring-value">0</span>
+            </div>
+          </div>
+          <p id="shadow-description"></p>
+          <div class="limit-track">
+            <div id="limit-bar" class="limit-bar"></div>
+          </div>
+          <p id="limit-advice" class="advice-text"></p>
+        </article>
+      </div>
+
+      <article class="result-panel axis-panel">
+        <p class="panel-label">内訳</p>
+        <div id="score-list" class="score-list"></div>
+      </article>
+
+      <div class="result-actions">
+        <button id="share-image-button" class="primary-button" type="button">結果画像を表示</button>
+        <button id="restart-button" class="ghost-button" type="button">もう一度鑑定する</button>
+      </div>
+      <p id="share-status" class="share-status" aria-live="polite"></p>
+      <div id="share-preview" class="share-preview">
+        <img id="share-preview-image" alt="鑑定結果の共有画像">
+        <a id="share-download-link" class="download-link" href="#" download>画像を保存</a>
+      </div>
+
+      <article class="result-panel type-table-panel">
+        <p class="panel-label">16タイプ鑑定表</p>
+        <div class="type-matrix-wrap">
+          <div class="matrix-frame">
+            <div class="matrix-axis matrix-axis-top">T<small>思考</small></div>
+            <div class="matrix-axis matrix-axis-left">J<small>企画</small></div>
+            <div id="type-matrix" class="type-matrix">
+              <span class="matrix-group-label nt">NT 分析</span>
+              <span class="matrix-group-label nf">NF 外交</span>
+              <span class="matrix-group-label sj">SJ 番人</span>
+              <span class="matrix-group-label sp">SP 探検</span>
+            </div>
+            <div class="matrix-axis matrix-axis-right">P<small>柔軟</small></div>
+            <div class="matrix-axis matrix-axis-bottom">F<small>感情</small></div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div id="compat-modal" class="compat-modal" aria-hidden="true">
+      <article class="compat-card" role="dialog" aria-modal="true" aria-labelledby="compat-title">
+        <header class="compat-header">
+          <div>
+            <h2 id="compat-title" class="compat-title">相性</h2>
+            <p id="compat-subtitle" class="compat-subtitle"></p>
+          </div>
+          <button id="compat-close" class="compat-close" type="button" aria-label="閉じる">×</button>
+        </header>
+        <div id="compat-body" class="compat-body"></div>
+      </article>
+    </div>
+  </main>
+
+  <script>
+const questions = [
+  { id: 1, axis: "E/I", trait: "E", label: "E傾向", text: "他人の目を過剰に気にしてしまい、自分の本音ではなく「その場で求められている役割や明るいキャラクター」を無理に演じて、後から激しく疲弊する。" },
+  { id: 2, axis: "E/I", trait: "E", label: "E傾向", text: "周囲に人がいないと自分の価値が分からなくなり、常に誰かと連絡を取っているか、SNSをチェックしていないと強い焦燥感に襲われる。" },
+  { id: 3, axis: "E/I", trait: "I", label: "I傾向", text: "傷つくことや拒ぜつされることを恐れるあまり、人と一定以上の距離を縮められず、無意識に「心の壁」を作って孤独を深めてしまう。" },
+  { id: 4, axis: "E/I", trait: "I", label: "I傾向", text: "大人数の集まりや会議では極力気配を消したくなり、急に発言を求められると頭が真っ白になるか、動悸がするほど緊張してしまう。" },
+  { id: 5, axis: "E/I", trait: null, label: "シャドウ項目", shadow: true, text: "ストレスが極限に達すると、誰の言葉も信じられなくなり、殻に閉じこもって完全に音信不通（人間関係のリセット）になりたくなる。" },
+  { id: 6, axis: "S/N", trait: "S", label: "S傾向", text: "マニュアルや明確な前例がない状況だと一歩も前に進めなくなり、自分の頭でゼロから「新しい可能性」やアイデアを絞り出すことに強い拒絶感がある。" },
+  { id: 7, axis: "S/N", trait: "S", label: "S傾向", text: "目の前の細かいミスや不備、過去の失敗データばかりに意識が向いてしまい、全体の大きな流れや本来の目的を見失って自滅しがちだ。" },
+  { id: 8, axis: "S/N", trait: "N", label: "N傾向", text: "自分の頭の中にある「完璧な理想やビジョン」にこだわりすぎるあまり、現実の泥臭い妥協や、他者との調整作業に耐えられず、投げ出したくなる。" },
+  { id: 9, axis: "S/N", trait: "N", label: "N傾向", text: "人の言葉を額面通りに受け取れず、「この発言の裏にはどんな悪意や意図があるのか」と深読みしすぎて、勝手に人間不信に陥ることがある。" },
+  { id: 10, axis: "S/N", trait: null, label: "シャドウ項目", shadow: true, text: "追い詰められると、根拠のない「最悪の未来の予感」に支配され、何をやっても大失敗に終わるような気がして身動きが取れなくなる。" },
+  { id: 11, axis: "T/F", trait: "T", label: "T傾向", text: "他人の感情的な愚痴や相談を聞くのが苦痛で、つい「結局どうしたいの？」と結論や正論を求めてしまい、相手から「冷たい人だ」と距離を置かれる。" },
+  { id: 12, axis: "T/F", trait: "T", label: "T傾向", text: "自分の弱みや傷ついた気持ちを他人に開示することが「負け」や「非合理的」に思えてしまい、どこまでも一人で強がって抱え込んでしまう。" },
+  { id: 13, axis: "T/F", trait: "F", label: "F傾向", text: "他人のちょっとした不機嫌や冷たい態度を「自分が何か悪いことをしたせいだ」と過剰に受け止め、一日中そのことで頭がいっぱいになる。" },
+  { id: 14, axis: "T/F", trait: "F", label: "F傾向", text: "誰も傷つけたくない・嫌われたくないという思いが強すぎて、必要な「お断り」や「苦言」が言えず、自分が犠牲になる道を選んでしまう。" },
+  { id: 15, axis: "T/F", trait: null, label: "シャドウ項目", shadow: true, text: "普段は冷静（または穏やか）を装っているが、限界を超えると「どうせ誰も私を理解してくれない」と、ドロドロした感情や涙が突然コントロールできずに噴出する。" },
+  { id: 16, axis: "J/P", trait: "J", label: "J傾向", text: "自分で立てた計画やタスクが予想外のトラブルで崩れると、それだけで全てが台無しになったように感じ、激しい自己嫌悪やイライラに襲われる。" },
+  { id: 17, axis: "J/P", trait: "J", label: "J傾向", text: "自分を常に厳しく律していないと「価値のない人間になってしまう」という恐怖があり、休日でもダラダラ過ごすことに強い罪悪感を覚える。" },
+  { id: 18, axis: "J/P", trait: "P", label: "P傾向", text: "自由度が高い状況（「好きにやっていいよ」と言われるなど）ほど、何から手をつけていいか分からなくなり、結局先延ばしにして時間だけが過ぎていく。" },
+  { id: 19, axis: "J/P", trait: "P", label: "P傾向", text: "物事をきっちり管理したり、書類の整理や決まったルーティンを毎日継続したりすることが、息が詰まるほど苦手で長続きしない。" },
+  { id: 20, axis: "J/P", trait: null, label: "シャドウ項目", shadow: true, text: "極度のプレッシャーがかかると、普段の柔軟性が消え失せ、部屋の掃除や持ち物の整理など、目に見える小さな枠組みを異常なほど強迫的にコントロールしようとする。" }
+];
+
+const choices = [
+  { label: "強く当てはまる", score: 3 },
+  { label: "やや当てはまる", score: 2 },
+  { label: "あまり当てはまらない", score: 1 },
+  { label: "全く当てはまらない", score: 0 }
+];
+
+const elementInfo = {
+  water: {
+    key: "water",
+    label: "水",
+    type: "TJ型",
+    color: "#5aa7d8",
+    description: "論理的統制を重視し、混乱の中でも構造や責任を見つけようとする傾向があります。限界時は感情の熱量を抑え込みすぎないことが大切です。"
+  },
+  wood: {
+    key: "wood",
+    label: "木",
+    type: "TP型",
+    color: "#79b86d",
+    description: "柔軟な探求を重視し、自分なりの仕組みや可能性を試しながら前に進む傾向があります。限界時は選択肢を増やしすぎず、休む判断も力になります。"
+  },
+  metal: {
+    key: "metal",
+    label: "金",
+    type: "FJ型",
+    color: "#d8d0bd",
+    description: "調和と規律を重視し、場の空気や期待に応えようとする傾向があります。限界時は他人の問題まで背負いすぎない境界線が必要です。"
+  },
+  fire: {
+    key: "fire",
+    label: "火",
+    type: "FP型",
+    color: "#e46f57",
+    description: "情熱と表現を重視し、自分の感覚や美意識を通して世界と関わる傾向があります。限界時は衝動を責めず、安心できる形で外に出すことが助けになります。"
+  }
+};
+
+const axisTieBreakers = {
+  "E/I": { questionId: 5, high: "I", low: "E" },
+  "S/N": { questionId: 10, high: "N", low: "S" },
+  "T/F": { questionId: 15, high: "F", low: "T" },
+  "J/P": { questionId: 20, high: "J", low: "P" }
+};
+
+const temperamentMap = {
+  TJ: "water",
+  TP: "wood",
+  FJ: "metal",
+  FP: "fire"
+};
+
+const temperamentGroups = {
+  NT: "分析",
+  NF: "外交",
+  SJ: "番人",
+  SP: "探検"
+};
+
+const shadowMap = {
+  water: "fire",
+  fire: "water",
+  wood: "metal",
+  metal: "wood"
+};
+
+const shadowExamples = {
+  water: "例：正論で固めて感情を切り離す",
+  wood: "例：考えすぎて決められなくなる",
+  metal: "例：人目や正しさに縛られすぎる",
+  fire: "例：感情が一気にあふれて止まらない"
+};
+
+const originalTypeNames = {
+  ISTJ: {
+    name: "静かな秩序の守り手",
+    description: "責任感と継続力で日常を支えるタイプです。曖昧な指示や急な変更よりも、手順・約束・実績が見えるほど力を発揮します。",
+    aruaru: "前例を確認したい / ちゃんとしていない状態が気になる / 任されたことを最後まで抱えがち",
+    strengths: "継続、管理、現実的な改善"
+  },
+  ISFJ: {
+    name: "やさしい献身の番人",
+    description: "人の安心や場の調和を大切にするタイプです。細かな変化に気づき、誰かが困る前にそっと支えることができます。",
+    aruaru: "頼まれる前に動く / 断るより引き受ける / 自分の疲れに気づくのが遅い",
+    strengths: "気配り、支援、安心感づくり"
+  },
+  INFJ: {
+    name: "深読みする灯台",
+    description: "人や未来の奥にある意味を見つめるタイプです。目の前の言葉だけでなく、その背景や違和感まで読み取ろうとします。",
+    aruaru: "少人数なら深く話せる / 表情の裏を読んでしまう / 理想と現実の差に疲れやすい",
+    strengths: "洞察、言語化、静かな導き"
+  },
+  INTJ: {
+    name: "孤高の設計者",
+    description: "先を読み、仕組みで問題を解こうとするタイプです。感覚的な勢いよりも、全体設計や長期的な勝ち筋を重視します。",
+    aruaru: "無駄な会議が苦手 / 頭の中で先に結論が出る / 基準が高すぎて孤立しがち",
+    strengths: "戦略、設計、改善の見取り図"
+  },
+  ISTP: {
+    name: "沈黙の実験家",
+    description: "観察し、試し、納得してから動くタイプです。言葉で説明されるより、実際に扱いながら仕組みをつかむ方が得意です。",
+    aruaru: "説明より実験したい / 感情の圧に黙る / 干渉が続くと急に離れる",
+    strengths: "観察、実践、トラブル対応"
+  },
+  ISFP: {
+    name: "繊細な感覚の職人",
+    description: "自分の感覚や美意識を静かに守るタイプです。派手に主張しなくても、好き嫌いや違和感は身体でかなり正直に感じています。",
+    aruaru: "空気に合わせすぎる / 好きなものへのこだわりが強い / 無理な場では黙って消耗する",
+    strengths: "感性、表現、やさしい距離感"
+  },
+  INFP: {
+    name: "静かな理想探求家",
+    description: "心の奥の価値観や理想を大切にするタイプです。表面的にうまくいっていても、自分の中で納得できないと前に進みにくいところがあります。",
+    aruaru: "言葉にできない違和感を抱える / 理想が高い / 優しいけど急に距離を取る",
+    strengths: "共感、世界観づくり、意味を見つけること"
+  },
+  INTP: {
+    name: "内省する問いの研究者",
+    description: "考えること、理解することを通して世界と向き合うタイプです。すぐに結論を出すより、構造や前提を分解したくなります。",
+    aruaru: "考え始めると止まらない / 感情論に戸惑う / 納得できない説明を流せない",
+    strengths: "分析、概念化、矛盾の発見"
+  },
+  ESTP: {
+    name: "現場で動く突破者",
+    description: "目の前の状況を読み、行動で流れを変えるタイプです。考え込むより、現場で試しながら突破口を見つけます。",
+    aruaru: "止まっている場を動かしたい / 退屈に弱い / その場の判断力で乗り切る",
+    strengths: "実行、交渉、瞬発力"
+  },
+  ESFP: {
+    name: "今を照らす表現者",
+    description: "場の空気を動かし、人との体験を大切にするタイプです。感情や反応が生きている場所で、自然と存在感が出ます。",
+    aruaru: "場を明るくしようとする / 反応がないと不安になる / 楽しい人役で疲れる",
+    strengths: "表現、場づくり、人を巻き込む力"
+  },
+  ENFP: {
+    name: "可能性を追う火花",
+    description: "ひらめきと感情の熱で未来を広げるタイプです。人やアイデアの中に眠っている可能性を見つけると、一気に火がつきます。",
+    aruaru: "始める時の熱量が高い / 選択肢を増やしすぎる / ルーティンでしぼむ",
+    strengths: "発想、共感、可能性を広げること"
+  },
+  ENTP: {
+    name: "境界を揺らす発想家",
+    description: "常識を疑い、新しい切り口を探すタイプです。会話の中で前提をひっくり返し、議論で可能性が広がる瞬間に火がつきます。",
+    aruaru: "反論ではなく別案を出したい / 退屈な正解が苦手 / 話しながら考えが進む",
+    strengths: "問いを投げること、議論で広げること、盲点の発見"
+  },
+  ESTJ: {
+    name: "現実を整える進行役",
+    description: "物事を前に進め、責任を形にするタイプです。曖昧な話を具体的な役割や期限に落とし込むと力を発揮します。",
+    aruaru: "段取りがないと落ち着かない / 責任感で引っ張る / できていない所が先に見える",
+    strengths: "実行管理、判断、現実化"
+  },
+  ESFJ: {
+    name: "場を支える調和役",
+    description: "人の期待や関係性を敏感に読み取るタイプです。場の空気を整え、みんなが安心して動ける状態を作ろうとします。",
+    aruaru: "人間関係の温度差に敏感 / 自分のことは後回し / 感謝されると頑張りすぎる",
+    strengths: "調整、支援、チームの安定"
+  },
+  ENFJ: {
+    name: "人を導く共鳴者",
+    description: "人の可能性を信じ、場を温めながら導くタイプです。相手の感情や未来像を言葉にして、前に進む力へ変えようとします。",
+    aruaru: "人の成長に本気になる / 空気を読みすぎる / 期待を背負いすぎる",
+    strengths: "励ますこと、場の共鳴、想いの言語化"
+  },
+  ENTJ: {
+    name: "未来を動かす構想家",
+    description: "目的を定め、流れを作って進めるタイプです。大きな目標を見据え、人や状況を動かすための構造を組み立てます。",
+    aruaru: "停滞を見ると動かしたくなる / 弱音を後回しにする / 最短距離を探しがち",
+    strengths: "統率、戦略、突破の設計"
+  }
+};
+
+const typeOrder = [
+  "ISTJ", "ISFJ", "INFJ", "INTJ",
+  "ISTP", "ISFP", "INFP", "INTP",
+  "ESTP", "ESFP", "ENFP", "ENTP",
+  "ESTJ", "ESFJ", "ENFJ", "ENTJ"
+];
+
+const matrixGroups = [
+  {
+    code: "TJ",
+    title: "水",
+    subtitle: "現実を整える",
+    className: "water-zone",
+    nZone: "n-upper-right",
+    types: { top: "ENTJ", left: "ESTJ", right: "INTJ", bottom: "ISTJ" }
+  },
+  {
+    code: "TP",
+    title: "木",
+    subtitle: "可能性を試す",
+    className: "wood-zone",
+    nZone: "n-upper-left",
+    types: { top: "ENTP", left: "INTP", right: "ESTP", bottom: "ISTP" }
+  },
+  {
+    code: "FJ",
+    title: "金",
+    subtitle: "場を支える",
+    className: "metal-zone",
+    nZone: "n-lower-right",
+    types: { top: "ISFJ", left: "ESFJ", right: "INFJ", bottom: "ENFJ" }
+  },
+  {
+    code: "FP",
+    title: "火",
+    subtitle: "心を表現する",
+    className: "fire-zone",
+    nZone: "n-lower-left",
+    types: { top: "ISFP", left: "INFP", right: "ESFP", bottom: "ENFP" }
+  }
+];
+
+const traitLabels = {
+  E: "外向",
+  I: "内向",
+  S: "現実",
+  N: "直感",
+  T: "思考",
+  F: "感情",
+  J: "企画",
+  P: "柔軟"
+};
+
+const limitAdvice = [
+  {
+    max: 34,
+    text: "今はまだ余白が残っています。小さな違和感を早めに拾い、睡眠・食事・予定の詰め込みすぎを整えると安定しやすい状態です。"
+  },
+  {
+    max: 67,
+    text: "心の圧が少し高まっています。誰かの期待に合わせ続けていないかを見直し、ひとりで回復する時間を先に予定へ入れてください。"
+  },
+  {
+    max: 100,
+    text: "限界サインが強めに出ています。重要な判断は急がず、信頼できる人や専門家に状況を共有し、まず刺激を減らすことを優先してください。"
+  }
+];
+
+const state = {
+  currentIndex: 0,
+  answers: Array(questions.length).fill(null),
+  lastResult: null
+};
+
+const screens = {
+  start: document.getElementById("start-screen"),
+  question: document.getElementById("question-screen"),
+  result: document.getElementById("result-screen")
+};
+
+const questionCount = document.getElementById("question-count");
+const answeredCount = document.getElementById("answered-count");
+const progressBar = document.getElementById("progress-bar");
+const questionText = document.getElementById("question-text");
+const answerOptions = document.getElementById("answer-options");
+const backButton = document.getElementById("back-button");
+
+document.getElementById("start-button").addEventListener("click", startDiagnosis);
+document.getElementById("reset-button").addEventListener("click", resetDiagnosis);
+document.getElementById("restart-button").addEventListener("click", resetDiagnosis);
+document.getElementById("share-image-button").addEventListener("click", createShareImage);
+document.getElementById("type-matrix").addEventListener("click", handleTypeMatrixClick);
+document.getElementById("type-matrix").addEventListener("keydown", handleTypeMatrixKeydown);
+document.getElementById("compat-close").addEventListener("click", closeCompatibilityModal);
+document.getElementById("compat-modal").addEventListener("click", (event) => {
+  if (event.target.id === "compat-modal") closeCompatibilityModal();
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") closeCompatibilityModal();
+});
+backButton.addEventListener("click", goBack);
+
+function startDiagnosis() {
+  state.currentIndex = 0;
+  showScreen("question");
+  renderQuestion();
+}
+
+function resetDiagnosis() {
+  state.currentIndex = 0;
+  state.answers = Array(questions.length).fill(null);
+  state.lastResult = null;
+  document.getElementById("share-status").textContent = "";
+  document.getElementById("share-preview").classList.remove("active");
+  showScreen("start");
+}
+
+function showScreen(name) {
+  Object.values(screens).forEach((screen) => screen.classList.remove("screen-active"));
+  screens[name].classList.add("screen-active");
+}
+
+function renderQuestion() {
+  const question = questions[state.currentIndex];
+  const progress = Math.round((state.currentIndex / questions.length) * 100);
+
+  questionCount.textContent = `Q${state.currentIndex + 1} / ${questions.length}`;
+  answeredCount.textContent = `${progress}%`;
+  progressBar.style.width = `${progress}%`;
+  questionText.textContent = question.text;
+  backButton.disabled = state.currentIndex === 0;
+  backButton.style.opacity = state.currentIndex === 0 ? "0.45" : "1";
+
+  answerOptions.innerHTML = "";
+  choices.forEach((choice) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "answer-button";
+    button.textContent = choice.label;
+
+    if (state.answers[state.currentIndex] === choice.score) {
+      button.classList.add("selected");
+    }
+
+    button.addEventListener("click", () => selectAnswer(choice.score));
+    answerOptions.appendChild(button);
+  });
+}
+
+function selectAnswer(score) {
+  state.answers[state.currentIndex] = score;
+
+  if (state.currentIndex < questions.length - 1) {
+    state.currentIndex += 1;
+    renderQuestion();
+    return;
+  }
+
+  progressBar.style.width = "100%";
+  answeredCount.textContent = "100%";
+  renderResult();
+}
+
+function goBack() {
+  if (state.currentIndex === 0) return;
+  state.currentIndex -= 1;
+  renderQuestion();
+}
+
+function renderResult() {
+  const result = calculateResult();
+  state.lastResult = result;
+  const main = elementInfo[result.mainElement];
+  const shadow = elementInfo[result.shadowElement];
+  const originalType = originalTypeNames[result.personalityType];
+  const group = getTemperamentGroup(result.personalityType);
+  const advice = limitAdvice.find((item) => result.limitPercent <= item.max);
+  document.getElementById("share-status").textContent = "";
+  document.getElementById("share-preview").classList.remove("active");
+
+  document.getElementById("personality-code").textContent = result.personalityType;
+  document.getElementById("original-type-name").textContent = originalType.name;
+  document.getElementById("main-type-description").innerHTML = `
+    <div class="type-description">
+      <p>${originalType.description}</p>
+      <p class="type-section"><span class="type-section-title">あるある：</span>${originalType.aruaru}</p>
+      <p class="type-section"><span class="type-section-title">得意：</span>${originalType.strengths}</p>
+    </div>
+  `;
+  document.getElementById("element-note").textContent =
+    `補助分類: ${group.code}（${group.label}） / ${main.label}（${main.type}）`;
+
+  document.getElementById("shadow-type-title").textContent = `${result.limitPercent}%`;
+  document.getElementById("shadow-description").textContent =
+    `限界時は「${shadow.label}」の反応が出やすい状態です。${shadowExamples[result.shadowElement]}`;
+
+  document.getElementById("limit-ring-value").textContent = result.limitPercent;
+  document.querySelector(".limit-ring").style.background =
+    `conic-gradient(var(--danger) ${result.limitPercent * 3.6}deg, rgba(23, 26, 31, 0.1) 0deg)`;
+  document.getElementById("limit-bar").style.width = `${result.limitPercent}%`;
+  document.getElementById("limit-advice").textContent = advice.text;
+
+  renderScoreList(result.axisScores);
+  renderTypeTable(result.personalityType);
+  showScreen("result");
+}
+
+function createShareImage() {
+  if (!state.lastResult) return;
+
+  const result = state.lastResult;
+  const main = elementInfo[result.mainElement];
+  const shadow = elementInfo[result.shadowElement];
+  const originalType = originalTypeNames[result.personalityType];
+  const group = getTemperamentGroup(result.personalityType);
+  const advice = limitAdvice.find((item) => result.limitPercent <= item.max);
+  const canvas = document.createElement("canvas");
+  const width = 1080;
+  const height = 1350;
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext("2d");
+
+  ctx.fillStyle = "#f8f4ec";
+  ctx.fillRect(0, 0, width, height);
+  drawCircle(ctx, 140, 120, 260, "rgba(90, 167, 216, 0.18)");
+  drawCircle(ctx, 920, 160, 220, "rgba(228, 111, 87, 0.13)");
+
+  roundRect(ctx, 70, 70, width - 140, height - 140, 28, "#fffdf8", "#ded6c8");
+
+  ctx.fillStyle = "#5f6673";
+  ctx.font = '700 34px "Hiragino Sans", "Yu Gothic", sans-serif';
+  ctx.fillText("生きづらさ 16タイプ鑑定", 118, 142);
+
+  ctx.fillStyle = "#171a1f";
+  ctx.font = '900 150px system-ui, sans-serif';
+  ctx.fillText(result.personalityType, 112, 298);
+
+  ctx.fillStyle = "#9a6a16";
+  ctx.font = '900 56px "Hiragino Sans", "Yu Gothic", sans-serif';
+  ctx.fillText(originalType.name, 118, 382);
+
+  let y = 456;
+  ctx.fillStyle = "#4e5663";
+  ctx.font = '700 31px "Hiragino Sans", "Yu Gothic", sans-serif';
+  y = wrapCanvasText(ctx, originalType.description, 118, y, 840, 48);
+
+  y += 18;
+  y = drawShareLine(ctx, "あるある", originalType.aruaru, 118, y);
+  y += 10;
+  y = drawShareLine(ctx, "得意", originalType.strengths, 118, y);
+
+  y += 34;
+  roundRect(ctx, 118, y, 844, 118, 18, "#f7efd9", "#e3cf98");
+  ctx.fillStyle = "#171a1f";
+  ctx.font = '900 30px "Hiragino Sans", "Yu Gothic", sans-serif';
+  ctx.fillText(`補助分類：${group.code}（${group.label}） / ${main.label}（${main.type}）`, 148, y + 45);
+  ctx.fillStyle = "#5f6673";
+  ctx.font = '700 26px "Hiragino Sans", "Yu Gothic", sans-serif';
+  ctx.fillText(`シャドウ限界度：${result.limitPercent}% / ${shadow.label}の反応`, 148, y + 86);
+
+  y += 160;
+  ctx.fillStyle = "#171a1f";
+  ctx.font = '900 30px "Hiragino Sans", "Yu Gothic", sans-serif';
+  ctx.fillText("内訳", 118, y);
+  y += 28;
+  drawAxisSummary(ctx, result.axisScores, y);
+
+  ctx.fillStyle = "#9a6a16";
+  ctx.font = '800 25px "Hiragino Sans", "Yu Gothic", sans-serif';
+  ctx.fillText("結果は保存してシェアできます", 118, height - 118);
+
+  const fileName = `生きづらさ16タイプ鑑定_${result.personalityType}_${originalType.name}.png`;
+  const imageUrl = canvas.toDataURL("image/png");
+  const preview = document.getElementById("share-preview");
+  const previewImage = document.getElementById("share-preview-image");
+  const downloadLink = document.getElementById("share-download-link");
+
+  previewImage.src = imageUrl;
+  downloadLink.href = imageUrl;
+  downloadLink.download = fileName;
+  preview.classList.add("active");
+  document.getElementById("share-status").textContent =
+    "画像を表示しました。スマホでは画像を長押しして保存できます。";
+}
+
+function calculateResult() {
+  const axisScores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+
+  questions.forEach((question, index) => {
+    if (!question.trait) return;
+    axisScores[question.trait] += state.answers[index] ?? 0;
+  });
+
+  const personalityType = [
+    pickAxis("E/I", "E", "I", axisScores, state.answers),
+    pickAxis("S/N", "S", "N", axisScores, state.answers),
+    pickAxis("T/F", "T", "F", axisScores, state.answers),
+    pickAxis("J/P", "J", "P", axisScores, state.answers)
+  ].join("");
+
+  const temperament = personalityType.slice(2, 4);
+  const mainElement = temperamentMap[temperament];
+  const shadowElement = shadowMap[mainElement];
+  const shadowRawScore = questions.reduce((total, question, index) => {
+    return question.shadow ? total + (state.answers[index] ?? 0) : total;
+  }, 0);
+  const limitPercent = Math.round((shadowRawScore / 12) * 100);
+
+  return {
+    axisScores,
+    personalityType,
+    scores: {
+      water: axisScores.T + axisScores.J,
+      wood: axisScores.T + axisScores.P,
+      metal: axisScores.F + axisScores.J,
+      fire: axisScores.F + axisScores.P
+    },
+    mainElement,
+    shadowElement,
+    shadowRawScore,
+    limitPercent
+  };
+}
+
+function pickAxis(axisName, leftTrait, rightTrait, axisScores, answers) {
+  if (axisScores[leftTrait] > axisScores[rightTrait]) return leftTrait;
+  if (axisScores[rightTrait] > axisScores[leftTrait]) return rightTrait;
+
+  const tieBreaker = axisTieBreakers[axisName];
+  const tieBreakerScore = answers[tieBreaker.questionId - 1] ?? 0;
+  return tieBreakerScore >= 2 ? tieBreaker.high : tieBreaker.low;
+}
+
+function renderScoreList(scores) {
+  const scoreList = document.getElementById("score-list");
+  scoreList.innerHTML = "";
+
+  const axisRows = [
+    ["E", "I"],
+    ["S", "N"],
+    ["T", "F"],
+    ["J", "P"]
+  ];
+
+  axisRows.forEach(([left, right]) => {
+    const total = scores[left] + scores[right];
+    const selected = scores[left] === scores[right]
+      ? pickAxis(`${left}/${right}`, left, right, scores, state.answers)
+      : scores[left] > scores[right] ? left : right;
+    let rightPercent = total === 0 ? 50 : Math.round((scores[right] / total) * 100);
+    let leftPercent = 100 - rightPercent;
+
+    if (scores[left] === scores[right]) {
+      leftPercent = selected === left ? 51 : 49;
+      rightPercent = selected === right ? 51 : 49;
+    }
+
+    const selectedPercent = selected === left ? leftPercent : rightPercent;
+    const visualLeftPercent = amplifyDifference(leftPercent);
+    const visualRightPercent = 100 - visualLeftPercent;
+    const row = document.createElement("div");
+    row.className = "score-row";
+    row.innerHTML = `
+      <span class="score-axis">${left}/${right}</span>
+      <div class="score-track" aria-hidden="true">
+        <span class="score-fill-left" style="width: ${visualLeftPercent}%;"></span>
+        <span class="score-fill-right" style="width: ${visualRightPercent}%;"></span>
+        <span class="score-midline"></span>
+      </div>
+      <span class="score-judgement">${traitLabels[left]}${leftPercent}:${traitLabels[right]}${rightPercent}</span>
+    `;
+    scoreList.appendChild(row);
+  });
+}
+
+function amplifyDifference(percent) {
+  if (percent <= 0) return 0;
+  if (percent >= 100) return 100;
+  const amplified = 50 + (percent - 50) * 2.2;
+  return Math.max(8, Math.min(92, Math.round(amplified)));
+}
+
+function renderTypeTable(currentType) {
+  const matrix = document.getElementById("type-matrix");
+  matrix.innerHTML = `
+    <span class="matrix-group-label nt">NT 分析</span>
+    <span class="matrix-group-label nf">NF 外交</span>
+    <span class="matrix-group-label sj">SJ 番人</span>
+    <span class="matrix-group-label sp">SP 探検</span>
+  `;
+
+  matrixGroups.forEach((group) => {
+    const quadrant = document.createElement("section");
+    quadrant.className = `matrix-quadrant ${group.className} ${group.nZone}`;
+    quadrant.innerHTML = `
+      <div class="matrix-types">
+        <div class="matrix-label">
+          <span>${group.title}（${group.code}）</span>
+          <small>${group.subtitle}</small>
+        </div>
+        ${Object.entries(group.types).map(([position, typeCode]) => `
+          <div class="type-cell ${position} ${typeCode === currentType ? "current-type" : ""}" data-type="${typeCode}" role="button" tabindex="0" aria-label="${typeCode}との相性を見る">
+            <span class="type-code-small">${typeCode}</span>
+            <span class="type-name-small">${originalTypeNames[typeCode].name}</span>
+          </div>
+        `).join("")}
+      </div>
+    `;
+    matrix.appendChild(quadrant);
+  });
+}
+
+function handleTypeMatrixClick(event) {
+  const cell = event.target.closest(".type-cell");
+  if (!cell || !state.lastResult) return;
+  showCompatibilityModal(cell.dataset.type);
+}
+
+function handleTypeMatrixKeydown(event) {
+  if (event.key !== "Enter" && event.key !== " ") return;
+  const cell = event.target.closest(".type-cell");
+  if (!cell || !state.lastResult) return;
+  event.preventDefault();
+  showCompatibilityModal(cell.dataset.type);
+}
+
+function showCompatibilityModal(targetType) {
+  const myType = state.lastResult.personalityType;
+  const compatibility = buildCompatibility(myType, targetType);
+  document.getElementById("compat-title").textContent = `${myType} × ${targetType}`;
+  document.getElementById("compat-subtitle").textContent =
+    `${originalTypeNames[myType].name} × ${originalTypeNames[targetType].name}`;
+  document.getElementById("compat-body").innerHTML = `
+    <span class="compat-chip">${compatibility.theme}</span>
+    <div class="compat-section">
+      <strong>よいところ</strong>
+      <p>${compatibility.good}</p>
+    </div>
+    <div class="compat-section">
+      <strong>ズレやすいところ</strong>
+      <p>${compatibility.caution}</p>
+    </div>
+    <div class="compat-section">
+      <strong>うまくいくコツ</strong>
+      <p>${compatibility.tip}</p>
+    </div>
+  `;
+  const modal = document.getElementById("compat-modal");
+  modal.classList.add("active");
+  modal.setAttribute("aria-hidden", "false");
+}
+
+function closeCompatibilityModal() {
+  const modal = document.getElementById("compat-modal");
+  modal.classList.remove("active");
+  modal.setAttribute("aria-hidden", "true");
+}
+
+function buildCompatibility(myType, targetType) {
+  if (myType === targetType) {
+    return {
+      theme: "似た者どうしの安心ペア",
+      good: "考え方や疲れどころが近く、言わなくても伝わる感覚が生まれやすい組み合わせです。",
+      caution: "似ているぶん、同じ弱点で同時に止まったり、同じ不安を増幅しやすいところがあります。",
+      tip: "共感で終わらせず、役割や次の一歩を小さく分けると安定します。"
+    };
+  }
+
+  const same = {
+    energy: myType[0] === targetType[0],
+    sense: myType[1] === targetType[1],
+    judge: myType[2] === targetType[2],
+    pace: myType[3] === targetType[3]
+  };
+  const sameCount = Object.values(same).filter(Boolean).length;
+  const myGroup = getTemperamentGroup(myType);
+  const targetGroup = getTemperamentGroup(targetType);
+  const theme = sameCount >= 3
+    ? "空気が合いやすい近距離ペア"
+    : sameCount === 2
+      ? "違いが刺激になるバランスペア"
+      : "学びが多い凸凹ペア";
+
+  const goodParts = [];
+  const cautionParts = [];
+  const tipParts = [];
+
+  if (same.sense) {
+    goodParts.push(myType[1] === "N" ? "話が深まりやすく、未来や意味の話で盛り上がりやすい" : "現実感覚が近く、具体的な行動に落とし込みやすい");
+  } else {
+    goodParts.push("理想を見る人と現実を見る人で、視野を補い合いやすい");
+    cautionParts.push("片方には夢物語、もう片方には細かすぎる話に聞こえることがある");
+    tipParts.push("抽象と具体を行き来して話す");
+  }
+
+  if (same.judge) {
+    goodParts.push(myType[2] === "T" ? "判断基準が論理寄りで、話が整理されやすい" : "気持ちや関係性を大事にする温度感が近い");
+  } else {
+    goodParts.push("正しさと気持ちの両方を見られる");
+    cautionParts.push("正論のつもりが冷たく聞こえたり、配慮のつもりが遠回りに見えたりする");
+    tipParts.push("結論の前に、事実と気持ちを分けて確認する");
+  }
+
+  if (same.pace) {
+    goodParts.push(myType[3] === "J" ? "進め方のテンポが揃いやすい" : "余白や変更を許し合いやすい");
+  } else {
+    goodParts.push("計画力と柔軟性で補い合える");
+    cautionParts.push("締切や予定変更への感じ方がズレやすい");
+    tipParts.push("決める所と自由にする所を先に分ける");
+  }
+
+  if (same.energy) {
+    tipParts.push(myType[0] === "E" ? "盛り上がりすぎたら一度整理する" : "沈黙を悪いサインだと決めつけない");
+  } else {
+    goodParts.push("外に出す力と内で深める力が組み合わさる");
+    cautionParts.push("反応の速さや連絡頻度で温度差が出やすい");
+    tipParts.push("返事のペースを相手の愛情や本気度と直結させない");
+  }
+
+  if (myGroup.code === targetGroup.code) {
+    goodParts.unshift(`${myGroup.code}（${myGroup.label}）同士で、世界の見方が近い`);
+  } else {
+    goodParts.unshift(`${myGroup.code}（${myGroup.label}）と${targetGroup.code}（${targetGroup.label}）で、役割が分かれやすい`);
+  }
+
+  return {
+    theme,
+    good: uniqueJoin(goodParts),
+    caution: uniqueJoin(cautionParts.length ? cautionParts : ["近い部分が多いほど、違う所だけが急に気になりやすい"]),
+    tip: uniqueJoin(tipParts)
+  };
+}
+
+function uniqueJoin(items) {
+  return [...new Set(items)].join("。") + "。";
+}
+
+function drawCircle(ctx, x, y, radius, color) {
+  ctx.beginPath();
+  ctx.arc(x, y, radius, 0, Math.PI * 2);
+  ctx.fillStyle = color;
+  ctx.fill();
+}
+
+function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
+  ctx.beginPath();
+  ctx.moveTo(x + radius, y);
+  ctx.lineTo(x + width - radius, y);
+  ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+  ctx.lineTo(x + width, y + height - radius);
+  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+  ctx.lineTo(x + radius, y + height);
+  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+  ctx.lineTo(x, y + radius);
+  ctx.quadraticCurveTo(x, y, x + radius, y);
+  ctx.closePath();
+  ctx.fillStyle = fill;
+  ctx.fill();
+  if (stroke) {
+    ctx.strokeStyle = stroke;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+}
+
+function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight) {
+  const chars = Array.from(text);
+  let line = "";
+  chars.forEach((char) => {
+    const testLine = line + char;
+    if (ctx.measureText(testLine).width > maxWidth && line) {
+      ctx.fillText(line, x, y);
+      line = char;
+      y += lineHeight;
+      return;
+    }
+    line = testLine;
+  });
+  if (line) {
+    ctx.fillText(line, x, y);
+    y += lineHeight;
+  }
+  return y;
+}
+
+function drawShareLine(ctx, label, text, x, y) {
+  ctx.fillStyle = "#9a6a16";
+  ctx.font = '900 27px "Hiragino Sans", "Yu Gothic", sans-serif';
+  ctx.fillText(`${label}：`, x, y);
+  ctx.fillStyle = "#4e5663";
+  ctx.font = '700 27px "Hiragino Sans", "Yu Gothic", sans-serif';
+  return wrapCanvasText(ctx, text, x + 112, y, 720, 42);
+}
+
+function drawAxisSummary(ctx, scores, startY) {
+  const axisRows = [
+    ["E", "I"],
+    ["S", "N"],
+    ["T", "F"],
+    ["J", "P"]
+  ];
+  let y = startY;
+
+  axisRows.forEach(([left, right]) => {
+    const total = scores[left] + scores[right];
+    const selected = scores[left] === scores[right]
+      ? pickAxis(`${left}/${right}`, left, right, scores, state.answers)
+      : scores[left] > scores[right] ? left : right;
+    let rightPercent = total === 0 ? 50 : Math.round((scores[right] / total) * 100);
+    let leftPercent = 100 - rightPercent;
+
+    if (scores[left] === scores[right]) {
+      leftPercent = selected === left ? 51 : 49;
+      rightPercent = selected === right ? 51 : 49;
+    }
+
+    const visualLeftPercent = amplifyDifference(leftPercent);
+    ctx.fillStyle = "#171a1f";
+    ctx.font = "900 26px system-ui, sans-serif";
+    ctx.fillText(`${left}/${right}`, 118, y + 24);
+
+    const barX = 208;
+    const barY = y;
+    const barW = 440;
+    const barH = 22;
+    roundRect(ctx, barX, barY, barW, barH, 11, "#e8dfcd");
+    const fillW = Math.round(barW * visualLeftPercent / 100);
+    roundRect(ctx, barX, barY, fillW, barH, 11, "#d9b768");
+
+    ctx.fillStyle = "#5f6673";
+    ctx.font = '800 24px "Hiragino Sans", "Yu Gothic", sans-serif';
+    ctx.fillText(`${traitLabels[left]}${leftPercent}:${traitLabels[right]}${rightPercent}`, 682, y + 23);
+    y += 52;
+  });
+}
+
+function getTemperamentGroup(typeCode) {
+  const groupCode = typeCode[1] === "N"
+    ? `N${typeCode[2]}`
+    : `S${typeCode[3]}`;
+
+  return {
+    code: groupCode,
+    label: temperamentGroups[groupCode]
+  };
+}
+
+function getTypeAxisText(typeCode) {
+  return typeCode.split("").map((letter) => traitLabels[letter]).join("・");
+}
+
+  </script>
+</body>
+</html>
