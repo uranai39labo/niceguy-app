@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>リアル 第6回 十干と黄金の羅針盤・産土神社 ── ナイス貝の占い講座 学習サイト</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --navy-deep:#121D33; --navy:#1B2A4A; --navy-mid:#29406B; --gold:#C9A227; --gold-light:#E8D27A;
+    --cream:#FAF8F3; --ink:#1B2A4A; --muted:#5B6B8C; --line:#E3DECF; --sidebar-w:266px; }
+  *{box-sizing:border-box;} html{scroll-behavior:smooth;}
+  body{ margin:0; background:var(--cream); color:var(--ink); font-family:"Zen Kaku Gothic New",sans-serif; line-height:1.85; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,.serif{ font-family:"Shippori Mincho",serif; letter-spacing:.02em; }
+  a{color:inherit;} :focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+  .layout{ display:flex; align-items:flex-start; } .main{ flex:1; min-width:0; }
+  .sidebar{ width:var(--sidebar-w); flex-shrink:0; position:sticky; top:0; height:100vh; overflow-y:auto;
+    background:var(--navy-deep); color:var(--cream); display:flex; flex-direction:column; padding:24px 16px 20px;
+    border-right:1px solid rgba(255,255,255,.06); z-index:60; }
+  .side-brand{ display:flex; align-items:center; gap:9px; font-family:"Shippori Mincho",serif; font-weight:700; font-size:15px; color:var(--gold-light); }
+  .side-brand .dot{ width:9px; height:9px; border-radius:50%; background:var(--gold); }
+  .side-sub{ font-size:10.5px; letter-spacing:.14em; color:#8E9BBE; margin:2px 0 14px 18px; text-transform:uppercase; }
+  .side-back{ display:inline-flex; gap:7px; font-size:12.5px; color:#9FAAC9; text-decoration:none; margin:0 0 14px 3px; }
+  .side-back:hover{ color:var(--gold-light); }
+  .side-label{ font-size:10px; letter-spacing:.14em; color:#6B77A0; text-transform:uppercase; margin:6px 3px 8px; }
+  .side-nav{ display:flex; flex-direction:column; gap:1px; }
+  .side-nav a{ display:flex; flex-direction:column; gap:1px; padding:8px 10px; border-radius:8px; text-decoration:none; transition:background .15s; }
+  .side-nav a:hover{ background:rgba(255,255,255,.05); }
+  .side-nav a.active{ background:rgba(201,162,39,.15); }
+  .side-nav a .cn{ font-size:12.5px; color:var(--gold-light); }
+  .side-nav a .ct{ font-size:12px; color:#C7D0E6; }
+  .side-nav a.active .ct{ color:#fff; }
+  .side-foot{ margin-top:16px; font-size:11px; color:#586284; }
+  .mtopbar{ display:none; } .scrim{ display:none; }
+
+  .wrap{ max-width:820px; margin:0 auto; padding:52px 6vw 100px; }
+  .crumb{ font-size:12.5px; color:var(--muted); margin-bottom:14px; }
+  .crumb a{ color:var(--muted); text-decoration:none; } .crumb a:hover{ color:var(--gold); }
+  .l-tag{ display:inline-block; font-family:"Shippori Mincho",serif; font-size:13px; font-weight:700; color:var(--gold-light); background:var(--navy); padding:5px 14px; border-radius:999px; margin-bottom:16px; }
+  .l-title{ font-size:clamp(24px,3.4vw,34px); margin:0 0 8px; line-height:1.45; }
+  .l-meta{ font-size:13.5px; color:var(--muted); margin-bottom:28px; }
+
+  .embed-wrap{ position:relative; aspect-ratio:16/9; }
+  .embed{ position:absolute; inset:0; background:#0D1526; border-radius:14px; overflow:hidden; box-shadow:0 18px 40px rgba(18,29,51,.16); }
+  .embed iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+  .embed.mini{ position:fixed; inset:auto 18px 18px auto; width:min(360px,74vw); height:auto; aspect-ratio:16/9; z-index:90; border-radius:12px; box-shadow:0 16px 40px rgba(9,14,26,.5); }
+  .mini-bar{ display:none; }
+  .embed.mini .mini-bar{ display:flex; align-items:center; justify-content:space-between; position:absolute; left:0; right:0; top:-27px; height:27px; padding:0 4px 0 12px; background:var(--navy-deep); color:var(--cream); border-radius:9px 9px 0 0; font-size:11px; }
+  .mini-bar button{ background:transparent; border:0; color:var(--gold-light); cursor:pointer; font-size:15px; line-height:1; padding:2px 8px; }
+  .mini-bar button:hover{ color:#fff; }
+
+  .bh{ display:flex; align-items:baseline; gap:12px; margin:46px 0 16px; }
+  .bh .en{ font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); }
+  .bh h2{ font-size:19px; margin:0; }
+
+  .tl{ border:1px solid var(--line); border-radius:14px; background:#fff; overflow:hidden; }
+  .tl button{ display:flex; align-items:flex-start; gap:14px; width:100%; text-align:left; padding:12px 16px; background:transparent; border:0; border-top:1px solid var(--line); cursor:pointer; font-family:inherit; font-size:13.5px; color:var(--ink); transition:background .15s; }
+  .tl button:first-child{ border-top:0; } .tl button:hover{ background:var(--cream); } .tl button.active{ background:#FBF6E7; }
+  .tl .t{ flex-shrink:0; font-variant-numeric:tabular-nums; font-size:12px; color:var(--gold); background:var(--cream); border:1px solid var(--line); border-radius:7px; padding:3px 8px; min-width:64px; text-align:center; }
+  .tl button.active .t{ background:var(--navy); color:var(--gold-light); border-color:var(--navy); }
+  .tl-note{ font-size:12px; color:var(--muted); margin:10px 2px 0; }
+
+  .toggle-head{ cursor:pointer; user-select:none; align-items:center; }
+  .toggle-head .toggle-btn{ margin-left:auto; display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:700; color:var(--navy); background:var(--cream); border:1px solid var(--line); border-radius:999px; padding:6px 14px; white-space:nowrap; transition:all .15s; }
+  .toggle-head:hover .toggle-btn{ border-color:var(--gold); color:var(--gold); background:#FBF6E7; }
+  .toggle-head .toggle-btn .tb-ico{ font-size:11px; }
+  .collapsible.hidden{ display:none; }
+
+  .mapcard{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:22px 26px; }
+  .mapcard ul{ margin:0; padding-left:1.15em; } .mapcard li{ margin:0 0 9px; font-size:15px; }
+  .mapcard.prose p{ margin:0 0 14px; font-size:15px; } .mapcard.prose p:last-child{ margin-bottom:0; }
+  .aboutnote{ font-size:12.5px; color:var(--muted); background:#F4F2EA; border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin-top:16px; }
+
+  .ctable{ width:100%; border-collapse:collapse; margin:2px 0 18px; font-size:14.5px; border:1px solid var(--line); }
+  .ctable th, .ctable td{ text-align:left; padding:11px 15px; border-top:1px solid var(--line); vertical-align:top; }
+  .ctable thead th{ background:var(--navy); color:var(--gold-light); font-family:"Shippori Mincho",serif; font-weight:700; font-size:13.5px; border-top:0; }
+  .ctable tbody tr:nth-child(even){ background:#FBF9F3; }
+  .ctable td:first-child{ font-weight:700; white-space:nowrap; }
+  @media (max-width:560px){ .ctable td:first-child{ white-space:normal; } }
+  .script h2.ch{ font-size:20px; margin:44px 0 6px; padding-top:14px; border-top:1px solid var(--line); }
+  .ch-time{ font-size:12px; color:var(--muted); margin-bottom:16px; }
+  .nar{ font-size:15px; margin:0 0 15px; }
+  .q{ display:flex; gap:11px; margin:0 0 16px; align-items:flex-start; }
+  .q .who{ flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:46px; height:30px; border-radius:999px; font-size:11px; font-weight:700; margin-top:3px; letter-spacing:.02em; }
+  .q p{ margin:0; font-size:15px; border-radius:14px; padding:11px 16px; max-width:82%; position:relative; }
+  .q-teacher .who{ background:var(--navy); color:var(--gold-light); }
+  .q-teacher p{ background:#FBF7EA; border:1px solid #EAD9A6; }
+  .q-user{ flex-direction:row-reverse; }
+  .q-user .who{ background:#EEF1F6; color:var(--muted); border:1px solid var(--line); }
+  .q-user p{ background:#fff; border:1px solid var(--line); }
+  .note-teach{ background:#fff; border-left:3px solid var(--gold); border-radius:0 10px 10px 0; padding:12px 18px; margin:0 0 15px; box-shadow:0 2px 10px rgba(27,42,74,.04); }
+  .note-teach .lbl{ display:block; font-size:11px; letter-spacing:.08em; color:var(--gold); font-weight:700; margin-bottom:5px; }
+  .note-teach p{ margin:0; font-size:14.5px; }
+
+  .checklist{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:20px 24px; }
+  .clitem{ display:flex; align-items:flex-start; gap:11px; padding:10px 0; border-top:1px solid var(--line); cursor:pointer; font-size:14.5px; }
+  .clitem:first-child{ border-top:0; }
+  .clitem input{ appearance:none; -webkit-appearance:none; width:19px; height:19px; margin-top:3px; border:1.6px solid var(--navy-mid); border-radius:5px; cursor:pointer; position:relative; flex-shrink:0; background:#fff; transition:all .18s; }
+  .clitem input:checked{ background:var(--gold); border-color:var(--gold); }
+  .clitem input:checked::after{ content:"✓"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:12px; color:var(--navy-deep); font-weight:700; }
+  .clitem input:checked + span{ color:var(--muted); text-decoration:line-through; }
+
+  .lnav{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:50px; flex-wrap:wrap; }
+  .lnav a.back{ font-size:14px; color:var(--muted); text-decoration:none; } .lnav a.back:hover{ color:var(--gold); }
+  .donebtn{ display:inline-flex; align-items:center; gap:10px; background:var(--gold); color:var(--navy-deep); font-weight:700; font-size:15px; padding:14px 28px; border-radius:11px; border:0; cursor:pointer; font-family:inherit; transition:transform .18s, background .18s; }
+  .donebtn:hover{ transform:translateY(-2px); background:var(--gold-light); }
+  .donebtn.on{ background:var(--navy); color:var(--gold-light); }
+
+  @media (max-width:880px){
+    .mtopbar{ display:flex; align-items:center; gap:12px; position:sticky; top:0; z-index:70; padding:12px 18px; background:var(--navy-deep); color:var(--cream); border-bottom:1px solid rgba(255,255,255,.08); }
+    .mtopbar .burger{ width:40px; height:40px; border-radius:9px; border:1px solid rgba(255,255,255,.15); background:transparent; color:var(--gold-light); font-size:18px; cursor:pointer; }
+    .mtopbar .mbrand{ font-family:"Shippori Mincho",serif; font-weight:700; font-size:14px; color:var(--gold-light); }
+    .sidebar{ position:fixed; top:0; left:0; height:100vh; transform:translateX(-100%); transition:transform .28s; box-shadow:0 0 40px rgba(0,0,0,.4); }
+    body.nav-open .sidebar{ transform:translateX(0); }
+    body.nav-open .scrim{ display:block; position:fixed; inset:0; background:rgba(9,14,26,.5); z-index:55; }
+  }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } .sidebar{ transition:none; } }
+</style>
+</head>
+<body>
+  <div class="mtopbar">
+    <button class="burger" id="burger" aria-label="メニュー">☰</button>
+    <span class="mbrand">リアル第6回 十干と黄金の羅針盤</span>
+  </div>
+  <div class="scrim" id="scrim"></div>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="side-brand"><span class="dot"></span> ナイス貝 占い講座</div>
+      <p class="side-sub">学習サイト</p>
+      <a class="side-back" href="nice-kai-2ki.html#real">← 学習トップにもどる</a>
+      <div class="side-label">この回の目次</div>
+      <nav class="side-nav" id="sideNav">
+<a href="#ch1"><span class="cn">第1章</span><span class="ct">宇宙人が集まる回には、やっぱり宇宙人が来る</span></a>
+<a href="#ch2"><span class="cn">第2章</span><span class="ct">ギリギリまで動けないのも、一つの才能</span></a>
+<a href="#ch3"><span class="cn">第3章</span><span class="ct">弱点をコツコツやると、ある日突然化ける</span></a>
+<a href="#ch4"><span class="cn">第4章</span><span class="ct">やりたいけれど、やりたくない場所に才能がある</span></a>
+<a href="#ch5"><span class="cn">第5章</span><span class="ct">産土神社は、人生のツボのような場所</span></a>
+<a href="#ch6"><span class="cn">第6章</span><span class="ct">十干を横文字へ翻訳する「黄金の羅針盤」</span></a>
+<a href="#ch7"><span class="cn">第7章</span><span class="ct">光だけでなく、闇まで見て初めて前へ進める</span></a>
+<a href="#ch8"><span class="cn">第8章</span><span class="ct">削れば削るほど、受け取る人は楽になる</span></a>
+<a href="#ch9"><span class="cn">第9章</span><span class="ct">占いは、心を開いた後に森へ放つためにある</span></a>
+<a href="#ch10"><span class="cn">第10章</span><span class="ct">ルノルマンカードは、ネズミの居場所を狙い撃つ</span></a>
+<a href="#ch11"><span class="cn">第11章</span><span class="ct">開く人、閉じる人、切って整える人</span></a>
+<a href="#ch12"><span class="cn">第12章</span><span class="ct">未完成のまま一人に見せる</span></a>
+<a href="#ch13"><span class="cn">第13章</span><span class="ct">皆で作るから、羅針盤が生きた仕組みになる</span></a>
+<a href="#ch14"><span class="cn">第14章</span><span class="ct">令和の志士を、危険な森へ送り出す</span></a>
+<a href="#ch15"><span class="cn">第15章</span><span class="ct">AIは秘書にもなるが、ペンタゴンへ行くかもしれない</span></a>
+<a href="#ch16"><span class="cn">第16章</span><span class="ct">宇宙時間を地球時間へ翻訳する</span></a>
+<a href="#chE"><span class="cn">終章</span><span class="ct">自分のドマイナスを、誰かの地図へ変える</span></a>
+      </nav>
+      <div class="side-foot">© ナイス貝 ／ 片貝文昌</div>
+    </aside>
+
+    <div class="main">
+      <div class="wrap">
+        <div class="crumb"><a href="nice-kai-2ki.html">学習トップ</a> ／ <a href="nice-kai-2ki.html#real">リアル講座</a> ／ リアル 第6回</div>
+        <span class="l-tag">リアル 第6回</span>
+        <h1 class="l-title">十干と黄金の羅針盤・産土神社</h1>
+        <div class="l-meta">2026.06.14(日) ・ 新横浜</div>
+
+        <div class="embed-wrap" id="embedWrap"><div class="embed" id="videoBox"><div class="mini-bar"><span>▶ 動画</span><button id="miniClose" title="元の位置にもどす" aria-label="元の位置にもどす">⤢</button></div><iframe id="ytframe" src="https://www.youtube.com/embed/qnZL1glWcwo?rel=0" title="十干と黄金の羅針盤・産土神社" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>
+
+<div class="bh"><span class="en">Transcript</span><h2>編集書き起こし（本編）</h2></div><div class="script"><h2 class="ch" id="ch1">第1章　宇宙人が集まる回には、やっぱり宇宙人が来る</h2>
+<p class="nar">第6回は、開始早々から「宇宙人が集まりやすい回」という宣言で始まりました。誕生数7、狼、虎、11、22、33。普通のペースでは動きにくく、独自のスイッチを持つ人たちが、迷いながら会場へ集まってきます。</p>
+<p class="nar">道に迷ったことまで、講座のテーマになってしまうのがこの回です。自分のペースを崩せない人、締め切り直前でしか動けない人、周囲から見ると「なぜ今まで動かなかったのか」と思われる人。それぞれの特殊な起動方法を理解するところから始まりました。</p>
+<p class="nar">00:02:29</p>
+<h2 class="ch" id="ch2">第2章　ギリギリまで動けないのも、一つの才能</h2>
+<p class="nar">講師は「早く始めましょう」とは言いません。むしろ、多くの参加者がギリギリまで待つことを理解した上で、その性質をどう使うかを考えます。</p>
+<p class="nar">虎や狼のように、自分のペースを守る力が強い人は、他人の予定表だけでは動きません。追い込まれることで100へ切り替わる。その力を責めるのではなく、事故になる前にスイッチを入れる仕組みが必要です。</p>
+<p class="nar">00:09:43</p>
+<h2 class="ch" id="ch3">第3章　弱点をコツコツやると、ある日突然化ける</h2>
+<p class="nar">占いを継続して学ぶ意味について、講師は「一番の弱点をコツコツ扱うと、ある日突然、周囲を追い抜く」と説明します。</p>
+<p class="nar">引きこもりから外へ出る、記憶が飛ぶ中で仕組みを作る、人に会いたくないのに人と関わる。大きな弱点を抱えた人ほど、同じ場所で困る人へ具体的な道順を渡せます。</p>
+<p class="nar">00:13:35</p>
+<h2 class="ch" id="ch4">第4章　やりたいけれど、やりたくない場所に才能がある</h2>
+<p class="nar">黄金の羅針盤を作り始めた理由は、講師自身の矛盾でした。「人に会いたくない。でも、人に会う必要がある」。この両立しない願いが、新しい仕組みを生みます。</p>
+<p class="nar">矛盾を片方だけ消すのではなく、両方を満たす仕組みを考える。会いたくない自分を否定せず、必要な人に届く入口を作る。この発想が、診断アプリ、メール講座、少人数の場へつながっていきます。</p>
+<p class="nar">00:16:37</p>
+<h2 class="ch" id="ch5">第5章　産土神社は、人生のツボのような場所</h2>
+<p class="nar">講座は十干の説明へ進む前に、神社の話へ大きく広がります。神社は、人間の体でいうツボのような場所。訪れることで、自分の流れが整い、必要なエネルギーを持ち帰る場所として語られました。</p>
+<p class="nar">産土神社や一宮、大神神社、三輪山、天河、安房神社、品川神社など、参加者の縁から次々と神社名が出てきます。神社の知識を暗記するより、「なぜか気になる」「誘われた」「仕事ができた」という流れを見逃さないことが大切です。</p>
+<p class="nar">00:18:50</p>
+<h2 class="ch" id="ch6">第6章　十干を横文字へ翻訳する「黄金の羅針盤」</h2>
+<p class="nar">今回の中心となる「黄金の羅針盤」は、生まれた日の十干を、現代の人が受け取りやすい言葉へ翻訳する入口です。十三種類を一度に見せるのではなく、まず一つの言葉を届けます。</p>
+<p class="nar">十干を捨てたわけではありません。深い東洋思想へ入る前に、相手が受け取れる入り口を作ったのです。パイオニア、プロデューサー、クリエイター、バンガード、ディレクター。言葉を現代化することで、自分の役割を生活へ持ち帰りやすくします。</p>
+<p class="nar">00:27:32</p>
+<h2 class="ch" id="ch7">第7章　光だけでなく、闇まで見て初めて前へ進める</h2>
+<p class="nar">黄金の羅針盤では、才能だけでなく「その才能が止まる時の影」も扱います。光だけを褒めても、現実の問題は動きません。</p>
+<p class="nar">パイオニアなら孤立や打ち上げ花火、クリエイターなら完璧主義と市場への反発。才能が大きいほど、その裏側にも強い癖があります。欠点として切り捨てず、才能が空回りする条件として読み解きます。</p>
+<p class="nar">00:25:58</p>
+<h2 class="ch" id="ch8">第8章　削れば削るほど、受け取る人は楽になる</h2>
+<p class="nar">講師は、つい知識を詰め込みたくなる自分に対し、今回は「削る」ことへ挑戦しています。</p>
+<p class="nar">深い知識をすべて渡すことが親切とは限りません。一言で心が動けば、次の一歩へ進めます。興味が湧いた人には、七日間のメール、AI、ノート、講座と、少しずつ奥へ入る道を用意します。</p>
+<p class="nar">02:32:00</p>
+<h2 class="ch" id="ch9">第9章　占いは、心を開いた後に森へ放つためにある</h2>
+<p class="nar">講師は、自分の役割を「人を集め、心を開く人」と表現します。しかし、開いたまま放置すると、せっかく出てきた才能が行き場を失います。</p>
+<p class="nar">黄金の羅針盤は、覚醒させるだけの診断ではありません。森の中でどこへ行き、誰と組み、どんな弱点に注意するかを示すマップです。</p>
+<p class="nar">01:57:00</p>
+<h2 class="ch" id="ch10">第10章　ルノルマンカードは、ネズミの居場所を狙い撃つ</h2>
+<p class="nar">個別例では、ルノルマンカードが「直近の問題を具体的に見つける道具」として登場します。講師が広く能力を開くタイプなら、カードを読む秋本さんは一点を仕留めるスナイパーです。</p>
+<p class="nar">ネズミは、ストレス、消耗、小さな穴、時間を奪うもの。連続してカードを見ることで、ぼんやりした不調が具体的な課題へ変わります。</p>
+<p class="nar">02:16:00</p>
+<h2 class="ch" id="ch11">第11章　開く人、閉じる人、切って整える人</h2>
+<p class="nar">占い師にも役割の違いがあります。人を開く人、封印して守る人、不要なものを切り離す人。全員が同じ鑑定をする必要はありません。</p>
+<p class="nar">自分にできない部分を欠点と見るのではなく、別の人が担当する余白と考えます。占いの種類だけでなく、人の性質自体がチーム設計になります。</p>
+<p class="nar">02:22:00</p>
+<h2 class="ch" id="ch12">第12章　未完成のまま一人に見せる</h2>
+<p class="nar">完璧主義のクリエイターへ、AIが容赦なく伝えた最初の一歩は「完成度60％で世に出す」でした。</p>
+<p class="nar">強い言葉が必要な人もいます。ただし、人が直接言うと、言う側も傷つく。そこでAIを叩き棒や防具として使い、本人が動く言葉へ変換します。</p>
+<p class="nar">02:25:00</p>
+<h2 class="ch" id="ch13">第13章　皆で作るから、羅針盤が生きた仕組みになる</h2>
+<p class="nar">黄金の羅針盤は、まだ完成していません。商品ページも、メールも、リンクも、講座中にバグが見つかります。しかし、その未完成を隠さず、参加者と一緒に作ることが今回の会議でした。</p>
+<p class="nar">一人で完璧に作ってから売るのではなく、実際の反応を受けながら育てます。十タイプ×七日間のメールという大きな作業も、AIと人の力を借りれば現実になります。</p>
+<p class="nar">02:33:00</p>
+<h2 class="ch" id="ch14">第14章　令和の志士を、危険な森へ送り出す</h2>
+<p class="nar">講師が作りたいのは、診断アプリだけではありません。自分のドマイナスをプラスへ変え、時代を切り開く人が育つ森です。</p>
+<p class="nar">最終的な構想は、温泉、食、農、学び、神社、占いがつながる場所。必要な人が必要な量だけ訪れ、互いの才能を生かす生態系です。</p>
+<p class="nar">02:42:00</p>
+<h2 class="ch" id="ch15">第15章　AIは秘書にもなるが、ペンタゴンへ行くかもしれない</h2>
+<p class="nar">終盤では、急速に進化するAIの話へ。パソコン内の整理、ホームページ制作、調査、メール返信まで代行する一方、指示を誤ると「余計なことまでやる」危険性も語られます。</p>
+<p class="nar">AIは、講師にとって外部記憶、秘書、厳しい助言者、制作スタッフです。人へ頼むと気を使い、口を出してしまう性質も、AI相手なら遠慮なく試行錯誤できます。</p>
+<p class="nar">03:10:00</p>
+<h2 class="ch" id="ch16">第16章　宇宙時間を地球時間へ翻訳する</h2>
+<p class="nar">コンサートやイベントが一週間前に決まり、宇宙人同士のコラボが突然始まる。講師は「宇宙時間」で動く人たちを、地球の予定表へつなぐ必要性を実感します。</p>
+<p class="nar">宇宙時間を否定せず、スケジュールアプリ、役割分担、AI秘書で地球時間へ翻訳する。自由な才能と現実の運営を両立させることが、次の講座のテーマへつながります。</p>
+<p class="nar">03:20:00</p>
+<h2 class="ch" id="chE">終章　自分のドマイナスを、誰かの地図へ変える</h2>
+<p class="nar">第6回は、十干の説明会でありながら、実際には「どうすれば特殊な人たちが力を発揮できるか」を話し合う作戦会議でした。苦手、遅さ、孤独、完璧主義、記憶の欠落、人に頼れないこと。これらを消すのではなく、仕組みへ変えていきます。</p>
+<p class="nar">黄金の羅針盤は、未来を当てる道具ではありません。自分がどこで力を失い、誰となら進め、どの森へ向かうかを思い出すための地図です。</p></div>
+<div class="bh"><span class="en">Review</span><h2>復習チェックリスト</h2></div><div class="checklist"><label class="clitem"><input type="checkbox" class="clchk" data-i="0"><span>自分が0か100になりやすい条件を確認した</span></label>
+<label class="clitem"><input type="checkbox" class="clchk" data-i="1"><span>一番苦手なことが、誰かに教えられる才能にならないか考えた</span></label>
+<label class="clitem"><input type="checkbox" class="clchk" data-i="2"><span>「やりたいけれど、やりたくない」矛盾を書き出した</span></label>
+<label class="clitem"><input type="checkbox" class="clchk" data-i="3"><span>気になる神社や土地との縁を振り返った</span></label>
+<label class="clitem"><input type="checkbox" class="clchk" data-i="4"><span>自分の十干タイプを、日常語で一文にした</span></label>
+<label class="clitem"><input type="checkbox" class="clchk" data-i="5"><span>強みが闇へ反転する条件を確認した</span></label>
+<label class="clitem"><input type="checkbox" class="clchk" data-i="6"><span>最初に渡す情報を一つまで削った</span></label>
+<label class="clitem"><input type="checkbox" class="clchk" data-i="7"><span>自分は「開く・閉じる・切る・整える」のどれが得意か考えた</span></label>
+<label class="clitem"><input type="checkbox" class="clchk" data-i="8"><span>未完成のものを、信頼できる一人に見せる予定を決めた</span></label>
+<label class="clitem"><input type="checkbox" class="clchk" data-i="9"><span>AIへ任せることと、人が確認することを分けた</span></label>
+<label class="clitem"><input type="checkbox" class="clchk" data-i="10"><span>宇宙時間の自分を支える、地球時間の仕組みを一つ作った</span></label>
+<label class="clitem"><input type="checkbox" class="clchk" data-i="11"><span>自分のドマイナスを、誰かの地図へ変えるテーマを選んだ</span></label></div>
+
+        <div class="lnav">
+          <a class="back" href="nice-kai-2ki.html#real">← 学習トップ（リアル講座）にもどる</a>
+          <button class="donebtn" id="doneBtn" type="button">この回を視聴済みにする</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+(function(){
+  "use strict";
+  var KEY="nicekai_learn_v2", CLKEY="nicekai_r06_checklist", RID="r06", VID="qnZL1glWcwo";
+  function load(k){ try{return JSON.parse(localStorage.getItem(k))||{};}catch(e){return {};} }
+  function save(k,v){ try{localStorage.setItem(k,JSON.stringify(v));}catch(e){} }
+
+  var frame=document.getElementById("ytframe");
+  var vbox=document.getElementById("videoBox");
+  document.querySelectorAll(".tl button[data-sec]").forEach(function(b){
+    b.addEventListener("click", function(){
+      var sec=b.getAttribute("data-sec");
+      if(frame) frame.src="https://www.youtube.com/embed/"+VID+"?rel=0&start="+sec+"&autoplay=1";
+      document.querySelectorAll(".tl button").forEach(function(x){x.classList.remove("active");});
+      b.classList.add("active");
+      if(frame && vbox && !vbox.classList.contains("mini")) frame.scrollIntoView({behavior:"smooth",block:"center"});
+    });
+  });
+
+  // sticky mini-player: keep the video watchable while scrolling
+  var ewrap=document.getElementById("embedWrap");
+  if(ewrap && vbox && "IntersectionObserver" in window){
+    var vio=new IntersectionObserver(function(es){
+      var e=es[0];
+      if(!e.isIntersecting && e.boundingClientRect.top < 0){ vbox.classList.add("mini"); }
+      else if(e.isIntersecting){ vbox.classList.remove("mini"); }
+    }, {threshold:[0,0.35]});
+    vio.observe(ewrap);
+  }
+  var mclose=document.getElementById("miniClose");
+  if(mclose){ mclose.addEventListener("click", function(){ if(vbox) vbox.classList.remove("mini"); if(ewrap) ewrap.scrollIntoView({behavior:"smooth",block:"start"}); }); }
+
+  // timeline open/close
+  document.querySelectorAll(".toggle-head").forEach(function(h){
+    h.addEventListener("click", function(){
+      h.classList.toggle("collapsed");
+      var collapsed=h.classList.contains("collapsed");
+      var t=document.getElementById(h.getAttribute("data-target"));
+      if(t) t.classList.toggle("hidden", collapsed);
+      var ico=h.querySelector(".tb-ico"), txt=h.querySelector(".tb-txt");
+      if(ico) ico.textContent = collapsed ? "▸" : "▾";
+      if(txt) txt.textContent = collapsed ? "開く" : "閉じる";
+    });
+  });
+
+  var cl=load(CLKEY);
+  document.querySelectorAll(".clchk").forEach(function(c){
+    var i=c.getAttribute("data-i");
+    c.checked=!!cl[i];
+    c.addEventListener("change", function(){ var s=load(CLKEY); s[i]=c.checked; save(CLKEY,s); });
+  });
+
+  var st=load(KEY); var db=document.getElementById("doneBtn");
+  function paint(){ if(st[RID]){ db.classList.add("on"); db.textContent="✓ 視聴済み ｜ もう一度押すと解除"; } else { db.classList.remove("on"); db.textContent="この回を視聴済みにする"; } }
+  paint();
+  db.addEventListener("click", function(){ var s=load(KEY); s[RID]=!s[RID]; save(KEY,s); st=s; paint(); });
+
+  var links=Array.prototype.slice.call(document.querySelectorAll("#sideNav a"));
+  var map={}; links.forEach(function(a){ var id=a.getAttribute("href").slice(1); var el=document.getElementById(id); if(el) map[id]=a; });
+  if("IntersectionObserver" in window){
+    var obs=new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting){ links.forEach(function(a){a.classList.remove("active");}); var a=map[en.target.id]; if(a) a.classList.add("active"); } }); }, {rootMargin:"-30% 0px -60% 0px", threshold:0});
+    Object.keys(map).forEach(function(id){ obs.observe(document.getElementById(id)); });
+  }
+
+  var burger=document.getElementById("burger"), scrim=document.getElementById("scrim");
+  function closeNav(){ document.body.classList.remove("nav-open"); }
+  if(burger) burger.addEventListener("click", function(){ document.body.classList.toggle("nav-open"); });
+  if(scrim) scrim.addEventListener("click", closeNav);
+  document.querySelectorAll("#sideNav a").forEach(function(a){ a.addEventListener("click", closeNav); });
+})();
+</script>
+</body>
+</html>

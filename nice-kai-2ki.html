@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>算命学講座 第2期 アーカイブ ── ナイス貝</title>
+<title>ナイス貝の占い講座 学習サイト</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
@@ -18,6 +18,7 @@
     --ink:#1B2A4A;
     --muted:#5B6B8C;
     --line:#E3DECF;
+    --sidebar-w:256px;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -36,23 +37,57 @@
   a{color:inherit;}
   :focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
 
-  /* ---------- nav ---------- */
-  .nav{
-    position:sticky; top:0; z-index:50;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:18px 6vw;
-    background:rgba(250,248,243,.88);
-    backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav-brand{display:flex; align-items:center; gap:10px; font-weight:700; font-size:15px;}
-  .nav-brand .dot{width:8px; height:8px; border-radius:50%; background:var(--gold);}
-  .nav-links{display:flex; gap:28px; font-size:14px; color:var(--muted);}
-  .nav-links a{text-decoration:none;}
-  .nav-links a:hover{color:var(--gold);}
-  @media (max-width:680px){ .nav-links{display:none;} }
+  /* ================= LAYOUT ================= */
+  .layout{ display:flex; align-items:flex-start; }
+  .main{ flex:1; min-width:0; }
 
-  /* ---------- hero ---------- */
+  /* ================= SIDEBAR ================= */
+  .sidebar{
+    width:var(--sidebar-w); flex-shrink:0;
+    position:sticky; top:0; height:100vh;
+    background:var(--navy-deep); color:var(--cream);
+    display:flex; flex-direction:column;
+    padding:26px 20px 22px;
+    border-right:1px solid rgba(255,255,255,.06);
+    z-index:60;
+  }
+  .side-brand{ display:flex; align-items:center; gap:10px; font-family:"Shippori Mincho",serif; font-weight:700; font-size:16px; color:var(--gold-light); margin-bottom:4px; }
+  .side-brand .dot{ width:9px; height:9px; border-radius:50%; background:var(--gold); flex-shrink:0; }
+  .side-sub{ font-size:11.5px; letter-spacing:.14em; color:#8E9BBE; margin:0 0 24px 19px; text-transform:uppercase; }
+
+  .side-nav{ display:flex; flex-direction:column; gap:2px; }
+  .side-nav a{
+    display:flex; align-items:center; gap:11px;
+    padding:10px 12px; border-radius:9px;
+    font-size:14px; color:#C7D0E6; text-decoration:none;
+    transition:background .18s ease, color .18s ease;
+  }
+  .side-nav a .ico{ width:18px; text-align:center; opacity:.85; font-size:14px; }
+  .side-nav a:hover{ background:rgba(255,255,255,.05); color:var(--cream); }
+  .side-nav a.active{ background:rgba(201,162,39,.14); color:var(--gold-light); }
+
+  .side-progress{
+    margin-top:22px; padding:14px 14px 16px;
+    background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.07);
+    border-radius:12px;
+  }
+  .side-progress .sp-top{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:9px; }
+  .side-progress .sp-label{ font-size:11.5px; letter-spacing:.1em; color:#8E9BBE; text-transform:uppercase; }
+  .side-progress .sp-count{ font-family:"Shippori Mincho",serif; font-size:15px; color:var(--gold-light); }
+  .side-progress .sp-count b{ font-size:20px; }
+  .meter{ height:8px; background:rgba(255,255,255,.08); border-radius:999px; overflow:hidden; }
+  .meter > span{ display:block; height:100%; width:0; border-radius:999px; background:linear-gradient(90deg,var(--gold),var(--gold-light)); transition:width .45s ease; }
+
+  .side-foot{ margin-top:auto; padding-top:20px; }
+  .side-foot .foot-links{ display:flex; flex-wrap:wrap; gap:8px 14px; }
+  .side-foot a{ font-size:12px; color:#9FAAC9; text-decoration:none; }
+  .side-foot a:hover{ color:var(--gold-light); }
+  .side-foot .copy{ font-size:11px; color:#586284; margin-top:14px; }
+
+  .mtopbar{ display:none; }
+  .scrim{ display:none; }
+
+  /* ================= HERO ================= */
   .hero{
     padding:96px 6vw 80px;
     background:var(--navy-deep);
@@ -72,79 +107,199 @@
   }
   .hero h1{
     font-size:clamp(32px, 5vw, 56px);
-    font-weight:700; line-height:1.4; margin:0 0 22px; max-width:14ch;
+    font-weight:700; line-height:1.4; margin:0 0 22px; max-width:16ch;
     color:var(--gold-light);
   }
   .hero p{
-    max-width:46ch; color:#C7D0E6; font-size:16.5px; margin:0;
+    max-width:48ch; color:#C7D0E6; font-size:16.5px; margin:0;
   }
   .hero-meta{
     margin-top:40px; display:flex; gap:36px; flex-wrap:wrap;
   }
   .hero-meta div{font-size:13px; color:#8E9BBE;}
-  .hero-meta strong{display:block; font-size:20px; color:var(--cream); font-family:"Shippori Mincho", serif; margin-bottom:2px;}
+  .hero-meta strong{display:block; font-size:19px; color:var(--cream); font-family:"Shippori Mincho", serif; margin-bottom:2px;}
 
-  /* ---------- section shell ---------- */
+  /* ================= SECTION SHELL ================= */
   section{padding:80px 6vw;}
-  .section-head{max-width:640px; margin-bottom:56px;}
+  .section-head{max-width:660px; margin-bottom:48px;}
   .section-head .eyebrow{color:var(--gold); margin-bottom:14px;}
   .section-head h2{font-size:clamp(24px,3vw,34px); margin:0 0 14px; color:var(--ink);}
   .section-head p{color:var(--muted); margin:0; font-size:15px;}
 
-  /* ---------- voyage map (signature element) ---------- */
-  .voyage{ background:var(--cream); }
-  .voyage-wrap{position:relative; max-width:1040px; margin:0 auto;}
-  .voyage-path{ display:block; width:100%; height:auto; }
-  .voyage-path path{
-    fill:none; stroke:var(--gold); stroke-width:1.6; stroke-dasharray:2 9; stroke-linecap:round;
-    opacity:.55;
+  /* ================= START ================= */
+  .start{ background:#F4F2EA; }
+  .steps{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; max-width:1040px; }
+  @media (max-width:900px){ .steps{ grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:520px){ .steps{ grid-template-columns:1fr;} }
+  .step{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:24px 20px; }
+  .step .snum{ font-family:"Shippori Mincho",serif; font-size:13px; font-weight:700; color:var(--gold); letter-spacing:.1em; margin-bottom:12px; }
+  .step h3{ font-size:16px; margin:0 0 8px; color:var(--ink); }
+  .step p{ font-size:13.5px; color:var(--muted); margin:0; line-height:1.75; }
+  .start-note{ max-width:1040px; margin:28px 0 0; font-size:13px; color:var(--muted); display:flex; align-items:center; gap:9px; }
+  .start-note .pin{ color:var(--gold); }
+
+  /* ================= VIDEO (ZOOM) ================= */
+  .zoom{ background:var(--cream); }
+  .zoom-wrap{ max-width:1040px; margin:0 auto; }
+
+  .progress-card{
+    background:#fff; border:1px solid var(--line); border-radius:14px;
+    padding:20px 24px; margin:0 auto 40px; max-width:1040px;
+    display:flex; align-items:center; gap:22px; flex-wrap:wrap;
   }
-  .waypoints{
-    display:grid; grid-template-columns:repeat(3,1fr); gap:28px 22px;
-    margin-top:-30px;
+  .progress-card .pc-text{ font-family:"Shippori Mincho",serif; font-size:15px; color:var(--ink); white-space:nowrap; }
+  .progress-card .pc-text b{ font-size:22px; color:var(--gold); }
+  .progress-card .meter{ flex:1; min-width:180px; height:10px; background:var(--cream); }
+  .progress-card .pc-reset{
+    font-size:12px; color:var(--muted); background:transparent; border:1px solid var(--line);
+    border-radius:8px; padding:7px 13px; cursor:pointer; white-space:nowrap; transition:all .18s ease;
   }
-  @media (max-width:900px){ .waypoints{grid-template-columns:repeat(2,1fr);} }
-  @media (max-width:560px){ .waypoints{grid-template-columns:1fr; margin-top:8px;} .voyage-path{display:none;} }
+  .progress-card .pc-reset:hover{ border-color:var(--gold); color:var(--gold); }
+
+  .lessons{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  @media (max-width:900px){ .lessons{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .lessons{grid-template-columns:1fr;} }
 
   .stop{
     background:#fff; border:1px solid var(--line); border-radius:14px;
-    padding:22px 20px 20px; position:relative;
-    transition:transform .25s ease, box-shadow .25s ease;
+    padding:22px 20px 18px; position:relative;
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
   }
   .stop:hover{ transform:translateY(-4px); box-shadow:0 14px 28px rgba(27,42,74,.08); }
   .stop .num{
-    width:34px; height:34px; border-radius:50%; background:var(--navy);
-    color:var(--gold-light); font-family:"Shippori Mincho", serif; font-weight:700; font-size:14px;
-    display:flex; align-items:center; justify-content:center; margin-bottom:14px;
+    min-width:34px; height:34px; padding:0 9px; border-radius:999px; background:var(--navy);
+    color:var(--gold-light); font-family:"Shippori Mincho", serif; font-weight:700; font-size:13px;
+    display:inline-flex; align-items:center; justify-content:center; margin-bottom:14px;
   }
+  .stop.intro .num{ background:var(--navy-mid); }
   .stop.bonus .num{ background:var(--gold); color:var(--navy-deep); }
   .stop .date{ font-size:12px; color:var(--muted); letter-spacing:.03em; }
-  .stop h3{ font-size:17px; margin:6px 0 12px; color:var(--ink); min-height:24px; }
-  .stop .placeholder{ color:#B5B0A0; font-style:italic; }
+  .stop h3{ font-size:16.5px; margin:6px 0 12px; color:var(--ink); min-height:24px; line-height:1.5; }
   .chips{ display:flex; gap:8px; flex-wrap:wrap; margin-top:4px; }
   .chip{
     font-size:12px; padding:6px 12px; border-radius:999px;
     background:var(--cream); border:1px solid var(--line); color:var(--muted);
     text-decoration:none; transition:all .2s ease;
   }
+  .chip.play{ background:var(--navy); color:var(--gold-light); border-color:var(--navy); }
+  .chip.play:hover{ background:var(--navy-mid); }
   .chip:hover{ background:var(--navy); color:var(--gold-light); border-color:var(--navy); }
-  .chip.empty{ opacity:.45; cursor:default; }
+  .chip.empty{ opacity:.5; cursor:default; }
   .chip.empty:hover{ background:var(--cream); color:var(--muted); border-color:var(--line); }
 
-  /* ---------- overview prose ---------- */
-  .overview-grid{
-    display:grid; grid-template-columns:1fr 1fr; gap:48px; max-width:1040px;
+  .stop.is-done{ border-color:var(--gold); }
+  .stop.is-done::after{
+    content:"✓ 視聴済み"; position:absolute; top:14px; right:14px;
+    font-size:10.5px; letter-spacing:.08em; font-weight:700;
+    color:var(--navy-deep); background:var(--gold-light);
+    padding:3px 8px; border-radius:999px;
   }
-  @media (max-width:760px){ .overview-grid{grid-template-columns:1fr;} }
-  .overview-grid p{ color:var(--ink); font-size:15.5px; margin:0 0 16px; }
-  .overview-grid .label{
-    font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold);
-    font-weight:700; margin-bottom:10px; display:block;
+  .done-toggle{
+    display:inline-flex; align-items:center; gap:8px; cursor:pointer;
+    margin-top:16px; padding-top:14px; border-top:1px dashed var(--line);
+    width:100%; font-size:13px; color:var(--muted); user-select:none;
+  }
+  .done-toggle input{
+    appearance:none; -webkit-appearance:none;
+    width:18px; height:18px; border:1.6px solid var(--navy-mid); border-radius:5px;
+    cursor:pointer; position:relative; flex-shrink:0; transition:all .18s ease; background:#fff;
+  }
+  .done-toggle input:checked{ background:var(--gold); border-color:var(--gold); }
+  .done-toggle input:checked::after{
+    content:"✓"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-size:12px; color:var(--navy-deep); font-weight:700;
+  }
+  .stop.is-done .done-toggle{ color:var(--gold); font-weight:700; }
+  .stop.pending{ opacity:.72; }
+  .stop.pending .num{ background:#B9C0D2; color:#fff; }
+
+  /* ================= VIDEO LIST ================= */
+  .vlist{ max-width:1040px; margin:0 auto; display:flex; flex-direction:column; gap:12px; }
+  .vrow{
+    display:flex; align-items:center; gap:18px;
+    background:#fff; border:1px solid var(--line); border-radius:12px; padding:12px 16px;
+    transition:border-color .2s, box-shadow .2s;
+  }
+  .vrow:hover{ box-shadow:0 10px 24px rgba(27,42,74,.07); }
+  .vrow.is-done{ border-color:var(--gold); }
+  .vthumb{
+    position:relative; width:196px; flex-shrink:0; aspect-ratio:16/9;
+    border-radius:9px; overflow:hidden; background:#0D1526; cursor:pointer;
+  }
+  .vthumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .vthumb .pbtn{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:44px; height:44px; border-radius:50%; background:rgba(18,29,51,.72);
+    color:var(--gold-light); display:flex; align-items:center; justify-content:center;
+    font-size:15px; padding-left:3px; transition:background .18s, color .18s;
+  }
+  .vthumb:hover .pbtn{ background:var(--gold); color:var(--navy-deep); }
+  .vthumb iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+  .vthumb.pending{ cursor:default; display:flex; align-items:center; justify-content:center; }
+  .vthumb.pending .pend{ color:#9FAAC9; font-size:13px; font-family:"Shippori Mincho",serif; }
+  .vinfo{ flex:1; min-width:0; }
+  .vtag{
+    display:inline-block; font-family:"Shippori Mincho",serif; font-size:11.5px; font-weight:700;
+    color:var(--gold-light); background:var(--navy); padding:3px 10px; border-radius:999px; margin-bottom:7px;
+  }
+  .vtag.intro{ background:var(--navy-mid); }
+  .vtag.muted{ background:#B9C0D2; color:#fff; }
+  .vinfo h3{ font-size:16px; margin:0 0 5px; color:var(--ink); line-height:1.45; }
+  .vmeta{ font-size:12.5px; color:var(--muted); }
+  .vmeta a{ color:var(--gold); text-decoration:none; }
+  .vmeta a:hover{ text-decoration:underline; }
+  .vcheck{
+    flex-shrink:0; display:inline-flex; align-items:center; gap:8px; cursor:pointer;
+    font-size:12.5px; color:var(--muted); user-select:none; white-space:nowrap;
+  }
+  .vrow.is-done .vcheck{ color:var(--gold); font-weight:700; }
+  .vcheck input{
+    appearance:none; -webkit-appearance:none; width:18px; height:18px;
+    border:1.6px solid var(--navy-mid); border-radius:5px; cursor:pointer;
+    position:relative; flex-shrink:0; background:#fff; transition:all .18s;
+  }
+  .vcheck input:checked{ background:var(--gold); border-color:var(--gold); }
+  .vcheck input:checked::after{ content:"✓"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:12px; color:var(--navy-deep); font-weight:700; }
+  @media (max-width:640px){
+    .vrow{ flex-wrap:wrap; }
+    .vthumb{ width:140px; }
+    .vcheck{ width:100%; padding-top:8px; border-top:1px dashed var(--line); }
   }
 
-  /* ---------- resources ---------- */
-  .resources{ background:#F4F2EA; }
-  .res-list{ max-width:760px; }
+  /* ================= REAL (compact) ================= */
+  .real{ background:#F4F2EA; }
+  .real .section-head{ margin-bottom:30px; }
+  .real-note{ max-width:820px; font-size:13.5px; color:var(--muted); margin:0 0 26px; display:flex; gap:9px; align-items:flex-start; }
+  .real-note .pin{ color:var(--gold); }
+  .real-list{ max-width:900px; display:grid; grid-template-columns:1fr 1fr; gap:10px 20px; }
+  @media (max-width:680px){ .real-list{ grid-template-columns:1fr; } }
+  .real-row{
+    display:flex; align-items:center; gap:14px;
+    padding:13px 16px; background:#fff; border:1px solid var(--line); border-radius:10px;
+  }
+  .real-row .rnum{
+    flex-shrink:0; width:26px; height:26px; border-radius:50%;
+    background:var(--cream); border:1px solid var(--line);
+    font-size:12px; color:var(--muted); display:flex; align-items:center; justify-content:center;
+    font-family:"Shippori Mincho",serif;
+  }
+  .real-row .rinfo{ flex:1; min-width:0; }
+  .real-row .rdate{ font-size:11.5px; color:var(--muted); }
+  .real-row .rname{ font-size:13.5px; color:var(--ink); }
+  .real-row .rtag{
+    flex-shrink:0; font-size:10.5px; color:var(--muted);
+    border:1px dashed var(--line); border-radius:999px; padding:3px 9px; white-space:nowrap;
+  }
+
+  /* ================= OVERVIEW ================= */
+  .overview-grid{ display:grid; grid-template-columns:1fr 1fr; gap:48px; max-width:1040px; }
+  @media (max-width:760px){ .overview-grid{grid-template-columns:1fr;} }
+  .overview-grid p{ color:var(--ink); font-size:15.5px; margin:0 0 16px; }
+  .overview-grid .label{ font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); font-weight:700; margin-bottom:10px; display:block; }
+
+  /* ================= RESOURCES ================= */
+  .resources{ background:var(--cream); }
+  .res-list{ max-width:820px; }
   .res-row{
     display:flex; align-items:center; justify-content:space-between; gap:16px;
     padding:20px 0; border-bottom:1px solid var(--line);
@@ -152,420 +307,480 @@
   .res-row:last-child{ border-bottom:none; }
   .res-row .res-name{ font-size:15.5px; color:var(--ink); }
   .res-row .res-sub{ font-size:12.5px; color:var(--muted); margin-top:3px; }
-  .res-btn{
-    flex-shrink:0;
-    font-size:13px; padding:9px 18px; border-radius:8px;
-    background:var(--navy); color:var(--gold-light); text-decoration:none;
-    white-space:nowrap;
-  }
+  .res-btn{ flex-shrink:0; font-size:13px; padding:9px 18px; border-radius:8px; background:var(--navy); color:var(--gold-light); text-decoration:none; white-space:nowrap; }
   .res-btn:hover{ background:var(--navy-mid); }
-  .res-btn.empty{ background:transparent; color:var(--muted); border:1px dashed var(--line); }
-  .res-category{
-    font-size:11px; letter-spacing:.18em; font-weight:700; text-transform:uppercase;
-    color:var(--gold); padding:28px 0 8px; border-bottom:2px solid var(--gold);
-    margin-bottom:4px;
-  }
-  .res-category.first{ padding-top:0; }
-  .res-category.pick{ color:var(--navy-deep); background:var(--navy); color:var(--gold-light); padding:8px 14px; border-radius:6px; border:none; display:inline-block; margin-bottom:4px; margin-top:28px; }
-  .res-category.pick.first{ margin-top:0; }
+  .res-links{ display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; max-width:380px; }
+  .res-chip{ font-size:12px; padding:7px 13px; border-radius:999px; background:var(--navy); color:var(--gold-light); text-decoration:none; white-space:nowrap; transition:background .2s ease; }
+  .res-chip:hover{ background:var(--navy-mid); }
+  .res-chip.muted{ background:transparent; color:var(--muted); border:1px dashed var(--line); }
 
-  /* ---------- cta ---------- */
-  .cta{
-    background:var(--navy-deep); color:var(--cream); text-align:center;
-    padding:90px 6vw;
-  }
+  /* ================= MORE (past single videos) ================= */
+  .more{ background:#F4F2EA; }
+  .more-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px 20px; max-width:820px; }
+  @media (max-width:680px){ .more-grid{grid-template-columns:1fr;} }
+  .more-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px; background:#fff; border:1px solid var(--line); border-radius:10px; }
+  .more-row .mname{ font-size:13.5px; color:var(--ink); }
+  .more-row a.mgo{ flex-shrink:0; font-size:12px; color:var(--gold); text-decoration:none; white-space:nowrap; }
+  .more-row a.mgo:hover{ text-decoration:underline; }
+  .more-foot{ max-width:820px; margin:22px 0 0; font-size:13px; }
+  .more-foot a{ color:var(--navy-mid); }
+
+  /* ================= CTA ================= */
+  .cta{ background:var(--navy-deep); color:var(--cream); text-align:center; padding:90px 6vw; }
   .cta .eyebrow{ color:var(--gold-light); justify-content:center; }
   .cta h2{ font-size:clamp(26px,3.6vw,40px); color:var(--gold-light); max-width:18ch; margin:0 auto 18px; }
   .cta p{ color:#C7D0E6; max-width:48ch; margin:0 auto 36px; font-size:15.5px; }
-  .cta-btn{
-    display:inline-block; background:var(--gold); color:var(--navy-deep);
-    font-weight:700; padding:16px 36px; border-radius:10px; text-decoration:none;
-    font-size:15px; letter-spacing:.02em;
-    transition:transform .2s ease;
-  }
+  .cta-btn{ display:inline-block; background:var(--gold); color:var(--navy-deep); font-weight:700; padding:16px 36px; border-radius:10px; text-decoration:none; font-size:15px; letter-spacing:.02em; transition:transform .2s ease, background .2s ease; }
   .cta-btn:hover{ transform:translateY(-2px); background:var(--gold-light); }
 
-  /* ---------- footer ---------- */
-  footer{
-    padding:40px 6vw; background:var(--navy-deep); color:#7C88AC;
+  /* ================= FOOTER ================= */
+  footer.page-foot{
+    padding:34px 6vw; background:#0D1526; color:#7C88AC;
     font-size:12.5px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
     border-top:1px solid rgba(255,255,255,.08);
   }
-  footer a{ color:#9FAAC9; text-decoration:none; }
-  footer a:hover{ color:var(--gold-light); }
+  footer.page-foot a{ color:#9FAAC9; text-decoration:none; }
+  footer.page-foot a:hover{ color:var(--gold-light); }
   .foot-links{ display:flex; gap:18px; flex-wrap:wrap; }
 
+  /* ================= RESPONSIVE ================= */
+  @media (max-width:880px){
+    .mtopbar{
+      display:flex; align-items:center; gap:12px;
+      position:sticky; top:0; z-index:70;
+      padding:12px 18px; background:var(--navy-deep); color:var(--cream);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .mtopbar .burger{ width:40px; height:40px; border-radius:9px; border:1px solid rgba(255,255,255,.15); background:transparent; color:var(--gold-light); font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+    .mtopbar .mbrand{ font-family:"Shippori Mincho",serif; font-weight:700; font-size:15px; color:var(--gold-light); }
+    .sidebar{ position:fixed; top:0; left:0; height:100vh; transform:translateX(-100%); transition:transform .28s ease; box-shadow:0 0 40px rgba(0,0,0,.4); }
+    body.nav-open .sidebar{ transform:translateX(0); }
+    body.nav-open .scrim{ display:block; position:fixed; inset:0; background:rgba(9,14,26,.5); z-index:55; }
+    .hero{ padding-top:64px; }
+  }
   @media (prefers-reduced-motion: reduce){
     .stop{ transition:none; }
     html{ scroll-behavior:auto; }
+    .sidebar{ transition:none; }
   }
 </style>
 </head>
 <body>
 
-  <nav class="nav">
-    <div class="nav-brand"><span class="dot"></span> ナイス貝 ── 羅針盤アーカイブ</div>
-    <div class="nav-links">
-      <a href="#voyage">全9回</a>
-      <a href="#overview">第2期について</a>
-      <a href="#resources">共通資料</a>
-      <a href="#next">第3期</a>
-    </div>
-  </nav>
-
-  <header class="hero">
-    <div class="eyebrow">算命学講座 ── 第2期</div>
-    <h1>九つの航海の<br>記録を、<br>ひとつの羅針盤に。</h1>
-    <p>第2期、全9回の学びの記録をまとめました。資料・録画・文字起こしは、それぞれの回のカードからご覧いただけます。</p>
-    <div class="hero-meta">
-      <div><strong>全9回</strong>講座構成</div>
-      <div><strong>算命学</strong>主なテーマ</div>
-      <div><strong>Zoom ＋ 対面</strong>開催形式</div>
-    </div>
-  </header>
-
-  <!-- ================= NOTEBOOKLM BANNER ================= -->
-  <div style="background:var(--gold); padding:20px 6vw; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
-    <div>
-      <div style="font-size:11px; letter-spacing:.18em; font-weight:700; color:var(--navy-deep); text-transform:uppercase; margin-bottom:4px;">📚 学習ツール（重要）</div>
-      <div style="font-family:'Shippori Mincho',serif; font-size:17px; font-weight:700; color:var(--navy-deep);">第2期 NotebookLM ── まずここで学んでください</div>
-    </div>
-    <a href="https://notebooklm.google.com/notebook/5815ba18-0dfc-4af9-8e7d-43f16143fbdb" target="_blank" rel="noopener"
-       style="flex-shrink:0; background:var(--navy-deep); color:var(--gold-light); font-weight:700; padding:13px 28px; border-radius:10px; text-decoration:none; font-size:14px; white-space:nowrap;">
-      NotebookLMを開く →
-    </a>
+  <div class="mtopbar">
+    <button class="burger" id="burger" aria-label="メニューを開く">☰</button>
+    <span class="mbrand">ナイス貝 占い講座 学習サイト</span>
   </div>
+  <div class="scrim" id="scrim"></div>
 
-  <!-- ================= VOYAGE MAP ================= -->
-  <section class="voyage" id="voyage">
-    <div class="section-head">
-      <div class="eyebrow">THE NINE SESSIONS</div>
-      <h2>全9回の航海記録</h2>
-      <p>各回の録画・文字起こしはカードのリンクからご覧いただけます。</p>
-    </div>
+  <div class="layout">
 
-    <div class="voyage-wrap">
-      <svg class="voyage-path" viewBox="0 0 1040 60" preserveAspectRatio="none">
-        <path d="M20,30 C 220,-10 320,70 520,30 S 820,-10 1020,30" />
-      </svg>
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="sidebar" id="sidebar">
+      <div class="side-brand"><span class="dot"></span> ナイス貝 占い講座</div>
+      <p class="side-sub">学習サイト</p>
 
-      <div class="waypoints">
+      <nav class="side-nav" id="sideNav">
+        <a href="#top"><span class="ico">⚓</span> はじめに</a>
+        <a href="#start"><span class="ico">🧭</span> 学びの進め方</a>
+        <a href="#zoom"><span class="ico">🎥</span> 動画で学ぶ（Zoom）</a>
+        <a href="#real"><span class="ico">🏫</span> リアル講座</a>
+        <a href="#resources"><span class="ico">🗂️</span> 共通資料</a>
+        <a href="#more"><span class="ico">📺</span> もっと学ぶ</a>
+        <a href="#next"><span class="ico">✨</span> 第3期の募集</a>
+      </nav>
 
-        <!-- 01 -->
-        <article class="stop">
-          <div class="num">01</div>
-          <div class="date">2026.04.16(木)</div>
-          <h3>新大久保</h3>
-          <div class="chips">
-            <a class="chip" href="https://youtu.be/-eprO8UfNm4" target="_blank" rel="noopener">録画 →</a>
-            <a class="chip" href="https://drive.google.com/file/d/1wjGOkG0Ika3TGFsrQDnbaD2b0nKhVCf5/view?usp=sharing" target="_blank" rel="noopener">音声 →</a>
-            <a class="chip empty" href="#">資料</a>
-            <a class="chip" href="https://docs.google.com/document/d/1va6NpMLKdhh0LBCmL5Owr8-mFjnxIGaGxc6OX7xb_sU/edit?usp=sharing" target="_blank" rel="noopener">文字起こし →</a>
+      <div class="side-progress">
+        <div class="sp-top">
+          <span class="sp-label">Zoom動画の進捗</span>
+          <span class="sp-count"><b id="spDone">0</b> / <span id="spTotal">0</span></span>
+        </div>
+        <div class="meter"><span id="spBar"></span></div>
+      </div>
+
+      <div class="side-foot">
+        <div class="foot-links">
+          <a href="https://reservestock.jp/page/index/44078" target="_blank" rel="noopener">公式</a>
+          <a href="https://lin.ee/jrKIohi" target="_blank" rel="noopener">LINE</a>
+          <a href="https://youtube.com/@uranai39labo" target="_blank" rel="noopener">YouTube</a>
+          <a href="https://instagram.com/niceguykatakai" target="_blank" rel="noopener">Instagram</a>
+        </div>
+        <div class="copy">© ナイス貝 ／ 片貝文昌</div>
+      </div>
+    </aside>
+
+    <!-- ================= MAIN ================= -->
+    <div class="main">
+
+      <header class="hero" id="top">
+        <div class="eyebrow">ナイス貝の占い講座 ── 学習サイト</div>
+        <h1>学びを、羅針盤に。</h1>
+        <p>Zoom講座とリアル講座で学んだことを、いつでも見返せる学習サイトです。動画・資料・鑑定アプリをここにまとめました。左のメニューから各セクションへ移動できます。</p>
+        <div class="hero-meta">
+          <div><strong>Zoom ＋ リアル</strong>2つの学び方</div>
+          <div><strong>動画・資料・アプリ</strong>教材ぜんぶ</div>
+          <div><strong>算命学 × インド占星術</strong>主なテーマ</div>
+        </div>
+      </header>
+
+      <!-- ================= START ================= -->
+      <section class="start" id="start">
+        <div class="section-head">
+          <div class="eyebrow">HOW TO LEARN</div>
+          <h2>学びの進め方</h2>
+          <p>はじめての方は、この4つの流れで進めるのがおすすめです。無理なく、何度でも見返しながら進めてください。</p>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <div class="snum">STEP 01</div>
+            <h3>動画で学ぶ</h3>
+            <p>「動画で学ぶ（Zoom）」の講座を、導入から順番に視聴します。まずは流れをつかみましょう。</p>
           </div>
-        </article>
-
-        <!-- 02 -->
-        <article class="stop">
-          <div class="num">02</div>
-          <div class="date">2026.04.19(日)</div>
-          <h3>綱島（K-Plat綱島）</h3>
-          <div class="chips">
-            <a class="chip empty" href="#">録画</a>
-            <a class="chip empty" href="#">資料</a>
-            <a class="chip" href="https://docs.google.com/document/d/14fOUls0C-pKeqRYYhzro0wARUfbei8Wnu1cCV-U-uDw/edit?usp=sharing" target="_blank" rel="noopener">文字起こし →</a>
+          <div class="step">
+            <div class="snum">STEP 02</div>
+            <h3>資料で復習</h3>
+            <p>「共通資料」のスライドを開き、気になった所を読み返して理解を深めます。</p>
           </div>
-        </article>
-
-        <!-- 03 -->
-        <article class="stop">
-          <div class="num">03</div>
-          <div class="date">2026.04.26(日)</div>
-          <h3>中原市民館</h3>
-          <div class="chips">
-            <a class="chip" href="https://drive.google.com/file/d/1KkBEeWddOdeYSH_X8cSRaBN6CV3ltCE-/view?usp=sharing" target="_blank" rel="noopener">録画 →</a>
-            <a class="chip" href="https://drive.google.com/file/d/1AZrfDZsxr5QJf0L2jj91NCm4Y7HmRaWU/view?usp=sharing" target="_blank" rel="noopener">音声 →</a>
-            <a class="chip empty" href="#">資料</a>
-            <a class="chip" href="https://docs.google.com/document/d/1uUW6HoONp8e6LnD_cgEP0AEontqBS0MPEdL3Tj0FOiU/edit?usp=sharing" target="_blank" rel="noopener">文字起こし →</a>
+          <div class="step">
+            <div class="snum">STEP 03</div>
+            <h3>アプリで実践</h3>
+            <p>鑑定システムやかんたんアプリで、自分や家族・友人を実際に鑑定してみましょう。</p>
           </div>
-        </article>
-
-        <!-- 04 -->
-        <article class="stop">
-          <div class="num">04</div>
-          <div class="date">2026.05.14(木)</div>
-          <h3>五反田（スクエア会議室）</h3>
-          <div class="chips">
-            <a class="chip" href="https://youtu.be/uY8P34YkRxs" target="_blank" rel="noopener">録画 →</a>
-            <a class="chip" href="https://drive.google.com/file/d/1IZnyFyA0tpio_rzrqf_cEljzKes1Me4J/view?usp=sharing" target="_blank" rel="noopener">音声 →</a>
-            <a class="chip empty" href="#">資料</a>
-            <a class="chip" href="https://docs.google.com/document/d/15m_aXtlJDVWsEcU5Cyz_qIxmcrDxJ8nSeVPUcEH5fK8/edit?usp=sharing" target="_blank" rel="noopener">文字起こし →</a>
+          <div class="step">
+            <div class="snum">STEP 04</div>
+            <h3>進捗を記録</h3>
+            <p>観終わった回は「視聴済み」にチェック。左のメニューで進み具合が一目で分かります。</p>
           </div>
-        </article>
+        </div>
+        <p class="start-note"><span class="pin">📌</span> チェックした進捗は、ログイン不要でこの端末（ブラウザ）に自動保存されます。次に開いたときも続きから確認できます。</p>
+      </section>
 
-        <!-- 05 -->
-        <article class="stop">
-          <div class="num">05</div>
-          <div class="date">2026.05.17(日)</div>
-          <h3>綱島（K-Plat綱島）</h3>
-          <div class="chips">
-            <a class="chip" href="https://drive.google.com/file/d/1YpMBq0lUPQu4FxjOcePikAS-ga-22IUZ/view?usp=sharing" target="_blank" rel="noopener">録画 →</a>
-            <a class="chip" href="https://drive.google.com/file/d/1CqqyDNxld7IfK7TAxb3NJFGDWQmfy01g/view?usp=sharing" target="_blank" rel="noopener">音声 →</a>
-            <a class="chip empty" href="#">資料</a>
-            <a class="chip" href="https://docs.google.com/document/d/1YvEd-BtKp_fVW8nzw0BuTiS8_bybC94Q6XvKmLMykRg/edit?usp=sharing" target="_blank" rel="noopener">文字起こし →</a>
+      <!-- ================= VIDEO / ZOOM ================= -->
+      <section class="zoom" id="zoom">
+        <div class="section-head">
+          <div class="eyebrow">動画で学ぶ ── Zoom講座</div>
+          <h2>Zoom講座（カリキュラム順）</h2>
+          <p>この順番で観れば、学びが積み上がります。まずは短い「導入」から。観終わった回は「視聴済み」にチェックを入れてください。</p>
+        </div>
+
+        <div class="progress-card">
+          <div class="pc-text">視聴の進捗　<b id="pcDone">0</b> / <span id="pcTotal">0</span></div>
+          <div class="meter"><span id="pcBar"></span></div>
+          <button class="pc-reset" id="pcReset" type="button">進捗をリセット</button>
+        </div>
+
+        <div class="zoom-wrap">
+          <div class="vlist">
+
+            <div class="vrow" data-id="z00">
+              <div class="vthumb" data-vid="XOoohgzn27A"><img loading="lazy" src="https://img.youtube.com/vi/XOoohgzn27A/mqdefault.jpg" alt=""><span class="pbtn">▶</span></div>
+              <div class="vinfo">
+                <span class="vtag intro">導入</span>
+                <h3>変化の時代の「設計図」の作り方</h3>
+                <div class="vmeta">約6分　・　<a href="lesson.html#z00">章・要約を見る →</a></div>
+              </div>
+              <label class="vcheck"><input type="checkbox" class="done-check" data-id="z00"> 視聴済み</label>
+            </div>
+
+            <div class="vrow" data-id="z01">
+              <div class="vthumb" data-vid="-eprO8UfNm4"><img loading="lazy" src="https://img.youtube.com/vi/-eprO8UfNm4/mqdefault.jpg" alt=""><span class="pbtn">▶</span></div>
+              <div class="vinfo">
+                <span class="vtag">第1回</span>
+                <h3>占いを学ぶ理由</h3>
+                <div class="vmeta">2:02:13　・　<a href="lesson.html#z01">章・要約を見る →</a>　・　<a href="https://www.astro.com/swisseph/swepha_j.htm" target="_blank" rel="noopener">エフェメリス</a></div>
+              </div>
+              <label class="vcheck"><input type="checkbox" class="done-check" data-id="z01"> 視聴済み</label>
+            </div>
+
+            <div class="vrow" data-id="z015">
+              <div class="vthumb" data-vid="uY8P34YkRxs"><img loading="lazy" src="https://img.youtube.com/vi/uY8P34YkRxs/mqdefault.jpg" alt=""><span class="pbtn">▶</span></div>
+              <div class="vinfo">
+                <span class="vtag">第1.5回</span>
+                <h3>占いを学ぶ理由 ②（補講）</h3>
+                <div class="vmeta">2:08:50　・　<a href="lesson.html#z015">章・要約を見る →</a></div>
+              </div>
+              <label class="vcheck"><input type="checkbox" class="done-check" data-id="z015"> 視聴済み</label>
+            </div>
+
+            <div class="vrow" data-id="z02">
+              <div class="vthumb" data-vid="_wS2rScW0Jo"><img loading="lazy" src="https://img.youtube.com/vi/_wS2rScW0Jo/mqdefault.jpg" alt=""><span class="pbtn">▶</span></div>
+              <div class="vinfo">
+                <span class="vtag">第2回</span>
+                <h3>インド占星術の基礎</h3>
+                <div class="vmeta">1:54:28　・　<a href="lesson.html#z02">章・要約を見る →</a>　・　<a href="https://www.astro.com/swisseph/swepha_j.htm" target="_blank" rel="noopener">エフェメリス</a></div>
+              </div>
+              <label class="vcheck"><input type="checkbox" class="done-check" data-id="z02"> 視聴済み</label>
+            </div>
+
+            <div class="vrow" data-id="z03">
+              <div class="vthumb" data-vid="W55Sgl9yAUk"><img loading="lazy" src="https://img.youtube.com/vi/W55Sgl9yAUk/mqdefault.jpg" alt=""><span class="pbtn">▶</span></div>
+              <div class="vinfo">
+                <span class="vtag">第3回</span>
+                <h3>鑑定アプリの使い方</h3>
+                <div class="vmeta">1:57:02　・　<a href="lesson.html#z03">章・要約を見る →</a></div>
+              </div>
+              <label class="vcheck"><input type="checkbox" class="done-check" data-id="z03"> 視聴済み</label>
+            </div>
+
+            <div class="vrow" data-id="z04">
+              <div class="vthumb" data-vid="30bFMTfNkkM"><img loading="lazy" src="https://img.youtube.com/vi/30bFMTfNkkM/mqdefault.jpg" alt=""><span class="pbtn">▶</span></div>
+              <div class="vinfo">
+                <span class="vtag">第4回</span>
+                <h3>鑑定アプリで家族を鑑定</h3>
+                <div class="vmeta">2:04:27　・　<a href="lesson.html#z04">章・要約を見る →</a></div>
+              </div>
+              <label class="vcheck"><input type="checkbox" class="done-check" data-id="z04"> 視聴済み</label>
+            </div>
+
+            <div class="vrow" data-id="z05">
+              <div class="vthumb" data-vid="WdvhP55Z5bE"><img loading="lazy" src="https://img.youtube.com/vi/WdvhP55Z5bE/mqdefault.jpg" alt=""><span class="pbtn">▶</span></div>
+              <div class="vinfo">
+                <span class="vtag">第5回</span>
+                <h3>第5回 講座</h3>
+                <div class="vmeta">1:49:52　・　<a href="lesson.html#z05">章・要約を見る →</a></div>
+              </div>
+              <label class="vcheck"><input type="checkbox" class="done-check" data-id="z05"> 視聴済み</label>
+            </div>
+
+            <div class="vrow pending" data-id="z06">
+              <div class="vthumb pending"><span class="pend">準備中</span></div>
+              <div class="vinfo">
+                <span class="vtag muted">第6回</span>
+                <h3>第6回 講座</h3>
+                <div class="vmeta">公開準備中</div>
+              </div>
+            </div>
+
           </div>
-        </article>
+        </div>
+      </section>
 
-        <!-- 06 -->
-        <article class="stop">
-          <div class="num">06</div>
-          <div class="date">2026.05.24(日)</div>
-          <h3>五反田（スクエア会議室）</h3>
-          <div class="chips">
-            <a class="chip" href="https://drive.google.com/file/d/14xZfl2VFUpT2Q-AbhPZBJFwKWU-qxSBQ/view?usp=sharing" target="_blank" rel="noopener">録画 →</a>
-            <a class="chip" href="https://drive.google.com/file/d/11TDCmpgvIvr7MJJbL77e4SEuS_GI3Cwb/view?usp=sharing" target="_blank" rel="noopener">音声 →</a>
-            <a class="chip empty" href="#">資料</a>
-            <a class="chip" href="https://docs.google.com/document/d/1xK6mjShkxuy4icMCRY1yeKvBEwXUb3kPbtHJU3J2MYo/edit?usp=sharing" target="_blank" rel="noopener">文字起こし →</a>
+      <!-- ================= REAL (compact) ================= -->
+      <section class="real" id="real">
+        <div class="section-head">
+          <div class="eyebrow">リアル講座 ── 対面</div>
+          <h2>リアル講座（対面）の記録</h2>
+        </div>
+        <p class="real-note"><span class="pin">📌</span> 対面で開催したリアル講座の記録です。各回の「動画・書き起こし →」から、動画・タイムライン・要約・編集書き起こしのページを開けます。（一部の対面日は準備中です）</p>
+        <div class="real-list">
+          <a class="real-row" href="real-2ki-01.html" style="text-decoration:none;"><div class="rnum">1</div><div class="rinfo"><div class="rdate">2026.04.16(木) ・ 新大久保</div><div class="rname">第1回 占いの基礎</div></div><span class="rtag" style="border-style:solid;border-color:var(--gold);color:var(--gold);">動画・書き起こし →</span></a>
+          <div class="real-row"><div class="rnum">–</div><div class="rinfo"><div class="rdate">2026.04.19(日) ・ 綱島</div><div class="rname">第1回（対面・別会場）</div></div><span class="rtag">準備中</span></div>
+          <a class="real-row" href="real-2ki-02.html" style="text-decoration:none;"><div class="rnum">2</div><div class="rinfo"><div class="rdate">2026.04.26(日) ・ 中原市民館</div><div class="rname">第2回 占いの分類体系</div></div><span class="rtag" style="border-style:solid;border-color:var(--gold);color:var(--gold);">動画・書き起こし →</span></a>
+          <a class="real-row" href="real-2ki-03.html" style="text-decoration:none;"><div class="rnum">3</div><div class="rinfo"><div class="rdate">2026.05.14(木) ・ 五反田</div><div class="rname">第3回 魁罡とインド占星術</div></div><span class="rtag" style="border-style:solid;border-color:var(--gold);color:var(--gold);">動画・書き起こし →</span></a>
+          <a class="real-row" href="real-2ki-04.html" style="text-decoration:none;"><div class="rnum">4</div><div class="rinfo"><div class="rdate">2026.05.17(日) ・ 綱島</div><div class="rname">第4回 岩戸開きと占いシステム</div></div><span class="rtag" style="border-style:solid;border-color:var(--gold);color:var(--gold);">動画・書き起こし →</span></a>
+          <a class="real-row" href="real-2ki-05.html" style="text-decoration:none;"><div class="rnum">5</div><div class="rinfo"><div class="rdate">2026.05.24(日) ・ 五反田</div><div class="rname">第5回 ハードモードとAI自作</div></div><span class="rtag" style="border-style:solid;border-color:var(--gold);color:var(--gold);">動画・書き起こし →</span></a>
+          <div class="real-row"><div class="rnum">–</div><div class="rinfo"><div class="rdate">2026.06.11(木) ・ 五反田</div><div class="rname">対面（別会場）</div></div><span class="rtag">準備中</span></div>
+          <a class="real-row" href="real-2ki-06.html" style="text-decoration:none;"><div class="rnum">6</div><div class="rinfo"><div class="rdate">2026.06.14(日) ・ 新横浜</div><div class="rname">第6回 十干と黄金の羅針盤・産土神社</div></div><span class="rtag" style="border-style:solid;border-color:var(--gold);color:var(--gold);">動画・書き起こし →</span></a>
+          <a class="real-row" href="real-2ki-07.html" style="text-decoration:none;"><div class="rnum">7</div><div class="rinfo"><div class="rdate">2026.06.28(日) ・ 中原区自治会館</div><div class="rname">第7回補講 自己紹介と才能の発掘</div></div><span class="rtag" style="border-style:solid;border-color:var(--gold);color:var(--gold);">動画・書き起こし →</span></a>
+        </div>
+      </section>
+
+      <!-- ================= RESOURCES ================= -->
+      <section class="resources" id="resources">
+        <div class="section-head">
+          <div class="eyebrow">共通資料</div>
+          <h2>期を通して使う資料</h2>
+          <p>毎回参照する、回をまたいだ共通の資料はここにまとめます。</p>
+        </div>
+        <div class="res-list">
+          <div class="res-row">
+            <div>
+              <div class="res-name">鑑定システム(スプレッドシート)</div>
+              <div class="res-sub">複製してお使いください</div>
+            </div>
+            <div class="res-links">
+              <a class="res-chip" href="https://docs.google.com/spreadsheets/d/1iLtTJl3vr8xMCmhcKs2Xzmwddk5VJvaGgNiyAjxkkxA/edit?usp=sharing" target="_blank" rel="noopener">基本鑑定システム</a>
+              <a class="res-chip" href="https://docs.google.com/spreadsheets/d/13MoIxvJH7eWPJ1CjaSUMDTBb_k_dh03DjqOaDXpTHME/edit?usp=sharing" target="_blank" rel="noopener">シンプル鑑定システム</a>
+              <a class="res-chip" href="https://docs.google.com/spreadsheets/d/1dCrVlkfn5-9Z00nmLz3SzRhxJDWtsy9Oz99GLhX_xEI/edit?usp=sharing" target="_blank" rel="noopener">フラクタル鑑定システム</a>
+            </div>
           </div>
-        </article>
-
-        <!-- 07 -->
-        <article class="stop">
-          <div class="num">07</div>
-          <div class="date">2026.06.11(木)</div>
-          <h3>五反田（スクエア会議室）</h3>
-          <div class="chips">
-            <a class="chip" href="https://youtu.be/_wS2rScW0Jo" target="_blank" rel="noopener">録画 →</a>
-            <a class="chip empty" href="#">資料</a>
-            <a class="chip empty" href="#">文字起こし</a>
+          <div class="res-row">
+            <div>
+              <div class="res-name">鑑定アプリ</div>
+              <div class="res-sub">ブラウザですぐ使える自作アプリ</div>
+            </div>
+            <div class="res-links">
+              <a class="res-chip" href="https://script.google.com/macros/s/AKfycbwT1lD_60Mea9I1j6nZ8s3a22SOJBEi0UDA1n9-DTDx5xN1VJj3SxnKciQD2RDut55LmQ/exec" target="_blank" rel="noopener">かんたん干支アプリ</a>
+              <a class="res-chip" href="https://script.google.com/macros/s/AKfycbzuC4SKTPrx2SZKwrUvGE7TYsMm1UvFv8Uh7LuM-LpntiIKegTyif4vqUAO9tiWLWZ0/exec" target="_blank" rel="noopener">基本鑑定アプリ</a>
+              <a class="res-chip" href="https://script.google.com/macros/s/AKfycbxanSULx1ZfemExHmfhhPnJyBu3XiGQCIoHvDwvZXjtSVCXbSRnUskl5l7Jsc-JWxz5EQ/exec" target="_blank" rel="noopener">インド占星術アプリ</a>
+            </div>
           </div>
-        </article>
-
-        <!-- 08 -->
-        <article class="stop">
-          <div class="num">08</div>
-          <div class="date">2026.06.14(日)</div>
-          <h3>新横浜（TSUBAKI新横浜スペース）</h3>
-          <div class="chips">
-            <a class="chip" href="https://drive.google.com/file/d/1USrVU28Feikx57uQASVGlTqZ_MK2NiM_/view?usp=sharing" target="_blank" rel="noopener">録画 →</a>
-            <a class="chip" href="https://drive.google.com/file/d/16SdUl_iK5LCTyyTBubs3pD7We9xrkYh0/view?usp=sharing" target="_blank" rel="noopener">音声 →</a>
-            <a class="chip empty" href="#">資料</a>
-            <a class="chip" href="https://docs.google.com/document/d/1mmcj8LCETpSCTUKch34RkXUh7LMvK2GctTp5RLhbKYQ/edit?usp=sharing" target="_blank" rel="noopener">文字起こし →</a>
+          <div class="res-row">
+            <div>
+              <div class="res-name">占い資料「六十干支鑑定」スライド一式</div>
+              <div class="res-sub">基本・育成・十干十二支・六十干支・数秘術・インド占星術</div>
+            </div>
+            <div class="res-links">
+              <a class="res-chip" href="https://docs.google.com/presentation/d/1pcke8KRNC0lTih2Z1Jj1uV2b0uuCbnq_Hga2LSpR6K0/present" target="_blank" rel="noopener">①占いの基本</a>
+              <a class="res-chip" href="https://docs.google.com/presentation/d/1FeDqkddmoyR3qRt4bvs78Rqmr3F54XOWW6-40EfPYqc/present" target="_blank" rel="noopener">②育成講座</a>
+              <a class="res-chip" href="https://docs.google.com/presentation/d/11L0s4TqpEPkOsTQg2ZpXvS5Pf4aWDxsgn82PXLitJ_M/present" target="_blank" rel="noopener">③十干十二支</a>
+              <a class="res-chip" href="https://docs.google.com/presentation/d/1nurx1hhy7oNBpnR61naSNvBCAxjCXCGDV5wHFFm2jGU/present" target="_blank" rel="noopener">④六十干支・動物占い</a>
+              <a class="res-chip" href="https://docs.google.com/presentation/d/1XGuxvImGEpruagR5rFMZuEHOxgaa4SIIL0JbKZ208qc/present" target="_blank" rel="noopener">⓪数秘術</a>
+              <a class="res-chip" href="https://docs.google.com/presentation/d/19ehGjPeU4HU714-WeqYj6gctxJiHQv1Hwf36lZw0XNY/present" target="_blank" rel="noopener">インド占星術の基礎</a>
+            </div>
           </div>
-        </article>
-
-        <!-- 09 補講 -->
-        <article class="stop bonus">
-          <div class="num">09</div>
-          <div class="date">2026.06.28(日)</div>
-          <h3>中原区自治会館 多目的室1</h3>
-          <div class="chips">
-            <a class="chip empty" href="#">録画</a>
-            <a class="chip" href="https://drive.google.com/file/d/11PahczPsoQ301Er0BVlEGSMC0Kdtb8G8/view?usp=sharing" target="_blank" rel="noopener">音声 →</a>
-            <a class="chip empty" href="#">市場データ資料</a>
-            <a class="chip" href="https://docs.google.com/document/d/182_47i-Zi3G-92avd2qpHx0lvk6omGPKjM8l9rtedXc/edit?usp=sharing" target="_blank" rel="noopener">文字起こし →</a>
+          <div class="res-row">
+            <div>
+              <div class="res-name">補講資料「占い：迷信から戦略へ」</div>
+              <div class="res-sub">出口戦略・実学化・なぜ今占いが必要か(Google Driveに格納/リンク準備中)</div>
+            </div>
+            <div class="res-links">
+              <span class="res-chip muted">❶迷信から戦略へ(mp4)</span>
+              <span class="res-chip muted">❷未来を創る(pptx)</span>
+              <span class="res-chip muted">❸実学に変える(pptx)</span>
+              <span class="res-chip muted">❹日本の叡智とAI(pdf)</span>
+            </div>
           </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= OVERVIEW ================= -->
-  <section id="overview">
-    <div class="section-head">
-      <div class="eyebrow">第2期について</div>
-      <h2>この期で、何を学んだか</h2>
-    </div>
-    <div class="overview-grid">
-      <div>
-        <span class="label">学びの内容</span>
-        <p>算命学の基礎(十干・十二支・五行)から、十大主星などの鑑定理論、そして実際にお互いを鑑定し合う実践まで進みました。単発の鑑定を受けるのではなく、継続して学ぶことで、自分自身の人生のサイクルを自分の手で読み解く視点が育ったことが、この期の一番の成果です。</p>
-      </div>
-      <div>
-        <span class="label">場としてのあり方</span>
-        <p>批判せず、誠実に評価し合い、安心して本音を話せる場であることを、講座を通じて大切にしてきました。内容以上に、この関わり方そのものが今期の財産になっています。</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= RESOURCES ================= -->
-  <section class="resources" id="resources">
-    <div class="section-head">
-      <div class="eyebrow">共通資料</div>
-      <h2>期を通して使う資料</h2>
-      <p>毎回参照する、回をまたいだ共通の資料はここにまとめます。</p>
-    </div>
-    <div class="res-list">
-
-      <!-- ★ まず今おすすめの -->
-      <div class="res-category pick first">★ まず今おすすめの</div>
-
-      <div class="res-row">
-        <div>
-          <div class="res-name">①生きづらさ鑑定</div>
-          <div class="res-sub">本日の講座資料</div>
+          <div class="res-row">
+            <div>
+              <div class="res-name">NotebookLM ノートブック</div>
+              <div class="res-sub">音声・文字起こしの横断検索・要約(Googleログインが必要)</div>
+            </div>
+            <a class="res-btn" href="https://notebooklm.google.com/notebook/5815ba18-0dfc-4af9-8e7d-43f16143fbdb" target="_blank" rel="noopener">開く →</a>
+          </div>
+          <div class="res-row">
+            <div>
+              <div class="res-name">受講者コミュニティ「占い羅針盤ギルド」</div>
+              <div class="res-sub">LINEオープンチャット</div>
+            </div>
+            <a class="res-btn" href="https://line.me/ti/g2/a35owWpdaeqz0uyCnoPATW_Rb9vUuYNpH4GLaA?utm_source=invitation&amp;utm_medium=link_copy&amp;utm_campaign=default" target="_blank" rel="noopener">参加する →</a>
+          </div>
         </div>
-        <a class="res-btn" href="https://uranai39labo.github.io/niceguy-app/hardmode_v3.html" target="_blank" rel="noopener">開く →</a>
-      </div>
+      </section>
 
-      <div class="res-row">
-        <div>
-          <div class="res-name">②AIナイス貝の黄金の羅針盤</div>
-          <div class="res-sub">本日の講座資料</div>
+      <!-- ================= MORE (single videos) ================= -->
+      <section class="more" id="more">
+        <div class="section-head">
+          <div class="eyebrow">もっと学ぶ ── 単発動画</div>
+          <h2>興味に応じて観る、単発の動画</h2>
+          <p>YouTubeで公開中の単発シリーズです。カリキュラム順ではないので、順番学習には使わず、気になったテーマから自由にどうぞ。</p>
         </div>
-        <a class="res-btn" href="https://gemini.google.com/gem/1FjVcGq-KpP23ZNBnEAHJcCX6vUyB3PnU" target="_blank" rel="noopener">開く →</a>
-      </div>
-
-      <div class="res-row">
-        <div>
-          <div class="res-name">③講座生用の学習リンク</div>
-          <div class="res-sub">本日の講座資料</div>
+        <div class="more-grid">
+          <div class="more-row"><span class="mname">なぜ今「占い」が必要なのか？桃太郎の秘密</span><a class="mgo" href="https://www.youtube.com/watch?v=pR87CfWiSBg" target="_blank" rel="noopener">観る →</a></div>
+          <div class="more-row"><span class="mname">数秘術入門講座（003）</span><a class="mgo" href="https://www.youtube.com/watch?v=4zvnDebpZ2Q" target="_blank" rel="noopener">観る →</a></div>
+          <div class="more-row"><span class="mname">インド占星術の基礎の基礎（011）</span><a class="mgo" href="https://www.youtube.com/watch?v=joXf-5hPLJc" target="_blank" rel="noopener">観る →</a></div>
+          <div class="more-row"><span class="mname">才能が目覚める命卜相（012）</span><a class="mgo" href="https://www.youtube.com/watch?v=ZkYiCZAOllY" target="_blank" rel="noopener">観る →</a></div>
         </div>
-        <a class="res-btn" href="https://uranai39labo.github.io/niceguy-app/step_curriculum.html" target="_blank" rel="noopener">開く →</a>
-      </div>
+        <p class="more-foot"><a href="https://youtube.com/@uranai39labo" target="_blank" rel="noopener">▶ YouTubeチャンネルで単発シリーズをすべて見る →</a></p>
+      </section>
 
-      <div class="res-row">
-        <div>
-          <div class="res-name">④ナイス貝の黄金の羅針盤</div>
-          <div class="res-sub">note</div>
+      <!-- ================= NEXT ================= -->
+      <section class="cta" id="next">
+        <div class="eyebrow" style="display:flex;">第3期 募集中</div>
+        <h2>次の学びも、<br>一緒に。</h2>
+        <p>これまで築いた基礎をさらに深めながら、自分自身の人生の柱を、自分の手で読めるようになる講座です。</p>
+        <a class="cta-btn" href="https://forms.gle/j9689XrVWLoGRsKh8" target="_blank" rel="noopener">第3期に申し込む →</a>
+      </section>
+
+      <footer class="page-foot">
+        <div>ナイス貝 ／ 片貝文昌</div>
+        <div class="foot-links">
+          <a href="https://reservestock.jp/page/index/44078" target="_blank" rel="noopener">公式サイト</a>
+          <a href="https://lin.ee/jrKIohi" target="_blank" rel="noopener">LINE</a>
+          <a href="https://youtube.com/@uranai39labo" target="_blank" rel="noopener">YouTube</a>
+          <a href="https://instagram.com/niceguykatakai" target="_blank" rel="noopener">Instagram</a>
         </div>
-        <a class="res-btn" href="https://note.com/nicekai" target="_blank" rel="noopener">開く →</a>
-      </div>
+      </footer>
 
-      <!-- 学習スライド -->
-      <div class="res-category">学習スライド</div>
+    </div><!-- /.main -->
+  </div><!-- /.layout -->
 
-      <div class="res-row">
-        <div>
-          <div class="res-name">占い基本の見方</div>
-          <div class="res-sub">スライド（プレゼント版）</div>
-        </div>
-        <a class="res-btn" href="https://docs.google.com/presentation/d/1pcke8KRNC0lTih2Z1Jj1uV2b0uuCbnq_Hga2LSpR6K0/present" target="_blank" rel="noopener">開く →</a>
-      </div>
+<script>
+(function(){
+  "use strict";
+  var KEY = "nicekai_learn_v2";
 
-      <div class="res-row">
-        <div>
-          <div class="res-name">占い師の育成講座01</div>
-          <div class="res-sub">スライド</div>
-        </div>
-        <a class="res-btn" href="https://docs.google.com/presentation/d/1FeDqkddmoyR3qRt4bvs78Rqmr3F54XOWW6-40EfPYqc/present" target="_blank" rel="noopener">開く →</a>
-      </div>
+  function load(){ try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){ return {}; } }
+  function save(p){ try { localStorage.setItem(KEY, JSON.stringify(p)); } catch(e){} }
 
-      <div class="res-row">
-        <div>
-          <div class="res-name">十干十二支資料</div>
-          <div class="res-sub">スライド（2026年版）</div>
-        </div>
-        <a class="res-btn" href="https://docs.google.com/presentation/d/11L0s4TqpEPkOsTQg2ZpXvS5Pf4aWDxsgn82PXLitJ_M/present" target="_blank" rel="noopener">開く →</a>
-      </div>
+  var checks = Array.prototype.slice.call(document.querySelectorAll(".done-check"));
+  var TOTAL = checks.length;
+  var spDone = document.getElementById("spDone");
+  var spTotal = document.getElementById("spTotal");
+  var spBar  = document.getElementById("spBar");
+  var pcDone = document.getElementById("pcDone");
+  var pcTotal = document.getElementById("pcTotal");
+  var pcBar  = document.getElementById("pcBar");
+  if(spTotal) spTotal.textContent = TOTAL;
+  if(pcTotal) pcTotal.textContent = TOTAL;
 
-      <div class="res-row">
-        <div>
-          <div class="res-name">六十干支・動物占い</div>
-          <div class="res-sub">スライド</div>
-        </div>
-        <a class="res-btn" href="https://docs.google.com/presentation/d/1nurx1hhy7oNBpnR61naSNvBCAxjCXCGDV5wHFFm2jGU/present" target="_blank" rel="noopener">開く →</a>
-      </div>
+  function refresh(){
+    var done = 0;
+    checks.forEach(function(cb){ if(cb.checked) done++; });
+    var pct = TOTAL ? Math.round(done / TOTAL * 100) : 0;
+    if(spDone) spDone.textContent = done;
+    if(pcDone) pcDone.textContent = done;
+    if(spBar)  spBar.style.width  = pct + "%";
+    if(pcBar)  pcBar.style.width  = pct + "%";
+  }
 
-      <div class="res-row">
-        <div>
-          <div class="res-name">数秘術講座</div>
-          <div class="res-sub">スライド（2026年版）</div>
-        </div>
-        <a class="res-btn" href="https://docs.google.com/presentation/d/1XGuxvImGEpruagR5rFMZuEHOxgaa4SIIL0JbKZ208qc/present" target="_blank" rel="noopener">開く →</a>
-      </div>
+  var state = load();
+  checks.forEach(function(cb){
+    var id = cb.getAttribute("data-id");
+    var on = !!state[id];
+    cb.checked = on;
+    var card = cb.closest(".vrow");
+    if(card) card.classList.toggle("is-done", on);
+    cb.addEventListener("change", function(){
+      var s = load();
+      s[id] = cb.checked;
+      save(s);
+      if(card) card.classList.toggle("is-done", cb.checked);
+      refresh();
+    });
+  });
+  refresh();
 
-      <div class="res-row">
-        <div>
-          <div class="res-name">インド占星術</div>
-          <div class="res-sub">スライド</div>
-        </div>
-        <a class="res-btn" href="https://docs.google.com/presentation/d/19ehGjPeU4HU714-WeqYj6gctxJiHQv1Hwf36lZw0XNY/present" target="_blank" rel="noopener">開く →</a>
-      </div>
+  var reset = document.getElementById("pcReset");
+  if(reset){
+    reset.addEventListener("click", function(){
+      if(!confirm("この端末の視聴チェックをすべてリセットします。よろしいですか？")) return;
+      save({});
+      checks.forEach(function(cb){
+        cb.checked = false;
+        var card = cb.closest(".vrow");
+        if(card) card.classList.remove("is-done");
+      });
+      refresh();
+    });
+  }
 
-      <!-- 鑑定ツール -->
-      <div class="res-category">鑑定ツール</div>
+  // click a thumbnail -> play the video inline in that row
+  document.querySelectorAll(".vthumb[data-vid]").forEach(function(t){
+    t.addEventListener("click", function(){
+      var vid = t.getAttribute("data-vid");
+      if(!vid || t.querySelector("iframe")) return;
+      t.innerHTML = '<iframe src="https://www.youtube.com/embed/'+vid+'?rel=0&autoplay=1" title="動画" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+    });
+  });
 
-      <div class="res-row">
-        <div>
-          <div class="res-name">鑑定システム Ver1.6（基本）</div>
-          <div class="res-sub">スプレッドシート・複製して使用</div>
-        </div>
-        <a class="res-btn" href="https://docs.google.com/spreadsheets/d/1iLtTJl3vr8xMCmhcKs2Xzmwddk5VJvaGgNiyAjxkkxA/edit?usp=sharing" target="_blank" rel="noopener">開く →</a>
-      </div>
+  var burger = document.getElementById("burger");
+  var scrim  = document.getElementById("scrim");
+  function closeNav(){ document.body.classList.remove("nav-open"); }
+  if(burger) burger.addEventListener("click", function(){ document.body.classList.toggle("nav-open"); });
+  if(scrim)  scrim.addEventListener("click", closeNav);
+  document.querySelectorAll("#sideNav a").forEach(function(a){ a.addEventListener("click", closeNav); });
 
-      <div class="res-row">
-        <div>
-          <div class="res-name">かんたん鑑定システム Ver1.6</div>
-          <div class="res-sub">スプレッドシート・複製して使用</div>
-        </div>
-        <a class="res-btn" href="https://docs.google.com/spreadsheets/d/13MoIxvJH7eWPJ1CjaSUMDTBb_k_dh03DjqOaDXpTHME/edit?usp=sharing" target="_blank" rel="noopener">開く →</a>
-      </div>
-
-      <div class="res-row">
-        <div>
-          <div class="res-name">フラクタル鑑定システム</div>
-          <div class="res-sub">スプレッドシート・2026/05/01配布版</div>
-        </div>
-        <a class="res-btn" href="https://docs.google.com/spreadsheets/d/1dCrVlkfn5-9Z00nmLz3SzRhxJDWtsy9Oz99GLhX_xEI/edit?usp=sharing" target="_blank" rel="noopener">開く →</a>
-      </div>
-
-      <!-- その他 -->
-      <div class="res-category">その他</div>
-
-      <div class="res-row">
-        <div>
-          <div class="res-name">受講者コミュニティ</div>
-          <div class="res-sub">LINEオープンチャット「占い羅針盤ギルド」</div>
-        </div>
-        <a class="res-btn" href="https://line.me/ti/g2/a35owWpdaeqz0uyCnoPATW_Rb9vUuYNpH4GLaA?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" target="_blank" rel="noopener">参加する →</a>
-      </div>
-
-      <div class="res-row">
-        <div>
-          <div class="res-name">講座ポータルサイト</div>
-          <div class="res-sub">Google Sites（資料・アーカイブ一覧）</div>
-        </div>
-        <a class="res-btn" href="https://sites.google.com/view/niceuranai02/home" target="_blank" rel="noopener">開く →</a>
-      </div>
-
-      <div class="res-row">
-        <div>
-          <div class="res-name">第2期 振り返りサイト</div>
-          <div class="res-sub">このアーカイブページのURL</div>
-        </div>
-        <a class="res-btn" href="https://uranai39labo.github.io/niceguy-app/nice-kai-2ki.html" target="_blank" rel="noopener">開く →</a>
-      </div>
-
-      <div class="res-row">
-        <div>
-          <div class="res-name">占い市場データ（PowerPoint）</div>
-          <div class="res-sub">6/28 補講で使用</div>
-        </div>
-        <a class="res-btn empty" href="#">リンクを追加</a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ================= NEXT TERM CTA ================= -->
-  <section class="cta" id="next">
-    <div class="eyebrow" style="display:flex;">第3期 募集中</div>
-    <h2>次の航海も、<br>一緒に。</h2>
-    <p>第2期で築いた基礎をさらに深めながら、自分自身の人生の柱を、自分の手で読めるようになる講座です。</p>
-    <a class="cta-btn" href="https://forms.gle/d6mZZjWRfwQB9pZp9" target="_blank" rel="noopener">第3期に申し込む →</a>
-  </section>
-
-  <footer>
-    <div>ナイス貝 ／ 片貝文昌</div>
-    <div class="foot-links">
-      <a href="https://reservestock.jp/page/index/44078" target="_blank" rel="noopener">公式サイト</a>
-      <a href="https://lin.ee/jrKIohi" target="_blank" rel="noopener">LINE</a>
-      <a href="https://youtube.com/@uranai39labo" target="_blank" rel="noopener">YouTube</a>
-      <a href="https://instagram.com/niceguykatakai" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://note.com/nicekai" target="_blank" rel="noopener">note</a>
-    </div>
-  </footer>
-
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll("#sideNav a"));
+  var map = {};
+  navLinks.forEach(function(a){
+    var id = a.getAttribute("href").slice(1);
+    var sec = document.getElementById(id);
+    if(sec) map[id] = a;
+  });
+  if("IntersectionObserver" in window){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          navLinks.forEach(function(a){ a.classList.remove("active"); });
+          var a = map[en.target.id];
+          if(a) a.classList.add("active");
+        }
+      });
+    }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
+    Object.keys(map).forEach(function(id){ var sec = document.getElementById(id); if(sec) obs.observe(sec); });
+  }
+})();
+</script>
 </body>
 </html>

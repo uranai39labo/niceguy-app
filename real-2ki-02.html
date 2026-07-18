@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>リアル 第2回 占いの分類体系 ── 三分類・四分類・二分類 ── ナイス貝の占い講座 学習サイト</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --navy-deep:#121D33; --navy:#1B2A4A; --navy-mid:#29406B; --gold:#C9A227; --gold-light:#E8D27A;
+    --cream:#FAF8F3; --ink:#1B2A4A; --muted:#5B6B8C; --line:#E3DECF; --sidebar-w:266px; }
+  *{box-sizing:border-box;} html{scroll-behavior:smooth;}
+  body{ margin:0; background:var(--cream); color:var(--ink); font-family:"Zen Kaku Gothic New",sans-serif; line-height:1.85; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,.serif{ font-family:"Shippori Mincho",serif; letter-spacing:.02em; }
+  a{color:inherit;} :focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+  .layout{ display:flex; align-items:flex-start; } .main{ flex:1; min-width:0; }
+  .sidebar{ width:var(--sidebar-w); flex-shrink:0; position:sticky; top:0; height:100vh; overflow-y:auto;
+    background:var(--navy-deep); color:var(--cream); display:flex; flex-direction:column; padding:24px 16px 20px;
+    border-right:1px solid rgba(255,255,255,.06); z-index:60; }
+  .side-brand{ display:flex; align-items:center; gap:9px; font-family:"Shippori Mincho",serif; font-weight:700; font-size:15px; color:var(--gold-light); }
+  .side-brand .dot{ width:9px; height:9px; border-radius:50%; background:var(--gold); }
+  .side-sub{ font-size:10.5px; letter-spacing:.14em; color:#8E9BBE; margin:2px 0 14px 18px; text-transform:uppercase; }
+  .side-back{ display:inline-flex; gap:7px; font-size:12.5px; color:#9FAAC9; text-decoration:none; margin:0 0 14px 3px; }
+  .side-back:hover{ color:var(--gold-light); }
+  .side-label{ font-size:10px; letter-spacing:.14em; color:#6B77A0; text-transform:uppercase; margin:6px 3px 8px; }
+  .side-nav{ display:flex; flex-direction:column; gap:1px; }
+  .side-nav a{ display:flex; flex-direction:column; gap:1px; padding:8px 10px; border-radius:8px; text-decoration:none; transition:background .15s; }
+  .side-nav a:hover{ background:rgba(255,255,255,.05); }
+  .side-nav a.active{ background:rgba(201,162,39,.15); }
+  .side-nav a .cn{ font-size:12.5px; color:var(--gold-light); }
+  .side-nav a .ct{ font-size:12px; color:#C7D0E6; }
+  .side-nav a.active .ct{ color:#fff; }
+  .side-foot{ margin-top:16px; font-size:11px; color:#586284; }
+  .mtopbar{ display:none; } .scrim{ display:none; }
+
+  .wrap{ max-width:820px; margin:0 auto; padding:52px 6vw 100px; }
+  .crumb{ font-size:12.5px; color:var(--muted); margin-bottom:14px; }
+  .crumb a{ color:var(--muted); text-decoration:none; } .crumb a:hover{ color:var(--gold); }
+  .l-tag{ display:inline-block; font-family:"Shippori Mincho",serif; font-size:13px; font-weight:700; color:var(--gold-light); background:var(--navy); padding:5px 14px; border-radius:999px; margin-bottom:16px; }
+  .l-title{ font-size:clamp(24px,3.4vw,34px); margin:0 0 8px; line-height:1.45; }
+  .l-meta{ font-size:13.5px; color:var(--muted); margin-bottom:28px; }
+
+  .embed-wrap{ position:relative; aspect-ratio:16/9; }
+  .embed{ position:absolute; inset:0; background:#0D1526; border-radius:14px; overflow:hidden; box-shadow:0 18px 40px rgba(18,29,51,.16); }
+  .embed iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+  .embed.mini{ position:fixed; inset:auto 18px 18px auto; width:min(360px,74vw); height:auto; aspect-ratio:16/9; z-index:90; border-radius:12px; box-shadow:0 16px 40px rgba(9,14,26,.5); }
+  .mini-bar{ display:none; }
+  .embed.mini .mini-bar{ display:flex; align-items:center; justify-content:space-between; position:absolute; left:0; right:0; top:-27px; height:27px; padding:0 4px 0 12px; background:var(--navy-deep); color:var(--cream); border-radius:9px 9px 0 0; font-size:11px; }
+  .mini-bar button{ background:transparent; border:0; color:var(--gold-light); cursor:pointer; font-size:15px; line-height:1; padding:2px 8px; }
+  .mini-bar button:hover{ color:#fff; }
+
+  .bh{ display:flex; align-items:baseline; gap:12px; margin:46px 0 16px; }
+  .bh .en{ font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); }
+  .bh h2{ font-size:19px; margin:0; }
+
+  .tl{ border:1px solid var(--line); border-radius:14px; background:#fff; overflow:hidden; }
+  .tl button{ display:flex; align-items:flex-start; gap:14px; width:100%; text-align:left; padding:12px 16px; background:transparent; border:0; border-top:1px solid var(--line); cursor:pointer; font-family:inherit; font-size:13.5px; color:var(--ink); transition:background .15s; }
+  .tl button:first-child{ border-top:0; } .tl button:hover{ background:var(--cream); } .tl button.active{ background:#FBF6E7; }
+  .tl .t{ flex-shrink:0; font-variant-numeric:tabular-nums; font-size:12px; color:var(--gold); background:var(--cream); border:1px solid var(--line); border-radius:7px; padding:3px 8px; min-width:64px; text-align:center; }
+  .tl button.active .t{ background:var(--navy); color:var(--gold-light); border-color:var(--navy); }
+  .tl-note{ font-size:12px; color:var(--muted); margin:10px 2px 0; }
+
+  .toggle-head{ cursor:pointer; user-select:none; align-items:center; }
+  .toggle-head .toggle-btn{ margin-left:auto; display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:700; color:var(--navy); background:var(--cream); border:1px solid var(--line); border-radius:999px; padding:6px 14px; white-space:nowrap; transition:all .15s; }
+  .toggle-head:hover .toggle-btn{ border-color:var(--gold); color:var(--gold); background:#FBF6E7; }
+  .toggle-head .toggle-btn .tb-ico{ font-size:11px; }
+  .collapsible.hidden{ display:none; }
+
+  .mapcard{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:22px 26px; }
+  .mapcard ul{ margin:0; padding-left:1.15em; } .mapcard li{ margin:0 0 9px; font-size:15px; }
+  .mapcard.prose p{ margin:0 0 14px; font-size:15px; } .mapcard.prose p:last-child{ margin-bottom:0; }
+  .aboutnote{ font-size:12.5px; color:var(--muted); background:#F4F2EA; border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin-top:16px; }
+
+  .ctable{ width:100%; border-collapse:collapse; margin:2px 0 18px; font-size:14.5px; border:1px solid var(--line); }
+  .ctable th, .ctable td{ text-align:left; padding:11px 15px; border-top:1px solid var(--line); vertical-align:top; }
+  .ctable thead th{ background:var(--navy); color:var(--gold-light); font-family:"Shippori Mincho",serif; font-weight:700; font-size:13.5px; border-top:0; }
+  .ctable tbody tr:nth-child(even){ background:#FBF9F3; }
+  .ctable td:first-child{ font-weight:700; white-space:nowrap; }
+  @media (max-width:560px){ .ctable td:first-child{ white-space:normal; } }
+  .script h2.ch{ font-size:20px; margin:44px 0 6px; padding-top:14px; border-top:1px solid var(--line); }
+  .ch-time{ font-size:12px; color:var(--muted); margin-bottom:16px; }
+  .nar{ font-size:15px; margin:0 0 15px; }
+  .q{ display:flex; gap:11px; margin:0 0 16px; align-items:flex-start; }
+  .q .who{ flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:46px; height:30px; border-radius:999px; font-size:11px; font-weight:700; margin-top:3px; letter-spacing:.02em; }
+  .q p{ margin:0; font-size:15px; border-radius:14px; padding:11px 16px; max-width:82%; position:relative; }
+  .q-teacher .who{ background:var(--navy); color:var(--gold-light); }
+  .q-teacher p{ background:#FBF7EA; border:1px solid #EAD9A6; }
+  .q-user{ flex-direction:row-reverse; }
+  .q-user .who{ background:#EEF1F6; color:var(--muted); border:1px solid var(--line); }
+  .q-user p{ background:#fff; border:1px solid var(--line); }
+  .note-teach{ background:#fff; border-left:3px solid var(--gold); border-radius:0 10px 10px 0; padding:12px 18px; margin:0 0 15px; box-shadow:0 2px 10px rgba(27,42,74,.04); }
+  .note-teach .lbl{ display:block; font-size:11px; letter-spacing:.08em; color:var(--gold); font-weight:700; margin-bottom:5px; }
+  .note-teach p{ margin:0; font-size:14.5px; }
+
+  .checklist{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:20px 24px; }
+  .clitem{ display:flex; align-items:flex-start; gap:11px; padding:10px 0; border-top:1px solid var(--line); cursor:pointer; font-size:14.5px; }
+  .clitem:first-child{ border-top:0; }
+  .clitem input{ appearance:none; -webkit-appearance:none; width:19px; height:19px; margin-top:3px; border:1.6px solid var(--navy-mid); border-radius:5px; cursor:pointer; position:relative; flex-shrink:0; background:#fff; transition:all .18s; }
+  .clitem input:checked{ background:var(--gold); border-color:var(--gold); }
+  .clitem input:checked::after{ content:"✓"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:12px; color:var(--navy-deep); font-weight:700; }
+  .clitem input:checked + span{ color:var(--muted); text-decoration:line-through; }
+
+  .lnav{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:50px; flex-wrap:wrap; }
+  .lnav a.back{ font-size:14px; color:var(--muted); text-decoration:none; } .lnav a.back:hover{ color:var(--gold); }
+  .donebtn{ display:inline-flex; align-items:center; gap:10px; background:var(--gold); color:var(--navy-deep); font-weight:700; font-size:15px; padding:14px 28px; border-radius:11px; border:0; cursor:pointer; font-family:inherit; transition:transform .18s, background .18s; }
+  .donebtn:hover{ transform:translateY(-2px); background:var(--gold-light); }
+  .donebtn.on{ background:var(--navy); color:var(--gold-light); }
+
+  @media (max-width:880px){
+    .mtopbar{ display:flex; align-items:center; gap:12px; position:sticky; top:0; z-index:70; padding:12px 18px; background:var(--navy-deep); color:var(--cream); border-bottom:1px solid rgba(255,255,255,.08); }
+    .mtopbar .burger{ width:40px; height:40px; border-radius:9px; border:1px solid rgba(255,255,255,.15); background:transparent; color:var(--gold-light); font-size:18px; cursor:pointer; }
+    .mtopbar .mbrand{ font-family:"Shippori Mincho",serif; font-weight:700; font-size:14px; color:var(--gold-light); }
+    .sidebar{ position:fixed; top:0; left:0; height:100vh; transform:translateX(-100%); transition:transform .28s; box-shadow:0 0 40px rgba(0,0,0,.4); }
+    body.nav-open .sidebar{ transform:translateX(0); }
+    body.nav-open .scrim{ display:block; position:fixed; inset:0; background:rgba(9,14,26,.5); z-index:55; }
+  }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } .sidebar{ transition:none; } }
+</style>
+</head>
+<body>
+  <div class="mtopbar">
+    <button class="burger" id="burger" aria-label="メニュー">☰</button>
+    <span class="mbrand">リアル第2回 占いの分類体系</span>
+  </div>
+  <div class="scrim" id="scrim"></div>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="side-brand"><span class="dot"></span> ナイス貝 占い講座</div>
+      <p class="side-sub">学習サイト</p>
+      <a class="side-back" href="nice-kai-2ki.html#real">← 学習トップにもどる</a>
+      <div class="side-label">この回の目次</div>
+      <nav class="side-nav" id="sideNav">
+<a href="#ch1"><span class="cn">第1章</span><span class="ct">占いの前に「人を動かす」を知る</span></a>
+<a href="#ch2"><span class="cn">第2章</span><span class="ct">あなたが悪いのではなく、内側のトラが暴れている</span></a>
+<a href="#ch3"><span class="cn">第3章</span><span class="ct">パーしか出さない人生をどうするか</span></a>
+<a href="#ch4"><span class="cn">第4章</span><span class="ct">目の前の10円を磨く</span></a>
+<a href="#ch5"><span class="cn">第5章</span><span class="ct">三分類――人は何を基準に動くのか</span></a>
+<a href="#ch6"><span class="cn">第6章</span><span class="ct">四分類――誰を身内と感じ、どこで線を引くか</span></a>
+<a href="#ch7"><span class="cn">第7章</span><span class="ct">仕事・買い物・褒め方に分類が表れる</span></a>
+<a href="#ch8"><span class="cn">第8章</span><span class="ct">相手に届く言葉へ翻訳する</span></a>
+<a href="#ch9"><span class="cn">第9章</span><span class="ct">動物占いの奥には干支がいる</span></a>
+<a href="#ch10"><span class="cn">第10章</span><span class="ct">学ぶ人から、教える人へ</span></a>
+<a href="#ch11"><span class="cn">第11章</span><span class="ct">AIで講座と鑑定を形にする</span></a>
+<a href="#ch12"><span class="cn">第12章</span><span class="ct">占い師は背中を押すのか</span></a>
+<a href="#ch13"><span class="cn">第13章</span><span class="ct">人体図から人生の役割を見る</span></a>
+<a href="#ch14"><span class="cn">第14章</span><span class="ct">分類の奥で、インド占星術につながる</span></a>
+<a href="#chE"><span class="cn">終章</span><span class="ct">分類は、人を箱に入れるためではない</span></a>
+      </nav>
+      <div class="side-foot">© ナイス貝 ／ 片貝文昌</div>
+    </aside>
+
+    <div class="main">
+      <div class="wrap">
+        <div class="crumb"><a href="nice-kai-2ki.html">学習トップ</a> ／ <a href="nice-kai-2ki.html#real">リアル講座</a> ／ リアル 第2回</div>
+        <span class="l-tag">リアル 第2回</span>
+        <h1 class="l-title">占いの分類体系 ── 三分類・四分類・二分類</h1>
+        <div class="l-meta">2026.04.26(日) ・ 中原市民館</div>
+
+        <div class="embed-wrap" id="embedWrap"><div class="embed" id="videoBox"><div class="mini-bar"><span>▶ 動画</span><button id="miniClose" title="元の位置にもどす" aria-label="元の位置にもどす">⤢</button></div><iframe id="ytframe" src="https://www.youtube.com/embed/BQIYM8X_vIY?rel=0" title="占いの分類体系 ── 三分類・四分類・二分類" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>
+
+<div class="bh toggle-head" data-target="tlWrap"><span class="en">Timeline</span><h2>タイムライン（章）</h2><span class="toggle-btn"><span class="tb-ico">▾</span><span class="tb-txt">閉じる</span></span></div><div class="collapsible" id="tlWrap"><div class="tl"><button type="button" data-sec="0"><span class="t">0:00:00</span><span>オープニング〜「人を動かす」3つの原則と占いの関係</span></button>
+<button type="button" data-sec="270"><span class="t">0:04:30</span><span>動物占いの正義（価値観）の違いを理解する</span></button>
+<button type="button" data-sec="480"><span class="t">0:08:00</span><span>動物が2つ重なる「正直者」の葛藤と対処法</span></button>
+<button type="button" data-sec="900"><span class="t">0:15:00</span><span>お金と人を動かす「10円磨き」の法則（口コミと投資）</span></button>
+<button type="button" data-sec="1140"><span class="t">0:19:00</span><span>相手に合わせて8割のエンタメで2割の真実を届ける</span></button>
+<button type="button" data-sec="1560"><span class="t">0:26:00</span><span>カーネギーの原則を占いで自然に実践する方法</span></button>
+<button type="button" data-sec="1843"><span class="t">0:30:43</span><span>動物占いの3分類（人柄・結果・直感）の基本構造</span></button>
+<button type="button" data-sec="2080"><span class="t">0:34:40</span><span>人柄タイプ（月：こじか・クロヒョウ・たぬき・ヒツジ）の人間関係</span></button>
+<button type="button" data-sec="2140"><span class="t">0:35:40</span><span>結果タイプ（地球：オオカミ・サル・トラ・コアラ）の目的志向</span></button>
+<button type="button" data-sec="2200"><span class="t">0:36:40</span><span>直感タイプ（太陽：ペガサス・チーター・ライオン・ゾウ）のVIP・天才肌</span></button>
+<button type="button" data-sec="2540"><span class="t">0:42:20</span><span>各タイプの「特・得・徳」へのこだわりとサービス精神</span></button>
+<button type="button" data-sec="2900"><span class="t">0:48:20</span><span>チーム編成の極意（ピッチャー・キャッチャー・監督の役割）</span></button>
+<button type="button" data-sec="3180"><span class="t">0:53:00</span><span>各タイプのやる気スイッチ（ランキング・マイペース・VIP）</span></button>
+<button type="button" data-sec="3360"><span class="t">0:56:00</span><span>時代を読む目と行動のタイミング（チーターとゾウの役割）</span></button>
+<button type="button" data-sec="3540"><span class="t">0:59:00</span><span>4分類（荒魂・和魂・奇魂・幸魂）とチームの統合</span></button>
+<button type="button" data-sec="3620"><span class="t">1:00:20</span><span>3分類別：買い物（購買）パターンの違い</span></button>
+<button type="button" data-sec="4300"><span class="t">1:11:40</span><span>クレーム対応や指示の出し方・誘い方の違い</span></button>
+<button type="button" data-sec="5040"><span class="t">1:24:00</span><span>占い各流派の歴史（動物占い・個性学・個性心理学）</span></button>
+<button type="button" data-sec="5620"><span class="t">1:33:40</span><span>算命学の流派（高尾学館・伝習院など）と協会ビジネス</span></button>
+<button type="button" data-sec="5710"><span class="t">1:35:10</span><span>台湾の富裕層向けビジネスとメイドインジャパン（水・健康）</span></button>
+<button type="button" data-sec="5920"><span class="t">1:38:40</span><span>占いの「帝王学」マーケティングと「庶民学」への思い</span></button>
+<button type="button" data-sec="6277"><span class="t">1:44:37</span><span>休憩〜次回講座のスケジュール調整と会場選び（目黒周辺など）</span></button>
+<button type="button" data-sec="7330"><span class="t">2:02:10</span><span>「ねじねじ」農法と極限状態で入る発達障害・ゾウのスイッチ</span></button>
+<button type="button" data-sec="8110"><span class="t">2:15:10</span><span>AIツール（Claude）を活用したアプリ・スケジュール作成</span></button>
+<button type="button" data-sec="8660"><span class="t">2:24:20</span><span>Googleサイトを使った会員専用ページ・動画共有の仕組み</span></button>
+<button type="button" data-sec="9030"><span class="t">2:30:30</span><span>NotebookLMを活用した鑑定書の漫画化・音声化</span></button>
+<button type="button" data-sec="9200"><span class="t">2:33:20</span><span>Canva「マジックカット」での画像・文字編集の実演</span></button>
+<button type="button" data-sec="10130"><span class="t">2:48:50</span><span>占いで背中を押すこと（ダチョウ倶楽部理論と悪人の覚悟）</span></button>
+<button type="button" data-sec="10450"><span class="t">2:54:10</span><span>宿命の設計図（人体星図）と表裏の顔の葛藤</span></button>
+<button type="button" data-sec="10990"><span class="t">3:03:10</span><span>日経平均・ビットコインの相場分析（三角保ち合いと最終防衛ライン）</span></button>
+<button type="button" data-sec="11290"><span class="t">3:08:10</span><span>日本人の集団無意識：ひどい目に遭って覚醒したい願望</span></button>
+<button type="button" data-sec="12010"><span class="t">3:20:10</span><span>インド占星術の基礎：9つの惑星と陰陽五行の対応</span></button>
+<button type="button" data-sec="12220"><span class="t">3:23:40</span><span>表鬼門・裏鬼門（艮の金神）に隠されたエネルギー</span></button>
+<button type="button" data-sec="12400"><span class="t">3:26:40</span><span>ラーフ（龍の頭／現世の欲望）とケートゥ（龍の尻尾／過去の手放し）</span></button>
+<button type="button" data-sec="12600"><span class="t">3:30:00</span><span>惑星の神様（アシュタ・ラクシュミーとシャニ）との向き合い方</span></button>
+<button type="button" data-sec="12880"><span class="t">3:34:40</span><span>インド占星術・空海の宿曜経・シルディ・サイ・ババの繋がり</span></button>
+<button type="button" data-sec="13000"><span class="t">3:36:40</span><span>復習の重要性とエンディング</span></button></div><p class="tl-note">時間をクリックすると、動画のその場面から再生されます。</p></div>
+<div class="bh"><span class="en">Summary</span><h2>はじめに</h2></div><div class="mapcard prose"><p>この文書は、講座の発言を一語一句並べた逐語録ではありません。講師の比喩、受講者との掛け合い、思わず笑ってしまう言い回しを残しながら、重複や言い直しを整理した「講座読み物」です。</p>
+<p>第2回では、動物占いの分類表を覚える前に、もっと根本的な問いから始まります。どうすれば、人は自分から動くのか。どうすれば、相手を否定せずに課題を伝えられるのか。そして、同じ言葉が人によってまったく違って届くのはなぜなのか。</p></div>
+<div class="bh"><span class="en">Transcript</span><h2>編集書き起こし（本編）</h2></div><div class="script"><h2 class="ch" id="ch1">第1章　占いの前に「人を動かす」を知る</h2>
+<div class="ch-time">🕒 開始 00:00:13</div>
+<p class="nar">第2回は、分類表を覚えることではなく、営業や商売の根本から始まりました。講師が最初に取り上げたのは、デール・カーネギーの『人を動かす』です。</p>
+<div class="q q-teacher"><span class="who">講師</span><p>占いの技術の前に、これだけは覚えてほしい。三つだけです。相手にも一理あると認めること。相手に重要感を持ってもらうこと。そして、相手の立場に身を置くこと。</p></div>
+<table class="ctable"><thead><tr><th>カーネギーの三つの教え</th><th>ひとことで言うと</th></tr></thead><tbody><tr><td>① 相手にも一理あると認める</td><td>正しさで戦わず、まず相手の言い分を受け止める</td></tr><tr><td>② 相手に重要感を持たせる</td><td>「あなたは大切だ」と感じてもらう</td></tr><tr><td>③ 相手の立場に身を置く</td><td>相手の目線に立って物事を考える</td></tr></tbody></table>
+<div class="q q-teacher"><span class="who">講師</span><p>占いには分類がたくさんあります。星座なら十二の正義、動物占いにも十二の正義がある。対角のタイプは、まったく反対のことを正しいと思っていることさえあります。</p></div>
+<div class="q q-user"><span class="who">受講者</span><p>じゃあ、正しさで勝負したら…</p></div>
+<div class="q q-teacher"><span class="who">講師</span><p>終わりません。正しさのぶつかり合いは、どこまでいっても平行線です。</p></div>
+<div class="note-teach"><span class="lbl">講師の解説</span><p>占いを学ぶ前提として、まず「人はそれぞれ違う正義で動いている」と認めるところから始まります。</p></div>
+<h2 class="ch" id="ch2">第2章　あなたが悪いのではなく、内側のトラが暴れている</h2>
+<div class="ch-time">🕒 開始 00:01:45</div>
+<p class="nar">ここで、会社占いの面白い使い方が紹介されます。本人を一つの人格として責めるのではなく、その人の中に社長・営業・社員がいるように分けて見る方法です。</p>
+<div class="q q-teacher"><span class="who">講師</span><p>たぬきは安心感を求めます。でも内側のトラが『安心して飯が食えるのか、結果を出してこそだろう』と暴れ出す。どちらも本人の一部で、どちらにも正義があるんです。</p></div>
+<div class="q q-user"><span class="who">受講者</span><p>自分が悪い、という話ではないんですね。</p></div>
+<div class="q q-teacher"><span class="who">講師</span><p>責める必要はありません。大事なのは、どちらを優先するかを本人が選べる状態にしてあげることです。</p></div>
+<div class="note-teach"><span class="lbl">講師の解説</span><p>人を責めるのではなく、その人の中でどの性質が強く出ているのかを一緒に見る――これが会社占いの使い方です。</p></div>
+<h2 class="ch" id="ch3">第3章　パーしか出さない人生をどうするか</h2>
+<div class="ch-time">🕒 開始 00:08:57</div>
+<p class="nar">同じ動物が二つ重なっている人の話になりました。</p>
+<div class="q q-teacher"><span class="who">講師</span><p>社長と社員が同じ意見を持っているようなものです。意見が一本化されるぶん強いのですが、嘘がつけず、別の手を柔軟に出しにくいことがあります。</p></div>
+<div class="q q-user"><span class="who">受講者</span><p>報われないと感じるときは、どうすれば…</p></div>
+<div class="q q-teacher"><span class="who">講師</span><p>グーやチョキを新しく覚えるのも一つ。でも、どうしてもパーだけで生きたいなら、パーを鍛え抜いて、普通のチョキにも勝てるくらい極める道もあります。</p></div>
+<div class="note-teach"><span class="lbl">講師の解説</span><p>弱点を直すか、強みを極めるか。どちらが正解かではなく、本人が選べることが大切だという話でした。</p></div>
+<h2 class="ch" id="ch4">第4章　目の前の10円を磨く</h2>
+<div class="ch-time">🕒 開始 00:15:02</div>
+<p class="nar">講師独自の仕事観として「10円磨き」が登場します。</p>
+<div class="q q-teacher"><span class="who">講師</span><p>目の前の一人を、曇った10円玉だと思ってください。少額の人という意味ではありません。その10円玉をピカピカに磨くんです。</p></div>
+<div class="q q-teacher"><span class="who">講師</span><p>すると『あの人に磨いてもらった』と噂が広がる。噂が100円に届き、500円に届き、やがて1万円の仕事が挨拶に来る。大きな仕事は、最初から1万円だけを追った結果ではないんです。</p></div>
+<div class="note-teach"><span class="lbl">講師の解説</span><p>大きな成果は、目の前の一人を磨き続けた評判の先にやってくる、という比喩でした。</p></div>
+<h2 class="ch" id="ch5">第5章　三分類――人は何を基準に動くのか</h2>
+<div class="ch-time">🕒 開始 00:34:10</div>
+<p class="nar">ここから動物占いの分類体系に入ります。最初の大分類は三分類です。</p>
+<div class="q q-teacher"><span class="who">講師</span><p>結果や目的を重視するタイプ、人柄や関係を重視するタイプ、直感や感覚を重視するタイプ。人は動く基準がそれぞれ違います。</p></div>
+<div class="q q-teacher"><span class="who">講師</span><p>同じ商品を勧めるときも、結果タイプには『何が、いくらで、どれだけ改善するのか』。人柄タイプには『誰が、どんな思いで作ったのか』。直感タイプには『それ面白そう』『今までにない』。入り口が違うんです。</p></div>
+<div class="note-teach"><span class="lbl">講師の解説</span><p>同じ助言でも、相手のタイプに合わせて入り口を変える――これが三分類の使いどころです。</p></div>
+<h2 class="ch" id="ch6">第6章　四分類――誰を身内と感じ、どこで線を引くか</h2>
+<div class="ch-time">🕒 開始 00:35:20</div>
+<p class="nar">続いて四分類です。人との距離感や、世界の分け方が見えてきます。</p>
+<div class="q q-teacher"><span class="who">講師</span><p>ファミリーに入った人を徹底的に大切にする人もいれば、役割や成果で関係を判断する人もいる。自分とファンという距離感を好む人も、そもそも他人にあまり関心を向けない人もいます。</p></div>
+<div class="q q-user"><span class="who">受講者</span><p>どの距離感が正しい、というのは…</p></div>
+<div class="q q-teacher"><span class="who">講師</span><p>ありません。問題は、自分が当たり前だと思っている関わり方を、相手も当たり前だと思っているとは限らない、ということです。</p></div>
+<div class="note-teach"><span class="lbl">講師の解説</span><p>距離感の正解を決めるのではなく、前提の違いに気づくことが四分類の目的です。</p></div>
+<h2 class="ch" id="ch7">第7章　仕事・買い物・褒め方に分類が表れる</h2>
+<div class="ch-time">🕒 開始 00:49:20</div>
+<p class="nar">分類は性格説明で終わりません。報告・連絡・相談、仕事の任せ方、買い物、決断の速度、褒め方にまで表れます。</p>
+<div class="q q-teacher"><span class="who">講師</span><p>買い物ひとつでも、店員の愛想が良ければ買う人、目的の商品が安ければ買う人、買うものを忘れて別のものを持って帰る人がいます。即決させた方がいい人もいれば、急かされると『なぜ自分のペースで決めさせない』と反発する人もいる。</p></div>
+<div class="q q-teacher"><span class="who">講師</span><p>人柄タイプには『あなたがいてくれて助かった』と、存在そのものへの感謝が響きます。直感タイプには、理屈より勢いのある一言が届くことがあります。</p></div>
+<div class="note-teach"><span class="lbl">講師の解説</span><p>褒め方や任せ方まで、分類ごとに響き方が違うと知っておくと、関わり方を選べます。</p></div>
+<h2 class="ch" id="ch8">第8章　相手に届く言葉へ翻訳する</h2>
+<div class="ch-time">🕒 開始 01:15:00</div>
+<p class="nar">講師は、梅干しの販売を例に、人柄タイプへ物語を届ける方法を説明します。</p>
+<div class="q q-teacher"><span class="who">講師</span><p>ただ『十粒でいくら』と言うのではありません。雪国で何十年も漬け続けたおばあちゃんの思い、最後に残った十粒、今どうして売る必要があるのか。そこまで伝えるんです。</p></div>
+<div class="q q-teacher"><span class="who">講師</span><p>講座やYouTubeも同じ。自分が本好きだからと、相手に本を五冊渡せばいいわけじゃない。読むのが苦痛な人には、A4一枚の要約や、漫画、動画、会話の方が届きます。</p></div>
+<div class="note-teach"><span class="lbl">講師の解説</span><p>同じ中身でも、相手が受け取れる形へ『翻訳』して届けることが大切だ、という章でした。</p></div>
+<h2 class="ch" id="ch9">第9章　動物占いの奥には干支がいる</h2>
+<div class="ch-time">🕒 開始 01:25:00</div>
+<p class="nar">話題は、動物名の表記やデザインから、動物占い・個性學・算命学・干支の系譜へ進みます。</p>
+<div class="q q-teacher"><span class="who">講師</span><p>なぜ『たぬき』や『こじか』は柔らかく見えるのか。なぜ途中から『チータ』が『チーター』になったのか。名称にも、受け手のイメージを考えた編集があるんです。</p></div>
+<div class="q q-teacher"><span class="who">講師</span><p>個性學には人志向・城志向・大物志向といった分類があり、動物占いにも似た構造がある。奥をたどると、十干十二支や陰陽五行という共通の土台が見えてきます。</p></div>
+<div class="note-teach"><span class="lbl">講師の解説</span><p>別々に見える占術も、何を分類しどう使うかを見れば、同じ構造を違う言葉で説明していることがあります。</p></div>
+<h2 class="ch" id="ch10">第10章　学ぶ人から、教える人へ</h2>
+<div class="ch-time">🕒 開始 00:25:10</div>
+<div class="q q-teacher"><span class="who">講師</span><p>これは覚えなくていいです。――と何度も言いますが、本当に忘れていいわけじゃない。今日から人に教えてください、という意味です。</p></div>
+<div class="q q-user"><span class="who">受講者</span><p>まだ学び終わっていなくても、ですか？</p></div>
+<div class="q q-teacher"><span class="who">講師</span><p>AIが資料作りを助けてくれる時代です。学び終わるまで発信を待つ必要はありません。学びながら整理して、教えながら理解を深めればいい。</p></div>
+<div class="note-teach"><span class="lbl">講師の解説</span><p>受講者のままでいるのではなく、少しずつ教える側へ移っていくことが勧められました。</p></div>
+<h2 class="ch" id="ch11">第11章　AIで講座と鑑定を形にする</h2>
+<div class="ch-time">🕒 開始 02:09:31</div>
+<p class="nar">後半は、Claude・ChatGPT・NotebookLM・Gemini・Canvaなどを使った制作の実演へ進みます。</p>
+<div class="q q-teacher"><span class="who">講師</span><p>スケジュール管理、講座資料、投稿画像、鑑定書、漫画、個人用ページまで、AIが形にしていきます。画像に『土と水が整うところから命が育つ』という言葉を入れて、金色の剣を持たせてみましょう。</p></div>
+<div class="q q-teacher"><span class="who">講師</span><p>大事なのは、AIが勝手にいい講座を作ることではありません。占い師が持っている分類や経験、比喩、相手への理解を、文章・画像・漫画・音声へ展開しやすくする道具として使うことです。</p></div>
+<div class="note-teach"><span class="lbl">講師の解説</span><p>AIは答えの代わりではなく、自分の中にあるものを外へ出す道具として使う――これが繰り返し語られました。</p></div>
+<h2 class="ch" id="ch12">第12章　占い師は背中を押すのか</h2>
+<div class="ch-time">🕒 開始 02:50:00</div>
+<p class="nar">占い師の役割について、講師はダチョウ倶楽部の比喩を持ち出します。</p>
+<div class="q q-teacher"><span class="who">講師</span><p>『押すなよ、絶対押すなよ』ですよ。相手が口では嫌だと言っているとき、本当に止めてほしいのか、それとも踏み出す勇気がほしいのか。</p></div>
+<div class="q q-teacher"><span class="who">講師</span><p>もちろん、何でも押せばいいわけじゃない。分類や命式から、本人の言葉と内側の欲求がずれている可能性を見つけて、最後は本人が選べる形で差し出すんです。</p></div>
+<div class="note-teach"><span class="lbl">講師の解説</span><p>背中を押すかどうかは、本人の言葉と本音のずれを見極めたうえで、本人に選ばせる――という話でした。</p></div>
+<h2 class="ch" id="ch13">第13章　人体図から人生の役割を見る</h2>
+<div class="ch-time">🕒 開始 02:52:12</div>
+<p class="nar">算命学の人体図の話に移ります。</p>
+<div class="q q-teacher"><span class="who">講師</span><p>人体図では、社会の顔、家庭の顔、考え方、本当の自分、仕事の役割を、複数の位置から見ます。人には一つの顔しかないわけじゃない。場所や関係によって、違う自分が働いているんです。</p></div>
+<div class="q q-teacher"><span class="who">講師</span><p>自分は裏方が向いていると思っていても、今の運気では表に立つ必要があることもある。逆に、いつも表に出るのが正解とも限りません。</p></div>
+<div class="note-teach"><span class="lbl">講師の解説</span><p>どの時期にどの顔を使うかを見ることで、役割のずれを調整できる、という視点でした。</p></div>
+<h2 class="ch" id="ch14">第14章　分類の奥で、インド占星術につながる</h2>
+<div class="ch-time">🕒 開始 03:20:02</div>
+<p class="nar">最後に、講座はインド占星術の基本へ進みます。</p>
+<div class="q q-teacher"><span class="who">講師</span><p>太陽、月、火星、水星、木星、金星、土星、ラーフ、ケートゥ。惑星はそれぞれ、魂、心、勇気、知性、成長、喜び、試練、欲望、手放しといった物語を持っています。</p></div>
+<div class="q q-teacher"><span class="who">講師</span><p>特に土星は、制限や試練を通して人を成熟させる存在です。ただ怖いのではありません。</p></div>
+<div class="note-teach"><span class="lbl">講師の解説</span><p>動物占い、干支、五行、インド占星術。言葉は違っても、人の中の複数の力を分類し、その関係を見る点でつながっています。</p></div>
+<h2 class="ch" id="chE">終章　分類は、人を箱に入れるためではない</h2>
+<p class="nar">三分類、四分類、二分類を覚えると、人を簡単に説明できる気がしてきます。しかし、この講座が伝えていたのは、分類で人を決めつけることではありませんでした。</p>
+<div class="q q-teacher"><span class="who">講師</span><p>同じ言葉が届かないとき、『相手が分かってくれない』と切り捨てない。相手の正義と受け取り方を考える。本人を責めるのではなく、その人の中でどの性質が強く働いているかを一緒に見る。</p></div>
+<div class="note-teach"><span class="lbl">講師の解説</span><p>分類は、人を箱に閉じ込める檻ではなく、人と人の間に橋を架けるための地図です。</p></div></div>
+<div class="bh"><span class="en">Review</span><h2>復習チェックリスト</h2></div><div class="checklist"><label class="clitem"><input type="checkbox" class="clchk" data-i="0"><span>相手を否定せず、「本人」と「強く出ている性質」を分けて考えられる</span></label>
+<label class="clitem"><input type="checkbox" class="clchk" data-i="1"><span>結果・人柄・直感の三分類を、自分の言葉で説明できる</span></label>
+<label class="clitem"><input type="checkbox" class="clchk" data-i="2"><span>同じ商品や助言を、三つのタイプに合わせて言い換えられる</span></label>
+<label class="clitem"><input type="checkbox" class="clchk" data-i="3"><span>自分が「パーしか出していない」場面を一つ見つけられる</span></label>
+<label class="clitem"><input type="checkbox" class="clchk" data-i="4"><span>目の前の一人を磨く「10円磨き」の行動を一つ決められる</span></label>
+<label class="clitem"><input type="checkbox" class="clchk" data-i="5"><span>学んだ内容を誰か一人に説明できる</span></label>
+<label class="clitem"><input type="checkbox" class="clchk" data-i="6"><span>AIを答えの代わりではなく、表現を広げる道具として使える</span></label></div>
+
+        <div class="lnav">
+          <a class="back" href="nice-kai-2ki.html#real">← 学習トップ（リアル講座）にもどる</a>
+          <button class="donebtn" id="doneBtn" type="button">この回を視聴済みにする</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+(function(){
+  "use strict";
+  var KEY="nicekai_learn_v2", CLKEY="nicekai_r02_checklist", RID="r02", VID="BQIYM8X_vIY";
+  function load(k){ try{return JSON.parse(localStorage.getItem(k))||{};}catch(e){return {};} }
+  function save(k,v){ try{localStorage.setItem(k,JSON.stringify(v));}catch(e){} }
+
+  var frame=document.getElementById("ytframe");
+  var vbox=document.getElementById("videoBox");
+  document.querySelectorAll(".tl button[data-sec]").forEach(function(b){
+    b.addEventListener("click", function(){
+      var sec=b.getAttribute("data-sec");
+      if(frame) frame.src="https://www.youtube.com/embed/"+VID+"?rel=0&start="+sec+"&autoplay=1";
+      document.querySelectorAll(".tl button").forEach(function(x){x.classList.remove("active");});
+      b.classList.add("active");
+      if(frame && vbox && !vbox.classList.contains("mini")) frame.scrollIntoView({behavior:"smooth",block:"center"});
+    });
+  });
+
+  // sticky mini-player: keep the video watchable while scrolling
+  var ewrap=document.getElementById("embedWrap");
+  if(ewrap && vbox && "IntersectionObserver" in window){
+    var vio=new IntersectionObserver(function(es){
+      var e=es[0];
+      if(!e.isIntersecting && e.boundingClientRect.top < 0){ vbox.classList.add("mini"); }
+      else if(e.isIntersecting){ vbox.classList.remove("mini"); }
+    }, {threshold:[0,0.35]});
+    vio.observe(ewrap);
+  }
+  var mclose=document.getElementById("miniClose");
+  if(mclose){ mclose.addEventListener("click", function(){ if(vbox) vbox.classList.remove("mini"); if(ewrap) ewrap.scrollIntoView({behavior:"smooth",block:"start"}); }); }
+
+  // timeline open/close
+  document.querySelectorAll(".toggle-head").forEach(function(h){
+    h.addEventListener("click", function(){
+      h.classList.toggle("collapsed");
+      var collapsed=h.classList.contains("collapsed");
+      var t=document.getElementById(h.getAttribute("data-target"));
+      if(t) t.classList.toggle("hidden", collapsed);
+      var ico=h.querySelector(".tb-ico"), txt=h.querySelector(".tb-txt");
+      if(ico) ico.textContent = collapsed ? "▸" : "▾";
+      if(txt) txt.textContent = collapsed ? "開く" : "閉じる";
+    });
+  });
+
+  var cl=load(CLKEY);
+  document.querySelectorAll(".clchk").forEach(function(c){
+    var i=c.getAttribute("data-i");
+    c.checked=!!cl[i];
+    c.addEventListener("change", function(){ var s=load(CLKEY); s[i]=c.checked; save(CLKEY,s); });
+  });
+
+  var st=load(KEY); var db=document.getElementById("doneBtn");
+  function paint(){ if(st[RID]){ db.classList.add("on"); db.textContent="✓ 視聴済み ｜ もう一度押すと解除"; } else { db.classList.remove("on"); db.textContent="この回を視聴済みにする"; } }
+  paint();
+  db.addEventListener("click", function(){ var s=load(KEY); s[RID]=!s[RID]; save(KEY,s); st=s; paint(); });
+
+  var links=Array.prototype.slice.call(document.querySelectorAll("#sideNav a"));
+  var map={}; links.forEach(function(a){ var id=a.getAttribute("href").slice(1); var el=document.getElementById(id); if(el) map[id]=a; });
+  if("IntersectionObserver" in window){
+    var obs=new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting){ links.forEach(function(a){a.classList.remove("active");}); var a=map[en.target.id]; if(a) a.classList.add("active"); } }); }, {rootMargin:"-30% 0px -60% 0px", threshold:0});
+    Object.keys(map).forEach(function(id){ obs.observe(document.getElementById(id)); });
+  }
+
+  var burger=document.getElementById("burger"), scrim=document.getElementById("scrim");
+  function closeNav(){ document.body.classList.remove("nav-open"); }
+  if(burger) burger.addEventListener("click", function(){ document.body.classList.toggle("nav-open"); });
+  if(scrim) scrim.addEventListener("click", closeNav);
+  document.querySelectorAll("#sideNav a").forEach(function(a){ a.addEventListener("click", closeNav); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>リアル 第7回補講 自己紹介と才能の発掘 ── ナイス貝の占い講座 学習サイト</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --navy-deep:#121D33; --navy:#1B2A4A; --navy-mid:#29406B; --gold:#C9A227; --gold-light:#E8D27A;
+    --cream:#FAF8F3; --ink:#1B2A4A; --muted:#5B6B8C; --line:#E3DECF; --sidebar-w:266px; }
+  *{box-sizing:border-box;} html{scroll-behavior:smooth;}
+  body{ margin:0; background:var(--cream); color:var(--ink); font-family:"Zen Kaku Gothic New",sans-serif; line-height:1.85; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,.serif{ font-family:"Shippori Mincho",serif; letter-spacing:.02em; }
+  a{color:inherit;} :focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+  .layout{ display:flex; align-items:flex-start; } .main{ flex:1; min-width:0; }
+  .sidebar{ width:var(--sidebar-w); flex-shrink:0; position:sticky; top:0; height:100vh; overflow-y:auto;
+    background:var(--navy-deep); color:var(--cream); display:flex; flex-direction:column; padding:24px 16px 20px;
+    border-right:1px solid rgba(255,255,255,.06); z-index:60; }
+  .side-brand{ display:flex; align-items:center; gap:9px; font-family:"Shippori Mincho",serif; font-weight:700; font-size:15px; color:var(--gold-light); }
+  .side-brand .dot{ width:9px; height:9px; border-radius:50%; background:var(--gold); }
+  .side-sub{ font-size:10.5px; letter-spacing:.14em; color:#8E9BBE; margin:2px 0 14px 18px; text-transform:uppercase; }
+  .side-back{ display:inline-flex; gap:7px; font-size:12.5px; color:#9FAAC9; text-decoration:none; margin:0 0 14px 3px; }
+  .side-back:hover{ color:var(--gold-light); }
+  .side-label{ font-size:10px; letter-spacing:.14em; color:#6B77A0; text-transform:uppercase; margin:6px 3px 8px; }
+  .side-nav{ display:flex; flex-direction:column; gap:1px; }
+  .side-nav a{ display:flex; flex-direction:column; gap:1px; padding:8px 10px; border-radius:8px; text-decoration:none; transition:background .15s; }
+  .side-nav a:hover{ background:rgba(255,255,255,.05); }
+  .side-nav a.active{ background:rgba(201,162,39,.15); }
+  .side-nav a .cn{ font-size:12.5px; color:var(--gold-light); }
+  .side-nav a .ct{ font-size:12px; color:#C7D0E6; }
+  .side-nav a.active .ct{ color:#fff; }
+  .side-foot{ margin-top:16px; font-size:11px; color:#586284; }
+  .mtopbar{ display:none; } .scrim{ display:none; }
+
+  .wrap{ max-width:820px; margin:0 auto; padding:52px 6vw 100px; }
+  .crumb{ font-size:12.5px; color:var(--muted); margin-bottom:14px; }
+  .crumb a{ color:var(--muted); text-decoration:none; } .crumb a:hover{ color:var(--gold); }
+  .l-tag{ display:inline-block; font-family:"Shippori Mincho",serif; font-size:13px; font-weight:700; color:var(--gold-light); background:var(--navy); padding:5px 14px; border-radius:999px; margin-bottom:16px; }
+  .l-title{ font-size:clamp(24px,3.4vw,34px); margin:0 0 8px; line-height:1.45; }
+  .l-meta{ font-size:13.5px; color:var(--muted); margin-bottom:28px; }
+
+  .embed-wrap{ position:relative; aspect-ratio:16/9; }
+  .embed{ position:absolute; inset:0; background:#0D1526; border-radius:14px; overflow:hidden; box-shadow:0 18px 40px rgba(18,29,51,.16); }
+  .embed iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+  .embed.mini{ position:fixed; inset:auto 18px 18px auto; width:min(360px,74vw); height:auto; aspect-ratio:16/9; z-index:90; border-radius:12px; box-shadow:0 16px 40px rgba(9,14,26,.5); }
+  .mini-bar{ display:none; }
+  .embed.mini .mini-bar{ display:flex; align-items:center; justify-content:space-between; position:absolute; left:0; right:0; top:-27px; height:27px; padding:0 4px 0 12px; background:var(--navy-deep); color:var(--cream); border-radius:9px 9px 0 0; font-size:11px; }
+  .mini-bar button{ background:transparent; border:0; color:var(--gold-light); cursor:pointer; font-size:15px; line-height:1; padding:2px 8px; }
+  .mini-bar button:hover{ color:#fff; }
+
+  .bh{ display:flex; align-items:baseline; gap:12px; margin:46px 0 16px; }
+  .bh .en{ font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); }
+  .bh h2{ font-size:19px; margin:0; }
+
+  .tl{ border:1px solid var(--line); border-radius:14px; background:#fff; overflow:hidden; }
+  .tl button{ display:flex; align-items:flex-start; gap:14px; width:100%; text-align:left; padding:12px 16px; background:transparent; border:0; border-top:1px solid var(--line); cursor:pointer; font-family:inherit; font-size:13.5px; color:var(--ink); transition:background .15s; }
+  .tl button:first-child{ border-top:0; } .tl button:hover{ background:var(--cream); } .tl button.active{ background:#FBF6E7; }
+  .tl .t{ flex-shrink:0; font-variant-numeric:tabular-nums; font-size:12px; color:var(--gold); background:var(--cream); border:1px solid var(--line); border-radius:7px; padding:3px 8px; min-width:64px; text-align:center; }
+  .tl button.active .t{ background:var(--navy); color:var(--gold-light); border-color:var(--navy); }
+  .tl-note{ font-size:12px; color:var(--muted); margin:10px 2px 0; }
+
+  .toggle-head{ cursor:pointer; user-select:none; align-items:center; }
+  .toggle-head .toggle-btn{ margin-left:auto; display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:700; color:var(--navy); background:var(--cream); border:1px solid var(--line); border-radius:999px; padding:6px 14px; white-space:nowrap; transition:all .15s; }
+  .toggle-head:hover .toggle-btn{ border-color:var(--gold); color:var(--gold); background:#FBF6E7; }
+  .toggle-head .toggle-btn .tb-ico{ font-size:11px; }
+  .collapsible.hidden{ display:none; }
+
+  .mapcard{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:22px 26px; }
+  .mapcard ul{ margin:0; padding-left:1.15em; } .mapcard li{ margin:0 0 9px; font-size:15px; }
+  .mapcard.prose p{ margin:0 0 14px; font-size:15px; } .mapcard.prose p:last-child{ margin-bottom:0; }
+  .aboutnote{ font-size:12.5px; color:var(--muted); background:#F4F2EA; border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin-top:16px; }
+
+  .ctable{ width:100%; border-collapse:collapse; margin:2px 0 18px; font-size:14.5px; border:1px solid var(--line); }
+  .ctable th, .ctable td{ text-align:left; padding:11px 15px; border-top:1px solid var(--line); vertical-align:top; }
+  .ctable thead th{ background:var(--navy); color:var(--gold-light); font-family:"Shippori Mincho",serif; font-weight:700; font-size:13.5px; border-top:0; }
+  .ctable tbody tr:nth-child(even){ background:#FBF9F3; }
+  .ctable td:first-child{ font-weight:700; white-space:nowrap; }
+  @media (max-width:560px){ .ctable td:first-child{ white-space:normal; } }
+  .script h2.ch{ font-size:20px; margin:44px 0 6px; padding-top:14px; border-top:1px solid var(--line); }
+  .ch-time{ font-size:12px; color:var(--muted); margin-bottom:16px; }
+  .nar{ font-size:15px; margin:0 0 15px; }
+  .q{ display:flex; gap:11px; margin:0 0 16px; align-items:flex-start; }
+  .q .who{ flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:46px; height:30px; border-radius:999px; font-size:11px; font-weight:700; margin-top:3px; letter-spacing:.02em; }
+  .q p{ margin:0; font-size:15px; border-radius:14px; padding:11px 16px; max-width:82%; position:relative; }
+  .q-teacher .who{ background:var(--navy); color:var(--gold-light); }
+  .q-teacher p{ background:#FBF7EA; border:1px solid #EAD9A6; }
+  .q-user{ flex-direction:row-reverse; }
+  .q-user .who{ background:#EEF1F6; color:var(--muted); border:1px solid var(--line); }
+  .q-user p{ background:#fff; border:1px solid var(--line); }
+  .note-teach{ background:#fff; border-left:3px solid var(--gold); border-radius:0 10px 10px 0; padding:12px 18px; margin:0 0 15px; box-shadow:0 2px 10px rgba(27,42,74,.04); }
+  .note-teach .lbl{ display:block; font-size:11px; letter-spacing:.08em; color:var(--gold); font-weight:700; margin-bottom:5px; }
+  .note-teach p{ margin:0; font-size:14.5px; }
+
+  .checklist{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:20px 24px; }
+  .clitem{ display:flex; align-items:flex-start; gap:11px; padding:10px 0; border-top:1px solid var(--line); cursor:pointer; font-size:14.5px; }
+  .clitem:first-child{ border-top:0; }
+  .clitem input{ appearance:none; -webkit-appearance:none; width:19px; height:19px; margin-top:3px; border:1.6px solid var(--navy-mid); border-radius:5px; cursor:pointer; position:relative; flex-shrink:0; background:#fff; transition:all .18s; }
+  .clitem input:checked{ background:var(--gold); border-color:var(--gold); }
+  .clitem input:checked::after{ content:"✓"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:12px; color:var(--navy-deep); font-weight:700; }
+  .clitem input:checked + span{ color:var(--muted); text-decoration:line-through; }
+
+  .lnav{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:50px; flex-wrap:wrap; }
+  .lnav a.back{ font-size:14px; color:var(--muted); text-decoration:none; } .lnav a.back:hover{ color:var(--gold); }
+  .donebtn{ display:inline-flex; align-items:center; gap:10px; background:var(--gold); color:var(--navy-deep); font-weight:700; font-size:15px; padding:14px 28px; border-radius:11px; border:0; cursor:pointer; font-family:inherit; transition:transform .18s, background .18s; }
+  .donebtn:hover{ transform:translateY(-2px); background:var(--gold-light); }
+  .donebtn.on{ background:var(--navy); color:var(--gold-light); }
+
+  @media (max-width:880px){
+    .mtopbar{ display:flex; align-items:center; gap:12px; position:sticky; top:0; z-index:70; padding:12px 18px; background:var(--navy-deep); color:var(--cream); border-bottom:1px solid rgba(255,255,255,.08); }
+    .mtopbar .burger{ width:40px; height:40px; border-radius:9px; border:1px solid rgba(255,255,255,.15); background:transparent; color:var(--gold-light); font-size:18px; cursor:pointer; }
+    .mtopbar .mbrand{ font-family:"Shippori Mincho",serif; font-weight:700; font-size:14px; color:var(--gold-light); }
+    .sidebar{ position:fixed; top:0; left:0; height:100vh; transform:translateX(-100%); transition:transform .28s; box-shadow:0 0 40px rgba(0,0,0,.4); }
+    body.nav-open .sidebar{ transform:translateX(0); }
+    body.nav-open .scrim{ display:block; position:fixed; inset:0; background:rgba(9,14,26,.5); z-index:55; }
+  }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } .sidebar{ transition:none; } }
+</style>
+</head>
+<body>
+  <div class="mtopbar">
+    <button class="burger" id="burger" aria-label="メニュー">☰</button>
+    <span class="mbrand">リアル第7回補講 才能の発掘</span>
+  </div>
+  <div class="scrim" id="scrim"></div>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="side-brand"><span class="dot"></span> ナイス貝 占い講座</div>
+      <p class="side-sub">学習サイト</p>
+      <a class="side-back" href="nice-kai-2ki.html#real">← 学習トップにもどる</a>
+      <div class="side-label">この回の目次</div>
+      <nav class="side-nav" id="sideNav">
+<a href="#ch1"><span class="cn">第1章</span><span class="ct">舞台から現実へ戻りたくなかった人</span></a>
+<a href="#ch2"><span class="cn">第2章</span><span class="ct">宝塚の夢と、七本の柱</span></a>
+<a href="#ch3"><span class="cn">第3章</span><span class="ct">地球人として優秀な宇宙人</span></a>
+<a href="#ch4"><span class="cn">第4章</span><span class="ct">菩薩は、いるだけで仕事をしている</span></a>
+<a href="#ch5"><span class="cn">第5章</span><span class="ct">四十年着た鎧を脱いだら、何を着ればいい？</span></a>
+<a href="#ch6"><span class="cn">第6章</span><span class="ct">本人だけ気づかないDIYの扉</span></a>
+<a href="#ch7"><span class="cn">第7章</span><span class="ct">研究費として株で負けに行く人</span></a>
+<a href="#ch8"><span class="cn">第8章</span><span class="ct">体・心・魂は順番を飛ばさない</span></a>
+<a href="#ch9"><span class="cn">第9章</span><span class="ct">できることと、やりたいことは違う</span></a>
+<a href="#ch10"><span class="cn">第10章</span><span class="ct">お金を増やす前に、きび団子の使い道を決める</span></a>
+<a href="#ch11"><span class="cn">第11章</span><span class="ct">アンパンマンにはバイキンマンが必要</span></a>
+<a href="#ch12"><span class="cn">第12章</span><span class="ct">自己紹介は、才能の共同発掘だった</span></a>
+      </nav>
+      <div class="side-foot">© ナイス貝 ／ 片貝文昌</div>
+    </aside>
+
+    <div class="main">
+      <div class="wrap">
+        <div class="crumb"><a href="nice-kai-2ki.html">学習トップ</a> ／ <a href="nice-kai-2ki.html#real">リアル講座</a> ／ リアル 第7回補講</div>
+        <span class="l-tag">リアル 第7回補講</span>
+        <h1 class="l-title">自己紹介と才能の発掘</h1>
+        <div class="l-meta">2026.06.28(日) ・ 中原区自治会館</div>
+
+        <div class="embed-wrap" id="embedWrap"><div class="embed" id="videoBox"><div class="mini-bar"><span>▶ 動画</span><button id="miniClose" title="元の位置にもどす" aria-label="元の位置にもどす">⤢</button></div><iframe id="ytframe" src="https://www.youtube.com/embed/lm3qAnAt6E4?rel=0" title="自己紹介と才能の発掘" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>
+
+<div class="bh"><span class="en">Summary</span><h2>今回の講座の地図</h2></div><div class="mapcard"><ul><li>1．舞台から現実へ戻りたくなかった人</li>
+<li>2．宝塚の夢と、七本の柱</li>
+<li>3．地球人として優秀な宇宙人</li>
+<li>4．菩薩は、いるだけで仕事をしている</li>
+<li>5．四十年着た鎧を脱いだら、何を着ればいい？</li>
+<li>6．本人だけ気づかないDIYの扉</li>
+<li>7．研究費として株で負けに行く人</li>
+<li>8．体・心・魂は順番を飛ばさない</li>
+<li>9．できることと、やりたいことは違う</li>
+<li>10．お金を増やす前に、きび団子の使い道を決める</li>
+<li>11．アンパンマンにはバイキンマンが必要</li>
+<li>12．自己紹介は、才能の共同発掘だった</li>
+<li>00:00:14</li></ul></div>
+<div class="bh"><span class="en">Transcript</span><h2>編集書き起こし（本編）</h2></div><div class="script"><h2 class="ch" id="ch1">第1章　舞台から現実へ戻りたくなかった人</h2>
+<p class="nar">最初の参加者は、舞台に立った経験から「体全体で表現することが、本当に好きだった」と話しました。終演が近づくほど、現実へ戻りたくない気持ちが強くなったといいます。</p>
+<p class="nar">一方、現在の職場ではルールが多く、周囲に染まることはできても、心が死んでいく感覚がある。そこで「やりたいことを人生の八割に近づけたい」という言葉が出てきました。</p>
+<p class="nar">00:02:00</p>
+<h2 class="ch" id="ch2">第2章　宝塚の夢と、七本の柱</h2>
+<p class="nar">次の自己紹介では、歌うこと、踊ること、コンサートを開くこと、幼い頃に抱いた宝塚への憧れが次々と出てきます。本人は一つに決めようとしていましたが、話すほど柱が増えていきました。</p>
+<p class="nar">会場では、自己紹介の時間管理まで参加者に託されます。宇宙の話が膨らみやすい人と、地球時間を管理する人。すでに場そのものがチームになっていました。</p>
+<p class="nar">00:06:06</p>
+<h2 class="ch" id="ch3">第3章　地球人として優秀な宇宙人</h2>
+<p class="nar">情報を集め、整理し、すでにあるものを改善するのが得意な参加者。ゼロから生むのは苦手でも、材料があれば現実的にまとめられます。さらに、勧められた人の少ない神社へすぐ向かう行動力も持っていました。</p>
+<p class="nar">見えないものに関心がありながら、記録を取り、情報を整理し、現実へ戻せる。宇宙と地球の通訳役が自然に見えてきました。</p>
+<p class="nar">00:14:09</p>
+<h2 class="ch" id="ch4">第4章　菩薩は、いるだけで仕事をしている</h2>
+<p class="nar">長く家族の介護を担い、自分の得意や望みが分からなくなった参加者に対し、講師は「緑のチーターは人がいい」と言い切ります。行動の速さよりも、誰かのために自然に動いてしまう姿が周囲から語られました。</p>
+<p class="nar">講師は、人を一つの会社にたとえました。見えない従業員同士が「そちらの社長、最近どうですか」と情報交換し、その結果が安心感や直感として戻ってくる。菩薩タイプは、そこにいるだけで場を整えるという見方です。</p>
+<p class="nar">00:24:47</p>
+<h2 class="ch" id="ch5">第5章　四十年着た鎧を脱いだら、何を着ればいい？</h2>
+<p class="nar">四十年間続けた看護師の仕事を辞め、子育ても一段落した参加者は、長く着ていた鎧が突然いらなくなった感覚を語りました。</p>
+<p class="nar">仕事では患者や同僚に気を配り、家庭では子どもに気を配る。常に役割があり、その役割を果たすことで前へ進んできた人にとって、自由はすぐに喜びにはなりません。自由は、次に何を選ぶかを自分で決める怖さでもあります。</p>
+<p class="nar">00:27:16</p>
+<h2 class="ch" id="ch6">第6章　本人だけ気づかないDIYの扉</h2>
+<p class="nar">その参加者が何気なく話したのは、絵を描くこと、DIY、買った家具を自分仕様へ作り替えること、人の家や庭を整える夢でした。周囲の反応は一気に変わります。</p>
+<p class="nar">ここで講座は、講師が一人ずつ鑑定する形式から、全員で一人の扉を見つける形式へ変わりました。本人の言葉に対し、周囲が感じたことを返す。それは集団鑑定というより、才能の共同発掘です。</p>
+<p class="nar">00:30:15</p>
+<h2 class="ch" id="ch7">第7章　研究費として株で負けに行く人</h2>
+<p class="nar">施術家の参加者は、株価が下がると、買わなくてもよいのに再び買いに行ってしまうと話しました。損をしたいわけではありません。しかし講師は、その行動を「研究」と読み替えます。</p>
+<p class="nar">数秘7には、研究・探究だけでなく「切る」という意味も重ねられました。大きなものだけでなく、小さなものまで切ってしまう。物事の本質が見える分、「そこじゃないでしょう」と感じやすく、場に馴染みにくくなることもあります。</p>
+<p class="nar">00:35:18</p>
+<h2 class="ch" id="ch8">第8章　体・心・魂は順番を飛ばさない</h2>
+<p class="nar">その施術家は、人の体に触れると痛い場所や仕組みが分かり、その先に何をすればよいかまで見えてしまうと話します。しかし講師は、「魂をどう使うか」へ急ぐ前に、体と心を整える段階が必要だと説明しました。</p>
+<p class="nar">見える人ほど、周囲にも同じことが見えていると思いがちです。「触れば分かるでしょう」が当たり前になっていると、その能力を社会へ渡すための段差が見えません。</p>
+<p class="nar">00:40:00</p>
+<h2 class="ch" id="ch9">第9章　できることと、やりたいことは違う</h2>
+<p class="nar">自己紹介が進むにつれ、「人の話を聞ける」「サポートができる」「行動力がある」といった得意が出てきます。しかし、それを長く仕事にしてきたからといって、今後もやりたいとは限りません。</p>
+<p class="nar">できることは、過去の役割によって鍛えられた能力かもしれません。やりたいことは、これから育てたい方向です。この二つを分けることで、自己紹介が職務経歴の説明から、未来の宣言へ変わります。</p>
+<p class="nar">01:00:10</p>
+<h2 class="ch" id="ch10">第10章　お金を増やす前に、きび団子の使い道を決める</h2>
+<p class="nar">話題は相場とお金へ広がりました。ルールを研究したい人と、仕組みは分からなくてもお金が増えればよい人がいる。しかし、お金が増えれば幸せになるとは限りません。</p>
+<p class="nar">長期では資産が増えても、途中の下落に心が耐えられないことがあります。また、お金だけを先に集めると、それを何に使うかが分からず、講座でいう「きび団子」が腐り始めます。</p>
+<p class="nar">01:05:00</p>
+<h2 class="ch" id="ch11">第11章　アンパンマンにはバイキンマンが必要</h2>
+<p class="nar">人を助けたい菩薩タイプが、そのまま助けに行っても、相手は助けを求めていないことがあります。講師はこれをアンパンマンとバイキンマンで説明しました。</p>
+<p class="nar">困難をすべて取り除けばよいのではありません。本人が助けを受け取れる状態になるまで、経験が必要な場合があります。支援者は、助け方を工夫しなければなりません。</p>
+<p class="nar">01:08:00</p>
+<h2 class="ch" id="ch12">第12章　自己紹介は、才能の共同発掘だった</h2>
+<p class="nar">終盤では、似た性質を持つ参加者同士を組み合わせ、五行や相性の変化を見ながら、全員で言いたいことを返していきました。数分で解決できない人は「ランチ会行き」「熟成させる」となり、簡単に結論を出さないことも一つの結論になりました。</p>
+<p class="nar">自己紹介は、自分をうまく説明する試験ではありませんでした。本人が話す。周囲が反応する。占いの言葉が入る。笑いが起きる。その往復によって、「自分はこういう人だ」という固定された説明が少しずつ崩れ、新しい可能性が見えてきます。</p>
+<p class="nar">復習ワーク：自己紹介を才能発掘に変える</p>
+<p class="nar">□ いま得意なこと</p>
+<p class="nar">□ 本当はやりたいこと</p>
+<p class="nar">□ できるけれど、もうやりたくないこと</p>
+<p class="nar">□ 苦手なのに何年も続けていること</p>
+<p class="nar">□ 話すと周囲の反応が急に変わること</p>
+<p class="nar">□ 絶対に仕事にしないと決めていること</p>
+<p class="nar">□ 自分がいるだけで、場に起きている変化</p>
+<p class="nar">□ 信頼できる人から「それをやればいい」と言われること</p></div>
+
+        <div class="lnav">
+          <a class="back" href="nice-kai-2ki.html#real">← 学習トップ（リアル講座）にもどる</a>
+          <button class="donebtn" id="doneBtn" type="button">この回を視聴済みにする</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+(function(){
+  "use strict";
+  var KEY="nicekai_learn_v2", CLKEY="nicekai_r07_checklist", RID="r07", VID="lm3qAnAt6E4";
+  function load(k){ try{return JSON.parse(localStorage.getItem(k))||{};}catch(e){return {};} }
+  function save(k,v){ try{localStorage.setItem(k,JSON.stringify(v));}catch(e){} }
+
+  var frame=document.getElementById("ytframe");
+  var vbox=document.getElementById("videoBox");
+  document.querySelectorAll(".tl button[data-sec]").forEach(function(b){
+    b.addEventListener("click", function(){
+      var sec=b.getAttribute("data-sec");
+      if(frame) frame.src="https://www.youtube.com/embed/"+VID+"?rel=0&start="+sec+"&autoplay=1";
+      document.querySelectorAll(".tl button").forEach(function(x){x.classList.remove("active");});
+      b.classList.add("active");
+      if(frame && vbox && !vbox.classList.contains("mini")) frame.scrollIntoView({behavior:"smooth",block:"center"});
+    });
+  });
+
+  // sticky mini-player: keep the video watchable while scrolling
+  var ewrap=document.getElementById("embedWrap");
+  if(ewrap && vbox && "IntersectionObserver" in window){
+    var vio=new IntersectionObserver(function(es){
+      var e=es[0];
+      if(!e.isIntersecting && e.boundingClientRect.top < 0){ vbox.classList.add("mini"); }
+      else if(e.isIntersecting){ vbox.classList.remove("mini"); }
+    }, {threshold:[0,0.35]});
+    vio.observe(ewrap);
+  }
+  var mclose=document.getElementById("miniClose");
+  if(mclose){ mclose.addEventListener("click", function(){ if(vbox) vbox.classList.remove("mini"); if(ewrap) ewrap.scrollIntoView({behavior:"smooth",block:"start"}); }); }
+
+  // timeline open/close
+  document.querySelectorAll(".toggle-head").forEach(function(h){
+    h.addEventListener("click", function(){
+      h.classList.toggle("collapsed");
+      var collapsed=h.classList.contains("collapsed");
+      var t=document.getElementById(h.getAttribute("data-target"));
+      if(t) t.classList.toggle("hidden", collapsed);
+      var ico=h.querySelector(".tb-ico"), txt=h.querySelector(".tb-txt");
+      if(ico) ico.textContent = collapsed ? "▸" : "▾";
+      if(txt) txt.textContent = collapsed ? "開く" : "閉じる";
+    });
+  });
+
+  var cl=load(CLKEY);
+  document.querySelectorAll(".clchk").forEach(function(c){
+    var i=c.getAttribute("data-i");
+    c.checked=!!cl[i];
+    c.addEventListener("change", function(){ var s=load(CLKEY); s[i]=c.checked; save(CLKEY,s); });
+  });
+
+  var st=load(KEY); var db=document.getElementById("doneBtn");
+  function paint(){ if(st[RID]){ db.classList.add("on"); db.textContent="✓ 視聴済み ｜ もう一度押すと解除"; } else { db.classList.remove("on"); db.textContent="この回を視聴済みにする"; } }
+  paint();
+  db.addEventListener("click", function(){ var s=load(KEY); s[RID]=!s[RID]; save(KEY,s); st=s; paint(); });
+
+  var links=Array.prototype.slice.call(document.querySelectorAll("#sideNav a"));
+  var map={}; links.forEach(function(a){ var id=a.getAttribute("href").slice(1); var el=document.getElementById(id); if(el) map[id]=a; });
+  if("IntersectionObserver" in window){
+    var obs=new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting){ links.forEach(function(a){a.classList.remove("active");}); var a=map[en.target.id]; if(a) a.classList.add("active"); } }); }, {rootMargin:"-30% 0px -60% 0px", threshold:0});
+    Object.keys(map).forEach(function(id){ obs.observe(document.getElementById(id)); });
+  }
+
+  var burger=document.getElementById("burger"), scrim=document.getElementById("scrim");
+  function closeNav(){ document.body.classList.remove("nav-open"); }
+  if(burger) burger.addEventListener("click", function(){ document.body.classList.toggle("nav-open"); });
+  if(scrim) scrim.addEventListener("click", closeNav);
+  document.querySelectorAll("#sideNav a").forEach(function(a){ a.addEventListener("click", closeNav); });
+})();
+</script>
+</body>
+</html>

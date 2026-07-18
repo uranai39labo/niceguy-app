@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>講座ページ ── ナイス貝の占い講座 学習サイト</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#121D33; --navy:#1B2A4A; --navy-mid:#29406B;
+    --gold:#C9A227; --gold-light:#E8D27A; --cream:#FAF8F3;
+    --ink:#1B2A4A; --muted:#5B6B8C; --line:#E3DECF; --sidebar-w:256px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{ margin:0; background:var(--cream); color:var(--ink);
+    font-family:"Zen Kaku Gothic New", sans-serif; line-height:1.8; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,.serif{ font-family:"Shippori Mincho", serif; letter-spacing:.02em; }
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+
+  .layout{ display:flex; align-items:flex-start; }
+  .main{ flex:1; min-width:0; }
+
+  /* sidebar */
+  .sidebar{
+    width:var(--sidebar-w); flex-shrink:0; position:sticky; top:0; height:100vh;
+    background:var(--navy-deep); color:var(--cream); display:flex; flex-direction:column;
+    padding:26px 18px 22px; border-right:1px solid rgba(255,255,255,.06); z-index:60;
+  }
+  .side-brand{ display:flex; align-items:center; gap:10px; font-family:"Shippori Mincho",serif; font-weight:700; font-size:15.5px; color:var(--gold-light); margin-bottom:2px; }
+  .side-brand .dot{ width:9px; height:9px; border-radius:50%; background:var(--gold); flex-shrink:0; }
+  .side-sub{ font-size:11px; letter-spacing:.14em; color:#8E9BBE; margin:0 0 16px 19px; text-transform:uppercase; }
+  .side-back{ display:inline-flex; align-items:center; gap:7px; font-size:12.5px; color:#9FAAC9; text-decoration:none; margin:0 0 16px 4px; }
+  .side-back:hover{ color:var(--gold-light); }
+  .side-label{ font-size:10.5px; letter-spacing:.14em; color:#6B77A0; text-transform:uppercase; margin:6px 4px 8px; }
+  .side-nav{ display:flex; flex-direction:column; gap:2px; overflow-y:auto; }
+  .side-nav a{
+    display:flex; align-items:center; gap:9px; padding:9px 11px; border-radius:9px;
+    font-size:13.5px; color:#C7D0E6; text-decoration:none; transition:background .18s, color .18s;
+  }
+  .side-nav a:hover{ background:rgba(255,255,255,.05); color:var(--cream); }
+  .side-nav a.active{ background:rgba(201,162,39,.16); color:var(--gold-light); }
+  .side-nav a .tag{ min-width:44px; font-size:11px; color:#8E9BBE; }
+  .side-nav a.active .tag{ color:var(--gold-light); }
+  .side-nav a .chk{ margin-left:auto; font-size:12px; color:var(--gold); opacity:0; }
+  .side-nav a.done .chk{ opacity:1; }
+  .side-foot{ margin-top:auto; padding-top:16px; font-size:11px; color:#586284; }
+
+  .mtopbar{ display:none; } .scrim{ display:none; }
+
+  /* content */
+  .wrap{ max-width:900px; margin:0 auto; padding:54px 6vw 90px; }
+  .crumb{ font-size:12.5px; color:var(--muted); margin-bottom:14px; }
+  .crumb a{ color:var(--muted); text-decoration:none; } .crumb a:hover{ color:var(--gold); }
+  .l-tag{
+    display:inline-block; font-family:"Shippori Mincho",serif; font-size:13px; font-weight:700;
+    color:var(--gold-light); background:var(--navy); padding:5px 14px; border-radius:999px; margin-bottom:16px;
+  }
+  .l-title{ font-size:clamp(24px,3.4vw,34px); margin:0 0 8px; color:var(--ink); line-height:1.45; }
+  .l-dur{ font-size:13px; color:var(--muted); margin-bottom:28px; }
+
+  .embed-wrap{ position:relative; aspect-ratio:16/9; }
+  .embed{ position:absolute; inset:0; background:#0D1526; border-radius:14px; overflow:hidden; box-shadow:0 18px 40px rgba(18,29,51,.16); }
+  .embed iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+  .embed.mini{ position:fixed; inset:auto 18px 18px auto; width:min(360px,74vw); height:auto; aspect-ratio:16/9; z-index:90; border-radius:12px; box-shadow:0 16px 40px rgba(9,14,26,.5); }
+  .mini-bar{ display:none; }
+  .embed.mini .mini-bar{ display:flex; align-items:center; justify-content:space-between; position:absolute; left:0; right:0; top:-27px; height:27px; padding:0 4px 0 12px; background:var(--navy-deep); color:var(--cream); border-radius:9px 9px 0 0; font-size:11px; }
+  .mini-bar button{ background:transparent; border:0; color:var(--gold-light); cursor:pointer; font-size:15px; line-height:1; padding:2px 8px; }
+  .mini-bar button:hover{ color:#fff; }
+  .embed .pending-box{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#9FAAC9; gap:10px; text-align:center; padding:20px; }
+  .embed .pending-box .big{ font-family:"Shippori Mincho",serif; font-size:20px; color:var(--gold-light); }
+
+  .block-head{ display:flex; align-items:baseline; gap:12px; margin:44px 0 16px; }
+  .block-head h2{ font-size:19px; margin:0; color:var(--ink); }
+  .block-head .en{ font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); }
+
+  /* timeline */
+  .tl{ border:1px solid var(--line); border-radius:14px; background:#fff; overflow:hidden; }
+  .tl button{
+    display:flex; align-items:center; gap:14px; width:100%; text-align:left;
+    padding:13px 18px; background:transparent; border:0; border-top:1px solid var(--line);
+    cursor:pointer; font-family:inherit; font-size:14px; color:var(--ink); transition:background .15s;
+  }
+  .tl button:first-child{ border-top:0; }
+  .tl button:hover{ background:var(--cream); }
+  .tl button.active{ background:#FBF6E7; }
+  .tl .t{
+    flex-shrink:0; font-variant-numeric:tabular-nums; font-size:12.5px; color:var(--gold);
+    background:var(--cream); border:1px solid var(--line); border-radius:7px; padding:3px 9px; min-width:64px; text-align:center;
+  }
+  .tl button.active .t{ background:var(--navy); color:var(--gold-light); border-color:var(--navy); }
+  .tl .ph{ color:#B5B0A0; font-style:italic; }
+  .tl-note{ font-size:12px; color:var(--muted); margin:10px 2px 0; }
+  .toggle-head{ cursor:pointer; user-select:none; align-items:center; }
+  .toggle-head .toggle-btn{ margin-left:auto; display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:700; color:var(--navy); background:var(--cream); border:1px solid var(--line); border-radius:999px; padding:6px 14px; white-space:nowrap; transition:all .15s; }
+  .toggle-head:hover .toggle-btn{ border-color:var(--gold); color:var(--gold); background:#FBF6E7; }
+  .toggle-head .toggle-btn .tb-ico{ font-size:11px; }
+  .collapsible.hidden{ display:none; }
+
+  /* summary */
+  .summary{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:26px 28px; }
+  .summary p{ margin:0 0 14px; font-size:15px; color:var(--ink); }
+  .summary p:last-child{ margin-bottom:0; }
+  .summary ul{ margin:0; padding-left:1.15em; }
+  .summary li{ margin:0 0 10px; font-size:15px; }
+  .summary .ph{ color:#8E9BBE; font-style:italic; }
+
+  /* nav bottom */
+  .lnav{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:52px; flex-wrap:wrap; }
+  .lnav .prev{ font-size:14px; color:var(--muted); text-decoration:none; }
+  .lnav .prev:hover{ color:var(--gold); }
+  .lnav .prev.hidden{ visibility:hidden; }
+  .nextbtn{
+    display:inline-flex; align-items:center; gap:10px; background:var(--gold); color:var(--navy-deep);
+    font-weight:700; font-size:15px; padding:15px 30px; border-radius:11px; border:0; cursor:pointer;
+    font-family:inherit; transition:transform .18s, background .18s;
+  }
+  .nextbtn:hover{ transform:translateY(-2px); background:var(--gold-light); }
+  .nextbtn.done-state{ background:var(--navy); color:var(--gold-light); }
+  .savednote{ font-size:12px; color:var(--muted); margin-top:12px; text-align:right; }
+
+  @media (max-width:880px){
+    .mtopbar{ display:flex; align-items:center; gap:12px; position:sticky; top:0; z-index:70;
+      padding:12px 18px; background:var(--navy-deep); color:var(--cream); border-bottom:1px solid rgba(255,255,255,.08); }
+    .mtopbar .burger{ width:40px; height:40px; border-radius:9px; border:1px solid rgba(255,255,255,.15); background:transparent; color:var(--gold-light); font-size:18px; cursor:pointer; }
+    .mtopbar .mbrand{ font-family:"Shippori Mincho",serif; font-weight:700; font-size:14px; color:var(--gold-light); }
+    .sidebar{ position:fixed; top:0; left:0; height:100vh; transform:translateX(-100%); transition:transform .28s; box-shadow:0 0 40px rgba(0,0,0,.4); }
+    body.nav-open .sidebar{ transform:translateX(0); }
+    body.nav-open .scrim{ display:block; position:fixed; inset:0; background:rgba(9,14,26,.5); z-index:55; }
+  }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } .sidebar{ transition:none; } }
+</style>
+</head>
+<body>
+
+  <div class="mtopbar">
+    <button class="burger" id="burger" aria-label="メニュー">☰</button>
+    <span class="mbrand">ナイス貝 占い講座</span>
+  </div>
+  <div class="scrim" id="scrim"></div>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="side-brand"><span class="dot"></span> ナイス貝 占い講座</div>
+      <p class="side-sub">学習サイト</p>
+      <a class="side-back" href="nice-kai-2ki.html#zoom">← 学習トップにもどる</a>
+      <div class="side-label">Zoom講座（順番）</div>
+      <nav class="side-nav" id="sideNav"><!-- lessons injected --></nav>
+      <div class="side-foot">© ナイス貝 ／ 片貝文昌</div>
+    </aside>
+
+    <div class="main">
+      <div class="wrap" id="lessonWrap"><!-- lesson injected --></div>
+    </div>
+  </div>
+
+<script>
+(function(){
+  "use strict";
+  var KEY = "nicekai_learn_v2";
+  var HUB = "nice-kai-2ki.html";
+
+  var LESSONS = [
+    { id:"z00", tag:"導入", title:"変化の時代の「設計図」の作り方", vid:"XOoohgzn27A", dur:"約6分",
+      chapters:[ {t:0,label:"オープニング"}, {t:120,label:"（ここに章タイトルと時間を入れます）",ph:true} ],
+      summary:["（この回の要約をここに書きます。3〜5行くらいがおすすめです。）"] },
+    { id:"z01", tag:"第1回", title:"占いを学ぶ理由", vid:"-eprO8UfNm4", dur:"2時間2分",
+      chapters:[ {t:0,label:"はじめに・自己紹介"}, {t:600,label:"占いを学ぶ意味"}, {t:1800,label:"（章タイトルを入れる）",ph:true} ],
+      summary:["（この回の要約をここに書きます。）"] },
+    { id:"z015", tag:"第1.5回", title:"占いを学ぶ理由 ②（補講）", vid:"uY8P34YkRxs", dur:"2時間9分",
+      chapters:[ {t:0,label:"前回のふりかえり"}, {t:900,label:"（章タイトルを入れる）",ph:true} ],
+      summary:["（この回の要約をここに書きます。）"] },
+    { id:"z02", tag:"第2回", title:"インド占星術の基礎", vid:"_wS2rScW0Jo", dur:"1時間54分",
+      chapters:[ {t:0,label:"インド占星術とは"}, {t:900,label:"（章タイトルを入れる）",ph:true} ],
+      summary:["（この回の要約をここに書きます。）"] },
+    { id:"z03", tag:"第3回", title:"鑑定アプリの使い方", vid:"W55Sgl9yAUk", dur:"1時間57分",
+      chapters:[ {t:0,label:"アプリの開き方"}, {t:600,label:"（章タイトルを入れる）",ph:true} ],
+      summary:["（この回の要約をここに書きます。）"] },
+    { id:"z04", tag:"第4回", title:"鑑定アプリで家族を鑑定", vid:"30bFMTfNkkM", dur:"2時間4分",
+      chapters:[ {t:0,label:"実践の準備"}, {t:600,label:"（章タイトルを入れる）",ph:true} ],
+      summary:["（この回の要約をここに書きます。）"] },
+    { id:"z05", tag:"第5回", title:"第5回 講座", vid:"WdvhP55Z5bE", dur:"1時間50分",
+      chapters:[ {t:0,label:"オープニング"}, {t:600,label:"（章タイトルを入れる）",ph:true} ],
+      summary:["（この回の要約をここに書きます。）"] },
+    { id:"z06", tag:"第6回", title:"第6回 講座", vid:"_BlOpX0VIIk", dur:"1時間9分", pending:true,
+      chapters:[], summary:[] }
+  ];
+
+  function load(){ try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){ return {}; } }
+  function save(p){ try { localStorage.setItem(KEY, JSON.stringify(p)); } catch(e){} }
+  function fmt(sec){ var m=Math.floor(sec/60), s=sec%60; var h=Math.floor(m/60); m=m%60;
+    function p(n){return (n<10?"0":"")+n;}
+    return h>0 ? h+":"+p(m)+":"+p(s) : m+":"+p(s); }
+
+  function indexOfId(id){ for(var i=0;i<LESSONS.length;i++){ if(LESSONS[i].id===id) return i; } return -1; }
+  function currentId(){
+    var h=(location.hash||"").replace("#","");
+    return indexOfId(h)>=0 ? h : LESSONS[0].id;
+  }
+
+  var wrap = document.getElementById("lessonWrap");
+  var sideNav = document.getElementById("sideNav");
+
+  function buildSidebar(activeId){
+    var state=load(); var html="";
+    LESSONS.forEach(function(L){
+      var cls = "side-item" + (L.id===activeId?" active":"") + (state[L.id]?" done":"");
+      html += '<a class="'+cls+'" href="#'+L.id+'"><span class="tag">'+L.tag+'</span><span class="nm">'+L.title+'</span><span class="chk">✓</span></a>';
+    });
+    sideNav.innerHTML = html;
+  }
+
+  function seekTo(sec){
+    var L = currentLesson;
+    if(!L || L.pending) return;
+    var f = document.getElementById("ytframe");
+    if(f){ f.src = "https://www.youtube.com/embed/"+L.vid+"?rel=0&start="+sec+"&autoplay=1"; }
+    var btns = wrap.querySelectorAll(".tl button");
+    btns.forEach(function(b){ b.classList.remove("active"); });
+    var target = wrap.querySelector('.tl button[data-sec="'+sec+'"]');
+    if(target) target.classList.add("active");
+  }
+
+  var currentLesson = null;
+
+  function render(){
+    var id = currentId();
+    var idx = indexOfId(id);
+    var L = LESSONS[idx];
+    currentLesson = L;
+    var state = load();
+    var prev = LESSONS[idx-1], next = LESSONS[idx+1];
+
+    var embed;
+    if(L.pending){
+      embed = '<div class="embed"><div class="pending-box"><div class="big">この回は準備中です</div><div>録画の公開後に、ここで視聴できるようになります。</div></div></div>';
+    } else {
+      embed = '<div class="embed-wrap" id="embedWrap"><div class="embed" id="videoBox"><div class="mini-bar"><span>▶ 動画</span><button id="miniClose" title="元の位置にもどす" aria-label="元の位置にもどす">⤢</button></div><iframe id="ytframe" src="https://www.youtube.com/embed/'+L.vid+'?rel=0" title="'+L.title+'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>';
+    }
+
+    // timeline
+    var tl="";
+    if(L.chapters && L.chapters.length){
+      tl = '<div class="tl">';
+      L.chapters.forEach(function(c){
+        tl += '<button type="button" data-sec="'+c.t+'"><span class="t">'+fmt(c.t)+'</span><span class="'+(c.ph?"ph":"")+'">'+c.label+'</span></button>';
+      });
+      tl += '</div><p class="tl-note">時間をクリックすると、動画のその場面から再生されます。章のタイトルと時間は自由に書き換えられます。</p>';
+    } else {
+      tl = '<div class="tl"><button type="button" disabled><span class="t">--:--</span><span class="ph">タイムライン準備中</span></button></div>';
+    }
+
+    // summary
+    var sm;
+    if(L.summary && L.summary.length){
+      sm = '<div class="summary">';
+      L.summary.forEach(function(p){
+        var isPh = p.indexOf("（")===0;
+        sm += '<p class="'+(isPh?"ph":"")+'">'+p+'</p>';
+      });
+      sm += '</div>';
+    } else {
+      sm = '<div class="summary"><p class="ph">（要約は準備中です）</p></div>';
+    }
+
+    // bottom nav
+    var prevHtml = prev ? '<a class="prev" href="#'+prev.id+'">← '+prev.tag+'：'+prev.title+'</a>' : '<span class="prev hidden">←</span>';
+    var isDone = !!state[L.id];
+    var nextLabel, nextClass="";
+    if(L.pending){
+      nextLabel = null;
+    } else if(next){
+      nextLabel = (isDone?"✓ 視聴済み ｜ 次へ ":"視聴済みにして次へ ")+"→";
+    } else {
+      nextLabel = (isDone?"✓ 視聴済み ｜ 一覧へ ":"視聴済みにして一覧へ ")+"→";
+    }
+    if(isDone) nextClass=" done-state";
+    var nextHtml = L.pending ? '<a class="prev" href="'+HUB+'#zoom">一覧にもどる →</a>'
+                             : '<button class="nextbtn'+nextClass+'" id="nextBtn" type="button">'+nextLabel+'</button>';
+
+    wrap.innerHTML =
+      '<div class="crumb"><a href="'+HUB+'">学習トップ</a> ／ <a href="'+HUB+'#zoom">Zoom講座</a> ／ '+L.tag+'</div>'
+      + '<span class="l-tag">'+L.tag+'</span>'
+      + '<h1 class="l-title">'+L.title+'</h1>'
+      + '<div class="l-dur">'+ (L.pending?"公開準備中":("目安 "+L.dur)) +'</div>'
+      + embed
+      + '<div class="block-head toggle-head" data-target="tlWrap"><span class="en">Timeline</span><h2>タイムライン（章）</h2><span class="toggle-btn"><span class="tb-ico">▾</span><span class="tb-txt">閉じる</span></span></div>'
+      + '<div class="collapsible" id="tlWrap">' + tl + '</div>'
+      + '<div class="block-head"><span class="en">Summary</span><h2>要約</h2></div>'
+      + sm
+      + '<div class="lnav">'+prevHtml+nextHtml+'</div>'
+      + (L.pending?'':'<div class="savednote">「視聴済み」はこの端末に自動保存されます。</div>');
+
+    // wire timeline
+    wrap.querySelectorAll('.tl button[data-sec]').forEach(function(b){
+      b.addEventListener("click", function(){ seekTo(parseInt(b.getAttribute("data-sec"),10)); });
+    });
+    // wire timeline open/close
+    var th = wrap.querySelector('.toggle-head');
+    if(th){ th.addEventListener("click", function(){
+      th.classList.toggle("collapsed");
+      var collapsed = th.classList.contains("collapsed");
+      var t = document.getElementById(th.getAttribute("data-target"));
+      if(t) t.classList.toggle("hidden", collapsed);
+      var ico = th.querySelector(".tb-ico"), txt = th.querySelector(".tb-txt");
+      if(ico) ico.textContent = collapsed ? "▸" : "▾";
+      if(txt) txt.textContent = collapsed ? "開く" : "閉じる";
+    }); }
+    // sticky mini-player
+    var ewrap = document.getElementById("embedWrap");
+    var vbox = document.getElementById("videoBox");
+    if(ewrap && vbox && "IntersectionObserver" in window){
+      var vio = new IntersectionObserver(function(es){
+        var e = es[0];
+        if(!e.isIntersecting && e.boundingClientRect.top < 0){ vbox.classList.add("mini"); }
+        else if(e.isIntersecting){ vbox.classList.remove("mini"); }
+      }, {threshold:[0,0.35]});
+      vio.observe(ewrap);
+    }
+    var mclose = document.getElementById("miniClose");
+    if(mclose){ mclose.addEventListener("click", function(){ if(vbox) vbox.classList.remove("mini"); if(ewrap) ewrap.scrollIntoView({behavior:"smooth",block:"start"}); }); }
+    // wire next button
+    var nb = document.getElementById("nextBtn");
+    if(nb){
+      nb.addEventListener("click", function(){
+        var s = load(); s[L.id]=true; save(s);
+        buildSidebar(L.id);
+        if(next){ location.hash = "#"+next.id; window.scrollTo(0,0); }
+        else { location.href = HUB+"#zoom"; }
+      });
+    }
+
+    buildSidebar(L.id);
+    document.title = L.tag+"｜"+L.title+" ── ナイス貝の占い講座";
+    window.scrollTo(0,0);
+  }
+
+  window.addEventListener("hashchange", render);
+  render();
+
+  // mobile nav
+  var burger=document.getElementById("burger"), scrim=document.getElementById("scrim");
+  function closeNav(){ document.body.classList.remove("nav-open"); }
+  if(burger) burger.addEventListener("click", function(){ document.body.classList.toggle("nav-open"); });
+  if(scrim) scrim.addEventListener("click", closeNav);
+  sideNav.addEventListener("click", function(e){ if(e.target.closest("a")) closeNav(); });
+})();
+</script>
+</body>
+</html>

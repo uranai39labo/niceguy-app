@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>リアル 第1回 占いの基礎 ── 数秘術・動物占い・干支 ── ナイス貝の占い講座 学習サイト</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --navy-deep:#121D33; --navy:#1B2A4A; --navy-mid:#29406B; --gold:#C9A227; --gold-light:#E8D27A;
+    --cream:#FAF8F3; --ink:#1B2A4A; --muted:#5B6B8C; --line:#E3DECF; --sidebar-w:266px; }
+  *{box-sizing:border-box;} html{scroll-behavior:smooth;}
+  body{ margin:0; background:var(--cream); color:var(--ink); font-family:"Zen Kaku Gothic New",sans-serif; line-height:1.85; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,.serif{ font-family:"Shippori Mincho",serif; letter-spacing:.02em; }
+  a{color:inherit;} :focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+  .layout{ display:flex; align-items:flex-start; } .main{ flex:1; min-width:0; }
+  .sidebar{ width:var(--sidebar-w); flex-shrink:0; position:sticky; top:0; height:100vh; overflow-y:auto;
+    background:var(--navy-deep); color:var(--cream); display:flex; flex-direction:column; padding:24px 16px 20px;
+    border-right:1px solid rgba(255,255,255,.06); z-index:60; }
+  .side-brand{ display:flex; align-items:center; gap:9px; font-family:"Shippori Mincho",serif; font-weight:700; font-size:15px; color:var(--gold-light); }
+  .side-brand .dot{ width:9px; height:9px; border-radius:50%; background:var(--gold); }
+  .side-sub{ font-size:10.5px; letter-spacing:.14em; color:#8E9BBE; margin:2px 0 14px 18px; text-transform:uppercase; }
+  .side-back{ display:inline-flex; gap:7px; font-size:12.5px; color:#9FAAC9; text-decoration:none; margin:0 0 14px 3px; }
+  .side-back:hover{ color:var(--gold-light); }
+  .side-label{ font-size:10px; letter-spacing:.14em; color:#6B77A0; text-transform:uppercase; margin:6px 3px 8px; }
+  .side-nav{ display:flex; flex-direction:column; gap:1px; }
+  .side-nav a{ display:flex; flex-direction:column; gap:1px; padding:8px 10px; border-radius:8px; text-decoration:none; transition:background .15s; }
+  .side-nav a:hover{ background:rgba(255,255,255,.05); }
+  .side-nav a.active{ background:rgba(201,162,39,.15); }
+  .side-nav a .cn{ font-size:12.5px; color:var(--gold-light); }
+  .side-nav a .ct{ font-size:12px; color:#C7D0E6; }
+  .side-nav a.active .ct{ color:#fff; }
+  .side-foot{ margin-top:16px; font-size:11px; color:#586284; }
+  .mtopbar{ display:none; } .scrim{ display:none; }
+
+  .wrap{ max-width:820px; margin:0 auto; padding:52px 6vw 100px; }
+  .crumb{ font-size:12.5px; color:var(--muted); margin-bottom:14px; }
+  .crumb a{ color:var(--muted); text-decoration:none; } .crumb a:hover{ color:var(--gold); }
+  .l-tag{ display:inline-block; font-family:"Shippori Mincho",serif; font-size:13px; font-weight:700; color:var(--gold-light); background:var(--navy); padding:5px 14px; border-radius:999px; margin-bottom:16px; }
+  .l-title{ font-size:clamp(24px,3.4vw,34px); margin:0 0 8px; line-height:1.45; }
+  .l-meta{ font-size:13.5px; color:var(--muted); margin-bottom:28px; }
+
+  .embed-wrap{ position:relative; aspect-ratio:16/9; }
+  .embed{ position:absolute; inset:0; background:#0D1526; border-radius:14px; overflow:hidden; box-shadow:0 18px 40px rgba(18,29,51,.16); }
+  .embed iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+  .embed.mini{ position:fixed; inset:auto 18px 18px auto; width:min(360px,74vw); height:auto; aspect-ratio:16/9; z-index:90; border-radius:12px; box-shadow:0 16px 40px rgba(9,14,26,.5); }
+  .mini-bar{ display:none; }
+  .embed.mini .mini-bar{ display:flex; align-items:center; justify-content:space-between; position:absolute; left:0; right:0; top:-27px; height:27px; padding:0 4px 0 12px; background:var(--navy-deep); color:var(--cream); border-radius:9px 9px 0 0; font-size:11px; }
+  .mini-bar button{ background:transparent; border:0; color:var(--gold-light); cursor:pointer; font-size:15px; line-height:1; padding:2px 8px; }
+  .mini-bar button:hover{ color:#fff; }
+
+  .bh{ display:flex; align-items:baseline; gap:12px; margin:46px 0 16px; }
+  .bh .en{ font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); }
+  .bh h2{ font-size:19px; margin:0; }
+
+  .tl{ border:1px solid var(--line); border-radius:14px; background:#fff; overflow:hidden; }
+  .tl button{ display:flex; align-items:flex-start; gap:14px; width:100%; text-align:left; padding:12px 16px; background:transparent; border:0; border-top:1px solid var(--line); cursor:pointer; font-family:inherit; font-size:13.5px; color:var(--ink); transition:background .15s; }
+  .tl button:first-child{ border-top:0; } .tl button:hover{ background:var(--cream); } .tl button.active{ background:#FBF6E7; }
+  .tl .t{ flex-shrink:0; font-variant-numeric:tabular-nums; font-size:12px; color:var(--gold); background:var(--cream); border:1px solid var(--line); border-radius:7px; padding:3px 8px; min-width:64px; text-align:center; }
+  .tl button.active .t{ background:var(--navy); color:var(--gold-light); border-color:var(--navy); }
+  .tl-note{ font-size:12px; color:var(--muted); margin:10px 2px 0; }
+
+  .toggle-head{ cursor:pointer; user-select:none; align-items:center; }
+  .toggle-head .toggle-btn{ margin-left:auto; display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:700; color:var(--navy); background:var(--cream); border:1px solid var(--line); border-radius:999px; padding:6px 14px; white-space:nowrap; transition:all .15s; }
+  .toggle-head:hover .toggle-btn{ border-color:var(--gold); color:var(--gold); background:#FBF6E7; }
+  .toggle-head .toggle-btn .tb-ico{ font-size:11px; }
+  .collapsible.hidden{ display:none; }
+
+  .mapcard{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:22px 26px; }
+  .mapcard ul{ margin:0; padding-left:1.15em; } .mapcard li{ margin:0 0 9px; font-size:15px; }
+  .mapcard.prose p{ margin:0 0 14px; font-size:15px; } .mapcard.prose p:last-child{ margin-bottom:0; }
+  .aboutnote{ font-size:12.5px; color:var(--muted); background:#F4F2EA; border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin-top:16px; }
+
+  .ctable{ width:100%; border-collapse:collapse; margin:2px 0 18px; font-size:14.5px; border:1px solid var(--line); }
+  .ctable th, .ctable td{ text-align:left; padding:11px 15px; border-top:1px solid var(--line); vertical-align:top; }
+  .ctable thead th{ background:var(--navy); color:var(--gold-light); font-family:"Shippori Mincho",serif; font-weight:700; font-size:13.5px; border-top:0; }
+  .ctable tbody tr:nth-child(even){ background:#FBF9F3; }
+  .ctable td:first-child{ font-weight:700; white-space:nowrap; }
+  @media (max-width:560px){ .ctable td:first-child{ white-space:normal; } }
+  .script h2.ch{ font-size:20px; margin:44px 0 6px; padding-top:14px; border-top:1px solid var(--line); }
+  .ch-time{ font-size:12px; color:var(--muted); margin-bottom:16px; }
+  .nar{ font-size:15px; margin:0 0 15px; }
+  .q{ display:flex; gap:11px; margin:0 0 16px; align-items:flex-start; }
+  .q .who{ flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:46px; height:30px; border-radius:999px; font-size:11px; font-weight:700; margin-top:3px; letter-spacing:.02em; }
+  .q p{ margin:0; font-size:15px; border-radius:14px; padding:11px 16px; max-width:82%; position:relative; }
+  .q-teacher .who{ background:var(--navy); color:var(--gold-light); }
+  .q-teacher p{ background:#FBF7EA; border:1px solid #EAD9A6; }
+  .q-user{ flex-direction:row-reverse; }
+  .q-user .who{ background:#EEF1F6; color:var(--muted); border:1px solid var(--line); }
+  .q-user p{ background:#fff; border:1px solid var(--line); }
+  .note-teach{ background:#fff; border-left:3px solid var(--gold); border-radius:0 10px 10px 0; padding:12px 18px; margin:0 0 15px; box-shadow:0 2px 10px rgba(27,42,74,.04); }
+  .note-teach .lbl{ display:block; font-size:11px; letter-spacing:.08em; color:var(--gold); font-weight:700; margin-bottom:5px; }
+  .note-teach p{ margin:0; font-size:14.5px; }
+
+  .checklist{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:20px 24px; }
+  .clitem{ display:flex; align-items:flex-start; gap:11px; padding:10px 0; border-top:1px solid var(--line); cursor:pointer; font-size:14.5px; }
+  .clitem:first-child{ border-top:0; }
+  .clitem input{ appearance:none; -webkit-appearance:none; width:19px; height:19px; margin-top:3px; border:1.6px solid var(--navy-mid); border-radius:5px; cursor:pointer; position:relative; flex-shrink:0; background:#fff; transition:all .18s; }
+  .clitem input:checked{ background:var(--gold); border-color:var(--gold); }
+  .clitem input:checked::after{ content:"✓"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:12px; color:var(--navy-deep); font-weight:700; }
+  .clitem input:checked + span{ color:var(--muted); text-decoration:line-through; }
+
+  .lnav{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:50px; flex-wrap:wrap; }
+  .lnav a.back{ font-size:14px; color:var(--muted); text-decoration:none; } .lnav a.back:hover{ color:var(--gold); }
+  .donebtn{ display:inline-flex; align-items:center; gap:10px; background:var(--gold); color:var(--navy-deep); font-weight:700; font-size:15px; padding:14px 28px; border-radius:11px; border:0; cursor:pointer; font-family:inherit; transition:transform .18s, background .18s; }
+  .donebtn:hover{ transform:translateY(-2px); background:var(--gold-light); }
+  .donebtn.on{ background:var(--navy); color:var(--gold-light); }
+
+  @media (max-width:880px){
+    .mtopbar{ display:flex; align-items:center; gap:12px; position:sticky; top:0; z-index:70; padding:12px 18px; background:var(--navy-deep); color:var(--cream); border-bottom:1px solid rgba(255,255,255,.08); }
+    .mtopbar .burger{ width:40px; height:40px; border-radius:9px; border:1px solid rgba(255,255,255,.15); background:transparent; color:var(--gold-light); font-size:18px; cursor:pointer; }
+    .mtopbar .mbrand{ font-family:"Shippori Mincho",serif; font-weight:700; font-size:14px; color:var(--gold-light); }
+    .sidebar{ position:fixed; top:0; left:0; height:100vh; transform:translateX(-100%); transition:transform .28s; box-shadow:0 0 40px rgba(0,0,0,.4); }
+    body.nav-open .sidebar{ transform:translateX(0); }
+    body.nav-open .scrim{ display:block; position:fixed; inset:0; background:rgba(9,14,26,.5); z-index:55; }
+  }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } .sidebar{ transition:none; } }
+</style>
+</head>
+<body>
+  <div class="mtopbar">
+    <button class="burger" id="burger" aria-label="メニュー">☰</button>
+    <span class="mbrand">リアル第1回 占いの基礎</span>
+  </div>
+  <div class="scrim" id="scrim"></div>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="side-brand"><span class="dot"></span> ナイス貝 占い講座</div>
+      <p class="side-sub">学習サイト</p>
+      <a class="side-back" href="nice-kai-2ki.html#real">← 学習トップにもどる</a>
+      <div class="side-label">この回の目次</div>
+      <nav class="side-nav" id="sideNav">
+<a href="#ch1"><span class="cn">第1章</span><span class="ct">数秘術は、占いの入口になる</span></a>
+<a href="#ch2"><span class="cn">第2章</span><span class="ct">動物占いは、人の一生を映す</span></a>
+<a href="#ch3"><span class="cn">第3章</span><span class="ct">色と動物を重ねて、人の輪郭を読む</span></a>
+<a href="#ch4"><span class="cn">第4章</span><span class="ct">「変わっている」を、力の使い道に変える</span></a>
+<a href="#ch5"><span class="cn">第5章</span><span class="ct">占い師は、質問する側に立つ</span></a>
+<a href="#ch6"><span class="cn">第6章</span><span class="ct">数・色・動物で、最初の鑑定地図を作る</span></a>
+<a href="#ch7"><span class="cn">第7章</span><span class="ct">干支の奥には、十干という「幹」がある</span></a>
+<a href="#ch8"><span class="cn">第8章</span><span class="ct">2026年は、切り替わりの時期として読む</span></a>
+<a href="#ch9"><span class="cn">第9章</span><span class="ct">表のメニューと、奥にある知恵</span></a>
+<a href="#ch10"><span class="cn">第10章</span><span class="ct">後半戦――インド占星術の入口へ</span></a>
+<a href="#ch11"><span class="cn">第11章</span><span class="ct">アセンダント、D1、九つの惑星</span></a>
+<a href="#ch12"><span class="cn">第12章</span><span class="ct">惑星をキャラクターとして描く</span></a>
+<a href="#chE"><span class="cn">終章</span><span class="ct">占いを、力を借りるための言葉にする</span></a>
+      </nav>
+      <div class="side-foot">© ナイス貝 ／ 片貝文昌</div>
+    </aside>
+
+    <div class="main">
+      <div class="wrap">
+        <div class="crumb"><a href="nice-kai-2ki.html">学習トップ</a> ／ <a href="nice-kai-2ki.html#real">リアル講座</a> ／ リアル 第1回</div>
+        <span class="l-tag">リアル 第1回</span>
+        <h1 class="l-title">占いの基礎 ── 数秘術・動物占い・干支</h1>
+        <div class="l-meta">2026.04.16(木) ・ 新大久保</div>
+
+        <div class="embed-wrap" id="embedWrap"><div class="embed" id="videoBox"><div class="mini-bar"><span>▶ 動画</span><button id="miniClose" title="元の位置にもどす" aria-label="元の位置にもどす">⤢</button></div><iframe id="ytframe" src="https://www.youtube.com/embed/CatPXrdgKck?rel=0" title="占いの基礎 ── 数秘術・動物占い・干支" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>
+
+<div class="bh toggle-head" data-target="tlWrap"><span class="en">Timeline</span><h2>タイムライン（章）</h2><span class="toggle-btn"><span class="tb-ico">▾</span><span class="tb-txt">閉じる</span></span></div><div class="collapsible" id="tlWrap"><div class="tl"><button type="button" data-sec="0"><span class="t">0:00:00</span><span>オープニング〜誕生数秘術の基本（過去・現在・未来）</span></button>
+<button type="button" data-sec="381"><span class="t">0:06:21</span><span>動物占いと人生のサイクル（胎児からお墓まで）</span></button>
+<button type="button" data-sec="719"><span class="t">0:11:59</span><span>陰陽五行（色）と動物占いの掛け合わせ分析</span></button>
+<button type="button" data-sec="994"><span class="t">0:16:34</span><span>参加者の個別分析：「黒オオカミ」と異常干支の悩み</span></button>
+<button type="button" data-sec="1381"><span class="t">0:23:01</span><span>現実のトラブルと占いの関係・対話の難しさ</span></button>
+<button type="button" data-sec="1843"><span class="t">0:30:43</span><span>対話の極意：ドッチボールからキャッチボールへ</span></button>
+<button type="button" data-sec="2221"><span class="t">0:37:01</span><span>宇宙的視点と「シンデレラの呪い（魔法）」の解き方</span></button>
+<button type="button" data-sec="2811"><span class="t">0:46:51</span><span>丙午（ひのえうま）の年と時代の転換（午前の世界から午後の世界へ）</span></button>
+<button type="button" data-sec="3237"><span class="t">0:53:57</span><span>プロダクトサイクル・企業の盛衰と占いの役割</span></button>
+<button type="button" data-sec="3784"><span class="t">1:03:04</span><span>企業のライフサイクル（春夏秋冬）と世代交代の難しさ</span></button>
+<button type="button" data-sec="4301"><span class="t">1:11:41</span><span>インド占星術（光の科学）入門〜ガネーシャの導き〜</span></button>
+<button type="button" data-sec="4571"><span class="t">1:16:11</span><span>アガスティアの葉と聖者の修行について</span></button>
+<button type="button" data-sec="4901"><span class="t">1:21:41</span><span>インド占星術の基礎：アセンダント（ラグナ）と9つの惑星</span></button>
+<button type="button" data-sec="5301"><span class="t">1:28:21</span><span>ワークショップ：9つの惑星をキャラクターとして描く</span></button>
+<button type="button" data-sec="5521"><span class="t">1:32:01</span><span>土星は怖い？〜惑星に愛されるということ〜</span></button>
+<button type="button" data-sec="7569"><span class="t">2:06:09</span><span>ワークショップ発表：各参加者の惑星イラスト紹介</span></button>
+<button type="button" data-sec="8175"><span class="t">2:16:15</span><span>エンディング・記念撮影</span></button></div><p class="tl-note">時間をクリックすると、動画のその場面から再生されます。</p></div>
+<div class="bh"><span class="en">Summary</span><h2>今回の講座の地図</h2></div><div class="mapcard"><ul><li>数秘術を最初の入口にする</li>
+<li>動物占いを「人生の季節」として読む</li>
+<li>色・動物・数の三つで人物像をつかむ</li>
+<li>鑑定では会話の主導権をどう持つか</li>
+<li>干支の奥にある十干と、2026年の流れ</li>
+<li>インド占星術の入口――AI、D1、アセンダント</li>
+<li>惑星をキャラクターとして描くワーク</li></ul></div><div class="aboutnote">本書き起こしは、字幕の言い直し・重複・相づちを整理し、講座の流れと講師の意図が伝わるよう再構成したものです。占いに関する説明や解釈は、講座内で紹介された見解です。個人に関わる会話は、内容を損なわない範囲で匿名化しています。</div>
+<div class="bh"><span class="en">Transcript</span><h2>編集書き起こし（本編）</h2></div><div class="script"><h2 class="ch" id="ch1">第1章　数秘術は、占いの入口になる</h2>
+<div class="ch-time">🕒 開始 00:00:30</div>
+<p class="nar">講座は、受講者からの「誕生数秘術って何ですか？」という質問から始まりました。</p>
+<div class="q q-user"><span class="who">受講者</span><p>「誕生数秘術って、何を見るものなんですか？」</p></div>
+<p class="nar">講師は、数秘術にはさまざまな流派があることに触れながら、この講座で扱う誕生数秘術を、誕生日から過去・現在・未来の傾向を見ていく、シンプルで入りやすい方法として紹介します。</p>
+<div class="q q-teacher"><span class="who">講師</span><p>「最初に見るには、シンプルでいいんです。数秘はおすすめです」</p></div>
+<p class="nar">数の説明は、正解を当てるためだけのものではありません。自分の直感を言葉にしたり、人との違いを面白がったりするための、最初の地図として使える――そんな雰囲気で講座は進みました。</p>
+<div class="note-teach"><span class="lbl">講師の解説</span><p>数秘術は、答えを固定するためではなく、人を観察し、直感を言葉にするための入口として使います。</p></div>
+<h2 class="ch" id="ch2">第2章　動物占いは、人の一生を映す</h2>
+<div class="ch-time">🕒 開始 00:08:20</div>
+<p class="nar">数秘術の次の入口として、講師は動物占いを取り上げました。動物占いは覚えやすく、さらに奥には干支の考え方が隠れているため、学びを先へ進める橋にもなるといいます。</p>
+<p class="nar">講座では、受講者とクイズ形式で動物をたどっていきました。ペガサス、オオカミ、こじか、サル、チーター、クロヒョウ……。上段の動物は、若さや希望、勢いを表す段階として説明されます。</p>
+<div class="q q-teacher"><span class="who">講師</span><p>「次は何でしたっけ？　ペガサス、オオカミ、こじか……」</p></div>
+<div class="q q-user"><span class="who">受講者</span><p>「サル、チーター、クロヒョウです」</p></div>
+<p class="nar">その後、ライオン、トラ、たぬき、コアラ、ゾウ、ヒツジへと続きます。講師はこれを、魂が成長し、社会で働き、頂点を経験し、やがて客観性を得ていく「人の一生」のように説明しました。</p>
+<div class="note-teach"><span class="lbl">講師の解説</span><p>12動物を順に並べると、性格の一覧ではなく、人が成長して役割を変えていく物語として読めます。</p></div>
+<div class="q q-teacher"><span class="who">講師</span><p>「動物が分かると、大体のパターンが分かります。そこから色まで深くできるけれど、まずはそれで十分です」</p></div>
+<p class="nar">たとえば、締め切り間際に力を発揮しやすいタイプ、競争になると燃えるタイプ、危険を避けて勝ちにいくタイプ。動物のイメージを通すことで、性格の違いが抽象論ではなく、生き生きと見えてきます。</p>
+<h2 class="ch" id="ch3">第3章　色と動物を重ねて、人の輪郭を読む</h2>
+<div class="ch-time">🕒 開始 00:12:00</div>
+<p class="nar">講師は、動物占いを見るときには、動物だけでなく「色」も合わせて見ると、その人の傾向がより立体的になると話します。講座では、色を五行や精神面のパターンと結び付け、動物を身体的・行動的なパターンとして捉える見方が紹介されました。</p>
+<p class="nar">ある受講者の例を通して、真面目さ、研究肌、独特の感性、控えめさ、行動に移すときの怖さなどが話題になります。講師は、占いの言葉をそのままラベルにするのではなく、「何に喜び、どこで困りやすいか」を一緒に見つけるために使う姿勢を示しました。</p>
+<div class="q q-user"><span class="who">受講者</span><p>「営業が苦手なのかな？」</p></div>
+<div class="q q-teacher"><span class="who">講師</span><p>「真面目すぎたり、考えすぎたりして、一人だと一歩が出にくいことはあるかもしれません」</p></div>
+<p class="nar">この章では、強みと弱みを切り離さずに見る姿勢が印象的でした。人を惹き付ける力がある一方で、自分を出す場面では遠慮してしまう。その両方を知ることが、本人に合う環境や役割を考える手がかりになります。</p>
+<h2 class="ch" id="ch4">第4章　「変わっている」を、力の使い道に変える</h2>
+<div class="ch-time">🕒 開始 00:17:00</div>
+<p class="nar">個人の傾向を読む流れでは、周囲に合わせにくい感覚や、強いエネルギーをどう扱うかが話題になりました。講師は、一般的な場所で無理に平均に合わせようとすると苦しくなる人がいる、と語ります。</p>
+<div class="q q-teacher"><span class="who">講師</span><p>「向いていないところにいると大変です。でも、その人に向いた細い道に行くと、急に輝くことがある」</p></div>
+<p class="nar">ここでの「変わっている」は、否定のための言葉ではありません。独特の感性、強い集中力、周囲と違うリズムを、どこで生かすかを考えるための言葉として使われています。</p>
+<div class="q q-user"><span class="who">受講者</span><p>「変わっていること自体が、悪いわけではないんですね」</p></div>
+<div class="q q-teacher"><span class="who">講師</span><p>「そうです。力を出せる場所が違うだけです」</p></div>
+<p class="nar">講師は、占いによって相手を固定するのではなく、「その人は何をすると動きやすいのか」「今はどんな時期なのか」を伝えることで、次の一歩を見つけやすくなると説明しました。</p>
+<h2 class="ch" id="ch5">第5章　占い師は、質問する側に立つ</h2>
+<div class="ch-time">🕒 開始 00:30:00</div>
+<p class="nar">休憩を挟んだ後、講座は鑑定中の会話へ進みます。話が止まらない相談者に対して、ただ聞き続けるのではなく、うなずき、相手の言葉を繰り返し、質問を重ねる。そのことで会話の流れを整えられると講師は説明しました。</p>
+<div class="q q-teacher"><span class="who">講師</span><p>「『それで、どうなったんですか？』『そうなんですね』と聞いていく。質問する側に入ると、会話の主導権を持てます」</p></div>
+<div class="q q-user"><span class="who">受講者</span><p>「質問する側の方が強いんですね」</p></div>
+<div class="q q-teacher"><span class="who">講師</span><p>「圧倒的に強いです」</p></div>
+<p class="nar">ここで言う「強さ」は、相手を押さえ付けることではありません。相談者が自分の話を整理できるよう、会話のキャッチボールを成立させる力です。自分の話を急いで返す前に、まず相手の言葉を受け取り、次の質問へつなぐ。これは占いに限らず、人と関わる場面で使える実践的な知恵でした。</p>
+<div class="note-teach"><span class="lbl">講師の解説</span><p>質問する側に立つとは、相手を支配することではありません。相手の話を受け取り、整理できる流れを作ることです。</p></div>
+<h2 class="ch" id="ch6">第6章　数・色・動物で、最初の鑑定地図を作る</h2>
+<div class="ch-time">🕒 開始 00:40:00</div>
+<p class="nar">講師はここで、最初の鑑定では数秘術、色、動物の三つが分かれば、人物像の大枠をつかめると整理しました。</p>
+<p class="nar">特に、同じ数字が並ぶ場合や、講座内で「赤ランプ」と呼ばれた特徴的な組み合わせについては、一般的な枠に収まりにくい個性として注意深く見る、と説明されます。これは良し悪しの判定ではなく、困りやすさや、力を出せる場所を見つけるための目印です。</p>
+<div class="q q-teacher"><span class="who">講師</span><p>「赤ランプがいくつあるかをチェックする。多い人は、何か困っているか、もう自分の道を歩いているか、どちらかかもしれません」</p></div>
+<div class="q q-user"><span class="who">受講者</span><p>「多いから悪い、ということではないんですね」</p></div>
+<div class="q q-teacher"><span class="who">講師</span><p>「悪いではなく、普通の枠に収まりにくいという目印です」</p></div>
+<p class="nar">占いの入口では、細かな情報をすべて覚えるよりも、特徴を見つけ、本人の状況と照らし合わせることが大切だというメッセージが繰り返されました。</p>
+<h2 class="ch" id="ch7">第7章　干支の奥には、十干という「幹」がある</h2>
+<div class="ch-time">🕒 開始 00:40:30</div>
+<p class="nar">干支は十二支だけではなく、十干と十二支からできている。講師はこの仕組みを、枝だけを見るのではなく、木の幹や根まで見ることにたとえました。</p>
+<div class="q q-teacher"><span class="who">講師</span><p>「十二支は枝。けれど、本当は幹の方も大事なんです」</p></div>
+<div class="q q-user"><span class="who">受講者</span><p>「十二支だけを見ていたら、枝だけを見ていることになるんですね」</p></div>
+<p class="nar">十干と十二支を知ることで、人の表に見える振る舞いだけでなく、根っこのエネルギーや、時間の流れの捉え方が深まる――講座ではそのように説明されました。</p>
+<h2 class="ch" id="ch8">第8章　2026年は、切り替わりの時期として読む</h2>
+<div class="ch-time">🕒 開始 00:45:00</div>
+<p class="nar">講師は、2026年を丙午（ひのえうま）として紹介し、「午前」から「午後」へ移るような、切り替わりのイメージを重ねました。これは講座内の暦の読み方であり、社会や個人の流れを、波や季節として捉える視点です。</p>
+<p class="nar">情報、流行、商品、会社、人の人生にも、創業期・成長期・成熟期・衰退期のような波がある。講師は、上がり続けることだけを求めるのではなく、下がる時期に何を切り替えるかが大切だと話しました。</p>
+<div class="q q-teacher"><span class="who">講師</span><p>「波は、上がって下がってを繰り返します。下がるときに新しい波へ乗れるかが大事なんです」</p></div>
+<div class="note-teach"><span class="lbl">講師の解説</span><p>下降を失敗と決めつけず、次の波へ切り替える準備期間として読むのが、講座で紹介された視点です。</p></div>
+<p class="nar">占いは未来を固定する道具ではなく、今がどの波にあるかを見て、次の選択を考えるための高い視点として使える。ここでも、講師は占いを実践に結び付ける姿勢を示しました。</p>
+<h2 class="ch" id="ch9">第9章　表のメニューと、奥にある知恵</h2>
+<div class="ch-time">🕒 開始 00:55:00</div>
+<p class="nar">講師は、広く受け入れられる分かりやすい表現と、深く学びたい人のための奥行きのある知恵について語りました。占いを広めるときには、難解さだけでは人に届かない。表現を工夫し、入口を作る必要があるといいます。</p>
+<p class="nar">一方で、表面的な情報だけではなく、学び手が準備できたときに初めて見えてくる「裏のメニュー」のような理解もある。干支や日本の知恵を学ぶことは、その奥へ進むための鍵になる、という流れでした。</p>
+<h2 class="ch" id="ch10">第10章　後半戦――インド占星術の入口へ</h2>
+<div class="ch-time">🕒 開始 01:10:00</div>
+<p class="nar">後半は、インド占星術へ進みます。講師は、インドの神々や物語、アガスティアの葉の話題を交えながら、占術の世界観を紹介しました。</p>
+<p class="nar">アガスティアの葉については、人生が記されているとされる葉を読む仕組みとして説明されます。ただし、講師はそれを無条件に信じるよう勧めたわけではありません。話を聞く人には響く一方で、費用や窓口の問題もあり、慎重さが必要だという含みを残しました。</p>
+<p class="nar">続いて、AIを使ってインド占星術を学ぶことで、これまで難しかった情報が整理され、理解が圧縮されたという経験が共有されました。</p>
+<div class="q q-user"><span class="who">受講者</span><p>「AIを使うと、難しい占星術も整理しやすくなるんですか？」</p></div>
+<div class="q q-teacher"><span class="who">講師</span><p>「ルールが分かると、急に『ああ、そういうことか』となる。AIと一緒にやったら、今までの学びがぎゅっと圧縮された感じでした」</p></div>
+<h2 class="ch" id="ch11">第11章　アセンダント、D1、九つの惑星</h2>
+<div class="ch-time">🕒 開始 01:20:00</div>
+<p class="nar">インド占星術では、生まれた時刻と場所が重要になります。講師は、出生時刻がずれるとアセンダントが変わり、その後の読み方にも影響すると説明しました。</p>
+<div class="q q-teacher"><span class="who">講師</span><p>「生まれた時間と場所がないと、アセンダントがずれます。ここが決まらないと、全部ずれてしまう」</p></div>
+<p class="nar">基本となるD1チャートでは、アセンダント（ラグナ）、ハウス、惑星の配置などを見ます。太陽、月、火星、水星、木星、金星、土星、ラーフ、ケートゥという九つの惑星・感受点が、講座では重要な登場人物として紹介されました。</p>
+<p class="nar">細かなアスペクトや支配星の読み方は、次回以降に扱う予定とされました。今回は、複雑な理屈を一度に詰め込むより、惑星と親しくなることが主題です。</p>
+<h2 class="ch" id="ch12">第12章　惑星をキャラクターとして描く</h2>
+<div class="ch-time">🕒 開始 01:30:00</div>
+<p class="nar">この日のメインワークは、惑星をイラストにすることでした。太陽、月、火星、水星、木星、金星、土星、ラーフ、ケートゥを、記号ではなく、自分なりのキャラクターやイメージとして描いていきます。</p>
+<div class="q q-teacher"><span class="who">講師</span><p>「今日は惑星と仲良くなる日です。丸にするんじゃなくて、キャラクターにしてみてください」</p></div>
+<div class="q q-user"><span class="who">受講者</span><p>「上手に描けなくても大丈夫ですか？」</p></div>
+<div class="q q-teacher"><span class="who">講師</span><p>「上手さではなく、自分の中にあるイメージを外へ出すことが大事です」</p></div>
+<p class="nar">木星は高い学びやよい師匠、土星は努力や試練と結び付けて説明されました。しかし、土星をただ怖い存在として扱うのではなく、努力を続けられる人にとっては力を貸してくれる存在とも捉えます。</p>
+<p class="nar">受講者たちは、太陽を明るい存在、月を姫や三日月、火星をやんちゃな存在、木星を大きな神様、金星をスター、土星を厳しくも見守る人物などとして描きました。同じ惑星でも、描かれる姿は人によってまったく異なります。</p>
+<p class="nar">講師は、上手に描くことではなく、強制的にでもイメージを外に出すことに意味があると話します。絵には、その人自身の感性や、惑星との付き合い方が表れるからです。</p>
+<h2 class="ch" id="chE">終章　占いを、力を借りるための言葉にする</h2>
+<div class="ch-time">🕒 開始 02:15:00</div>
+<p class="nar">講座の最後は、受講者が描いたイラストを見せ合う時間になりました。抽象的な絵、物語性のある絵、分かりやすいキャラクター。どの表現にも、その人らしさがありました。</p>
+<p class="nar">数秘術、動物占い、干支、インド占星術。今回扱った方法は異なりますが、講座を通して一貫していたのは、占いを使って人を型にはめるのではなく、自分の特徴と仲良くなるという姿勢です。</p>
+<p class="nar">自分にある力を怖がるのではなく、どんな場面で使うのかを知る。相手の話を聞き、問いを立て、自分なりのイメージを描く。占いは、そのための言葉や地図になり得る――そんな入口となる第1回でした。</p></div>
+<div class="bh"><span class="en">Review</span><h2>復習チェックリスト</h2></div><div class="checklist"><label class="clitem"><input type="checkbox" class="clchk" data-i="0"><span>誕生数秘術で見る「過去・現在・未来」の考え方を説明できる。</span></label>
+<label class="clitem"><input type="checkbox" class="clchk" data-i="1"><span>動物占いを、干支へ進むための入口として捉えられる。</span></label>
+<label class="clitem"><input type="checkbox" class="clchk" data-i="2"><span>色・動物・数を重ねて人物像を見る意図を理解した。</span></label>
+<label class="clitem"><input type="checkbox" class="clchk" data-i="3"><span>鑑定では、うなずきと質問で会話を整えることを意識できる。</span></label>
+<label class="clitem"><input type="checkbox" class="clchk" data-i="4"><span>十干と十二支が干支を構成していることを知った。</span></label>
+<label class="clitem"><input type="checkbox" class="clchk" data-i="5"><span>占いの「波」の見方を、人生や仕事の切り替えに応用できる。</span></label>
+<label class="clitem"><input type="checkbox" class="clchk" data-i="6"><span>アセンダントとD1チャートがインド占星術の基本にあると理解した。</span></label>
+<label class="clitem"><input type="checkbox" class="clchk" data-i="7"><span>九つの惑星を、自分なりのイメージで描いてみる。</span></label></div>
+
+        <div class="lnav">
+          <a class="back" href="nice-kai-2ki.html#real">← 学習トップ（リアル講座）にもどる</a>
+          <button class="donebtn" id="doneBtn" type="button">この回を視聴済みにする</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+(function(){
+  "use strict";
+  var KEY="nicekai_learn_v2", CLKEY="nicekai_r01_checklist", RID="r01", VID="CatPXrdgKck";
+  function load(k){ try{return JSON.parse(localStorage.getItem(k))||{};}catch(e){return {};} }
+  function save(k,v){ try{localStorage.setItem(k,JSON.stringify(v));}catch(e){} }
+
+  var frame=document.getElementById("ytframe");
+  var vbox=document.getElementById("videoBox");
+  document.querySelectorAll(".tl button[data-sec]").forEach(function(b){
+    b.addEventListener("click", function(){
+      var sec=b.getAttribute("data-sec");
+      if(frame) frame.src="https://www.youtube.com/embed/"+VID+"?rel=0&start="+sec+"&autoplay=1";
+      document.querySelectorAll(".tl button").forEach(function(x){x.classList.remove("active");});
+      b.classList.add("active");
+      if(frame && vbox && !vbox.classList.contains("mini")) frame.scrollIntoView({behavior:"smooth",block:"center"});
+    });
+  });
+
+  // sticky mini-player: keep the video watchable while scrolling
+  var ewrap=document.getElementById("embedWrap");
+  if(ewrap && vbox && "IntersectionObserver" in window){
+    var vio=new IntersectionObserver(function(es){
+      var e=es[0];
+      if(!e.isIntersecting && e.boundingClientRect.top < 0){ vbox.classList.add("mini"); }
+      else if(e.isIntersecting){ vbox.classList.remove("mini"); }
+    }, {threshold:[0,0.35]});
+    vio.observe(ewrap);
+  }
+  var mclose=document.getElementById("miniClose");
+  if(mclose){ mclose.addEventListener("click", function(){ if(vbox) vbox.classList.remove("mini"); if(ewrap) ewrap.scrollIntoView({behavior:"smooth",block:"start"}); }); }
+
+  // timeline open/close
+  document.querySelectorAll(".toggle-head").forEach(function(h){
+    h.addEventListener("click", function(){
+      h.classList.toggle("collapsed");
+      var collapsed=h.classList.contains("collapsed");
+      var t=document.getElementById(h.getAttribute("data-target"));
+      if(t) t.classList.toggle("hidden", collapsed);
+      var ico=h.querySelector(".tb-ico"), txt=h.querySelector(".tb-txt");
+      if(ico) ico.textContent = collapsed ? "▸" : "▾";
+      if(txt) txt.textContent = collapsed ? "開く" : "閉じる";
+    });
+  });
+
+  var cl=load(CLKEY);
+  document.querySelectorAll(".clchk").forEach(function(c){
+    var i=c.getAttribute("data-i");
+    c.checked=!!cl[i];
+    c.addEventListener("change", function(){ var s=load(CLKEY); s[i]=c.checked; save(CLKEY,s); });
+  });
+
+  var st=load(KEY); var db=document.getElementById("doneBtn");
+  function paint(){ if(st[RID]){ db.classList.add("on"); db.textContent="✓ 視聴済み ｜ もう一度押すと解除"; } else { db.classList.remove("on"); db.textContent="この回を視聴済みにする"; } }
+  paint();
+  db.addEventListener("click", function(){ var s=load(KEY); s[RID]=!s[RID]; save(KEY,s); st=s; paint(); });
+
+  var links=Array.prototype.slice.call(document.querySelectorAll("#sideNav a"));
+  var map={}; links.forEach(function(a){ var id=a.getAttribute("href").slice(1); var el=document.getElementById(id); if(el) map[id]=a; });
+  if("IntersectionObserver" in window){
+    var obs=new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting){ links.forEach(function(a){a.classList.remove("active");}); var a=map[en.target.id]; if(a) a.classList.add("active"); } }); }, {rootMargin:"-30% 0px -60% 0px", threshold:0});
+    Object.keys(map).forEach(function(id){ obs.observe(document.getElementById(id)); });
+  }
+
+  var burger=document.getElementById("burger"), scrim=document.getElementById("scrim");
+  function closeNav(){ document.body.classList.remove("nav-open"); }
+  if(burger) burger.addEventListener("click", function(){ document.body.classList.toggle("nav-open"); });
+  if(scrim) scrim.addEventListener("click", closeNav);
+  document.querySelectorAll("#sideNav a").forEach(function(a){ a.addEventListener("click", closeNav); });
+})();
+</script>
+</body>
+</html>

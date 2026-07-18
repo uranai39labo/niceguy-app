@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>リアル 第3回 魁罡とインド占星術 ── ナイス貝の占い講座 学習サイト</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --navy-deep:#121D33; --navy:#1B2A4A; --navy-mid:#29406B; --gold:#C9A227; --gold-light:#E8D27A;
+    --cream:#FAF8F3; --ink:#1B2A4A; --muted:#5B6B8C; --line:#E3DECF; --sidebar-w:266px; }
+  *{box-sizing:border-box;} html{scroll-behavior:smooth;}
+  body{ margin:0; background:var(--cream); color:var(--ink); font-family:"Zen Kaku Gothic New",sans-serif; line-height:1.85; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,.serif{ font-family:"Shippori Mincho",serif; letter-spacing:.02em; }
+  a{color:inherit;} :focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+  .layout{ display:flex; align-items:flex-start; } .main{ flex:1; min-width:0; }
+  .sidebar{ width:var(--sidebar-w); flex-shrink:0; position:sticky; top:0; height:100vh; overflow-y:auto;
+    background:var(--navy-deep); color:var(--cream); display:flex; flex-direction:column; padding:24px 16px 20px;
+    border-right:1px solid rgba(255,255,255,.06); z-index:60; }
+  .side-brand{ display:flex; align-items:center; gap:9px; font-family:"Shippori Mincho",serif; font-weight:700; font-size:15px; color:var(--gold-light); }
+  .side-brand .dot{ width:9px; height:9px; border-radius:50%; background:var(--gold); }
+  .side-sub{ font-size:10.5px; letter-spacing:.14em; color:#8E9BBE; margin:2px 0 14px 18px; text-transform:uppercase; }
+  .side-back{ display:inline-flex; gap:7px; font-size:12.5px; color:#9FAAC9; text-decoration:none; margin:0 0 14px 3px; }
+  .side-back:hover{ color:var(--gold-light); }
+  .side-label{ font-size:10px; letter-spacing:.14em; color:#6B77A0; text-transform:uppercase; margin:6px 3px 8px; }
+  .side-nav{ display:flex; flex-direction:column; gap:1px; }
+  .side-nav a{ display:flex; flex-direction:column; gap:1px; padding:8px 10px; border-radius:8px; text-decoration:none; transition:background .15s; }
+  .side-nav a:hover{ background:rgba(255,255,255,.05); }
+  .side-nav a.active{ background:rgba(201,162,39,.15); }
+  .side-nav a .cn{ font-size:12.5px; color:var(--gold-light); }
+  .side-nav a .ct{ font-size:12px; color:#C7D0E6; }
+  .side-nav a.active .ct{ color:#fff; }
+  .side-foot{ margin-top:16px; font-size:11px; color:#586284; }
+  .mtopbar{ display:none; } .scrim{ display:none; }
+
+  .wrap{ max-width:820px; margin:0 auto; padding:52px 6vw 100px; }
+  .crumb{ font-size:12.5px; color:var(--muted); margin-bottom:14px; }
+  .crumb a{ color:var(--muted); text-decoration:none; } .crumb a:hover{ color:var(--gold); }
+  .l-tag{ display:inline-block; font-family:"Shippori Mincho",serif; font-size:13px; font-weight:700; color:var(--gold-light); background:var(--navy); padding:5px 14px; border-radius:999px; margin-bottom:16px; }
+  .l-title{ font-size:clamp(24px,3.4vw,34px); margin:0 0 8px; line-height:1.45; }
+  .l-meta{ font-size:13.5px; color:var(--muted); margin-bottom:28px; }
+
+  .embed-wrap{ position:relative; aspect-ratio:16/9; }
+  .embed{ position:absolute; inset:0; background:#0D1526; border-radius:14px; overflow:hidden; box-shadow:0 18px 40px rgba(18,29,51,.16); }
+  .embed iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+  .embed.mini{ position:fixed; inset:auto 18px 18px auto; width:min(360px,74vw); height:auto; aspect-ratio:16/9; z-index:90; border-radius:12px; box-shadow:0 16px 40px rgba(9,14,26,.5); }
+  .mini-bar{ display:none; }
+  .embed.mini .mini-bar{ display:flex; align-items:center; justify-content:space-between; position:absolute; left:0; right:0; top:-27px; height:27px; padding:0 4px 0 12px; background:var(--navy-deep); color:var(--cream); border-radius:9px 9px 0 0; font-size:11px; }
+  .mini-bar button{ background:transparent; border:0; color:var(--gold-light); cursor:pointer; font-size:15px; line-height:1; padding:2px 8px; }
+  .mini-bar button:hover{ color:#fff; }
+
+  .bh{ display:flex; align-items:baseline; gap:12px; margin:46px 0 16px; }
+  .bh .en{ font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); }
+  .bh h2{ font-size:19px; margin:0; }
+
+  .tl{ border:1px solid var(--line); border-radius:14px; background:#fff; overflow:hidden; }
+  .tl button{ display:flex; align-items:flex-start; gap:14px; width:100%; text-align:left; padding:12px 16px; background:transparent; border:0; border-top:1px solid var(--line); cursor:pointer; font-family:inherit; font-size:13.5px; color:var(--ink); transition:background .15s; }
+  .tl button:first-child{ border-top:0; } .tl button:hover{ background:var(--cream); } .tl button.active{ background:#FBF6E7; }
+  .tl .t{ flex-shrink:0; font-variant-numeric:tabular-nums; font-size:12px; color:var(--gold); background:var(--cream); border:1px solid var(--line); border-radius:7px; padding:3px 8px; min-width:64px; text-align:center; }
+  .tl button.active .t{ background:var(--navy); color:var(--gold-light); border-color:var(--navy); }
+  .tl-note{ font-size:12px; color:var(--muted); margin:10px 2px 0; }
+
+  .toggle-head{ cursor:pointer; user-select:none; align-items:center; }
+  .toggle-head .toggle-btn{ margin-left:auto; display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:700; color:var(--navy); background:var(--cream); border:1px solid var(--line); border-radius:999px; padding:6px 14px; white-space:nowrap; transition:all .15s; }
+  .toggle-head:hover .toggle-btn{ border-color:var(--gold); color:var(--gold); background:#FBF6E7; }
+  .toggle-head .toggle-btn .tb-ico{ font-size:11px; }
+  .collapsible.hidden{ display:none; }
+
+  .mapcard{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:22px 26px; }
+  .mapcard ul{ margin:0; padding-left:1.15em; } .mapcard li{ margin:0 0 9px; font-size:15px; }
+  .mapcard.prose p{ margin:0 0 14px; font-size:15px; } .mapcard.prose p:last-child{ margin-bottom:0; }
+  .aboutnote{ font-size:12.5px; color:var(--muted); background:#F4F2EA; border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin-top:16px; }
+
+  .ctable{ width:100%; border-collapse:collapse; margin:2px 0 18px; font-size:14.5px; border:1px solid var(--line); }
+  .ctable th, .ctable td{ text-align:left; padding:11px 15px; border-top:1px solid var(--line); vertical-align:top; }
+  .ctable thead th{ background:var(--navy); color:var(--gold-light); font-family:"Shippori Mincho",serif; font-weight:700; font-size:13.5px; border-top:0; }
+  .ctable tbody tr:nth-child(even){ background:#FBF9F3; }
+  .ctable td:first-child{ font-weight:700; white-space:nowrap; }
+  @media (max-width:560px){ .ctable td:first-child{ white-space:normal; } }
+  .script h2.ch{ font-size:20px; margin:44px 0 6px; padding-top:14px; border-top:1px solid var(--line); }
+  .ch-time{ font-size:12px; color:var(--muted); margin-bottom:16px; }
+  .nar{ font-size:15px; margin:0 0 15px; }
+  .q{ display:flex; gap:11px; margin:0 0 16px; align-items:flex-start; }
+  .q .who{ flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:46px; height:30px; border-radius:999px; font-size:11px; font-weight:700; margin-top:3px; letter-spacing:.02em; }
+  .q p{ margin:0; font-size:15px; border-radius:14px; padding:11px 16px; max-width:82%; position:relative; }
+  .q-teacher .who{ background:var(--navy); color:var(--gold-light); }
+  .q-teacher p{ background:#FBF7EA; border:1px solid #EAD9A6; }
+  .q-user{ flex-direction:row-reverse; }
+  .q-user .who{ background:#EEF1F6; color:var(--muted); border:1px solid var(--line); }
+  .q-user p{ background:#fff; border:1px solid var(--line); }
+  .note-teach{ background:#fff; border-left:3px solid var(--gold); border-radius:0 10px 10px 0; padding:12px 18px; margin:0 0 15px; box-shadow:0 2px 10px rgba(27,42,74,.04); }
+  .note-teach .lbl{ display:block; font-size:11px; letter-spacing:.08em; color:var(--gold); font-weight:700; margin-bottom:5px; }
+  .note-teach p{ margin:0; font-size:14.5px; }
+
+  .checklist{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:20px 24px; }
+  .clitem{ display:flex; align-items:flex-start; gap:11px; padding:10px 0; border-top:1px solid var(--line); cursor:pointer; font-size:14.5px; }
+  .clitem:first-child{ border-top:0; }
+  .clitem input{ appearance:none; -webkit-appearance:none; width:19px; height:19px; margin-top:3px; border:1.6px solid var(--navy-mid); border-radius:5px; cursor:pointer; position:relative; flex-shrink:0; background:#fff; transition:all .18s; }
+  .clitem input:checked{ background:var(--gold); border-color:var(--gold); }
+  .clitem input:checked::after{ content:"✓"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:12px; color:var(--navy-deep); font-weight:700; }
+  .clitem input:checked + span{ color:var(--muted); text-decoration:line-through; }
+
+  .lnav{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:50px; flex-wrap:wrap; }
+  .lnav a.back{ font-size:14px; color:var(--muted); text-decoration:none; } .lnav a.back:hover{ color:var(--gold); }
+  .donebtn{ display:inline-flex; align-items:center; gap:10px; background:var(--gold); color:var(--navy-deep); font-weight:700; font-size:15px; padding:14px 28px; border-radius:11px; border:0; cursor:pointer; font-family:inherit; transition:transform .18s, background .18s; }
+  .donebtn:hover{ transform:translateY(-2px); background:var(--gold-light); }
+  .donebtn.on{ background:var(--navy); color:var(--gold-light); }
+
+  @media (max-width:880px){
+    .mtopbar{ display:flex; align-items:center; gap:12px; position:sticky; top:0; z-index:70; padding:12px 18px; background:var(--navy-deep); color:var(--cream); border-bottom:1px solid rgba(255,255,255,.08); }
+    .mtopbar .burger{ width:40px; height:40px; border-radius:9px; border:1px solid rgba(255,255,255,.15); background:transparent; color:var(--gold-light); font-size:18px; cursor:pointer; }
+    .mtopbar .mbrand{ font-family:"Shippori Mincho",serif; font-weight:700; font-size:14px; color:var(--gold-light); }
+    .sidebar{ position:fixed; top:0; left:0; height:100vh; transform:translateX(-100%); transition:transform .28s; box-shadow:0 0 40px rgba(0,0,0,.4); }
+    body.nav-open .sidebar{ transform:translateX(0); }
+    body.nav-open .scrim{ display:block; position:fixed; inset:0; background:rgba(9,14,26,.5); z-index:55; }
+  }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } .sidebar{ transition:none; } }
+</style>
+</head>
+<body>
+  <div class="mtopbar">
+    <button class="burger" id="burger" aria-label="メニュー">☰</button>
+    <span class="mbrand">リアル第3回 魁罡とインド占星術</span>
+  </div>
+  <div class="scrim" id="scrim"></div>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="side-brand"><span class="dot"></span> ナイス貝 占い講座</div>
+      <p class="side-sub">学習サイト</p>
+      <a class="side-back" href="nice-kai-2ki.html#real">← 学習トップにもどる</a>
+      <div class="side-label">この回の目次</div>
+      <nav class="side-nav" id="sideNav">
+<a href="#ch1"><span class="cn">第1章</span><span class="ct">「魁罡」って、いったい何？</span></a>
+<a href="#ch2"><span class="cn">第2章</span><span class="ct">強すぎる人は、下道を走るスーパーカー</span></a>
+<a href="#ch3"><span class="cn">第3章</span><span class="ct">エネルギーは多ければいいのか</span></a>
+<a href="#ch4"><span class="cn">第4章</span><span class="ct">同じ誕生日なら、同じ人になる？</span></a>
+<a href="#ch5"><span class="cn">第5章</span><span class="ct">占いは正確すぎても伝わらない</span></a>
+<a href="#ch6"><span class="cn">第6章</span><span class="ct">魁罡と「劫財・帝旺」</span></a>
+<a href="#ch7"><span class="cn">第7章</span><span class="ct">自分の役割に戻るということ</span></a>
+<a href="#ch8"><span class="cn">第8章</span><span class="ct">後半戦――インド占星術へ</span></a>
+<a href="#ch9"><span class="cn">第9章</span><span class="ct">アガスティアの葉をどう受け取るか</span></a>
+<a href="#ch10"><span class="cn">第10章</span><span class="ct">AIと一緒にチャートを読む</span></a>
+<a href="#ch11"><span class="cn">第11章</span><span class="ct">D1・D9・ナクシャトラ</span></a>
+<a href="#ch12"><span class="cn">第12章</span><span class="ct">ムリガシーラ――答えを探し続ける鹿</span></a>
+<a href="#ch13"><span class="cn">第13章</span><span class="ct">「楽に進む道」が怖い人たち</span></a>
+<a href="#chE"><span class="cn">終章</span><span class="ct">強い力を消さず、走れる道を選ぶ</span></a>
+      </nav>
+      <div class="side-foot">© ナイス貝 ／ 片貝文昌</div>
+    </aside>
+
+    <div class="main">
+      <div class="wrap">
+        <div class="crumb"><a href="nice-kai-2ki.html">学習トップ</a> ／ <a href="nice-kai-2ki.html#real">リアル講座</a> ／ リアル 第3回</div>
+        <span class="l-tag">リアル 第3回</span>
+        <h1 class="l-title">魁罡とインド占星術</h1>
+        <div class="l-meta">2026.05.14(木) ・ 五反田</div>
+
+        <div class="embed-wrap" id="embedWrap"><div class="embed" id="videoBox"><div class="mini-bar"><span>▶ 動画</span><button id="miniClose" title="元の位置にもどす" aria-label="元の位置にもどす">⤢</button></div><iframe id="ytframe" src="https://www.youtube.com/embed/lj-zyiV7G3M?rel=0" title="魁罡とインド占星術" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>
+
+<div class="bh"><span class="en">Transcript</span><h2>編集書き起こし（本編）</h2></div><div class="script"><h2 class="ch" id="ch1">第1章　「魁罡」って、いったい何？</h2>
+<p class="nar">講座は、参加人数やZoom画面の確認から、いつものように少しにぎやかに始まりました。そして開始早々、今回の主役となる言葉が登場します。</p>
+<p class="nar">魁罡は、四柱推命において強い気質や突出した性質を持つとされる特殊干支です。一般的には、庚辰・庚戌・壬辰・戊戌の四つを中心に扱い、流派によって戊辰や壬戌を加える場合があります。</p>
+<p class="nar">講師は三島由紀夫、太宰治、川端康成、スポーツ選手などの名前を挙げながら、魁罡の人には、普通の枠に収まりきらない魅力や極端さが表れやすいと話します。</p>
+<p class="nar">ここで言う「腐る」とは、能力そのものがなくなることではありません。行き場を失った力が、無気力や自己否定、過剰な刺激への欲求として表れやすくなる、という比喩です。</p>
+<h2 class="ch" id="ch2">第2章　強すぎる人は、下道を走るスーパーカー</h2>
+<p class="nar">魁罡の説明で繰り返し登場したのが、車の比喩です。</p>
+<p class="nar">強い命式を持つ人は、どこでも平均的に活躍するというより、限られた分野で最大出力を出すことがあります。研究、芸術、経営、スポーツ、危機対応、新規事業など、普通以上の集中力や覚悟を必要とする場所です。</p>
+<p class="nar">問題は「普通の場所で普通にできないこと」ではなく、その車が本来走るべき道を見つけていないことかもしれません。</p>
+<h2 class="ch" id="ch3">第3章　エネルギーは多ければいいのか</h2>
+<p class="nar">次に講師は、命式のエネルギーを「ガソリンの量」として説明しました。</p>
+<p class="nar">エネルギーが強い人ほど、スイッチの入る条件が高い場合があります。普通の締め切りでは動けず、本当に後がない状況になって初めて集中する。小さな課題では退屈し、大きな逆境で目が覚める。</p>
+<p class="nar">受講者から見れば「どうして早くやらないの？」となります。しかし本人の中では、刺激が一定値を超えるまでエンジンが始動しないのです。だから必要なのは、怠け者という評価ではなく、始動条件を理解することです。</p>
+<h2 class="ch" id="ch4">第4章　同じ誕生日なら、同じ人になる？</h2>
+<p class="nar">講座では、参加者から素朴で重要な疑問が出ました。</p>
+<p class="nar">命式は本人そのものではありません。生まれ持った車種や初期設定を示していても、誰が運転するか、どんな道を通るか、整備をするか、事故を経験するかによって、人生は大きく変わります。</p>
+<p class="nar">ここで講師は、占いが当たる・当たらないという二択だけで語られることへの違和感も話しました。大分類として役立つ情報と、個人を完全に説明する情報は別物です。</p>
+<h2 class="ch" id="ch5">第5章　占いは正確すぎても伝わらない</h2>
+<p class="nar">話題は、六星占術や動物占い、MBTIなどの「タイプ診断」が広まった理由へ移ります。</p>
+<p class="nar">正確で詳しい情報ほど価値が高いように思えます。しかし、受け取る側が理解できなければ、実際には使われません。講師は細木数子氏の六星占術を例に、複雑な体系を分かりやすく編集し、商売として届ける力について語りました。</p>
+<p class="nar">占い師には、正確さだけでなく、情報量、面白さ、理解しやすさ、実用性を調整する編集力が必要です。</p>
+<h2 class="ch" id="ch6">第6章　魁罡と「劫財・帝旺」</h2>
+<p class="nar">個別の命式を見ていく中で、「劫財・帝旺」という強い組み合わせが取り上げられました。</p>
+<p class="nar">劫財は競争心、自立心、仲間との結び付きなどを示し、帝旺は強い自己、頂点、統率を象徴します。組み合わさると、人を巻き込みながら自分の方針を貫く力になります。</p>
+<p class="nar">ただし、強さが未成熟なまま表れると、相手の意見を聞かずに押し切る、仲間を自分の目的のためだけに使う、といった形にもなり得ます。能力が大きいほど、使う人の成熟が問われます。</p>
+<h2 class="ch" id="ch7">第7章　自分の役割に戻るということ</h2>
+<p class="nar">個人鑑定の流れでは、強い性質を持ちながら、それを表に出さず、安全な役割に収まろうとする姿が何度も話題になりました。</p>
+<p class="nar">占いの役割は、別人になる方法を教えることではありません。借り物の価値観を外し、本来の自分が力を出せる位置へ戻る手がかりを作ることです。</p>
+<p class="nar">「普通にできるようになる」ことがゴールではなく、「自分の特性が役立つ形を作る」ことがゴールになる人もいます。</p>
+<h2 class="ch" id="ch8">第8章　後半戦――インド占星術へ</h2>
+<p class="nar">休憩や差し入れを交えた雑談の後、講座はインド占星術へ移ります。前半の四柱推命が大きな車種やエネルギーの傾向を見ていたのに対し、後半はより細かな設計図を見ていきます。</p>
+<p class="nar">アセンダントは、生まれた瞬間に東の地平線から昇っていた星座です。本人の身体、第一印象、人生の出発点を表します。さらに、アセンダントの支配星がどこにいるかを見ることで、人生の中心テーマを読みます。</p>
+<h2 class="ch" id="ch9">第9章　アガスティアの葉をどう受け取るか</h2>
+<p class="nar">インドの話から、「アガスティアの葉」へ話題が広がります。これは、個人の人生が記された葉を探し出し、章ごとに家族、仕事、結婚、カルマなどを読むとされる仕組みです。</p>
+<p class="nar">講師は、アガスティアの葉を全面的に肯定も否定もせず、「一歩踏み出すきっかけ」として見る姿勢を示しました。</p>
+<p class="nar">特にカルマ解消の章や祈祷費用については、相談者によって金額が異なった事例もあるとして、信頼できる窓口を選ぶ必要性が語られました。</p>
+<h2 class="ch" id="ch10">第10章　AIと一緒にチャートを読む</h2>
+<p class="nar">後半の実践では、参加者のインド占星術データをAIへ入力し、チャートの意味を文章化していきます。</p>
+<p class="nar">実演中にも、AIが命式にない情報を付け加えたため、別のモデルでやり直す場面がありました。AIは便利ですが、鑑定者の検証を省略する道具ではありません。</p>
+<h2 class="ch" id="ch11">第11章　D1・D9・ナクシャトラ</h2>
+<p class="nar">D1は、現実の人生、身体、仕事、対人関係などを幅広く見る基本の出生図です。D9は、結婚だけでなく、惑星の本質的な強さ、内面的な成熟、人生後半の方向を見るために使われます。</p>
+<p class="nar">さらに、月がどのナクシャトラにあるかを見ることで、心の癖、求めるもの、無意識の方向を細かく読みます。ナクシャトラは月の通り道を27に分けた体系で、一つのナクシャトラは四つのパダへ分かれます。</p>
+<h2 class="ch" id="ch12">第12章　ムリガシーラ――答えを探し続ける鹿</h2>
+<p class="nar">参加者の月を見ていく中で、ムリガシーラというナクシャトラが登場します。ムリガシーラは「鹿の頭」を象徴し、探求、好奇心、真理を求め続ける性質を持つと説明されました。</p>
+<p class="nar">同じ探求心でも、自分に足りないものを探し続けるのか、集めた知識を人のために使うのかで、人生の感触は変わります。</p>
+<h2 class="ch" id="ch13">第13章　「楽に進む道」が怖い人たち</h2>
+<p class="nar">終盤では、本人に合う道が見えているのに、なぜか苦しい方を選んでしまう心のパターンが語られました。</p>
+<p class="nar">強いエネルギーを持つ人にとって、困難は能力を実感できる舞台です。しかし、困難がなければ存在価値がないわけではありません。</p>
+<p class="nar">課題は、逆境を完全になくすことではなく、意味のある課題を自分で選ぶことです。事故や対人衝突ではなく、創作、事業、研究、育成など、成果につながる難題を選ぶ。</p>
+<h2 class="ch" id="chE">終章　強い力を消さず、走れる道を選ぶ</h2>
+<p class="nar">今回の講座は、魁罡という特殊干支の説明から始まり、インド占星術、AI、ナクシャトラへと広がりました。しかし、話の中心は一貫しています。</p>
+<p class="nar">自分がスーパーカーなら、普通車になる必要はありません。高速道路へ出る方法を学ぶ。カーナビが壊れているなら、目的地を設定し直す。ガソリンが多いなら、意味のある場所で使い切る。</p>
+<p class="nar">四柱推命は、自分の車種や出力の傾向を教えてくれます。インド占星術は、より細かな部品、道、時期、心の癖を見せてくれます。AIは、その情報を整理して言葉にする補助になります。</p>
+<p class="nar">けれど、最後にハンドルを握るのは本人です。占いは、未来を固定するためではなく、自分が本来持っている力を知り、それを生かせる道へ戻るために使うものです。</p></div>
+
+        <div class="lnav">
+          <a class="back" href="nice-kai-2ki.html#real">← 学習トップ（リアル講座）にもどる</a>
+          <button class="donebtn" id="doneBtn" type="button">この回を視聴済みにする</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+(function(){
+  "use strict";
+  var KEY="nicekai_learn_v2", CLKEY="nicekai_r03_checklist", RID="r03", VID="lj-zyiV7G3M";
+  function load(k){ try{return JSON.parse(localStorage.getItem(k))||{};}catch(e){return {};} }
+  function save(k,v){ try{localStorage.setItem(k,JSON.stringify(v));}catch(e){} }
+
+  var frame=document.getElementById("ytframe");
+  var vbox=document.getElementById("videoBox");
+  document.querySelectorAll(".tl button[data-sec]").forEach(function(b){
+    b.addEventListener("click", function(){
+      var sec=b.getAttribute("data-sec");
+      if(frame) frame.src="https://www.youtube.com/embed/"+VID+"?rel=0&start="+sec+"&autoplay=1";
+      document.querySelectorAll(".tl button").forEach(function(x){x.classList.remove("active");});
+      b.classList.add("active");
+      if(frame && vbox && !vbox.classList.contains("mini")) frame.scrollIntoView({behavior:"smooth",block:"center"});
+    });
+  });
+
+  // sticky mini-player: keep the video watchable while scrolling
+  var ewrap=document.getElementById("embedWrap");
+  if(ewrap && vbox && "IntersectionObserver" in window){
+    var vio=new IntersectionObserver(function(es){
+      var e=es[0];
+      if(!e.isIntersecting && e.boundingClientRect.top < 0){ vbox.classList.add("mini"); }
+      else if(e.isIntersecting){ vbox.classList.remove("mini"); }
+    }, {threshold:[0,0.35]});
+    vio.observe(ewrap);
+  }
+  var mclose=document.getElementById("miniClose");
+  if(mclose){ mclose.addEventListener("click", function(){ if(vbox) vbox.classList.remove("mini"); if(ewrap) ewrap.scrollIntoView({behavior:"smooth",block:"start"}); }); }
+
+  // timeline open/close
+  document.querySelectorAll(".toggle-head").forEach(function(h){
+    h.addEventListener("click", function(){
+      h.classList.toggle("collapsed");
+      var collapsed=h.classList.contains("collapsed");
+      var t=document.getElementById(h.getAttribute("data-target"));
+      if(t) t.classList.toggle("hidden", collapsed);
+      var ico=h.querySelector(".tb-ico"), txt=h.querySelector(".tb-txt");
+      if(ico) ico.textContent = collapsed ? "▸" : "▾";
+      if(txt) txt.textContent = collapsed ? "開く" : "閉じる";
+    });
+  });
+
+  var cl=load(CLKEY);
+  document.querySelectorAll(".clchk").forEach(function(c){
+    var i=c.getAttribute("data-i");
+    c.checked=!!cl[i];
+    c.addEventListener("change", function(){ var s=load(CLKEY); s[i]=c.checked; save(CLKEY,s); });
+  });
+
+  var st=load(KEY); var db=document.getElementById("doneBtn");
+  function paint(){ if(st[RID]){ db.classList.add("on"); db.textContent="✓ 視聴済み ｜ もう一度押すと解除"; } else { db.classList.remove("on"); db.textContent="この回を視聴済みにする"; } }
+  paint();
+  db.addEventListener("click", function(){ var s=load(KEY); s[RID]=!s[RID]; save(KEY,s); st=s; paint(); });
+
+  var links=Array.prototype.slice.call(document.querySelectorAll("#sideNav a"));
+  var map={}; links.forEach(function(a){ var id=a.getAttribute("href").slice(1); var el=document.getElementById(id); if(el) map[id]=a; });
+  if("IntersectionObserver" in window){
+    var obs=new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting){ links.forEach(function(a){a.classList.remove("active");}); var a=map[en.target.id]; if(a) a.classList.add("active"); } }); }, {rootMargin:"-30% 0px -60% 0px", threshold:0});
+    Object.keys(map).forEach(function(id){ obs.observe(document.getElementById(id)); });
+  }
+
+  var burger=document.getElementById("burger"), scrim=document.getElementById("scrim");
+  function closeNav(){ document.body.classList.remove("nav-open"); }
+  if(burger) burger.addEventListener("click", function(){ document.body.classList.toggle("nav-open"); });
+  if(scrim) scrim.addEventListener("click", closeNav);
+  document.querySelectorAll("#sideNav a").forEach(function(a){ a.addEventListener("click", closeNav); });
+})();
+</script>
+</body>
+</html>
