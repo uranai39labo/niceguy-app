@@ -337,6 +337,21 @@
   .more-foot{ max-width:820px; margin:22px 0 0; font-size:13px; }
   .more-foot a{ color:var(--navy-mid); }
 
+  /* ================= さらに学ぶ band ================= */
+  .note-band{ background:#F4F2EA; padding:66px 6vw; }
+  .note-inner{ max-width:1000px; margin:0 auto; }
+  .note-inner .eyebrow{ color:var(--gold); margin-bottom:10px; }
+  .note-inner > h2{ font-size:24px; margin:0 0 26px; color:var(--ink); }
+  .note-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  @media (max-width:680px){ .note-grid{ grid-template-columns:1fr; } }
+  .note-card{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:26px 28px; display:flex; flex-direction:column; }
+  .note-card h3{ font-size:18px; margin:0 0 8px; color:var(--ink); }
+  .note-card p{ margin:0 0 18px; font-size:14px; color:var(--muted); flex:1; }
+  .note-card .go{ align-self:flex-start; background:var(--gold); color:var(--navy-deep); font-weight:700; padding:12px 22px; border-radius:10px; text-decoration:none; transition:transform .2s, background .2s; }
+  .note-card .go:hover{ transform:translateY(-2px); background:var(--gold-light); }
+  .note-card .go.disabled{ background:transparent; color:var(--muted); border:1px dashed var(--line); cursor:default; }
+  .note-card .go.disabled:hover{ transform:none; background:transparent; }
+
   /* ================= CTA ================= */
   .cta{ background:var(--navy-deep); color:var(--cream); text-align:center; padding:90px 6vw; }
   .cta .eyebrow{ color:var(--gold-light); justify-content:center; }
@@ -399,7 +414,8 @@
         <a href="#real"><span class="ico">🏫</span> リアル講座</a>
         <a href="#resources"><span class="ico">🗂️</span> 共通資料</a>
         <a href="#more"><span class="ico">📺</span> もっと学ぶ</a>
-        <a href="#next"><span class="ico">✨</span> 第3期の募集</a>
+        <a href="#note"><span class="ico">🧭</span> 黄金の羅針盤note</a>
+        <a href="#next"><span class="ico">✨</span> 第4期の募集</a>
       </nav>
 
       <div class="side-progress">
@@ -707,11 +723,41 @@
       </section>
 
       <!-- ================= NEXT ================= -->
+      <!-- ================= NOTE band ================= -->
+      <section class="note-band" id="note">
+        <div class="note-inner">
+          <div class="eyebrow">さらに学ぶ ── EXTRA</div>
+          <h2>講座の外でも、学びを深める</h2>
+          <div class="note-grid">
+            <div class="note-card">
+              <h3>🧭 「黄金の羅針盤」note</h3>
+              <p>講座では語りきれない話や、日々の気づきをまとめたnoteマガジンです。読むほどに、占いの見方が立体的になっていきます。</p>
+              <a class="go" href="https://note.com/nicekai/m/ma9fd48bba63b" target="_blank" rel="noopener">note を読む →</a>
+            </div>
+            <div class="note-card">
+              <h3>⛩️ 産土神社を探す</h3>
+              <p>自分の産土（うぶすな）神社を見つけて、ご縁のある土地の神さまとつながりましょう。占いの学びと合わせると、より深まります。</p>
+              <span class="go disabled">リンク準備中</span>
+            </div>
+            <div class="note-card">
+              <h3>🌿 明治神宮ツアーに参加</h3>
+              <p>みんなで明治神宮を巡るツアーです。実際に神社を訪れて、ご縁と学びを体で感じてみましょう。</p>
+              <a class="go" href="https://forms.gle/UAcvARV6TKbyq9aaA" target="_blank" rel="noopener">参加を申し込む →</a>
+            </div>
+            <div class="note-card">
+              <h3>🗓️ ナイス貝のイベント</h3>
+              <p>ナイス貝が企画するイベントの最新情報・日程はこちら。気になる会にぜひ参加してみてください。</p>
+              <a class="go" href="https://www.reservestock.jp/page/event_calendar/44078" target="_blank" rel="noopener">イベントカレンダーを見る →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="cta" id="next">
-        <div class="eyebrow" style="display:flex;">第3期 募集中</div>
+        <div class="eyebrow" style="display:flex;">第4期 募集</div>
         <h2>次の学びも、<br>一緒に。</h2>
         <p>これまで築いた基礎をさらに深めながら、自分自身の人生の柱を、自分の手で読めるようになる講座です。</p>
-        <a class="cta-btn" href="https://forms.gle/j9689XrVWLoGRsKh8" target="_blank" rel="noopener">第3期に申し込む →</a>
+        <a class="cta-btn" href="https://forms.gle/j9689XrVWLoGRsKh8" target="_blank" rel="noopener">第4期に申し込む →</a>
       </section>
 
       <footer class="page-foot">
