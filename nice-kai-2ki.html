@@ -142,6 +142,15 @@
   .zoom{ background:var(--cream); }
   .zoom-wrap{ max-width:1040px; margin:0 auto; }
 
+  /* course tabs (Zoom / リアル 切替) */
+  .course-tabs-wrap{ background:var(--cream); padding:46px 6vw 0; }
+  .course-tabs{ max-width:1040px; margin:0 auto; display:flex; gap:6px; border-bottom:1px solid var(--line); flex-wrap:wrap; }
+  .ctab{ font-family:"Shippori Mincho",serif; font-size:15px; font-weight:700; color:var(--muted); background:transparent; border:0; border-bottom:3px solid transparent; padding:12px 20px; cursor:pointer; margin-bottom:-1px; transition:color .18s, border-color .18s; }
+  .ctab:hover{ color:var(--ink); }
+  .ctab.active{ color:var(--gold); border-bottom-color:var(--gold); }
+  .zoom.tabbed{ padding-top:36px; }
+  .real.tabbed{ padding-top:36px; }
+
   .progress-card{
     background:#fff; border:1px solid var(--line); border-radius:14px;
     padding:20px 24px; margin:0 auto 40px; max-width:1040px;
@@ -215,6 +224,9 @@
 
   /* ================= VIDEO LIST ================= */
   .vlist{ max-width:1040px; margin:0 auto; display:flex; flex-direction:column; gap:12px; }
+  .vgroup{ max-width:1040px; margin:26px auto 12px; font-family:"Shippori Mincho",serif; font-size:16px; color:var(--ink); display:flex; align-items:center; gap:10px; }
+  .vgroup:first-child{ margin-top:4px; }
+  .vgroup .badge{ font-size:11px; font-weight:700; color:var(--navy-deep); background:var(--gold-light); padding:3px 11px; border-radius:999px; }
   .vrow{
     display:flex; align-items:center; gap:18px;
     background:#fff; border:1px solid var(--line); border-radius:12px; padding:12px 16px;
@@ -455,8 +467,16 @@
         <p class="start-note"><span class="pin">📌</span> チェックした進捗は、ログイン不要でこの端末（ブラウザ）に自動保存されます。次に開いたときも続きから確認できます。</p>
       </section>
 
+      <!-- ================= COURSE TABS ================= -->
+      <div class="course-tabs-wrap">
+        <div class="course-tabs">
+          <button class="ctab active" data-target="zoom" type="button">🎥 Zoom講座（動画）</button>
+          <button class="ctab" data-target="real" type="button">🏫 リアル講座（対面）</button>
+        </div>
+      </div>
+
       <!-- ================= VIDEO / ZOOM ================= -->
-      <section class="zoom" id="zoom">
+      <section class="zoom tabbed" id="zoom">
         <div class="section-head">
           <div class="eyebrow">動画で学ぶ ── Zoom講座</div>
           <h2>Zoom講座（カリキュラム順）</h2>
@@ -471,6 +491,20 @@
 
         <div class="zoom-wrap">
           <div class="vlist">
+
+            <h3 class="vgroup"><span class="badge">第3期</span> 開催中</h3>
+
+            <div class="vrow" data-id="z3-01">
+              <div class="vthumb" data-vid="EcMLBt5Ta3E"><img loading="lazy" src="https://img.youtube.com/vi/EcMLBt5Ta3E/mqdefault.jpg" alt=""><span class="pbtn">▶</span></div>
+              <div class="vinfo">
+                <span class="vtag">第1回</span>
+                <h3>占いの基礎と全体像</h3>
+                <div class="vmeta">2026.07.09</div>
+              </div>
+              <label class="vcheck"><input type="checkbox" class="done-check" data-id="z3-01"> 視聴済み</label>
+            </div>
+
+            <h3 class="vgroup"><span class="badge">第2期</span></h3>
 
             <div class="vrow" data-id="z00">
               <div class="vthumb" data-vid="XOoohgzn27A"><img loading="lazy" src="https://img.youtube.com/vi/XOoohgzn27A/mqdefault.jpg" alt=""><span class="pbtn">▶</span></div>
@@ -557,12 +591,19 @@
       </section>
 
       <!-- ================= REAL (compact) ================= -->
-      <section class="real" id="real">
+      <section class="real tabbed" id="real">
         <div class="section-head">
           <div class="eyebrow">リアル講座 ── 対面</div>
           <h2>リアル講座（対面）の記録</h2>
         </div>
         <p class="real-note"><span class="pin">📌</span> 対面で開催したリアル講座の記録です。各回の「動画・書き起こし →」から、動画・タイムライン・要約・編集書き起こしのページを開けます。（一部の対面日は準備中です）</p>
+        <h3 class="vgroup"><span class="badge">第3期</span> 開催中</h3>
+        <div class="real-list">
+          <a class="real-row" href="https://youtu.be/yTcJKxgpsXg" target="_blank" rel="noopener" style="text-decoration:none;"><div class="rnum">1</div><div class="rinfo"><div class="rdate">2026.07.12(日) ・ 日曜1</div><div class="rname">第1回 占いの基礎と全体像・相互鑑定</div></div><span class="rtag" style="border-style:solid;border-color:var(--gold);color:var(--gold);">動画 →</span></a>
+          <a class="real-row" href="https://youtu.be/3UwhFpDY59c" target="_blank" rel="noopener" style="text-decoration:none;"><div class="rnum">2</div><div class="rinfo"><div class="rdate">2026.07.17(木) ・ 目黒</div><div class="rname">第2回 16鑑定・卜占の稼ぎ方</div></div><span class="rtag" style="border-style:solid;border-color:var(--gold);color:var(--gold);">動画 →</span></a>
+        </div>
+
+        <h3 class="vgroup"><span class="badge">第2期</span></h3>
         <div class="real-list">
           <a class="real-row" href="real-2ki-01.html" style="text-decoration:none;"><div class="rnum">1</div><div class="rinfo"><div class="rdate">2026.04.16(木) ・ 新大久保</div><div class="rname">第1回 占いの基礎</div></div><span class="rtag" style="border-style:solid;border-color:var(--gold);color:var(--gold);">動画・書き起こし →</span></a>
           <div class="real-row"><div class="rnum">–</div><div class="rinfo"><div class="rdate">2026.04.19(日) ・ 綱島</div><div class="rname">第1回（対面・別会場）</div></div><span class="rtag">準備中</span></div>
@@ -753,6 +794,23 @@
       if(!vid || t.querySelector("iframe")) return;
       t.innerHTML = '<iframe src="https://www.youtube.com/embed/'+vid+'?rel=0&autoplay=1" title="動画" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
     });
+  });
+
+  // course tabs: switch between Zoom and リアル
+  var ctabs = document.querySelectorAll(".ctab");
+  var secZoom = document.getElementById("zoom");
+  var secReal = document.getElementById("real");
+  function showCourse(t){
+    ctabs.forEach(function(b){ b.classList.toggle("active", b.getAttribute("data-target")===t); });
+    if(secZoom) secZoom.style.display = (t==="real") ? "none" : "";
+    if(secReal) secReal.style.display = (t==="zoom") ? "none" : "";
+  }
+  ctabs.forEach(function(b){ b.addEventListener("click", function(){ showCourse(b.getAttribute("data-target")); }); });
+  showCourse("zoom");
+  document.querySelectorAll("#sideNav a").forEach(function(a){
+    var h=a.getAttribute("href");
+    if(h==="#zoom") a.addEventListener("click", function(){ showCourse("zoom"); });
+    if(h==="#real") a.addEventListener("click", function(){ showCourse("real"); });
   });
 
   var burger = document.getElementById("burger");
